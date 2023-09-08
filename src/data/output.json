@@ -1,0 +1,716 @@
+{
+    "type": "folder",
+    "name": "DSAPrepQuestions",
+    "location": ".",
+    "parent": "DSA",
+    "content": [
+        {
+            "type": "folder",
+            "name": "Combined",
+            "location": "Combined",
+            "parent": "DSAPrepQuestions",
+            "content": [
+                {
+                    "type": "folder",
+                    "name": "Arrays",
+                    "location": "Combined\\Arrays",
+                    "parent": "Combined",
+                    "content": [
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/add-to-array-form-of-integer\n\nimport java.util.*;\n\npublic class AddToArrayFormOfInteger {\n    public List<Integer> addToArrayForm(int[] num, int k) {\n        LinkedList<Integer> ans = new LinkedList<>();\n        for (int i = num.length - 1; i >= 0; i--) {\n            num[i] += k;\n            k = num[i] / 10;\n            ans.add(0, num[i] % 10);\n        }\n        while (k != 0) {\n            ans.add(0, k % 10);\n            k /= 10;\n        }\n        return ans;\n    }\n}\n",
+                            "name": "AddToArrayFormOfInteger.java",
+                            "location": "Combined\\Arrays\\AddToArrayFormOfInteger.java",
+                            "notes": "",
+                            "parent": "Arrays",
+                            "questionLink": "https://leetcode.com/problems/add-to-array-form-of-integer"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/cells-with-odd-values-in-a-matrix/\n\npublic class CellWithOddValuesInMatrix {\n    public int oddCells(int m, int n, int[][] I) {\n        // M = rows, N = cols\n        boolean[] row = new boolean[m];\n        boolean[] col = new boolean[n];\n        int r=0, c=0;\n        for (int i = 0; i < I.length; i++) {\n            row[I[i][0]] ^= true;\n            col[I[i][1]] ^= true;\n        }\n        for (int j = 0; j < n; j++)\n            if (col[j]) c++;\n\n        for (int j = 0; j < m; j++)\n            if (row[j]) r++;\n\n        // r(n-c) + c(m-r)\n        // rn + cm - rc - rc\n        return r*n + c*m - 2*r*c;\n    }\n}\n",
+                            "name": "CellWithOddValuesInMatrix.java",
+                            "location": "Combined\\Arrays\\CellWithOddValuesInMatrix.java",
+                            "notes": "",
+                            "parent": "Arrays",
+                            "questionLink": "https://leetcode.com/problems/cells-with-odd-values-in-a-matrix/"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/check-if-it-is-a-good-array/\n\npublic class GoodArray {\n    public boolean isGoodArray(int[] N) {\n        int ans = N[0];\n        for (int i = 1; i < N.length; i++)\n            ans = GCD(N[i], ans);\n        return ans == 1;\n    }\n    public int GCD(int a, int b) {\n        if (a%b == 0) return b;\n        return GCD(b, a%b);\n    }\n}\n",
+                            "name": "GoodArray.java",
+                            "location": "Combined\\Arrays\\GoodArray.java",
+                            "notes": "",
+                            "parent": "Arrays",
+                            "questionLink": "https://leetcode.com/problems/check-if-it-is-a-good-array/"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/jump-game/\n\npublic class JumpGame {\n    public boolean canJump(int[] nums) {\n        int n = nums.length - 1;\n        int goal = n;\n        for (int i = n; i >= 0; i--) {\n            if (i + nums[i] >= goal)\n                goal = i;\n        }\n        return goal == 0;\n    }\n}\n",
+                            "name": "JumpGame.java",
+                            "location": "Combined\\Arrays\\JumpGame.java",
+                            "notes": "",
+                            "parent": "Arrays",
+                            "questionLink": "https://leetcode.com/problems/jump-game/"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/minimum-cost-to-move-chips-to-the-same-position/\n\npublic class MinCostToFlipCoinsToSamePosition {\n    public int minCostToMoveChips(int[] position) {\n        int even = 0;\n        for (int i: position){\n            if ((i & 1) == 0){\n                even++;\n            }\n        }\n        return Math.min(even, position.length - even);\n    }\n}\n",
+                            "name": "MinCostToFlipCoinsToSamePosition.java",
+                            "location": "Combined\\Arrays\\MinCostToFlipCoinsToSamePosition.java",
+                            "notes": "",
+                            "parent": "Arrays",
+                            "questionLink": "https://leetcode.com/problems/minimum-cost-to-move-chips-to-the-same-position/"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/number-of-good-pairs/\n\nimport java.util.*;\n\npublic class NumberOfGoodPairs {\n    public static int numIdenticalPairs(int[] nums) {\n        // O(n) solution\n        int numberOfGoodPairs = 0;\n        HashMap<Integer, Integer> hm = new HashMap<>();\n        for (int i: nums) {\n            if (hm.containsKey(i)) {\n                numberOfGoodPairs += hm.get(i);\n            }\n            hm.put(i, hm.getOrDefault(i, 0) + 1);\n        }\n        return numberOfGoodPairs;\n\n        // O(n^2) solution\n        // int numberOfGoodPairs = 0;\n        // for (int i=0; i < nums.length -1; i++) {\n        //     for (int j=i+1; j < nums.length; j++) {\n        //         if (nums[i] == nums[j]) {\n        //             numberOfGoodPairs++;\n        //         }\n        //     }\n        // }\n        // return numberOfGoodPairs;\n    }\n}\n",
+                            "name": "NumberOfGoodPairs.java",
+                            "location": "Combined\\Arrays\\NumberOfGoodPairs.java",
+                            "notes": "",
+                            "parent": "Arrays",
+                            "questionLink": "https://leetcode.com/problems/number-of-good-pairs/"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/how-many-numbers-are-smaller-than-the-current-number/\n\npublic class NumbersSmallerThanCurrentNumber {\n    public int[] smallerNumbersThanCurrent(int[] nums) {\n        int[] counts = new int[102];\n        for (int num : nums)\n            counts[num]++;\n        for (int j = 1; j < counts.length; j++)\n            counts[j] += counts[j - 1];\n        int[] ans = new int[nums.length];\n        for (int i = 0; i < nums.length; i++) {\n            if (nums[i] == 0)\n                ans[i] = 0;\n            else\n                ans[i] = counts[nums[i] - 1];\n        }\n        return ans;\n    }\n}\n",
+                            "name": "NumbersSmallerThanCurrentNumber.java",
+                            "location": "Combined\\Arrays\\NumbersSmallerThanCurrentNumber.java",
+                            "notes": "",
+                            "parent": "Arrays",
+                            "questionLink": "https://leetcode.com/problems/how-many-numbers-are-smaller-than-the-current-number/"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/spiral-matrix-iii/\n\npublic class SpiralMatrix3 {\n    public int[][] spiralMatrixIII(int rows, int cols, int rStart, int cStart) {\n        int[] directions = {0, 1, 0, -1, 0};\n        int[][] ans = new int[rows*cols][2];\n        ans[0] = new int[] {rStart, cStart};\n        int len = 0, d = 0, ptr = 1;\n        while (ptr < ans.length) {\n            if (d == 0 || d == 2) len++;\n            for (int i = 0; i < len; i++) {\n                rStart += directions[d];\n                cStart += directions[d+1];\n                if (rStart >= 0 && rStart < rows && cStart >= 0 && cStart < cols) {\n                    ans[ptr++] = new int[] {rStart, cStart};\n                }\n            }\n            d = ++d%4;\n        }\n        return ans;\n    }\n}\n",
+                            "name": "SpiralMatrix3.java",
+                            "location": "Combined\\Arrays\\SpiralMatrix3.java",
+                            "notes": "",
+                            "parent": "Arrays",
+                            "questionLink": "https://leetcode.com/problems/spiral-matrix-iii/"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/transpose-matrix\n\npublic class TransposeMatrix {\n    public int[][] transpose(int[][] matrix) {\n        int rows = matrix.length;\n        int cols = matrix[0].length;\n        int[][] newMatrix = new int[cols][rows];\n        for (int i = 0; i < rows; i++) {\n            for (int j = 0; j < cols; j++) {\n                newMatrix[j][i] = matrix[i][j];\n            }\n        }\n        return newMatrix;\n    }\n}\n",
+                            "name": "TransposeMatrix.java",
+                            "location": "Combined\\Arrays\\TransposeMatrix.java",
+                            "notes": "",
+                            "parent": "Arrays",
+                            "questionLink": "https://leetcode.com/problems/transpose-matrix"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://www.codingninjas.com/studio/problems/print-like-a-wave_893268\n\nimport java.util.Arrays;\n\npublic class WavePrint {\n    public static int[] wavePrint(int arr[][], int nRows, int mCols) {\n        // Write your code here.\n        int[] ans = new int[nRows*mCols];\n        int ptr = 0;\n        for (int i = 0; i < mCols; i++) {\n            if ((i&1) == 0) {\n                // TB\n                for (int j = 0; j < nRows; j++) {\n                    ans[ptr++] = arr[j][i];\n                }\n            } else {\n                // BT\n                for (int j = nRows - 1; j >= 0; j--) {\n                    ans[ptr++] = arr[j][i];\n                }\n            }\n        }\n        return ans;\n    }\n\n    public static void main(String[] args) {\n        int[][] mat = {\n                {1,2,3,4},\n                {5,6,7,8},\n                {9,10,11,12}\n        };\n        int[] ans = wavePrint(mat, mat.length, mat[0].length);\n        System.out.println(Arrays.toString(ans));\n    }\n}\n",
+                            "name": "WavePrint.java",
+                            "location": "Combined\\Arrays\\WavePrint.java",
+                            "notes": "",
+                            "parent": "Arrays",
+                            "questionLink": "https://www.codingninjas.com/studio/problems/print-like-a-wave_893268"
+                        }
+                    ]
+                },
+                {
+                    "type": "folder",
+                    "name": "Binary Search",
+                    "location": "Combined\\Binary Search",
+                    "parent": "Combined",
+                    "content": [
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/arranging-coins/\n\npublic class ArrangingCoins {\n    public static int arrangeCoins(int n) {\n//        Brute force solution\n//        if (n <= 1) return n;\n//        int i;\n//        for (i = 0; i < n; i++) {\n//            long ans = ((long) i *(i+1))/2;\n//            if (ans > n) break;\n//        }\n//        return i-1;\n\n//        Better solution\n//        long start = 0, end = n;\n//        while (start <= end) {\n//            long mid = start + (end - start)/2;\n//            long val = (mid * (mid+1))/2;\n//            if (val == n) return (int) mid;\n//            if (val > n) {\n//                end = mid - 1;\n//            } else {\n//                start = mid + 1;\n//            }\n//        }\n//        return (int) end;\n\n//        Optimised solution\n//         Equation: k(k+1)/2 = n\n//         k^2 + k = 2*n\n//         k^2 + k + 1/4 = 2*n + 1/4\n//         (k + 1/2)^2 = 2n + 1/4\n//         k = sqrt(2n + 1/4) - 1/2\n        return (int) (Math.sqrt(2L*n + 0.25) - 0.5);\n    }\n\n    public static void main(String[] args) {\n        int ans = arrangeCoins(1804289383);\n        System.out.println(ans);\n    }\n}\n",
+                            "name": "ArrangingCoins.java",
+                            "location": "Combined\\Binary Search\\ArrangingCoins.java",
+                            "notes": "",
+                            "parent": "Binary Search",
+                            "questionLink": "https://leetcode.com/problems/arranging-coins/"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/find-right-interval/\n\nimport java.util.*;\npublic class FindRightInterval {\n    public static int[] findRightInterval(int[][] intervals) {\n        int[][] copy = new int[intervals.length][2];\n        HashMap<Integer, Integer> hm = new HashMap<>();\n        for (int i = 0; i < intervals.length; i++) {\n            copy[i] = intervals[i];\n            hm.put(intervals[i][0], i);\n        }\n        Arrays.sort(copy, Comparator.comparingInt(a -> a[0]));\n        int[] ans = new int[intervals.length];\n        for (int i = 0; i < intervals.length; i++) {\n            int pos = search(copy, intervals[i][1]);\n            ans[i] = pos == -1 ? pos : hm.get(copy[pos][0]);\n        }\n        return ans;\n    }\n    public static int search(int[][] arr, int target) {\n        int start = 0, end = arr.length - 1;\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            if (arr[mid][0] == target) return mid;\n            if (arr[mid][0] > target)\n                end = mid - 1;\n            else\n                start = mid + 1;\n        }\n        if (start == arr.length) return -1;\n        return start;\n    }\n}\n",
+                            "name": "FindRightInterval.java",
+                            "location": "Combined\\Binary Search\\FindRightInterval.java",
+                            "notes": "",
+                            "parent": "Binary Search",
+                            "questionLink": "https://leetcode.com/problems/find-right-interval/"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/frequency-of-the-most-frequent-element/\n\nimport java.util.*;\npublic class FrequencyOfMostFrequentElement {\n    public int maxFrequency(int[] N, int k) {\n        Arrays.sort(N);\n        int l = 0, r = 0;\n        long total = 0, result = 0;\n        while (r < N.length) {\n            total += N[r];\n            while ((long) N[r] * (r - l + 1) > total + k)\n                total -= N[l++];\n            result = Math.max(result, (r - l + 1));\n            r += 1;\n        }\n        return (int)result;\n    }\n}\n",
+                            "name": "FrequencyOfMostFrequentElement.java",
+                            "location": "Combined\\Binary Search\\FrequencyOfMostFrequentElement.java",
+                            "notes": "",
+                            "parent": "Binary Search",
+                            "questionLink": "https://leetcode.com/problems/frequency-of-the-most-frequent-element/"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/maximum-value-at-a-given-index-in-a-bounded-array/\n\npublic class MaxValueAtGivenIndexInBoundedArray {\n    public long getFormulaSum(int count, long mid) {\n        long c = Math.min(count, mid-1);\n        return c*mid - c*(c+1)/2 + Math.max(count - (mid-1), 0); // Adds extra 1s if any\n    }\n    public int maxValue(int n, int index, int maxSum) {\n        long start = 1;\n        long end = maxSum;\n        long result = 0;\n        while (start <= end) {\n            long mid = start + (end - start)/2;\n            long totalSum = getFormulaSum(index, mid);\n            totalSum += mid;\n            totalSum += getFormulaSum(n-index-1, mid);\n            if (totalSum <= maxSum) {\n                result = mid;\n                start = mid + 1;\n            } else {\n                end = mid - 1;\n            }\n        }\n        return (int)result;\n    }\n}\n",
+                            "name": "MaxValueAtGivenIndexInBoundedArray.java",
+                            "location": "Combined\\Binary Search\\MaxValueAtGivenIndexInBoundedArray.java",
+                            "notes": "",
+                            "parent": "Binary Search",
+                            "questionLink": "https://leetcode.com/problems/maximum-value-at-a-given-index-in-a-bounded-array/"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/minimum-absolute-sum-difference/\n\nimport java.util.*;\npublic class MinAbsoluteSumDifference {\n    public int minAbsoluteSumDiff(int[] N, int[] M) {\n        int[] diff = new int[N.length];\n        long maxSum = 0;\n        for (int i = 0; i < N.length; i++) {\n            diff[i] = Math.abs(N[i] - M[i]);\n            maxSum += diff[i];\n        }\n        Arrays.sort(N);\n        int max = 0;\n        for (int j = 0; j < N.length; j++) {\n            if (M[j] > 0) {\n                int difference = Math.abs(diff[j] - getMinDiff(N, M[j]));\n                max = Math.max(difference, max);\n            }\n        }\n        return (int)((maxSum - max) % 1000000007);\n    }\n\n    public static int getMinDiff(int[] arr, int target) {\n        int start = 0;\n        int end = arr.length - 1;\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            if (target == arr[mid]) return 0;\n            if (arr[mid] > target)\n                end = mid - 1;\n            else\n                start = mid + 1;\n        }\n        if (start >= arr.length) return Math.abs(arr[end] - target);\n        if (end < 0) return Math.abs(arr[start] - target);\n        int diff1 = Math.abs(arr[start] - target);\n        int diff2 = Math.abs(arr[end] - target);\n        return Math.min(diff1, diff2);\n    }\n}\n",
+                            "name": "MinAbsoluteSumDifference.java",
+                            "location": "Combined\\Binary Search\\MinAbsoluteSumDifference.java",
+                            "notes": "",
+                            "parent": "Binary Search",
+                            "questionLink": "https://leetcode.com/problems/minimum-absolute-sum-difference/"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/reach-a-number/\n\npublic class ReachANumber {\n    public static long formula(long n) {\n        return (n*(n+1))>>1;\n    }\n\n    public int reachNumber(int target) {\n        target = Math.abs(target);\n        long start = 1, end = target;\n        int steps = 0;\n        while (start <= end) {\n            long mid = start + (end - start)/2;\n            long distance = formula(mid);\n            if (distance >= target) {\n                steps = (int) mid;\n                end = mid - 1;\n            } else {\n                start = mid + 1;\n            }\n        }\n        long dist = formula(steps) - target;\n        if ((dist&1) != 0) {\n            return steps + ((steps&1) == 0 ? 1 : 2);\n        }\n        return steps;\n    }\n}\n",
+                            "name": "ReachANumber.java",
+                            "location": "Combined\\Binary Search\\ReachANumber.java",
+                            "notes": "",
+                            "parent": "Binary Search",
+                            "questionLink": "https://leetcode.com/problems/reach-a-number/"
+                        }
+                    ]
+                },
+                {
+                    "type": "folder",
+                    "name": "Maths",
+                    "location": "Combined\\Maths",
+                    "parent": "Combined",
+                    "content": [
+                        {
+                            "type": "file",
+                            "code": "// Link: https://www.geeksforgeeks.org/find-square-root-number-upto-given-precision-using-binary-search/\n\npublic class SquareRootWithPrecision {\n    public static int sqrt(int n) {\n        int start = 0, end = n;\n        while (start <= end) {\n            int mid = start + (end - start) / 2;\n            int root = mid * mid;\n            if (root == n) return mid;\n            if (root > n)\n                end = mid - 1;\n            else\n                start = mid + 1;\n        }\n        return end;\n    }\n\n    public static int getClosestSqrt(double n, int val, int num) {\n        int start = 0, end = 9;\n        while (start <= end) {\n            int mid = start + (end - start) / 2;\n            double x = n + mid / (double) val;\n            double root = x * x;\n            if (root < num)\n                start = mid + 1;\n            else\n                end = mid - 1;\n        }\n        return end;\n    }\n\n    public static double getSquareRootWithPrecision(int n, int p) {\n        double num = sqrt(n);\n        int increment = 10;\n        for (int i = 0; i < p; i++) {\n            int x = getClosestSqrt(num, increment, n); // log10\n            num += (double) x / increment;\n            increment *= 10;\n        }\n        return num;\n    }\n\n    public static void main(String[] args) {\n        int n = 40;\n        int p = 3;\n        double ans = getSquareRootWithPrecision(n, p);\n        System.out.printf(\"%.{%d}f\", p, ans);\n    }\n}\n",
+                            "name": "SquareRootWithPrecision.java",
+                            "location": "Combined\\Maths\\SquareRootWithPrecision.java",
+                            "notes": "",
+                            "parent": "Maths",
+                            "questionLink": "https://www.geeksforgeeks.org/find-square-root-number-upto-given-precision-using-binary-search/"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://www.geeksforgeeks.org/find-xor-of-numbers-from-the-range-l-r/\n\npublic class XorOfRange {\n    public static void main(String[] args) {\n        int n = 9;\n        int ans1 = computeXor(n);\n        int ans2 = computeXorEfficient(n);\n        System.out.println(ans1 + \"  \" + ans2);\n    }\n\n    static int computeXor(int n) {\n        if (n == 0) return 0;\n        int uni = 0;\n        for (int i = 1; i <= n; i++) {\n            uni = uni ^ i;\n        }\n        return uni;\n    }\n\n    static int computeXorEfficient(int n) {\n        int rem = n % 4;\n        switch (rem) {\n            case 0 -> {\n                return n;\n            }\n            case 1 -> {\n                return 1;\n            }\n            case 2 -> {\n                return n + 1;\n            }\n        }\n        return 0;\n    }\n}\n",
+                            "name": "XorOfRange.java",
+                            "location": "Combined\\Maths\\XorOfRange.java",
+                            "notes": "",
+                            "parent": "Maths",
+                            "questionLink": "https://www.geeksforgeeks.org/find-xor-of-numbers-from-the-range-l-r/"
+                        }
+                    ]
+                },
+                {
+                    "type": "folder",
+                    "name": "Sorting",
+                    "location": "Combined\\Sorting",
+                    "parent": "Combined",
+                    "content": [
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/assign-cookies/\n\nimport java.util.Arrays;\n\npublic class AssignCookies {\n    public static int findContentChildren(int[] g, int[] s) {\n        Arrays.sort(g);\n        Arrays.sort(s);\n        int gLast = g.length - 1;\n        int sLast = s.length - 1;\n        int count = 0;\n        while (gLast >= 0 && sLast >= 0) {\n            if (g[gLast] <= s[sLast]) {\n                gLast--;\n                sLast--;\n                count++;\n            } else {\n                gLast--;\n            }\n        }\n        return count;\n    }\n}\n",
+                            "name": "AssignCookies.java",
+                            "location": "Combined\\Sorting\\AssignCookies.java",
+                            "notes": "",
+                            "parent": "Sorting",
+                            "questionLink": "https://leetcode.com/problems/assign-cookies/"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/can-make-arithmetic-progression-from-sequence/\n\npublic class CanMakeAPFFromSequence {\n    public static void swap(int[] arr, int i, int j) {\n        int temp = arr[i];\n        arr[i] = arr[j];\n        arr[j] = temp;\n    }\n    public static boolean canMakeArithmeticProgression(int[] arr) {\n//        Brute force\n//         Arrays.sort(arr);\n//         int diff = arr[1] - arr[0];\n//         for (int i = 1; i < arr.length; i++) {\n//             if (arr[i] - arr[i-1] != diff) return false;\n//         }\n//         return true;\n\n//        Optimal solution\n        int min = Integer.MAX_VALUE, max =Integer.MIN_VALUE;\n        for (int num: arr){\n            min = Math.min(min, num);\n            max = Math.max(max, num);\n        }\n        int n = arr.length;\n//        If difference is not perfectly divisible then return false\n        if ((max - min) % (n - 1) != 0) return false;\n//        To get the difference between any 2 element in a AP\n        int diff = (max - min) / (n - 1);\n        int i = 0;\n        while (i < n) {\n            if (arr[i] == min + i*diff) i++;\n            else if ((arr[i] - min)%diff != 0) return false;\n            else {\n                int j = (arr[i] - min)/diff;\n                if (arr[i] == arr[j]) return false;\n                swap(arr, i, j);\n            }\n        }\n        return true;\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {13, 12, -12, 9, 9, 16, 7, -10, -20, 0, 18, -1, -20, -10, -8, 15, 15, 16, 2, 15};\n//        int[] arr = {2, 10, 7, 8, 3};\n//        int[] arr = {1,2,4};\n        System.out.println(canMakeArithmeticProgression(arr));\n    }\n}\n",
+                            "name": "CanMakeAPFFromSequence.java",
+                            "location": "Combined\\Sorting\\CanMakeAPFFromSequence.java",
+                            "notes": "",
+                            "parent": "Sorting",
+                            "questionLink": "https://leetcode.com/problems/can-make-arithmetic-progression-from-sequence/"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/insertion-sort-list\n\npublic class InsertionSortList {\n    static class ListNode {\n        int val;\n        ListNode next;\n        ListNode() {}\n        ListNode(int val) {\n            this.val = val;\n        }\n        ListNode(int val, ListNode next) {\n            this.val = val;\n            this.next = next;\n        }\n    }\n\n    public ListNode insertionSortList(ListNode head) {\n        ListNode start = head;\n        while (start != null) {\n            ListNode minNode = start;\n            ListNode temp = start.next;\n            while (temp != null) {\n                if (minNode.val > temp.val) {\n                    minNode = temp;\n                }\n                temp = temp.next;\n            }\n            // swap\n            int x = start.val;\n            start.val = minNode.val;\n            minNode.val = x;\n\n            start = start.next;\n        }\n        return head;\n    }\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+                            "name": "InsertionSortList.java",
+                            "location": "Combined\\Sorting\\InsertionSortList.java",
+                            "notes": "",
+                            "parent": "Sorting",
+                            "questionLink": "https://leetcode.com/problems/insertion-sort-list"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/maximum-product-of-two-elements-in-an-array\n\npublic class MaxProductOfTwoElementsInAnArray {\n    public int maxProduct(int[] nums) {\n        int f = 0, s = 0;\n        for (int num : nums) {\n            if (num > f) {\n                s = f;\n                f = num;\n            } else if (num > s) {\n                s = num;\n            }\n        }\n        return (f-1)*(s-1);\n    }\n}\n",
+                            "name": "MaxProductOfTwoElementsInAnArray.java",
+                            "location": "Combined\\Sorting\\MaxProductOfTwoElementsInAnArray.java",
+                            "notes": "",
+                            "parent": "Sorting",
+                            "questionLink": "https://leetcode.com/problems/maximum-product-of-two-elements-in-an-array"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/rank-transform-of-an-array/submissions/\n\nimport java.util.*;\n\npublic class RankTransformOfAnArray {\n    public int[] arrayRankTransform(int[] arr) {\n        HashMap<Integer, Integer> hm = new HashMap<Integer, Integer>();\n        int[] h = arr.clone();\n        Arrays.sort(h);\n        int rank = 1;\n        for (int i = 0; i < h.length; i++) {\n            if (!hm.containsKey(h[i])) {\n                hm.put(h[i], rank++);\n            }\n        }\n        for (int i = 0; i < arr.length; i++) {\n            h[i] = hm.get(arr[i]);\n        }\n        return h;\n    }\n}\n",
+                            "name": "RankTransformOfAnArray.java",
+                            "location": "Combined\\Sorting\\RankTransformOfAnArray.java",
+                            "notes": "",
+                            "parent": "Sorting",
+                            "questionLink": "https://leetcode.com/problems/rank-transform-of-an-array/submissions/"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/relative-sort-array/\n\nimport java.util.Arrays;\n\npublic class RelativeSortArray {\n    public static int[] relativeSortArray(int[] arr1, int[] arr2) {\n        int[] count = new int[1001];\n        int totalCount = arr1.length;\n        for (int i : arr1) {\n            count[i]++;\n        }\n        int j = 0;\n        for (int k : arr2) {\n            while (count[k] != 0) {\n                arr1[j++] = k;\n                count[k]--;\n                totalCount--;\n            }\n        }\n        if (totalCount != 0) {\n            for (int i = 0; i < 1001; i++) {\n                while (count[i] != 0) {\n                    arr1[j++] = i;\n                    count[i]--;\n                }\n            }\n        }\n        return arr1;\n    }\n    public static void main(String[] args) {\n//        Input:\n        int[] arr1 = {2,3,1,3,2,4,6,7,9,2,19};\n        int[] arr2 = {2,1,4,3,9,6};\n        int[] ans = relativeSortArray(arr1, arr2);\n        System.out.println(Arrays.toString(ans));\n//        Output: [2,2,2,1,4,3,3,9,6,7,19]\n    }\n}\n",
+                            "name": "RelativeSortArray.java",
+                            "location": "Combined\\Sorting\\RelativeSortArray.java",
+                            "notes": "",
+                            "parent": "Sorting",
+                            "questionLink": "https://leetcode.com/problems/relative-sort-array/"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/sort-array-by-increasing-frequency/\n\nimport java.util.*;\npublic class SortArrayByIncreasingFrequency {\n    public static int[] frequencySort(int[] nums) {\n        // Count the frequency of each number\n        Map<Integer, Integer> hm = new HashMap<>();\n        for (int num : nums) {\n            hm.put(num, hm.getOrDefault(num, 0) + 1);\n        }\n        // Sort the unique numbers by frequency and then by value\n        List<Integer> numList = new ArrayList<>(hm.keySet());\n        numList.sort((a, b) -> {\n            int freqCompare = Integer.compare(hm.get(a), hm.get(b));\n            return (freqCompare != 0) ? freqCompare : Integer.compare(b, a);\n        });\n        // Populate the sorted result array -> O(n) operation\n        int index = 0;\n        for (int num : numList) {\n            int freq = hm.get(num);\n            for (int i = 0; i < freq; i++) {\n                nums[index++] = num;\n            }\n        }\n        return nums;\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {-1,1,-6,4,5,-6,1,4,1};\n        int[] ans = frequencySort(arr);\n        System.out.println(Arrays.toString(ans));\n    }\n}\n",
+                            "name": "SortArrayByIncreasingFrequency.java",
+                            "location": "Combined\\Sorting\\SortArrayByIncreasingFrequency.java",
+                            "notes": "",
+                            "parent": "Sorting",
+                            "questionLink": "https://leetcode.com/problems/sort-array-by-increasing-frequency/"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/sort-integers-by-the-number-of-1-bits/description/\n\nimport java.util.*;\n\npublic class SortIntegersByNumberOf1Bits {\n    public static void swap(int[] arr, int i, int j) {\n        int temp = arr[i];\n        arr[i] = arr[j];\n        arr[j] = temp;\n    }\n\n    public static int compare(int a, int b) {\n        int aBits = Integer.bitCount(a);\n        int bBits = Integer.bitCount(b);\n        if (aBits != bBits) return aBits - bBits;\n        return a - b;\n    }\n\n    public static void mergeSort(int[] arr, int low, int high) {\n        if (low == high) return;\n        int mid = low + (high - low)/2;\n        mergeSort(arr, low, mid);\n        mergeSort(arr, mid+1, high);\n        merge(arr, low, mid, high);\n    }\n\n    public static void merge(int[] arr, int low, int mid, int high) {\n        int[] temp = new int[high - low + 1];\n        int i = 0, left = low, right = mid+1;\n        while (left <= mid && right <= high) {\n            if (compare(arr[left], arr[right]) > 0)\n                temp[i++] = arr[right++];\n            else\n                temp[i++] = arr[left++];\n        }\n        while (left <= mid) temp[i++] = arr[left++];\n        while (right <= high) temp[i++] = arr[right++];\n\n        for (int j = 0; j < temp.length; j++)\n            arr[j+low] = temp[j];\n    }\n\n    public static int[] sortByBits(int[] arr) {\n//        Brute force solution\n//        int n = arr.length - 1;\n//        for (int i = 0; i < n; i++) {\n//            boolean swapped = false;\n//            for (int j = 0; j < n - i; j++) {\n//                if (compare(arr[j], arr[j + 1]) > 0) {\n//                    swap(arr, j, j + 1);\n//                    swapped = true;\n//                }\n//            }\n//            if (!swapped) break;\n//        }\n//        return arr;\n\n//        Better solution\n//        for (int i = 0; i < arr.length; i++) {\n//            arr[i] += Integer.bitCount(arr[i]) * 10001;\n//        }\n//        Arrays.sort(arr);\n//        for (int i = 0; i < arr.length; i++) {\n//            arr[i] = arr[i] % 10001;\n//        }\n//        return arr;\n\n//        Optimised solution\n        mergeSort(arr, 0, arr.length - 1);\n        return arr;\n    }\n\n    public static void main(String[] args) {\n//        int[] arr = {0, 1, 2, 3, 4, 5, 6, 7, 8};\n//        int[] arr = {1024, 512, 256, 128, 64, 32, 16, 8, 4, 2, 1};\n        int[] arr = {2, 3, 5, 7, 11, 13, 17, 19};\n        int[] ans = sortByBits(arr);\n        System.out.println(Arrays.toString(ans));\n    }\n}\n",
+                            "name": "SortIntegersByNumberOf1Bits.java",
+                            "location": "Combined\\Sorting\\SortIntegersByNumberOf1Bits.java",
+                            "notes": "",
+                            "parent": "Sorting",
+                            "questionLink": "https://leetcode.com/problems/sort-integers-by-the-number-of-1-bits/description/"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/special-array-with-x-elements-greater-than-or-equal-x\n\npublic class SplArrayWithXElementsGTEToX {\n    public int specialArray(int[] nums) {\n        int start = 1, end = nums.length;\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            int count = 0;\n            for (int i: nums) {\n                if (i >= mid) count++;\n            }\n            if (count == mid) return mid;\n            if (count > mid)\n                start = mid + 1;\n            else\n                end = mid - 1;\n        }\n        return -1;\n    }\n}\n",
+                            "name": "SplArrayWithXElementsGTEToX.java",
+                            "location": "Combined\\Sorting\\SplArrayWithXElementsGTEToX.java",
+                            "notes": "",
+                            "parent": "Sorting",
+                            "questionLink": "https://leetcode.com/problems/special-array-with-x-elements-greater-than-or-equal-x"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/squares-of-a-sorted-array/\n\npublic class SquaresOfASortedArray {\n    public int[] sortedSquares(int[] nums) {\n//        Brute force\n//        int[] ans = new int[nums.length];\n//        for (int i=0; i < nums.length; i++) {\n//            ans[i] = nums[i]*nums[i];\n//        }\n//        Arrays.sort(ans);\n//        return ans;\n//        Best solution\n        int n = nums.length - 1;\n        int[] ans = new int[n+1];\n        int start = 0, end = n;\n        while(start <= end) {\n            if (Math.abs(nums[start]) >= Math.abs(nums[end])) {\n                ans[n--] = nums[start]*nums[start];\n                start++;\n            } else {\n                ans[n--] = nums[end]*nums[end];\n                end--;\n            }\n        }\n        return ans;\n    }\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+                            "name": "SquaresOfASortedArray.java",
+                            "location": "Combined\\Sorting\\SquaresOfASortedArray.java",
+                            "notes": "",
+                            "parent": "Sorting",
+                            "questionLink": "https://leetcode.com/problems/squares-of-a-sorted-array/"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/third-maximum-number/\n\n// Approach: Ranking technique with conditions to handle the same values as first and second;\n// Use Long instead of int as min and max value is Integer's min and max value\n\npublic class ThirdMaximumNumber {\n    public static int getThirdMaxNumber(int[] arr) {\n        long f = Long.MIN_VALUE;\n        long s = Long.MIN_VALUE;\n        long t = Long.MIN_VALUE;\n        for (int num : arr) {\n            if (num > f) {\n                t = s;\n                s = f;\n                f = num;\n            } else if (num > s && num != f) {\n                t = s;\n                s = num;\n            } else if (num > t && num != s && num != f) {\n                t = num;\n            }\n        }\n        if (t == Long.MIN_VALUE) {\n            return (int)f;\n        }\n        return (int)t;\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {1,2,2,5,3,5};\n        int ans = getThirdMaxNumber(arr);\n        System.out.println(ans);\n    }\n}\n",
+                            "name": "ThirdMaximumNumber.java",
+                            "location": "Combined\\Sorting\\ThirdMaximumNumber.java",
+                            "notes": "",
+                            "parent": "Sorting",
+                            "questionLink": "https://leetcode.com/problems/third-maximum-number/"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/3sum-closest/\n\nimport java.util.*;\npublic class ThreeSumClosest {\n    public static int threeSumClosest(int[] nums, int target) {\n        Arrays.sort(nums);\n        int n = nums.length;\n\n        int first3Sum = nums[0]+nums[1]+nums[2];\n        int last3Sum = nums[n-1]+nums[n-2]+nums[n-3];\n        if (first3Sum >= target) return first3Sum;\n        if (last3Sum <= target) return last3Sum;\n\n        int diff = Integer.MAX_VALUE;\n        int closest = Integer.MAX_VALUE;\n        for (int i = 0; i < n; i++) {\n            if (i > 0 && nums[i] == nums[i-1]) continue;\n            int j = i+1;\n            int k = nums.length - 1;\n            while (j < k) {\n                int sum = nums[i] + nums[j] + nums[k];\n                if (sum == target) return sum;\n\n                int abs = Math.abs(target - sum);\n                if (diff > abs) {\n                    closest = sum;\n                    diff = abs;\n                }\n                if (sum > target) k--;\n                else j++;\n            }\n        }\n        return closest;\n    }\n}\n",
+                            "name": "ThreeSumClosest.java",
+                            "location": "Combined\\Sorting\\ThreeSumClosest.java",
+                            "notes": "",
+                            "parent": "Sorting",
+                            "questionLink": "https://leetcode.com/problems/3sum-closest/"
+                        }
+                    ]
+                },
+                {
+                    "type": "folder",
+                    "name": "Strings",
+                    "location": "Combined\\Strings",
+                    "parent": "Combined",
+                    "content": [
+                        {
+                            "type": "file",
+                            "code": "// Link: https://practice.geeksforgeeks.org/problems/maximum-occuring-character-1587115620/1\n\npublic class MaximumOccuringCharacter {\n//    Use a hashmap or counts array to store the count of all the elements\n//    ans iterate over it to get the max count;\n    public static char getMaxOccuringChar(String line)\n    {\n        // Your code here\n        int[] count = new int[26];\n        for (int i = 0; i < line.length(); i++) {\n            count[(int) line.charAt(i) - 'a']++;\n        }\n        int max = count[0];\n        int idx = 0;\n        for (int j = 0; j < count.length; j++) {\n            if (count[j] > max) {\n                idx = j;\n                max = count[j];\n            }\n        }\n        return (char) (idx + 'a');\n    }\n\n    public static void main(String[] args) {\n        String s = \"testsample\";\n        char ans = getMaxOccuringChar(s);\n        System.out.println(ans);\n    }\n}\n",
+                            "name": "MaximumOccuringCharacter.java",
+                            "location": "Combined\\Strings\\MaximumOccuringCharacter.java",
+                            "notes": "",
+                            "parent": "Strings",
+                            "questionLink": "https://practice.geeksforgeeks.org/problems/maximum-occuring-character-1587115620/1"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/permutation-in-string/\n\npublic class PermutationInString {\n    public static boolean checkCount(int[] arr1, int[] arr2) {\n        for (int i = 0; i < arr1.length; i++) {\n            if (arr1[i] != arr2[i]) return false;\n        }\n        return true;\n    }\n\n    public static boolean checkInclusion(String s1, String s2) {\n        if (s1.length() > s2.length()) return false;\n        int[] count1 = new int[26];\n        for (int i = 0; i < s1.length(); i++) {\n            count1[s1.charAt(i) - 97]++;\n        }\n        int[] count2 = new int[26];\n        int windowSize = s1.length();\n        int i = 0;\n        while (i < windowSize) {\n            count2[s2.charAt(i) - 97]++;\n            i++;\n        }\n        if (checkCount(count1, count2)) return true;\n        while (i < s2.length()) {\n            // Add\n            count2[s2.charAt(i) -97]++;\n            // Minus\n            count2[s2.charAt(i-windowSize) -97]--;\n\n            i++;\n            if (checkCount(count1, count2)) return true;\n        }\n        return false;\n    }\n    public static void main(String[] args) {\n        String s1 = \"ab\";\n        String s2 = \"eidboaoo\";\n        boolean ans = checkInclusion(s1, s2);\n        System.out.println(ans);\n    }\n}\n",
+                            "name": "PermutationInString.java",
+                            "location": "Combined\\Strings\\PermutationInString.java",
+                            "notes": "",
+                            "parent": "Strings",
+                            "questionLink": "https://leetcode.com/problems/permutation-in-string/"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/\n\npublic class RemoveAllAdjacentDuplicates {\n    public static String removeDuplicates(String s) {\n//        Brute force solution\n//        Stack<Character> stack = new Stack<>();\n//        StringBuilder sb = new StringBuilder();\n//        for (int i = 0; i < s.length(); i++) {\n//            char ch = s.charAt(i);\n//            if (!stack.isEmpty() && stack.peek() == ch)\n//                stack.pop();\n//            else\n//                stack.push(ch);\n//        }\n//        while (!stack.isEmpty()) sb.append(stack.pop());\n//        return sb.reverse().toString();\n\n//        Better solution using stack\n        char[] stack = new char[s.length()];\n        int i = 0;\n        for (int j = 0; j < s.length(); j++) {\n            char ch = s.charAt(j);\n            if (i > 0 && stack[i-1] == ch)\n                i = Math.max(0, i - 1);\n            else\n                stack[i++] = ch;\n        }\n        return new String(stack, 0, i);\n\n//        Optimised solution: Two pointer approach which requires stringBuilder methods\n    }\n    public static void main(String[] args) {\n        String s = \"abbaca\";\n        String ans = removeDuplicates(s);\n        System.out.println(ans);\n    }\n}\n",
+                            "name": "RemoveAllAdjacentDuplicates.java",
+                            "location": "Combined\\Strings\\RemoveAllAdjacentDuplicates.java",
+                            "notes": "",
+                            "parent": "Strings",
+                            "questionLink": "https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/remove-all-occurrences-of-a-substring/\n\npublic class RemoveAllOccurrencesOfSubstring {\n    public static String removeOccurrences(String s, String part) {\n        StringBuilder sb = new StringBuilder(s);\n        while (sb.length()!=0 && sb.indexOf(part)>=0) {\n            int idx = sb.indexOf(part);\n            sb.delete(idx, idx+part.length());\n        }\n        return sb.toString();\n    }\n    public static void main(String[] args) {\n        String s = \"daabcbaabcbc\";\n        String part = \"abc\";\n        String ans = removeOccurrences(s, part);\n        System.out.println(ans);\n    }\n}\n",
+                            "name": "RemoveAllOccurrencesOfSubstring.java",
+                            "location": "Combined\\Strings\\RemoveAllOccurrencesOfSubstring.java",
+                            "notes": "",
+                            "parent": "Strings",
+                            "questionLink": "https://leetcode.com/problems/remove-all-occurrences-of-a-substring/"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://www.codingninjas.com/studio/problems/replace-spaces_1172172\n\npublic class ReplaceSpaces {\n    public static StringBuilder replaceSpaces(StringBuilder str) {\n        // Write your code here.\n        // return new StringBuilder(str.toString().replace(\" \", \"@40\"));\n        StringBuilder sb = new StringBuilder();\n        for (int i = 0; i < str.length(); i++) {\n            if (str.charAt(i) == ' ')\n                sb.append(\"@40\");\n            else\n                sb.append(str.charAt(i));\n        }\n        return sb;\n    }\n\n    public static void main(String[] args) {\n        StringBuilder str = new StringBuilder(\"Coding Ninjas Is A Coding Platform\");\n        StringBuilder ans = replaceSpaces(str);\n        System.out.println(ans);\n    }\n}\n",
+                            "name": "ReplaceSpaces.java",
+                            "location": "Combined\\Strings\\ReplaceSpaces.java",
+                            "notes": "",
+                            "parent": "Strings",
+                            "questionLink": "https://www.codingninjas.com/studio/problems/replace-spaces_1172172"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/reverse-words-in-a-string/description/\n\npublic class ReverseWords1 {\n    public static String reverseWords(String s) {\n//        Brute force solution\n//        String[] sArr = s.split(\" \");\n//        StringBuilder sb = new StringBuilder();\n//        for (int i = sArr.length - 1; i >= 0; i--) {\n//            if (sArr[i].trim().length() != 0) {\n//                sb.append(sArr[i]).append(\" \");\n//            }\n//        }\n//        return sb.toString().trim();\n\n//        Best: 2 pointer approach\n        int i = s.length() - 1, j = 0;\n        StringBuilder sb = new StringBuilder();\n        while (i >= 0) {\n            while (i >= 0 && s.charAt(i) == ' ') i--;\n            j = i;\n            while (i >= 0 && s.charAt(i) != ' ') i--;\n            if (i == -1) sb.append(s, 0, j+1);\n            else sb.append(s, i+1, j+1).append(' ');\n        }\n        return sb.toString().trim();\n    }\n    public static void main(String[] args) {\n        String s = \"a good   example\";\n//        The string can have more than 1 space anywhere in the array\n        String ans = reverseWords(s);\n        System.out.println(ans);\n    }\n}\n",
+                            "name": "ReverseWords1.java",
+                            "location": "Combined\\Strings\\ReverseWords1.java",
+                            "notes": "",
+                            "parent": "Strings",
+                            "questionLink": "https://leetcode.com/problems/reverse-words-in-a-string/description/"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://www.lintcode.com/problem/927/\n\nimport java.util.Arrays;\n\npublic class ReverseWordsInAString2 {\n//    Input: s = \"the sky is blue\"\n//    Output: \"blue is sky the\"\n    public static void reverse(char[] arr, int start, int end) {\n        while (start < end) {\n            char temp = arr[start];\n            arr[start++] = arr[end];\n            arr[end--] = temp;\n        }\n    }\n\n    public static char[] reverseWords(char[] arr) {\n//        int start = 0;\n//        int end = arr.length;\n//        reverse(arr, start, end - 1);\n//        for (int i = 0; i < end; i++) {\n//            if (arr[i] == ' ') {\n//                reverse(arr, start, i-1);\n//                start = i+1;\n//            } else if (i == end - 1) {\n//                reverse(arr, start, i);\n//            }\n//        }\n//        return arr;\n        int start = 0;\n        int end = arr.length - 1;\n        reverse(arr, start, end);\n        for (int i = 0; i <= end; i++) {\n            if (arr[i] == ' ') {\n                reverse(arr, start, i - 1);\n                start = i + 1;\n            }\n        }\n        reverse(arr, start, end);\n        return arr;\n    }\n    public static void main(String[] args) {\n        char[] arr = {'t', 'h', 'e', ' ', 's', 'k', 'y', ' ', 'i', 's', ' ', 'b', 'l', 'u', 'e'};\n        char[] ans = reverseWords(arr);\n        System.out.println(Arrays.toString(ans));\n    }\n}\n",
+                            "name": "ReverseWordsInAString2.java",
+                            "location": "Combined\\Strings\\ReverseWordsInAString2.java",
+                            "notes": "",
+                            "parent": "Strings",
+                            "questionLink": "https://www.lintcode.com/problem/927/"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/string-compression/\n\nimport java.util.Arrays;\n\npublic class StringCompression {\n    public static int compress(char[] chars) {\n//        Best solution O(n)\n        int n = chars.length;\n        int i = 0, j = 0, slow = 0;\n        while (j < n) {\n            while (j < n && chars[i] == chars[j]) j++;\n            int diff = j - i;\n            chars[slow++] = chars[i];\n            if (diff > 1) {\n                int len = (int) (Math.log10(diff) + 1);\n                for (int k = len - 1; k >= 0; k--) {\n                    chars[slow + k] = (char) ((diff%10) + '0');\n                    diff /= 10;\n                }\n                slow += len;\n//                String s = String.valueOf(diff);\n//                for (int k = 0; k < s.length(); k++) {\n//                    chars[slow++] = s.charAt(k);\n//                }\n            }\n            i = j;\n        }\n        System.out.println(Arrays.toString(chars));\n        return slow;\n    }\n\n    public static void main(String[] args) {\n        char[] chars = {'a', 'a', 'b', 'b', 'c', 'c', 'c'};\n        int ans = compress(chars);\n        System.out.println(ans);\n    }\n}\n",
+                            "name": "StringCompression.java",
+                            "location": "Combined\\Strings\\StringCompression.java",
+                            "notes": "",
+                            "parent": "Strings",
+                            "questionLink": "https://leetcode.com/problems/string-compression/"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/valid-palindrome/\n\n//    The given string is polluted with characters other than numbers and alphabets.\n//    Also ignore the case while solving for the answer\n\npublic class ValidPalindrome {\n    public static boolean isPalindrome(String s) {\n//        Brute force: Remove every character that is not valid using replaceAll method\n//        This will take O(n) time to replace and O(n) time to make it lowercase and then\n//        another O(n) to iterate the array\n//        Total TC = O(3n)\n//        s = s.replaceAll(\"[^a-zA-Z0-9]\", \"\").toLowerCase();\n//        int start = 0;\n//        int end = s.length() - 1;\n//        while (start < end) {\n//            if (s.charAt(start) != s.charAt(end)) return false;\n//            start++;\n//            end--;\n//        }\n//        return true;\n\n//        Best approach: Two pointer approach\n//        Total TC = O(2n) => (lowercase and iterating)\n         int n = s.length();\n         int start = 0;\n         int end = n-1;\n         s = s.toLowerCase();\n         while (start < end) {\n             if (!Character.isLetterOrDigit(s.charAt(start))) start++;\n             else if (!Character.isLetterOrDigit(s.charAt(end))) end--;\n             else {\n                 if (s.charAt(start) != s.charAt(end)) return false;\n                 start++;\n                 end--;\n             }\n         }\n         return true;\n\n    }\n    public static void main(String[] args) {\n        String s = \"A man, a plan, a canal: Panama\";\n        boolean ans = isPalindrome(s);\n        System.out.println(ans);\n    }\n}\n",
+                            "name": "ValidPalindrome.java",
+                            "location": "Combined\\Strings\\ValidPalindrome.java",
+                            "notes": "",
+                            "parent": "Strings",
+                            "questionLink": "https://leetcode.com/problems/valid-palindrome/"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "folder",
+            "name": "Neetcode 150",
+            "location": "Neetcode 150",
+            "parent": "DSAPrepQuestions",
+            "content": [
+                {
+                    "type": "folder",
+                    "name": "Arrays & Hashing",
+                    "location": "Neetcode 150\\Arrays & Hashing",
+                    "parent": "Neetcode 150",
+                    "content": [
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/contains-duplicate/\n\nimport java.util.*;\n\nclass ContainsDuplicate {\n    public boolean containsDuplicate(int[] nums) {\n        HashSet<Integer> hs = new HashSet<>();\n        for (int i : nums) {\n            if (hs.contains(i)) return true;\n            hs.add(i);\n        }\n        return false;\n    }\n}",
+                            "name": "ContainsDuplicate.java",
+                            "location": "Neetcode 150\\Arrays & Hashing\\ContainsDuplicate.java",
+                            "notes": "",
+                            "parent": "Arrays & Hashing",
+                            "questionLink": "https://leetcode.com/problems/contains-duplicate/"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/group-anagrams\n\nimport java.util.*;\n/*\n* Sorting and storing in hashmap and value list\n* if a duplicate string is found store it in value list.\n* If it does not exist create a new key value pair in hashmap\n*/\n\npublic class GroupAnagrams {\n    public static List<List<String>> groupAnagrams(String[] strs) {\n        HashMap<String, List<String>> hm = new HashMap<>();\n        for (String str : strs) {\n            char[] ch = str.toCharArray();\n            Arrays.sort(ch);\n            String s = new String(ch);\n            if (!hm.containsKey(s)) {\n                hm.put(s, new ArrayList<>());\n            }\n            hm.get(s).add(str);\n        }\n        System.out.println(hm);\n        return new ArrayList<>(hm.values());\n    }\n\n    public static void main(String[] args) {\n//        String[] arr = {\"eat\",\"tea\",\"tan\",\"ate\",\"nat\",\"bat\"};\n        String[] arr = {\"\"};\n        List<List<String>> ans = groupAnagrams(arr);\n        System.out.println(ans);\n    }\n}\n",
+                            "name": "GroupAnagrams.java",
+                            "location": "Neetcode 150\\Arrays & Hashing\\GroupAnagrams.java",
+                            "notes": "",
+                            "parent": "Arrays & Hashing",
+                            "questionLink": "https://leetcode.com/problems/group-anagrams"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/longest-consecutive-sequence\n\nimport java.util.*;\n\npublic class LongestConsecutiveSequence {\n    public static int longestConsecutive(int[] N) {\n//        Brute force solution\n//        if (N.length == 0) return 0;\n//        Arrays.sort(N);\n//        int maxLen = 0, len = 1, last = Integer.MIN_VALUE;\n//        for (int k : N) {\n//            if (k - 1 == last) len++;\n//            else if (k != last)len = 1;\n//            last = k;\n//            maxLen = Math.max(maxLen, len);\n//        }\n//        return maxLen;\n\n//        Best solution\n        HashSet<Integer> hs = new HashSet<>();\n        int maxCount = 0;\n        for (int num: N) hs.add(num);\n        for (int j : N) {\n            if (!hs.contains(j - 1)) {\n                int x = j;\n                int count = 1;\n                while (hs.contains(x+1)) {\n                    count++;\n                    x++;\n                }\n                maxCount = Math.max(maxCount, count);\n            }\n        }\n        return maxCount;\n    }\n    public static void main(String[] args) {\n\n    }\n}\n",
+                            "name": "LongestConsecutiveSequence.java",
+                            "location": "Neetcode 150\\Arrays & Hashing\\LongestConsecutiveSequence.java",
+                            "notes": "",
+                            "parent": "Arrays & Hashing",
+                            "questionLink": "https://leetcode.com/problems/longest-consecutive-sequence"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/product-of-array-except-self/description\n\npublic class ProductArrayExceptSelf {\n    public int[] productExceptSelf(int[] nums) {\n        int zeroCount = 0;\n        int zeroIdx = -1;\n        int[] ans = new int[nums.length];\n        int product = 1;\n        for (int i = 0; i < nums.length; i++) {\n            if (nums[i] == 0) {\n                zeroCount++;\n                if (zeroCount > 1) return ans;\n                zeroIdx = i;\n                continue;\n            }\n            product *= nums[i];\n        }\n        if (zeroCount == 1) {\n            ans[zeroIdx] = product;\n            return ans;\n        }\n        for (int j = 0; j < nums.length; j++) {\n            ans[j] = product / nums[j];\n        }\n        return ans;\n    }\n}\n",
+                            "name": "ProductArrayExceptSelf.java",
+                            "location": "Neetcode 150\\Arrays & Hashing\\ProductArrayExceptSelf.java",
+                            "notes": "",
+                            "parent": "Arrays & Hashing",
+                            "questionLink": "https://leetcode.com/problems/product-of-array-except-self/description"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/top-k-frequent-elements\n\nimport java.util.*;\n\npublic class TopKFrequentElements {\n    public static int[] topKFrequent(int[] nums, int k) {\n        // This is the O(klogN) solution\n        // int[] kArr = new int[k];\n        // HashMap<Integer, Integer> hm = new HashMap<>();\n        // for (int num : nums) {\n        //     hm.put(num, hm.getOrDefault(num, 0) + 1);\n        // }\n        // PriorityQueue<Map.Entry<Integer, Integer>> pq = new PriorityQueue<>(Map.Entry.comparingByValue());\n        // for (Map.Entry<Integer, Integer> it : hm.entrySet()) {\n        //     pq.add(it);\n        //     if (pq.size() > k) pq.poll();\n        // }\n        // while (!pq.isEmpty()) {\n        //     kArr[--k] = pq.poll().getKey();\n        // }\n        // return kArr;\n\n        // Most efficient solution: O(n)\n        Map<Integer, Integer> hm = new HashMap<>();\n        for (int num : nums) {\n            hm.put(num, hm.getOrDefault(num, 0) + 1);\n        }\n        List<List<Integer>> countList = new ArrayList<>();\n        for (int i = 0; i < nums.length; i++) {\n            countList.add(new ArrayList<>());\n        }\n        for(Map.Entry<Integer, Integer> val : hm.entrySet()) {\n            countList.get(val.getValue()-1).add(val.getKey());\n        }\n        int[] ans = new int[k];\n        int ptr = 0;\n        for (int i = countList.size() - 1; i >= 0; i--) {\n            if (countList.get(i).size() != 0) {\n                for (int j: countList.get(i)) {\n                    if (ptr == k) break;\n                    ans[ptr++] = j;\n                }\n            }\n        }\n        return ans;\n    }\n\n    public static void main(String[] args) {\n        int[] nums = {1, 1, 1, 2, 2, 3};\n        int k = 2;\n        int[] ans = topKFrequent(nums, k);\n        System.out.println(Arrays.toString(ans));\n    }\n}\n",
+                            "name": "TopKFrequentElements.java",
+                            "location": "Neetcode 150\\Arrays & Hashing\\TopKFrequentElements.java",
+                            "notes": "",
+                            "parent": "Arrays & Hashing",
+                            "questionLink": "https://leetcode.com/problems/top-k-frequent-elements"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/two-sum\n\nimport java.util.HashMap;\n\npublic class TwoSum {\n  public int[] twoSum(int[] nums, int target) {\n    HashMap<Integer, Integer> hm = new HashMap<>();\n    for (int j = 0; j < nums.length; j++) {\n      if (hm.containsKey(target - nums[j]))\n        return new int[] { j, hm.get(target - nums[j]) };\n      hm.put(nums[j], j);\n    }\n    return new int[] { -1, -1 };\n  }\n}\n",
+                            "name": "TwoSum.java",
+                            "location": "Neetcode 150\\Arrays & Hashing\\TwoSum.java",
+                            "notes": "",
+                            "parent": "Arrays & Hashing",
+                            "questionLink": "https://leetcode.com/problems/two-sum"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/valid-anagram\n\npublic class ValidAnagram {\n  public boolean isAnagram(String s, String t) {\n    if (s.length() != t.length())\n      return false;\n    int[] count = new int[26];\n    for (int i = 0; i < s.length(); i++) {\n      count[s.charAt(i) - 'a']++;\n      count[t.charAt(i) - 'a']--;\n    }\n    for (int i = 0; i < 26; i++) {\n      if (count[i] != 0)\n        return false;\n    }\n    return true;\n  }\n}\n",
+                            "name": "ValidAnagram.java",
+                            "location": "Neetcode 150\\Arrays & Hashing\\ValidAnagram.java",
+                            "notes": "",
+                            "parent": "Arrays & Hashing",
+                            "questionLink": "https://leetcode.com/problems/valid-anagram"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/valid-sudoku\n\nimport java.util.HashSet;\n\npublic class ValidSudoku {\n    public static boolean checkBlock(int iIdx, int jIdx, char[][] board) {\n        HashSet<Character> hs = new HashSet<>();\n        int rows = iIdx + 3;\n        int cols = jIdx + 3;\n        for (int i = iIdx; i < rows; i++) {\n            for (int j = jIdx; j < cols; j++) {\n                char curr = board[i][j];\n                if (curr != '.') {\n                    if (hs.contains(curr)) return false;\n                    hs.add(curr);\n                }\n            }\n        }\n        return true;\n    }\n    public static boolean isValidSudoku(char[][] board) {\n//        Row column check\n        for (int i = 0; i < board.length; i++) {\n            HashSet<Character> row = new HashSet<>();\n            HashSet<Character> col = new HashSet<>();\n            for (int j = 0; j < board.length; j++) {\n                char r = board[i][j], c = board[j][i];\n                if (r != '.' && row.contains(r)) return false;\n                else row.add(r);\n                if (c != '.' && col.contains(c)) return false;\n                else col.add(c);\n            }\n        }\n//        3x3 box check\n        for (int i = 0; i < 9; i += 3)\n            for (int j = 0; j < 9; j += 3)\n                if (!checkBlock(i, j, board)) return false;\n\n        return true;\n    }\n}\n",
+                            "name": "ValidSudoku.java",
+                            "location": "Neetcode 150\\Arrays & Hashing\\ValidSudoku.java",
+                            "notes": "",
+                            "parent": "Arrays & Hashing",
+                            "questionLink": "https://leetcode.com/problems/valid-sudoku"
+                        }
+                    ]
+                },
+                {
+                    "type": "folder",
+                    "name": "Binary Search",
+                    "location": "Neetcode 150\\Binary Search",
+                    "parent": "Neetcode 150",
+                    "content": [
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/\n\npublic class FindMinInSortedRotatedArray {\n    public int findMin(int[] arr) {\n        int start = 0;\n        int end = arr.length - 1;\n        int ans = Integer.MAX_VALUE;\n        while (start <= end) {\n            int mid = start + (end - start) / 2;\n            if (arr[mid] > arr[end]) {\n                ans = Math.min(ans, arr[start]);\n                start = mid + 1;\n            } else {\n                ans = Math.min(ans, arr[mid]);\n                end = mid - 1;\n            }\n        }\n        return ans;\n    }\n}\n",
+                            "name": "FindMinInSortedRotatedArray.java",
+                            "location": "Neetcode 150\\Binary Search\\FindMinInSortedRotatedArray.java",
+                            "notes": "",
+                            "parent": "Binary Search",
+                            "questionLink": "https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/koko-eating-bananas\n\npublic class kokoEatingBananas {\n    public long totalTimeToEat(int mid, int[] piles) {\n        long hours = 0;\n        for (int i : piles) {\n            hours += (i + mid - 1) / mid;\n        }\n        return hours;\n    }\n\n    public int minEatingSpeed(int[] piles, int h) {\n        int start = 1;\n        int end = 0;\n        for(int i: piles) {\n            end = Math.max(end, i);\n        }\n        int ans = 0;\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            if (totalTimeToEat(mid, piles) <= h) {\n                ans = mid;\n                end = mid - 1;\n            } else {\n                start = mid + 1;\n            }\n        }\n        return ans;\n    }\n}\n",
+                            "name": "kokoEatingBananas.java",
+                            "location": "Neetcode 150\\Binary Search\\kokoEatingBananas.java",
+                            "notes": "",
+                            "parent": "Binary Search",
+                            "questionLink": "https://leetcode.com/problems/koko-eating-bananas"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/median-of-two-sorted-arrays\n\npublic class MedianOfTwoSortedArrays {\n    public double findMedianSortedArrays(int[] M, int[] N) {\n       int m = M.length, n = N.length;\n       if (m > n) return findMedianSortedArrays(N, M);\n       int k = (m + n + 1)/2;\n       int start = 0, end = m;\n       while (start <= end) {\n           int mid1 = start + (end - start)/2;\n           int mid2 = k - mid1;\n           int l1 = mid1 > 0 ? M[mid1 - 1] : Integer.MIN_VALUE;\n           int l2 = mid2 > 0 ? N[mid2 - 1] : Integer.MIN_VALUE;\n           int r1 = mid1 < m ? M[mid1] : Integer.MIN_VALUE;\n           int r2 = mid2 < n ? N[mid2] : Integer.MIN_VALUE;\n           if (l1 <= r2 && l2 <= r1) {\n               double median = Math.max(l1, l2);\n               if ((m+n) %2 == 0) {\n                   median += Math.min(r1, r2);\n                   return median / 2;\n               }\n               return median;\n           }\n           if (l1 > r2) {\n               end = mid1 - 1;\n           } else {\n               start = mid1 + 1;\n           }\n       }\n       return -1;\n    }\n}\n",
+                            "name": "MedianOfTwoSortedArrays.java",
+                            "location": "Neetcode 150\\Binary Search\\MedianOfTwoSortedArrays.java",
+                            "notes": "",
+                            "parent": "Binary Search",
+                            "questionLink": "https://leetcode.com/problems/median-of-two-sorted-arrays"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/search-a-2d-matrix\n\npublic class Search2DMatrix {\n    public boolean searchMatrix(int[][] matrix, int target) {\n        int n = matrix.length;\n        int m = matrix[0].length;\n        int start = 0;\n        int end = n*m -1;\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            if (matrix[mid/m][mid%m] == target)\n                return true;\n            if (matrix[mid/m][mid%m] > target) {\n                end = mid - 1;\n            } else {\n                start = mid + 1;\n            }\n        }\n        return false;\n    }\n}\n",
+                            "name": "Search2DMatrix.java",
+                            "location": "Neetcode 150\\Binary Search\\Search2DMatrix.java",
+                            "notes": "",
+                            "parent": "Binary Search",
+                            "questionLink": "https://leetcode.com/problems/search-a-2d-matrix"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/search-in-rotated-sorted-array\n\npublic class SearchInRotatedSortedArray {\n    public int search(int[] arr, int target) {\n        int start = 0; int end = arr.length - 1;\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            if (target == arr[mid]) return mid;\n            if (arr[mid] >= arr[start]) {\n                if (target >= arr[start] && target < arr[mid])\n                    end = mid - 1;\n                else\n                    start = mid + 1;\n            } else {\n                if (target <= arr[end] && target > arr[mid])\n                    start = mid + 1;\n                else\n                    end = mid - 1;\n            }\n        }\n        return -1;\n    }\n}\n",
+                            "name": "SearchInRotatedSortedArray.java",
+                            "location": "Neetcode 150\\Binary Search\\SearchInRotatedSortedArray.java",
+                            "notes": "",
+                            "parent": "Binary Search",
+                            "questionLink": "https://leetcode.com/problems/search-in-rotated-sorted-array"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/time-based-key-value-store\n\nimport java.util.*;\n\nclass TimeMap {\n    HashMap<String, List<String[]>> hm;\n    public TimeMap() {\n        hm = new HashMap<>();\n    }\n\n    public void set(String key, String value, int timestamp) {\n        if (!hm.containsKey(key))\n            hm.put(key, new ArrayList<>());\n        hm.get(key).add(new String[]{ value, String.valueOf(timestamp) });\n    }\n\n    public String get(String key, int timestamp) {\n        if (!hm.containsKey(key)) return \"\";\n        List<String[]> list = hm.get(key);\n        int pos = findPos(list, timestamp);\n        if (pos == -1) return \"\";\n        return list.get(pos)[0];\n    }\n\n    public static int findPos(List<String[]> list, int target) {\n        int start = 0, end = list.size() - 1;\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            int val = Integer.parseInt(list.get(mid)[1]);\n            if (val == target) return mid;\n            if (val > target)\n                end = mid - 1;\n            else\n                start = mid + 1;\n        }\n        return end;\n    }\n\n    public static void main(String[] args) {\n        String[] operations = {\"TimeMap\", \"set\", \"set\", \"get\", \"get\", \"get\", \"get\", \"get\"};\n        String[][] values = {{}, {\"love\", \"high\", \"10\"}, {\"love\", \"low\", \"20\"}, {\"love\", \"5\"}, {\"love\", \"10\"}, {\"love\", \"15\"}, {\"love\", \"20\"}, {\"love\", \"25\"}};\n        TimeMap timeMap = null;\n        List<String> output = new ArrayList<>();\n        for (int i = 0; i < operations.length; i++) {\n            String[] val = values[i];\n            switch (operations[i]) {\n                case \"TimeMap\" -> {\n                    timeMap = new TimeMap();\n                    output.add(null);\n                }\n                case \"set\" -> {\n                    timeMap.set(val[0], val[1], Integer.parseInt(val[2]));\n                    output.add(null);\n                }\n                case \"get\" -> {\n                    output.add(timeMap.get(val[0], Integer.parseInt(val[1])));\n                }\n            }\n        }\n        System.out.println(output);\n    }\n}\n\n/**\n * Your TimeMap object will be instantiated and called as such:\n * TimeMap obj = new TimeMap();\n * obj.set(key,value,timestamp);\n * String param_2 = obj.get(key,timestamp);\n */",
+                            "name": "TimeMap.java",
+                            "location": "Neetcode 150\\Binary Search\\TimeMap.java",
+                            "notes": "",
+                            "parent": "Binary Search",
+                            "questionLink": "https://leetcode.com/problems/time-based-key-value-store"
+                        }
+                    ]
+                },
+                {
+                    "type": "folder",
+                    "name": "Not started",
+                    "location": "Neetcode 150\\Not started",
+                    "parent": "Neetcode 150",
+                    "content": [
+                        {
+                            "type": "folder",
+                            "name": "Advanced Graphs",
+                            "location": "Neetcode 150\\Not started\\Advanced Graphs",
+                            "parent": "Not started",
+                            "content": []
+                        },
+                        {
+                            "type": "folder",
+                            "name": "Backtracking",
+                            "location": "Neetcode 150\\Not started\\Backtracking",
+                            "parent": "Not started",
+                            "content": []
+                        },
+                        {
+                            "type": "folder",
+                            "name": "Bit Manipulation",
+                            "location": "Neetcode 150\\Not started\\Bit Manipulation",
+                            "parent": "Not started",
+                            "content": []
+                        },
+                        {
+                            "type": "folder",
+                            "name": "DP",
+                            "location": "Neetcode 150\\Not started\\DP",
+                            "parent": "Not started",
+                            "content": []
+                        },
+                        {
+                            "type": "folder",
+                            "name": "Graphs",
+                            "location": "Neetcode 150\\Not started\\Graphs",
+                            "parent": "Not started",
+                            "content": []
+                        },
+                        {
+                            "type": "folder",
+                            "name": "Greedy",
+                            "location": "Neetcode 150\\Not started\\Greedy",
+                            "parent": "Not started",
+                            "content": []
+                        },
+                        {
+                            "type": "folder",
+                            "name": "Heap & Priority Queue",
+                            "location": "Neetcode 150\\Not started\\Heap & Priority Queue",
+                            "parent": "Not started",
+                            "content": []
+                        },
+                        {
+                            "type": "folder",
+                            "name": "Intervals",
+                            "location": "Neetcode 150\\Not started\\Intervals",
+                            "parent": "Not started",
+                            "content": []
+                        },
+                        {
+                            "type": "folder",
+                            "name": "Linked List",
+                            "location": "Neetcode 150\\Not started\\Linked List",
+                            "parent": "Not started",
+                            "content": []
+                        },
+                        {
+                            "type": "folder",
+                            "name": "Math & Geometry",
+                            "location": "Neetcode 150\\Not started\\Math & Geometry",
+                            "parent": "Not started",
+                            "content": []
+                        },
+                        {
+                            "type": "folder",
+                            "name": "Sliding Window",
+                            "location": "Neetcode 150\\Not started\\Sliding Window",
+                            "parent": "Not started",
+                            "content": []
+                        },
+                        {
+                            "type": "folder",
+                            "name": "Stack",
+                            "location": "Neetcode 150\\Not started\\Stack",
+                            "parent": "Not started",
+                            "content": []
+                        },
+                        {
+                            "type": "folder",
+                            "name": "Trees",
+                            "location": "Neetcode 150\\Not started\\Trees",
+                            "parent": "Not started",
+                            "content": []
+                        },
+                        {
+                            "type": "folder",
+                            "name": "Tries",
+                            "location": "Neetcode 150\\Not started\\Tries",
+                            "parent": "Not started",
+                            "content": []
+                        }
+                    ]
+                },
+                {
+                    "type": "folder",
+                    "name": "Two Pointers",
+                    "location": "Neetcode 150\\Two Pointers",
+                    "parent": "Neetcode 150",
+                    "content": [
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/container-with-most-water/\n\npublic class ContainerWithMostWater {\n    public static int maxArea(int[] heights) {\n        int i = 0;\n        int j = heights.length - 1;\n        int area = 0;\n        int max = 0;\n        while (i < j) {\n            if (heights[i] <= heights[j]) i++;\n            else if (heights[i] > heights[j]) j--;\n\n            area = (j - i) * Math.min(heights[i], heights[j]);\n            max = Math.max(max, area);\n        }\n        return max;\n    }\n\n    public static void main(String[] args) {\n        int[] heights = {1, 8, 6, 2, 5, 4, 8, 3, 7};\n        int ans = maxArea(heights);\n        System.out.println(ans);\n    }\n}\n",
+                            "name": "ContainerWithMostWater.java",
+                            "location": "Neetcode 150\\Two Pointers\\ContainerWithMostWater.java",
+                            "notes": "",
+                            "parent": "Two Pointers",
+                            "questionLink": "https://leetcode.com/problems/container-with-most-water/"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/3sum\n\nimport java.util.*;\npublic class ThreeSum {\n    public List<List<Integer>> threeSum(int[] N) {\n        Arrays.sort(N);\n        List<List<Integer>> ans = new ArrayList<>();\n        int n = N.length;\n        for (int i = 0; i < n; i++) {\n            if (i > 0 && N[i] == N[i-1]) continue;\n            int j = i+1;\n            int k = n-1;\n            while (j < k) {\n                int sum = N[i] + N[j] + N[k];\n                if (sum > 0) k--;\n                else if (sum < 0) j++;\n                else {\n                    ans.add(Arrays.asList(N[i], N[j], N[k]));\n                    j++;\n                    k--;\n                    while (j < k && N[j] == N[j-1]) j++;\n                    while (j < k && N[k] == N[k+1]) k--;\n                }\n            }\n        }\n        return ans;\n    }\n}\n",
+                            "name": "ThreeSum.java",
+                            "location": "Neetcode 150\\Two Pointers\\ThreeSum.java",
+                            "notes": "",
+                            "parent": "Two Pointers",
+                            "questionLink": "https://leetcode.com/problems/3sum"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/trapping-rain-water/\n\nimport java.util.Arrays;\n\npublic class TrappingRainWater {\n    public static int trap(int[] height) {\n        int n = height.length;\n//        int[] maxLeft = new int[n];\n//        int[] maxRight = new int[n];\n//        int leftMax = 0, rightMax = 0;\n//        for (int i = 0; i < n; i++) {\n//            maxLeft[i] = leftMax;\n//            leftMax = Math.max(leftMax, height[i]);\n//            maxRight[n - i - 1] = rightMax;\n//            rightMax = Math.max(rightMax, height[n - i - 1]);\n//        }\n//        int count = 0;\n//        for (int j = 0; j < n; j++) {\n//            count += Math.max(Math.min(maxLeft[j], maxRight[j]) - height[j], 0);\n//        }\n//        return count;\n        int start = 0, end = n - 1;\n        int maxL = height[start], maxR = height[end];\n        int c = 0;\n        while (start < end) {\n            if (height[start] <= height[end]) {\n                start++;\n                maxL = Math.max(maxL, height[start]);\n                c += Math.max(maxL - height[start], 0);\n\n            } else {\n                end--;\n                maxR = Math.max(maxR, height[end]);\n                c += Math.max(maxR - height[end], 0);\n            }\n        }\n        return c;\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};\n        int ans = trap(arr);\n        System.out.println(ans);\n    }\n}\n",
+                            "name": "TrappingRainWater.java",
+                            "location": "Neetcode 150\\Two Pointers\\TrappingRainWater.java",
+                            "notes": "",
+                            "parent": "Two Pointers",
+                            "questionLink": "https://leetcode.com/problems/trapping-rain-water/"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/\n\npublic class TwoSumSortedArray {\n    public static int[] twoSum(int[] N, int target) {\n//        Brute force: Linear search the pair using 2 for loops (nested) O(N^2)\n\n//        Better solution: Use 2 pointer from left and right to get sum\n\n//        Optimised solution: Binary search\n        int start = 0;\n        int end = N.length - 1;\n        int[] ans = {-1, -1};\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            int sum = N[start] + N[end];\n            if (sum == target){\n                ans[0] = start + 1;\n                ans[1] = end + 1;\n                return ans;\n            }\n            if (sum > target)\n                end = N[start] + N[mid] > target ? mid - 1 : end - 1;\n            else\n                start = N[end] + N[mid] < target ? mid + 1 : start + 1;\n        }\n        return ans;\n    }\n}\n",
+                            "name": "TwoSumSortedArray.java",
+                            "location": "Neetcode 150\\Two Pointers\\TwoSumSortedArray.java",
+                            "notes": "",
+                            "parent": "Two Pointers",
+                            "questionLink": "https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/"
+                        },
+                        {
+                            "type": "file",
+                            "code": "// Link: https://leetcode.com/problems/valid-palindrome/\n\npublic class ValidPalindrome {\n    public boolean isPalindrome(String s) {\n//        Brute force solution\n//        s = s.replaceAll(\"[^a-zA-Z0-9]\", \"\").toLowerCase();\n//        int start = 0;\n//        int end = s.length() - 1;\n//        while (start < end) {\n//            if (s.charAt(start) != s.charAt(end)) return false;\n//            start++;\n//            end--;\n//        }\n//        return true;\n\n//        Optimised solution\n         int n = s.length();\n         int start = 0;\n         int end = n-1;\n         s = s.toLowerCase();\n         while (start < end) {\n             if (!Character.isLetterOrDigit(s.charAt(start))) start++;\n             else if (!Character.isLetterOrDigit(s.charAt(end))) end--;\n             else {\n                 if (s.charAt(start) != s.charAt(end)) return false;\n                 start++;\n                 end--;\n             }\n         }\n         return true;\n    }\n}\n",
+                            "name": "ValidPalindrome.java",
+                            "location": "Neetcode 150\\Two Pointers\\ValidPalindrome.java",
+                            "notes": "",
+                            "parent": "Two Pointers",
+                            "questionLink": "https://leetcode.com/problems/valid-palindrome/"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
