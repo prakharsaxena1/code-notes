@@ -1,9 +1,10 @@
-import { FC, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { Box, Stack, Typography, Paper, Grid } from '@mui/material';
 import DoneIcon from '@mui/icons-material/Done';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { IfileType } from '../../Interfaces';
 import CodeDisplay from '../../Component/CodeDisplay';
+// import makeLeetcodeRequest from '../../Component/DataFetch';
 
 interface IFileDisplay {
   file: IfileType;
@@ -11,6 +12,10 @@ interface IFileDisplay {
 
 interface ICopyCode {
   code: string;
+}
+
+interface IQuestion {
+  link: string;
 }
 
 const CopyCode: React.FC<ICopyCode> = ({ code }) => {
@@ -44,6 +49,21 @@ const CopyCode: React.FC<ICopyCode> = ({ code }) => {
         {text}
       </Typography>
     </Stack>
+  );
+};
+
+const Question: React.FC<IQuestion> = ({ link }) => {
+  // useEffect(() => {
+  //   if (link) {
+  //     makeLeetcodeRequest(link).then((res) => {
+  //       console.log(res);
+  //     });
+  //   }
+  // }, [link]);
+  return (
+    <a href={link} target="_blank" rel="noreferrer">
+      Link
+    </a>
   );
 };
 
@@ -101,6 +121,7 @@ const FileDisplay: FC<IFileDisplay> = ({ file }) => {
             <Typography variant="h6" sx={{ fontStyle: 'italic' }} gutterBottom>
               Question
             </Typography>
+            <Question link={file.link} />
           </Grid>
         )}
       </Grid>
