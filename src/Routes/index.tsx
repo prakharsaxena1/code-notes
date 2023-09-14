@@ -1,24 +1,7 @@
-import { Outlet } from 'react-router-dom';
 import RootPage from '../Pages/RootPage';
 import ErrorPage from '../Pages/ErrorPage';
-
-const Notes = () => {
-  return (
-    <>
-      Notes!!
-      <Outlet />
-    </>
-  );
-}
-
-const Questions = () => {
-  return (
-    <>
-      Questions!!
-      <Outlet />
-    </>
-  );
-}
+import HomePage from '../Pages/HomePage';
+import FolderPage from '../Pages/FolderPage';
 
 const routes: any[] = [
   {
@@ -27,12 +10,12 @@ const routes: any[] = [
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "Notes",
-        element: <Notes />,
+        path: "/",
+        element: <HomePage />,
       },
       {
-        path: "Questions",
-        element: <Questions />,
+        path: "/:id",
+        element: <FolderPage />,
       },
     ],
   },
