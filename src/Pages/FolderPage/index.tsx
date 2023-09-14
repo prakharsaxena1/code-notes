@@ -1,8 +1,8 @@
-import { Box, Grid } from "@mui/material";
-import { useLocation } from "react-router-dom"
-import FileDisplay from "../FileDisplayPage";
+import { Box, Grid } from '@mui/material';
+import { useLocation } from 'react-router-dom';
+import FileDisplay from '../FileDisplayPage';
 
-const FolderPage = () => {
+function FolderPage() {
   const locationStateData = useLocation();
   const { content } = locationStateData.state.folderData;
   return (
@@ -15,7 +15,7 @@ const FolderPage = () => {
         ))}
       </Grid>
     </Box>
-  )
+  );
 }
 
-export default FolderPage
+export default FolderPage;

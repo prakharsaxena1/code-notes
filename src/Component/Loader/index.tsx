@@ -1,12 +1,14 @@
 import styles from './styles.module.css';
 
 // Loader from: https://uiverse.io/Donewenfu
-const Loader = () => {
+function Loader() {
   return (
     <div className={`${styles.loader}`}>
-      <div className={`${styles.justifyContentCenter} ${styles.jimuPrimaryLoading}`}></div>
+      <div
+        className={`${styles.justifyContentCenter} ${styles.jimuPrimaryLoading}`}
+      />
     </div>
   );
-};
+}
 
-export default Loader
+export default Loader;

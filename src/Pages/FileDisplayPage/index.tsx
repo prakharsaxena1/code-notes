@@ -1,6 +1,6 @@
-import { FC } from "react";
-import { Box } from "@mui/material";
-import SyntaxHighlighter from 'react-syntax-highlighter'
+import { FC } from 'react';
+import { Box } from '@mui/material';
+import SyntaxHighlighter from 'react-syntax-highlighter';
 import { nightOwl } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 interface IfileType {
@@ -14,7 +14,7 @@ interface IfileType {
 }
 
 interface IFileDisplay {
-  file: IfileType
+  file: IfileType;
 }
 
 const FileDisplay: FC<IFileDisplay> = ({ file }) => {
@@ -41,7 +41,7 @@ const FileDisplay: FC<IFileDisplay> = ({ file }) => {
       </Box>
       {/* Notes */}
       <Box>
-        <textarea name="notes" id={file.id} value={file.notes}></textarea>
+        <textarea name="notes" id={file.id} value={file.notes} />
       </Box>
     </Box>
   );

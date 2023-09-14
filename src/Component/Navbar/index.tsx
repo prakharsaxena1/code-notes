@@ -1,9 +1,8 @@
-import React, { FC } from 'react';
-import {
-  AppBar, Toolbar, Typography,
-} from '@mui/material';
+import { AppBar, Toolbar, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
-const Navbar: FC = () => {
+const Navbar = () => {
+  const navigate = useNavigate();
   return (
     <AppBar
       enableColorOnDark
@@ -14,7 +13,14 @@ const Navbar: FC = () => {
       }}
     >
       <Toolbar disableGutters>
-        <Typography variant="h4" component="p" sx={{ m: 'auto' }}>Code Notes</Typography>
+        <Typography
+          variant="h4"
+          component="p"
+          sx={{ m: 'auto' }}
+          onClick={() => navigate('/')}
+        >
+          Code Notes
+        </Typography>
       </Toolbar>
     </AppBar>
   );

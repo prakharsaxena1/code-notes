@@ -1,18 +1,23 @@
 import { useNavigate } from 'react-router-dom';
-import data from '../../data/output.json'
 import { Box, Typography } from '@mui/material';
+import data from '../../data/output.json';
 
-const HomeMenu = () => {
+const HomePage = () => {
   const navigate = useNavigate();
   return (
     <>
       {data.content.map((mainFolders) => (
-        <Box key={mainFolders.name} onClick={() => navigate(mainFolders.name, { state: { folderData: mainFolders } })}>
+        <Box
+          key={mainFolders.name}
+          onClick={() =>
+            navigate(mainFolders.name, { state: { folderData: mainFolders } })
+          }
+        >
           <Typography>{mainFolders.name}</Typography>
         </Box>
       ))}
     </>
-  )
-}
+  );
+};
 
-export default HomeMenu;
+export default HomePage;

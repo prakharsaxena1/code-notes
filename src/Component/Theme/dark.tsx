@@ -13,8 +13,8 @@ const darkTheme = createTheme({
   typography: {
     allVariants: {
       fontFamily: 'Cairo Play',
-    }
-  }
+    },
+  },
 });
 
 export default darkTheme;

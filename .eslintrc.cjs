@@ -16,9 +16,7 @@ module.exports = {
       env: {
         node: true,
       },
-      files: [
-        '.eslintrc.{js,cjs}',
-      ],
+      files: ['.eslintrc.{js,cjs}'],
       parserOptions: {
         sourceType: 'script',
       },
@@ -30,12 +28,16 @@ module.exports = {
     sourceType: 'module',
     project: ['tsconfig.json', 'tsconfig.node.json'],
   },
-  plugins: [
-    'react',
-    '@typescript-eslint',
-    'prettier',
-  ],
+  plugins: ['react', '@typescript-eslint', 'prettier'],
   rules: {
     'react/react-in-jsx-scope': 0,
+    'react/function-component-definition': 0,
+    '@typescript-eslint/no-explicit-any': 0,
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        devDependencies: true,
+      },
+    ],
   },
 };
