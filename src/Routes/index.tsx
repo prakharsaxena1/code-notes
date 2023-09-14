@@ -1,11 +1,12 @@
 import { Route, createRoutesFromChildren } from 'react-router-dom';
 import App from '../App';
-import CodeNotesPage, { AllCodeDisplay } from '../Pages/CodeNotesPage';
+import CodeNotesPage from '../Pages/CodeNotesPage';
+import NotesDisplay from '../Pages/NotesDisplay';
 
 const routes = createRoutesFromChildren(
   <Route path="/" element={<App />}>
     <Route path="/" element={<CodeNotesPage />} />
-    <Route path="/code-notes" element={<AllCodeDisplay />} />
+    <Route path="/code-notes" element={<NotesDisplay />} />
   </Route>,
 );
 

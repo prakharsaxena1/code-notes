@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: 'Cairo Play', sans-serif;
+  font-family: 'Cairo Play', monospace, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin: 0px;
