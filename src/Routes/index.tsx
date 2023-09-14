@@ -1,27 +1,11 @@
 import { Route, createRoutesFromChildren } from 'react-router-dom';
 import App from '../App';
-import HomePage from '../Pages/HomePage';
-// const routes: any[] = [
-//   {
-//     path: "/",
-//     element: <RootPage />,
-//     errorElement: <ErrorPage />,
-//     children: [
-//       {
-//         path: "/",
-//         element: <HomePage />,
-//       },
-//       {
-//         path: "/:id",
-//         element: <FolderPage />,
-//       },
-//     ],
-//   },
-// ];
+import CodeNotesPage, { AllCodeDisplay } from '../Pages/CodeNotesPage';
 
 const routes = createRoutesFromChildren(
   <Route path="/" element={<App />}>
-    <Route path="/:id" element={<HomePage />} />
+    <Route path="/" element={<CodeNotesPage />} />
+    <Route path="/code-notes" element={<AllCodeDisplay />} />
   </Route>,
 );
 

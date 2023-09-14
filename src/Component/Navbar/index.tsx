@@ -1,5 +1,14 @@
-import { AppBar, Toolbar, Typography } from '@mui/material';
+import {
+  AppBar,
+  Box,
+  IconButton,
+  Stack,
+  Toolbar,
+  Typography,
+} from '@mui/material';
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import { useNavigate } from 'react-router-dom';
+import { urls } from '../../Constants';
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -13,14 +22,20 @@ const Navbar = () => {
       }}
     >
       <Toolbar disableGutters>
-        <Typography
-          variant="h4"
-          component="p"
-          sx={{ m: 'auto' }}
-          onClick={() => navigate('/')}
+        <Stack
+          sx={{ width: '100%', px: 4 }}
+          direction="row"
+          justifyContent="space-between"
         >
-          Code Notes
-        </Typography>
+          <Typography variant="h4" component="p">
+            Code Notes
+          </Typography>
+          <Box id="menu-box">
+            <IconButton onClick={() => navigate(urls.base)}>
+              <AutoStoriesIcon />
+            </IconButton>
+          </Box>
+        </Stack>
       </Toolbar>
     </AppBar>
   );

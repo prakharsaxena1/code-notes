@@ -2,16 +2,7 @@ import { FC } from 'react';
 import { Box } from '@mui/material';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { nightOwl } from 'react-syntax-highlighter/dist/esm/styles/hljs';
-
-interface IfileType {
-  id: string;
-  isFolder: boolean;
-  name: string;
-  code: string;
-  link: string | null;
-  notes: string;
-  tags: string[];
-}
+import { IfileType } from '../../Interfaces';
 
 interface IFileDisplay {
   file: IfileType;

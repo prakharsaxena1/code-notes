@@ -5,7 +5,6 @@ module.exports = {
   "singleQuote": true,
   "end_of_line": 'crlf',
   "arrowParens": "always",
-  "bracketSameLine": false,
   "bracketSpacing": true,
   "endOfLine": "lf",
 }
