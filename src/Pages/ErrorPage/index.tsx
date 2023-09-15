@@ -1,8 +1,7 @@
-import { useRouteError } from 'react-router-dom';
+// import { useRouteError } from 'react-router-dom';
 
 function ErrorPage() {
-  const error = useRouteError();
-  console.log(error);
+  // const error = useRouteError();
   return (
     <div id="error-page">
       <h1>Oops!</h1>

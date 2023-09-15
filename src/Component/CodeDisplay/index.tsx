@@ -1,5 +1,6 @@
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { nightOwl } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import CopyCode from './CopyCode';
 
 interface ICodeDisplay {
   code: string;
@@ -7,17 +8,19 @@ interface ICodeDisplay {
 
 const CodeDisplay: React.FC<ICodeDisplay> = ({ code }) => {
   return (
-    <SyntaxHighlighter
-      language="java"
-      style={nightOwl}
-      customStyle={{
-        margin: '0',
-        padding: '25px',
-        width: '100%',
-      }}
-    >
-      {code}
-    </SyntaxHighlighter>
+    <>
+      <SyntaxHighlighter
+        language="java"
+        style={nightOwl}
+        customStyle={{
+          margin: '0',
+          padding: '25px',
+        }}
+      >
+        {code}
+      </SyntaxHighlighter>
+      <CopyCode code={code} />
+    </>
   );
 };
 
