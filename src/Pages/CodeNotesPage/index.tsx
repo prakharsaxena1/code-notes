@@ -1,5 +1,5 @@
 import { Box, Paper, Typography } from '@mui/material';
-import data from '../../data/Output.json';
+import data from './data';
 import { IfolderType } from '../../Interfaces';
 import Folder from '../../Component/Folder';
 
