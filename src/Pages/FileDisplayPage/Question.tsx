@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Typography, Link, Paper } from '@mui/material';
 import parse from 'html-react-parser';
 import LaunchIcon from '@mui/icons-material/Launch';
-import makeLeetcodeRequest, { getSlugFromURL } from '../../Component/DataFetch';
+import makeRequest, { getSlugFromURL } from '../../Component/DataFetch';
 import { IQuestion } from './fileDisplay.interface';
 import Loader from '../../Component/Loader';
 
@@ -20,7 +20,7 @@ const Question: React.FC<IQuestion> = ({ link }) => {
   useEffect(() => {
     if (link) {
       setLoading(true);
-      makeLeetcodeRequest(link)
+      makeRequest(link)
         .then((codeData) => {
           setCode(codeData);
         })
@@ -41,12 +41,12 @@ const Question: React.FC<IQuestion> = ({ link }) => {
         color="inherit"
         target="_blank"
       >
-        <Typography variant="h6" sx={{ fontStyle: 'italic' }}>
+        <Typography variant="h6" sx={{ fontStyle: 'italic', marginRight: 2 }}>
           {slugToText(getSlugFromURL(link))}
         </Typography>
         <LaunchIcon />
       </Link>
-      <div style={{ position: 'relative', height: '45vh' }}>
+      <div style={{ position: 'relative', height: '75vh' }}>
         {loading ? (
           <Loader />
         ) : (

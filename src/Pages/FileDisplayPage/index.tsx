@@ -2,8 +2,8 @@ import { FC } from 'react';
 import { Box, Stack } from '@mui/material';
 import CodeDisplay from '../../Component/CodeDisplay';
 import { IFileDisplay } from './fileDisplay.interface';
-import Note from './Note';
 import Question from './Question';
+// import Note from './Note';
 
 const FileDisplay: FC<IFileDisplay> = ({ file }) => {
   return (
@@ -26,8 +26,8 @@ const FileDisplay: FC<IFileDisplay> = ({ file }) => {
         spacing={2}
         sx={{ p: 1, maxWidth: '60vw', height: '100%', boxSizing: 'border-box' }}
       >
-        <Note text={file.notes} />
         {file.link !== null && <Question link={file.link} />}
+        {/* <Note text={file.notes} /> */}
       </Stack>
     </Stack>
   );

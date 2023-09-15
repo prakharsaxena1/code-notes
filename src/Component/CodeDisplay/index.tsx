@@ -8,7 +8,7 @@ interface ICodeDisplay {
 
 const CodeDisplay: React.FC<ICodeDisplay> = ({ code }) => {
   return (
-    <>
+    <div>
       <SyntaxHighlighter
         language="java"
         style={nightOwl}
@@ -16,11 +16,13 @@ const CodeDisplay: React.FC<ICodeDisplay> = ({ code }) => {
           margin: '0',
           padding: '25px',
         }}
+        wrapLines
+        wrapLongLines
       >
         {code}
       </SyntaxHighlighter>
       <CopyCode code={code} />
-    </>
+    </div>
   );
 };
 

@@ -20,8 +20,8 @@ const CopyCode: React.FC<ICopyCode> = ({ code }) => {
       variant="text"
       sx={{
         position: 'absolute',
-        bottom: 15,
-        right: 15,
+        bottom: '3%',
+        right: '3%',
         p: 0,
       }}
     >
