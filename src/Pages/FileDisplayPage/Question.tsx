@@ -50,7 +50,14 @@ const Question: React.FC<IQuestion> = ({ link }) => {
         {loading ? (
           <Loader />
         ) : (
-          <Paper sx={{ p: 1, overflow: 'auto', height: '100%' }}>
+          <Paper
+            sx={{
+              p: 1,
+              overflow: 'auto',
+              height: '100%',
+              backgroundColor: '	#ECF0F1',
+            }}
+          >
             <div>{parse(code)}</div>
           </Paper>
         )}

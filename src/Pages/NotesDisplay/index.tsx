@@ -24,7 +24,7 @@ const NotesDisplay = () => {
   }
   const { files } = locationState.state;
   return (
-    <Box sx={{ height: 'calc( 100vh - 64px )', backgroundColor: '#dddddd' }}>
+    <Box sx={{ height: 'calc( 100vh - 64px )', backgroundColor: '#FAF9F6' }}>
       <Paper sx={{ position: 'relative' }}>
         <ScoreCard current={displayPtr + 1} total={files.length} />
         <Stack
