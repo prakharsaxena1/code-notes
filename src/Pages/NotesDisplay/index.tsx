@@ -30,7 +30,6 @@ const NotesDisplay = () => {
           spacing={2}
         >
           <Button
-            size="small"
             variant="outlined"
             disabled={displayPtr === 0}
             onClick={() => setDisplayPtr((prev) => prev - 1)}
@@ -38,7 +37,6 @@ const NotesDisplay = () => {
             Previous
           </Button>
           <Button
-            size="small"
             variant="contained"
             disabled={displayPtr === files.length - 1}
             onClick={() => setDisplayPtr((prev) => prev + 1)}

@@ -9,13 +9,16 @@ const FileDisplay: FC<IFileDisplay> = ({ file }) => {
   return (
     <Stack
       direction="row"
-      sx={{ height: 'calc( 100vh - (64px + 48px) )', width: '100%' }}
+      sx={{
+        width: '100vw',
+        height: 'calc( 100vh - (64px + 53px) )',
+      }}
     >
       <Box
         sx={{
-          position: 'relative',
           overflow: 'auto',
-          minWidth: '40vw',
+          minWidth: '650px',
+          maxWidth: '40vw',
           backgroundColor: 'rgb(1, 22, 39)',
         }}
       >

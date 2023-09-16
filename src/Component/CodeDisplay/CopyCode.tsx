@@ -17,11 +17,10 @@ const CopyCode: React.FC<ICodeProps> = ({ code }) => {
   return (
     <Button
       onClick={onClickAction}
-      variant="text"
       sx={{
-        position: 'fixed',
-        bottom: '3%',
-        right: '3%',
+        position: 'sticky',
+        top: 10,
+        left: '80%',
         p: 0,
       }}
     >
