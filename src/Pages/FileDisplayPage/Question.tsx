@@ -3,8 +3,8 @@ import { Typography, Link, Paper } from '@mui/material';
 import parse from 'html-react-parser';
 import LaunchIcon from '@mui/icons-material/Launch';
 import makeRequest, { getSlugFromURL } from '../../Component/DataFetch';
-import { IQuestion } from './fileDisplay.interface';
 import Loader from '../../Component/Loader';
+import { IQuestion } from '../../Interfaces';
 
 const slugToText = (slug: string) => {
   const words = slug.split('-');
@@ -25,7 +25,7 @@ const Question: React.FC<IQuestion> = ({ link }) => {
           setCode(codeData);
         })
         .catch(() => {
-          setCode('<h1>Unable to fetch code</h1>');
+          setCode('<h1>Unable to fetch question</h1>');
         })
         .finally(() => {
           setLoading(false);
@@ -58,7 +58,7 @@ const Question: React.FC<IQuestion> = ({ link }) => {
               backgroundColor: '	#ECF0F1',
             }}
           >
-            <div>{parse(code)}</div>
+            {parse(code)}
           </Paper>
         )}
       </div>

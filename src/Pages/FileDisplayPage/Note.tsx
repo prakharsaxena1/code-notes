@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Typography, Paper } from '@mui/material';
-import { INoteProps } from './fileDisplay.interface';
+import { INoteProps } from '../../Interfaces';
 
 const Note: React.FC<INoteProps> = ({ text }) => {
   const [editable, setEditable] = useState(false);

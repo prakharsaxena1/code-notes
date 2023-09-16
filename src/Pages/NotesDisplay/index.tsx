@@ -2,11 +2,7 @@ import React, { useState } from 'react';
 import { Box, Stack, Paper, Button } from '@mui/material';
 import { Navigate, useLocation } from 'react-router-dom';
 import FileDisplay from '../FileDisplayPage';
-
-interface IScoreCard {
-  current: number;
-  total: number;
-}
+import { IScoreCard } from '../../Interfaces';
 
 const ScoreCard: React.FC<IScoreCard> = ({ current, total }) => {
   return (
@@ -34,7 +30,6 @@ const NotesDisplay = () => {
           spacing={2}
         >
           <Button
-            size="small"
             variant="outlined"
             disabled={displayPtr === 0}
             onClick={() => setDisplayPtr((prev) => prev - 1)}
@@ -42,7 +37,6 @@ const NotesDisplay = () => {
             Previous
           </Button>
           <Button
-            size="small"
             variant="contained"
             disabled={displayPtr === files.length - 1}
             onClick={() => setDisplayPtr((prev) => prev + 1)}

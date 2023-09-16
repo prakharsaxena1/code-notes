@@ -9,8 +9,13 @@ export const getSlugFromURL = (url: string) => {
 const makeRequest = async (link: string) => {
   const slug = getSlugFromURL(link);
   if (link.includes('leetcode')) {
+    // Check for vercel
+    const { href } = window.location;
+    if (href.includes('vercel')) {
+      return '<h1>Cannot fetch from leetcode without proxy</h1>';
+    }
     return axios
-      .post('http://127.0.0.1:5000/', {
+      .post('http://localhost:8000/', {
         query:
           '\n    query questionContent($titleSlug: String!) {\n  question(titleSlug: $titleSlug) {\n    content\n    mysqlSchemas\n    dataSchemas\n  }\n}\n    ',
         variables: {
@@ -18,7 +23,9 @@ const makeRequest = async (link: string) => {
         },
         operationName: 'questionContent',
       })
-      .then((response) => response.data.data.question.content);
+      .then((response) => {
+        return response.data.data.question.content;
+      });
   }
   if (link.includes('codingninjas')) {
     return axios
@@ -37,7 +44,7 @@ const makeRequest = async (link: string) => {
         return code;
       });
   }
-  return '<p>Neither leetcode not codingninjas</p>';
+  return '<p>GFG article</p>';
 };
 
 export default makeRequest;
