@@ -9,6 +9,11 @@ export const getSlugFromURL = (url: string) => {
 const makeRequest = async (link: string) => {
   const slug = getSlugFromURL(link);
   if (link.includes('leetcode')) {
+    // Check for vercel
+    const { href } = window.location;
+    if (href.includes('vercel')) {
+      return '<h1>Cannot fetch from leetcode without proxy</h1>';
+    }
     return axios
       .post('http://127.0.0.1:5000/', {
         query:
@@ -37,7 +42,7 @@ const makeRequest = async (link: string) => {
         return code;
       });
   }
-  return '<p>Neither leetcode not codingninjas</p>';
+  return '<p>GFG article</p>';
 };
 
 export default makeRequest;
