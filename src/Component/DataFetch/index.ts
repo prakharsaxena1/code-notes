@@ -15,7 +15,7 @@ const makeRequest = async (link: string) => {
       return '<h1>Cannot fetch from leetcode without proxy</h1>';
     }
     return axios
-      .post('http://localhost:8000/', {
+      .post('https://proxyserver-1bit.onrender.com/', {
         query:
           '\n    query questionContent($titleSlug: String!) {\n  question(titleSlug: $titleSlug) {\n    content\n    mysqlSchemas\n    dataSchemas\n  }\n}\n    ',
         variables: {
