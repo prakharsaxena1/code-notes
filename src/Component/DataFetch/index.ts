@@ -9,11 +9,11 @@ export const getSlugFromURL = (url: string) => {
 const makeRequest = async (link: string) => {
   const slug = getSlugFromURL(link);
   if (link.includes('leetcode')) {
-    // Check for vercel
-    const { href } = window.location;
-    if (href.includes('vercel')) {
-      return '<h1>Cannot fetch from leetcode without proxy</h1>';
-    }
+    // // Check for vercel
+    // const { href } = window.location;
+    // if (href.includes('vercel')) {
+    //   return '<h1>Cannot fetch from leetcode without proxy</h1>';
+    // }
     return axios
       .post('https://proxyserver-1bit.onrender.com/', {
         query:
