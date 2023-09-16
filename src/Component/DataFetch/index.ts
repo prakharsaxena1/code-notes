@@ -15,7 +15,7 @@ const makeRequest = async (link: string) => {
       return '<h1>Cannot fetch from leetcode without proxy</h1>';
     }
     return axios
-      .post('http://127.0.0.1:5000/', {
+      .post('http://localhost:8000/', {
         query:
           '\n    query questionContent($titleSlug: String!) {\n  question(titleSlug: $titleSlug) {\n    content\n    mysqlSchemas\n    dataSchemas\n  }\n}\n    ',
         variables: {
@@ -23,7 +23,9 @@ const makeRequest = async (link: string) => {
         },
         operationName: 'questionContent',
       })
-      .then((response) => response.data.data.question.content);
+      .then((response) => {
+        return response.data.data.question.content;
+      });
   }
   if (link.includes('codingninjas')) {
     return axios
