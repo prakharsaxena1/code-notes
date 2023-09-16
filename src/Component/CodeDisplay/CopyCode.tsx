@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { Stack, Typography, Paper, Button } from '@mui/material';
 import DoneIcon from '@mui/icons-material/Done';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import { ICopyCode } from '../../Pages/FileDisplayPage/fileDisplay.interface';
+import { ICodeProps } from '../../Interfaces';
 
-const CopyCode: React.FC<ICopyCode> = ({ code }) => {
+const CopyCode: React.FC<ICodeProps> = ({ code }) => {
   const [copy, setCopy] = useState(false);
   const onClickAction = () => {
     navigator.clipboard.writeText(code);
@@ -19,7 +19,7 @@ const CopyCode: React.FC<ICopyCode> = ({ code }) => {
       onClick={onClickAction}
       variant="text"
       sx={{
-        position: 'absolute',
+        position: 'fixed',
         bottom: '3%',
         right: '3%',
         p: 0,

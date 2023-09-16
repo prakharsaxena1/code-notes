@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { Box, Stack } from '@mui/material';
 import CodeDisplay from '../../Component/CodeDisplay';
-import { IFileDisplay } from './fileDisplay.interface';
 import Question from './Question';
+import { IFileDisplay } from '../../Interfaces';
 // import Note from './Note';
 
 const FileDisplay: FC<IFileDisplay> = ({ file }) => {

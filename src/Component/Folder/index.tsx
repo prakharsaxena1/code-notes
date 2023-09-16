@@ -1,12 +1,8 @@
 import { useState } from 'react';
 import { Box, Paper, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { IfileType, IfolderType } from '../../Interfaces';
+import { IFolderProps, IFileType } from '../../Interfaces';
 import { urls } from '../../Constants';
-
-interface IFolderProps {
-  folderData: IfolderType;
-}
 
 const Folder: React.FC<IFolderProps> = ({ folderData }) => {
   const navigate = useNavigate();
@@ -27,7 +23,7 @@ const Folder: React.FC<IFolderProps> = ({ folderData }) => {
             if (!folderData.content[0].isFolder) {
               navigate(urls.codeNotes, {
                 state: {
-                  files: folderData.content as IfileType[],
+                  files: folderData.content as IFileType[],
                 },
               });
             }

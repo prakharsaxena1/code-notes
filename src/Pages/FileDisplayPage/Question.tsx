@@ -3,8 +3,8 @@ import { Typography, Link, Paper } from '@mui/material';
 import parse from 'html-react-parser';
 import LaunchIcon from '@mui/icons-material/Launch';
 import makeRequest, { getSlugFromURL } from '../../Component/DataFetch';
-import { IQuestion } from './fileDisplay.interface';
 import Loader from '../../Component/Loader';
+import { IQuestion } from '../../Interfaces';
 
 const slugToText = (slug: string) => {
   const words = slug.split('-');

@@ -1,6 +1,6 @@
 import { Box, Paper, Typography } from '@mui/material';
 import data from './data';
-import { IfolderType } from '../../Interfaces';
+import { IFolderType } from '../../Interfaces';
 import Folder from '../../Component/Folder';
 
 const CodeNotesPage = () => {
@@ -18,7 +18,7 @@ const CodeNotesPage = () => {
         Folders
       </Typography>
       <Box sx={{ p: '1rem 2rem' }}>
-        <Folder folderData={data as IfolderType} />
+        <Folder folderData={data as IFolderType} />
       </Box>
     </Paper>
   );

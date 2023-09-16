@@ -1,12 +1,9 @@
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { nightOwl } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import CopyCode from './CopyCode';
+import { ICodeProps } from '../../Interfaces';
 
-interface ICodeDisplay {
-  code: string;
-}
-
-const CodeDisplay: React.FC<ICodeDisplay> = ({ code }) => {
+const CodeDisplay: React.FC<ICodeProps> = ({ code }) => {
   return (
     <div>
       <SyntaxHighlighter

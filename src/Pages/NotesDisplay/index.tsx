@@ -2,11 +2,7 @@ import React, { useState } from 'react';
 import { Box, Stack, Paper, Button } from '@mui/material';
 import { Navigate, useLocation } from 'react-router-dom';
 import FileDisplay from '../FileDisplayPage';
-
-interface IScoreCard {
-  current: number;
-  total: number;
-}
+import { IScoreCard } from '../../Interfaces';
 
 const ScoreCard: React.FC<IScoreCard> = ({ current, total }) => {
   return (
