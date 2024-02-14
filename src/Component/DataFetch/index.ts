@@ -44,6 +44,11 @@ const makeRequest = async (link: string) => {
         return code;
       });
   }
+  if (link.includes('interviewbit')) {
+    return axios.post('https://proxyserver-1bit.onrender.com/interviewbit', {
+      slug,
+    });
+  }
   return '<p>GFG article</p>';
 };
 

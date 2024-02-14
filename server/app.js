@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import cheerio from 'cheerio';
 import axios from 'axios';
 
 const app = express();
@@ -31,6 +32,26 @@ app.post('/', async (req, res) => {
   const responseData = await response.data;
   return res.json({
     data: responseData.data,
+  });
+});
+
+app.post('/interviewbit', async (req, res) => {
+  const config = {
+    method: 'get',
+    url: `https://www.interviewbit.com/problems/${req.body.slug}`,
+  };
+  const response = await axios.request(config);
+  const html = await response.data;
+  const $ = cheerio.load(html);
+  // Find meta tags with attribute 'name' equals to 'description'
+  const description = $('meta[name="description"]').attr('content');
+  if (description) {
+    return res.json({
+      data: description,
+    });
+  }
+  return res.json({
+    data: config.url,
   });
 });
 
