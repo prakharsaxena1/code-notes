@@ -1,15 +1,15 @@
 const data = {
-  id: '6009723a-8551-46e9-8983-79c8fa54561b',
+  id: '8a5a3892-730d-4254-a382-e6281ececdbd',
   isFolder: true,
   name: 'DSA',
   content: [
     {
-      id: 'c486b6e7-f82f-42b3-b9f5-6a7da58af35f',
+      id: '67ed83eb-89ce-4e72-bd3e-73d3b819cf13',
       isFolder: true,
       name: 'Concepts',
       content: [
         {
-          id: 'd8bcc8ef-0517-45a5-ab46-57ddb1119b8e',
+          id: '4f260ab0-350b-471f-a27a-33fd6c291cdc',
           isFolder: false,
           name: 'DoublyLinkedList.java',
           code: 'public class DoublyLinkedList {\n    private Node head;\n    private Node tail;\n    private int length = 0;\n\n    class Node {\n        int value;\n        Node next;\n        Node prev;\n\n        Node(int val) {\n            this.value = val;\n        }\n    }\n\n    DoublyLinkedList() {\n        head = tail = null;\n    }\n\n    DoublyLinkedList(int val) {\n        Node newNode = new Node(val);\n        head = tail = newNode;\n        length++;\n    }\n\n    public static void printList(DoublyLinkedList list) {\n        Node temp = list.head;\n        if (list.length == 0) {\n            System.out.println("<List empty>");\n            return;\n        }\n        StringBuilder sb = new StringBuilder();\n        for (int i = 0; i < list.length; i++) {\n            sb.append(temp.value);\n            if (temp.next != null) {\n                sb.append(" <--> ");\n            }\n            temp = temp.next;\n        }\n        System.out.println(sb.toString());\n    }\n\n    public void append(int val) {\n        Node temp = new Node(val);\n        if (length == 0) {\n            head = tail = temp;\n        } else {\n            tail.next = temp;\n            temp.prev = tail;\n            tail = temp;\n        }\n        length++;\n    }\n\n    public Node removeLast() {\n        if (length == 0) return null;\n        Node temp = tail;\n        if (length == 1) {\n            head = tail = null;\n        } else {\n            tail = tail.prev;\n            tail.next = temp.prev = null;\n        }\n        length--;\n        return temp;\n    }\n\n    public void prepend(int val) {\n        Node temp = new Node(val);\n        if (length == 0) {\n            head = tail = temp;\n        } else {\n            temp.next = head;\n            head.prev = temp;\n            head = temp;\n        }\n        length++;\n    }\n\n    public Node removeFirst() {\n        if (length == 0) return null;\n        Node temp = head;\n        if (length == 1) {\n            head = tail = null;\n        } else {\n            head = head.next;\n            head.prev = null;\n            temp.next = null;\n        }\n        length--;\n        return temp;\n    }\n\n    public Node get(int index) {\n        if (index < 0 || index >= length) return null;\n        Node temp = head;\n        for (int i = 0; i < index; i++) {\n            temp = temp.next;\n        }\n        return temp;\n    }\n    public boolean set(int index, int val) {\n        Node temp = get(index);\n        if (temp != null) {\n            temp.value = val;\n            return true;\n        }\n        return false;\n    }\n\n    public boolean insert(int index, int val) {\n        if (index < 0 || index > length) return false;\n        if (index == 0) {\n            prepend(val);\n        } else if (index == length) {\n            append(val);\n        } else {\n            Node before = get(index - 1);\n            Node after = before.next;\n            Node temp = new Node(val);\n            before.next = temp;\n            temp.next = after;\n            after.prev = temp;\n            temp.prev = before;\n        }\n        length++;\n        return true;\n    }\n\n    public Node remove(int index) {\n        if (index < 0 || index >= length) return null;\n        if (index == 0) {\n            length--;\n            return removeFirst();\n        }\n        if (index == length - 1) {\n            length--;\n            return removeLast();\n        }\n        Node temp = get(index);\n        if (temp != null) {\n            Node before = temp.prev;\n            Node after = temp.next;\n            before.next = after;\n            after.prev = before;\n            length--;\n            return temp;\n        }\n        return null;\n    }\n\n    public static void main(String[] args) {\n        DoublyLinkedList list = new DoublyLinkedList(1);\n        list.append(2);\n        list.append(3);\n        list.append(9);\n        list.append(12);\n        System.out.println(list.remove(1));\n//        list.insert(4, 91);\n//        System.out.println(list.set(2, 99));\n//        System.out.println(list.get(2).value);\n//        System.out.println(list.removeFirst().value);\n        DoublyLinkedList.printList(list);\n    }\n}',
@@ -18,7 +18,7 @@ const data = {
           tags: ['DataStructures'],
         },
         {
-          id: '3487124f-c35e-49fc-a428-fb67823719b4',
+          id: 'c5caca77-4d23-4d60-b94f-47d93a278933',
           isFolder: false,
           name: 'Queue.java',
           code: 'public class Queue {\n    class Node {\n        int value;\n        Node next;\n        Node(int val) {\n            this.value = val;\n        }\n    }\n    Node head;\n    Node tail;\n    int length;\n    Queue(int val) {\n        Node newNode = new Node(val);\n        head = tail = newNode;\n        length++;\n    }\n    Queue() {\n        head = tail = null;\n        length = 0;\n    }\n    Node enqueue(int val) {\n        Node newNode = new Node(val);\n        if (length == 0) {\n            head = tail = newNode;\n        } else {\n            tail.next = newNode;\n            tail = newNode;\n        }\n        length++;\n        return newNode;\n    }\n\n    Node dequeue() {\n        if (length == 0) return null;\n        Node temp = head;\n        if (length == 1) {\n            head = tail = null;\n        } else {\n            head = head.next;\n            temp.next = null;\n        }\n        return temp;\n    }\n\n    public static void main(String[] args) {\n        Queue q = new Queue(10);\n        q.enqueue(4);\n        q.enqueue(19);\n        System.out.println(q.dequeue().value);\n    }\n}',
@@ -27,7 +27,7 @@ const data = {
           tags: ['DataStructures'],
         },
         {
-          id: '3925b214-c8e1-4fa7-8f89-cd4493fdabfa',
+          id: 'c25758e6-a73e-4e09-8229-1d88808ccf34',
           isFolder: false,
           name: 'SinglyLinkedList.java',
           code: 'public class SinglyLinkedList {\n    static class Node {\n        int value;\n        Node next;\n        Node (int val) {\n            this.value = val;\n        }\n    }\n    int length;\n    private Node head;\n    private Node tail;\n    SinglyLinkedList(int value) {\n        Node newNode = new Node(value);\n        head = tail = newNode;\n        length = 1;\n    }\n    SinglyLinkedList() {\n        head = tail = null;\n        length = 0;\n    }\n\n//    Methods\n    public void prepend(int val) {\n        Node newNode = new Node(val);\n        if (length == 0) {\n            head = tail = newNode;\n        } else {\n            newNode.next = head;\n            head = newNode;\n        }\n        length++;\n    }\n    public void append(int val) {\n        Node newNode = new Node(val);\n        if (length == 0) {\n            head = tail = newNode;\n        } else {\n            tail.next = newNode;\n            tail = newNode;\n        }\n        length++;\n    }\n    public Node removeLast() {\n        Node temp = head;\n        if (length <= 1) {\n            head = tail = null;\n        } else {\n            Node pre = head;\n            while (temp.next != null) {\n                pre = temp;\n                temp = temp.next;\n            }\n            tail = pre;\n            tail.next = null;\n        }\n        length--;\n        return temp;\n    }\n    public Node removeFirst() {\n        Node temp = head;\n        if (length <= 1) {\n            head = tail = null;\n        } else {\n            head = head.next;\n            temp.next = null;\n        }\n        length--;\n        return temp;\n    }\n    public Node get(int index) {\n        if (index >= length || index < 0) return null;\n        Node temp = head;\n        for (int i = 0; i < index; i++) {\n            temp = temp.next;\n        }\n        return temp;\n    }\n    public boolean set(int index, int val) {\n        Node temp = get(index);\n        if (temp != null) {\n            temp.value = val;\n            return true;\n        }\n        return false;\n    }\n\n    public void insert(int index, int val) {\n        if (index < 0 || index > length) return;\n        else if (index == 0) {\n            prepend(val);\n            return;\n        } else if (index == length) {\n            append(val);\n            return;\n        }\n        Node temp = head;\n        for (int i = 0; i < index - 1; i++) {\n            temp = temp.next;\n        }\n        Node newNode = new Node(val);\n        newNode.next = temp.next;\n        temp.next = newNode;\n        length++;\n        return;\n    }\n\n    public Node remove(int index) {\n        if (index < 0 || index >= length) return null;\n        if (index == 0) return removeFirst();\n        if (index == length - 1) return removeLast();\n        Node prev = get(index - 1);\n        Node temp = prev.next;\n        prev.next = temp.next;\n        temp.next = null;\n        length--;\n        return temp;\n    }\n\n    public void reverse() {\n        Node temp = head;\n        head = tail;\n        tail = temp;\n        Node prev = null;\n        Node next = null;\n        for (int i = 0; i < length; i++) {\n            next = temp.next;\n            temp.next = prev;\n            prev = temp;\n            temp = next;\n        }\n    }\n\n    public int getLength() {\n        return length;\n    }\n    public String getString() {\n        Node temp = head;\n        StringBuilder sb = new StringBuilder();\n        while (temp != null) {\n            sb.append(temp.value).append(" ");\n            temp = temp.next;\n        }\n        return sb.toString();\n    }\n\n    public static void main(String[] args) {\n        SinglyLinkedList list = new SinglyLinkedList();\n        list.append(1);\n        list.append(3);\n        list.append(5);\n        list.append(6);\n        System.out.println(list.getString());\n        list.reverse();\n        System.out.println(list.getString());\n    }\n}',
@@ -36,7 +36,7 @@ const data = {
           tags: ['DataStructures'],
         },
         {
-          id: '03d91b53-583f-424a-b9b6-933b8e05e986',
+          id: 'afa8e1a8-0893-4c2c-b3e3-d5c9e8d6e48f',
           isFolder: false,
           name: 'Stack.java',
           code: '// Using Singly linked list\n\npublic class Stack {\n    class Node {\n        Node next;\n        int value;\n        Node(int val) {\n            this.value = val;\n        }\n    }\n    private Node top;\n    private int height;\n    Stack(int val) {\n        top = new Node(val);\n        height = 1;\n    }\n//    Peek\n    public Node peek() {\n        return top;\n    }\n//    Push\n    public void push(int val) {\n        Node newNode = new Node(val);\n        if (height == 0) {\n            top = newNode;\n        } else {\n            newNode.next = top;\n            top = newNode;\n        }\n        height++;\n    }\n//    Pop\n    public Node pop() {\n        if (isEmpty()) {\n            return null;\n        }\n        Node temp = top;\n        top = top.next;\n        temp.next = null;\n        height--;\n        return temp;\n    }\n//    isEmpty\n    public boolean isEmpty() {\n        return height == 0;\n    }\n\n    public static void main(String[] args) {\n        Stack myStack = new Stack(10);\n        myStack.push(19);\n        myStack.push(13);\n        myStack.push(41);\n        myStack.push(25);\n//        System.out.println(myStack.pop().value);\n//        System.out.println(myStack.peek().value);\n        System.out.println(myStack.isEmpty());\n    }\n}',
@@ -45,7 +45,7 @@ const data = {
           tags: ['DataStructures'],
         },
         {
-          id: '1fbdeb29-bce6-4b52-95a6-ba5a2ab2385c',
+          id: '4b21a207-0cd1-40c1-89cc-d5df714e4036',
           isFolder: false,
           name: 'BinarySearch.java',
           code: '// BS on 1D Arrays\npublic class BinarySearch {\n    //    Iterative Binary Search\n    public static int binarySearch(int[] A, int target) {\n        int start = 0;\n        int end = A.length - 1;\n        while (start <= end) {\n            int mid = start + (end - start) / 2;\n            if (A[mid] == target) return mid;\n            if (A[mid] > target)\n                end = mid - 1;\n            else\n                start = mid + 1;\n        }\n        return -1;\n    }\n\n    //    Recursive Binary search\n    public static int binarySearch(int[] A, int target, int start, int end) {\n        if (start > end)\n            return -1;\n        int mid = start + (end - start) / 2;\n        if (A[mid] == target)\n            return mid;\n        if (A[mid] > target)\n            return binarySearch(A, target, start, mid - 1);\n        else\n            return binarySearch(A, target, mid + 1, end);\n    }\n\n    static int orderAgnosticBS(int arr[], int target) {\n        boolean isAscending = arr[0] > arr[arr.length - 1];\n        int start = 0, end = arr.length - 1;\n        while (start <= end) {\n            int mid = ((end - start) / 2) + start;\n            if (target == arr[mid]) return mid;\n            if (isAscending) {\n                if (target > arr[mid])\n                    end = mid - 1;\n                else\n                    start = mid + 1;\n            } else {\n                if (target < arr[mid])\n                    end = mid - 1;\n                else\n                    start = mid + 1;\n            }\n        }\n        return -1;\n    }\n}',
@@ -54,7 +54,7 @@ const data = {
           tags: ['Search'],
         },
         {
-          id: 'df30b773-ca88-4927-b53a-353e92430ddd',
+          id: 'eb62220a-2ef7-4e35-9de0-56f3d033dbc9',
           isFolder: false,
           name: 'LinearSearch.java',
           code: 'public class LinearSearch {\n    static int linearSearch(int arr[], int target) {\n        for (int i = 0; i <= arr.length; i++) {\n            if (target == arr[i]) {\n                return i;\n            }\n        }\n        return -1;\n    }\n}',
@@ -63,7 +63,7 @@ const data = {
           tags: ['Search'],
         },
         {
-          id: '6d2cb454-cf4d-460f-9b0a-70c289efbd48',
+          id: 'aa253960-fe32-4cca-abc1-9d2ac947db62',
           isFolder: false,
           name: 'BubbleSort.java',
           code: 'public class BubbleSort {\n  public static void swap(int[] arr, int idx1, int idx2) {\n    int temp = arr[idx1];\n    arr[idx1] = arr[idx2];\n    arr[idx2] = temp;\n  }\n\n  public static void bubbleSort(int[] arr) {\n    int n = arr.length;\n    for (int i = 0; i < n - 1; i++) {\n      boolean swapped = false;\n      for (int j = 0; j < n - i - 1; j++) {\n        if (arr[j] > arr[j + 1]) {\n          swap(arr, j, j + 1);\n          swapped = true;\n        }\n      }\n      if (!swapped) break;\n    }\n  }\n  \n  public static void bubbleSortRecursive(int[] arr, int n) {\n    if (n == 1) return;\n    boolean swapped = false;\n    for (int j = 0; j < n - 1; j++) {\n      if (arr[j] > arr[j + 1]) {\n        swap(arr, j, j + 1);\n        swapped = true;\n      }\n    }\n    if (!swapped) return;\n    bubbleSortRecursive(arr, n - 1);\n  }\n}',
@@ -72,7 +72,7 @@ const data = {
           tags: ['Sorting'],
         },
         {
-          id: 'f2b76609-1a59-41c5-b8d3-457aba75629f',
+          id: '32bce9ec-f967-47be-8bde-4a5c9cab194d',
           isFolder: false,
           name: 'CyclicSort.java',
           code: 'public class CyclicSort {\n  public static void swap(int[] arr, int idx1, int idx2) {\n    int temp = arr[idx1];\n    arr[idx1] = arr[idx2];\n    arr[idx2] = temp;\n  }\n\n  public static void cyclicSort(int[] arr) {\n    int i = 0;\n    while (i < arr.length) {\n      if (arr[i] != arr[arr[i] - 1])\n        swap(arr, i, arr[i] - 1);\n      else\n        i++;\n    }\n  }\n}',
@@ -81,7 +81,7 @@ const data = {
           tags: ['Sorting'],
         },
         {
-          id: 'cebaa4cc-54f9-410d-955c-214f1206f84f',
+          id: '47b2be1f-2ea6-4ae8-96dd-39f3c774d51b',
           isFolder: false,
           name: 'InsertionSort.java',
           code: 'public class InsertionSort {\n  public static void swap(int[] arr, int idx1, int idx2) {\n    int temp = arr[idx1];\n    arr[idx1] = arr[idx2];\n    arr[idx2] = temp;\n  }\n  public static void insertionSort(int[] arr) {\n    int n = arr.length;\n    for (int i = 1; i < n - 1; i++) {\n      for (int j = i; j > 0; j--) {\n        if (arr[j] >= arr[j - 1])\n          break;\n        swap(arr, j, j-1);\n      }\n    }\n  }\n\n  public static void insertionSortRecursive(int[] arr, int i) {\n    if (i == arr.length-1) return;\n    for (int j = i; j > 0; j--) {\n      if (arr[j] >= arr[j - 1])\n        break;\n      swap(arr, j, j-1);\n    }\n    insertionSortRecursive(arr, i+1);\n  }\n}',
@@ -90,7 +90,7 @@ const data = {
           tags: ['Sorting'],
         },
         {
-          id: '50057610-8917-483e-ac7f-f7f354b89e45',
+          id: 'd389d6f0-c872-4140-a5bb-f3dcf2e973f3',
           isFolder: false,
           name: 'MergeSort.java',
           code: 'public class MergeSort {\n  public static void mergeArray(int[] arr, int low, int mid, int high) {\n    int[] temp = new int[high - low + 1];\n    int left = low, right = mid + 1, i = 0;\n    while (left <= mid && right <= high) {\n      if (arr[left] <= arr[right])\n        temp[i++] = arr[left++];\n      else\n        temp[i++] = arr[right++];\n    }\n\n    while (left <= mid)\n      temp[i++] = arr[left++];\n\n    while (right <= high)\n      temp[i++] = arr[right++];\n\n    for (int j = 0; j < i; j++)\n      arr[j + low] = temp[j];\n  }\n\n  public static void mergeSort(int[] arr, int low, int high) {\n    if (low == high) {\n      return;\n    }\n    int mid = low + (high - low) / 2;\n    mergeSort(arr, low, mid);\n    mergeSort(arr, mid + 1, high);\n    mergeArray(arr, low, mid, high);\n  }\n\n}',
@@ -99,7 +99,7 @@ const data = {
           tags: ['Sorting'],
         },
         {
-          id: 'a4015307-a206-47f4-9395-7ec114270dc2',
+          id: 'fcbf2e1a-1a0a-44d5-abd6-8306aa4b07f5',
           isFolder: false,
           name: 'QuickSort.java',
           code: 'public class QuickSort {\n\n    public static void swap(int[] arr, int i, int j) {\n        int temp = arr[i];\n        arr[i] = arr[j];\n        arr[j] = temp;\n    }\n\n    public static int partition(int[] A, int low, int high) {\n        int pivot = A[low];\n        int i = low, j = high;\n        while (i < j) {\n            while (A[i] <= pivot && i < high) i++;\n            while (A[j] > pivot && j > low) j--;\n            if (i < j) swap(A, i, j);\n        }\n        swap(A, j, low);\n        return j;\n    }\n    public static void quickSort(int[] A, int low, int high) {\n        if (low < high) {\n            int pIdx = partition(A, low, high);\n            quickSort(A, low, pIdx-1);\n            quickSort(A, pIdx+1, high);\n        }\n    }\n}',
@@ -108,7 +108,7 @@ const data = {
           tags: ['Sorting'],
         },
         {
-          id: '96aea861-de4d-4756-8c88-0b14d1be4f69',
+          id: '9a3bc7c7-0282-4ec6-a4a9-e72a3d817de8',
           isFolder: false,
           name: 'SelectionSort.java',
           code: 'public class SelectionSort {\n  public static void selectionSort(int[] arr) {\n    int n = arr.length;\n    for (int i = 0; i < n-1; i++) {\n      int minIdx = i;\n      for (int j = i + 1; j < n; j++)\n        if (arr[minIdx] > arr[j])\n          minIdx = j;\n      if (i != minIdx) {\n        int temp = arr[i];\n        arr[i] = arr[minIdx];\n        arr[minIdx] = temp;\n      }\n    }\n  }\n\n}',
@@ -117,7 +117,7 @@ const data = {
           tags: ['Sorting'],
         },
         {
-          id: '2f2f0b1c-44ab-4ff4-b77e-23ce4189df73',
+          id: '197eeb3e-69cb-4976-8c33-2c73571d66b4',
           isFolder: false,
           name: 'CycleDetectionArray.java',
           code: "// AKA Floyd's algorithm, cycle detection in an array, find the duplicate number in an array of [1 - N]\npublic class CycleDetectionArray {\n    public static int findDuplicate(int[] nums) {\n        // To solve this in linear time and constant space we use FLOYD'S Algorithm\n        int slow = 0;\n        int fast = 0;\n        do {\n            slow = nums[slow];\n            fast = nums[nums[fast]];\n        } while (slow != fast);\n\n        int slow2 = 0;\n        while (slow != slow2) {\n            slow = nums[slow];\n            slow2 = nums[slow2];\n        }\n        return slow;\n    }\n}",
@@ -126,7 +126,7 @@ const data = {
           tags: ['Special Algorithms'],
         },
         {
-          id: '956cb040-50fd-4ed4-9d77-32aefb57f621',
+          id: '6cc40dbe-9a0b-4011-b435-c45a60c299bf',
           isFolder: false,
           name: 'CycleDetectionLinkedList.java',
           code: '// Detect loop or cycle in a linked list\npublic class CycleDetectionLinkedList {\n    static class ListNode {\n        int val;\n        ListNode next;\n        ListNode(int x) {\n            val = x;\n            next = null;\n        }\n    }\n\n    public static boolean hasCycle(ListNode head) {\n        ListNode slow = head;\n        ListNode fast = head;\n        while (fast != null && fast.next != null) {\n            fast = fast.next.next;\n            slow = slow.next;\n            if (fast == slow) return true;\n        }\n        return false;\n    }\n\n    public static void main(String[] args) {\n        ListNode head = new ListNode(0);\n        ListNode temp = head;\n        temp.next = new ListNode(2);\n        temp = temp.next;\n        temp.next = new ListNode(4);\n        temp = temp.next;\n        temp.next = new ListNode(1);\n        temp = temp.next;\n        temp.next = new ListNode(0);\n//        Created a cycle\n        temp.next.next  = head.next.next;\n    }\n}',
@@ -135,7 +135,7 @@ const data = {
           tags: ['Special Algorithms'],
         },
         {
-          id: '0447ff64-25d4-4bc3-8d3c-469419acd192',
+          id: 'bfa61fe9-0fa4-43a3-8680-e1a53cbdb933',
           isFolder: false,
           name: 'DutchNationalFlagAlgorithm.java',
           code: "// Dutch's national flag algorithm\n\nimport java.util.Arrays;\n\npublic class DutchNationalFlagAlgorithm {\n    public static int[] sort012(int[] arr) {\n        int low = 0, mid = 0, high = arr.length - 1;\n        while (mid <= high) {\n            if (arr[mid] == 0) {\n                int temp = arr[low];\n                arr[low] = arr[mid];\n                arr[mid] = temp;\n                low++;\n                mid++;\n            } else if (arr[mid] == 1) mid++;\n            else {\n                int temp = arr[high];\n                arr[high] = arr[mid];\n                arr[mid] = temp;\n                high--;\n            }\n        }\n        return arr;\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {0, 1, 2, 0, 1, 2};\n        int[] ans = sort012(arr);\n        System.out.println(Arrays.toString(ans));\n    }\n}",
@@ -144,7 +144,7 @@ const data = {
           tags: ['Special Algorithms'],
         },
         {
-          id: '0f127fd7-7be2-4a1e-a32e-96d11fb81519',
+          id: '0deb3ace-fa3c-492e-8a78-b0afb3bb7aee',
           isFolder: false,
           name: 'FastExponentiation.java',
           code: 'public class FastExponentiation {\n    public static int power(int a, int n) {\n        if (n == 0) return 1;\n        else if (n == 1) return a;\n\n        int r = power(a, n/2);\n\n        if (n%2 == 0) return r*r;\n        return r*a*r;\n    }\n}',
@@ -153,7 +153,7 @@ const data = {
           tags: ['Special Algorithms'],
         },
         {
-          id: 'b868f8a0-035a-459c-9876-8008577cde1b',
+          id: 'e180f07e-3b10-46df-a32a-db90d53d1330',
           isFolder: false,
           name: 'GCD.java',
           code: 'public class GCD {\n//    a = big, b = small\n    public static int getGCD(int a, int b) {\n        if (a%b == 0) return b;\n        return getGCD(b, a%b);\n    }\n\n    public static void main(String[] args) {\n        int ans = getGCD(51, 24);\n        System.out.println(ans);\n    }\n}',
@@ -162,7 +162,7 @@ const data = {
           tags: ['Special Algorithms'],
         },
         {
-          id: '147d3644-edbe-4d1b-88d9-63b80833d548',
+          id: '07942526-0a76-4bee-8eb4-7bfd5e33ca2c',
           isFolder: false,
           name: 'KadanesAlgorithm.java',
           code: "// Largest Sum Contiguous Subarray (Kadane's Algorithm)\npublic class KadanesAlgorithm {\n    public static int maxSum(int[] nums) {\n        int sum = 0;\n        int maxSum = 0;\n        for (int num : nums) {\n            sum += num; // Increment\n            maxSum = Math.max(maxSum, sum); // Maximise\n            if (sum < 0) sum = 0; // Check to reset\n        }\n        return maxSum;\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {-2, -3, 4, -1, -2, 1, 5, -3};\n        int ans = maxSum(arr);\n        System.out.println(ans);\n    }\n}",
@@ -171,7 +171,7 @@ const data = {
           tags: ['Special Algorithms'],
         },
         {
-          id: 'f9fe63d7-492e-4a5a-8810-e69b51715c55',
+          id: 'b9fdeaa1-6869-4b13-b53e-e66d4c51b51d',
           isFolder: false,
           name: 'MooresVotingAlgorithm.java',
           code: '//  Boyer-Moore Majority Voting Algorithm: used to find the majority element among the given elements that have more than N/ 2 occurrences.\npublic class MooresVotingAlgorithm {\n    public static int findMajority(int[] N) {\n        int element = -1, count = 0;\n        for (int j : N) {\n            if (count == 0) {\n                element = j;\n                count = 1;\n            } else if (element == j) count++;\n            else count--;\n        }\n        return element;\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {1, 2, 2, 2, 2, 1, 1, 2, 3, 4};\n        int majority = findMajority(arr);\n        System.out.println(" The majority element is : " + majority);\n    }\n}',
@@ -180,7 +180,7 @@ const data = {
           tags: ['Special Algorithms'],
         },
         {
-          id: 'a9b33d67-bbca-4c6d-9fa2-db696a6d43c8',
+          id: '6dfc6e89-8d56-421d-83f2-8307291c4420',
           isFolder: false,
           name: 'SieveOfEratosthenes.java',
           code: 'import java.util.*;\n\npublic class SieveOfEratosthenes {\n    public static int sieve(int n) {\n        List<Integer> ans = new ArrayList<>();\n        if (n <= 2) return 0;\n        int count = 0;\n        boolean[] M = new boolean[n];\n        for (int i = 2; i < n; i++) {\n            if (!M[i]) {\n                ans.add(i);\n                count++;\n                for (int j = 2* i; j < n; j += i) {\n                    M[j] = true;\n                }\n            }\n        }\n        System.out.println(ans);\n        return count;\n    }\n}',
@@ -189,7 +189,7 @@ const data = {
           tags: ['Special Algorithms'],
         },
         {
-          id: '9ee8f804-9f06-4413-9fd3-d631d5d7e28f',
+          id: 'c28b8a37-99d2-487b-b825-87ef4dd9fafa',
           isFolder: false,
           name: 'SubsequencesOfAString.java',
           code: 'import java.util.*;\n\npublic class SubsequencesOfAString {\n    public static ArrayList<String> subsequences(String str) {\n        // Using power set technique\n        ArrayList<String> ans = new ArrayList<>();\n        for (int i = 1; i < Math.pow(2, str.length()); i++) {\n            StringBuilder sb = new StringBuilder();\n            int idx = 0;\n            while(idx < str.length()) {\n                if (((i >> idx)&1) == 1) {\n                    sb.append(str.charAt(idx));\n                }\n                idx++;\n            }\n            ans.add(sb.toString());\n        }\n        return ans;\n    }\n}',
@@ -200,17 +200,17 @@ const data = {
       ],
     },
     {
-      id: '99cfe2e6-69c4-4a9d-b007-bf39c327052f',
+      id: '69e20dfd-762b-4a3f-8914-ab261fb0b827',
       isFolder: true,
       name: 'DSAPrepQuestions',
       content: [
         {
-          id: '9b6b2070-0ba4-4730-827e-931fac2aec6d',
+          id: 'cab42b2f-7ad2-487a-a245-0eab6b31b1e4',
           isFolder: true,
           name: 'Combined',
           content: [
             {
-              id: '263483e6-a50d-4e78-90eb-35c8794d6c98',
+              id: 'daacd407-3056-452d-964e-c6fa77811cd2',
               isFolder: false,
               name: 'AddToArrayFormOfInteger.java',
               code: 'import java.util.*;\n\npublic class AddToArrayFormOfInteger {\n    public List<Integer> addToArrayForm(int[] num, int k) {\n        LinkedList<Integer> ans = new LinkedList<>();\n        for (int i = num.length - 1; i >= 0; i--) {\n            num[i] += k;\n            k = num[i] / 10;\n            ans.add(0, num[i] % 10);\n        }\n        while (k != 0) {\n            ans.add(0, k % 10);\n            k /= 10;\n        }\n        return ans;\n    }\n}',
@@ -219,7 +219,7 @@ const data = {
               tags: ['Arrays'],
             },
             {
-              id: '4f2e1d29-be35-4993-87ca-ae3409a7a72b',
+              id: '5ebb0a87-9f41-4e25-a9dc-06437f10b089',
               isFolder: false,
               name: 'CellWithOddValuesInMatrix.java',
               code: 'public class CellWithOddValuesInMatrix {\n    public int oddCells(int m, int n, int[][] I) {\n        // M = rows, N = cols\n        boolean[] row = new boolean[m];\n        boolean[] col = new boolean[n];\n        int r=0, c=0;\n        for (int i = 0; i < I.length; i++) {\n            row[I[i][0]] ^= true;\n            col[I[i][1]] ^= true;\n        }\n        for (int j = 0; j < n; j++)\n            if (col[j]) c++;\n\n        for (int j = 0; j < m; j++)\n            if (row[j]) r++;\n\n        // r(n-c) + c(m-r)\n        // rn + cm - rc - rc\n        return r*n + c*m - 2*r*c;\n    }\n}',
@@ -228,7 +228,7 @@ const data = {
               tags: ['Arrays'],
             },
             {
-              id: 'a1938659-da5f-4001-bc75-ab3a5d79d585',
+              id: 'b5207308-5540-4798-891e-c0a30235c1b8',
               isFolder: false,
               name: 'GoodArray.java',
               code: 'public class GoodArray {\n    public boolean isGoodArray(int[] N) {\n        int ans = N[0];\n        for (int i = 1; i < N.length; i++)\n            ans = GCD(N[i], ans);\n        return ans == 1;\n    }\n    public int GCD(int a, int b) {\n        if (a%b == 0) return b;\n        return GCD(b, a%b);\n    }\n}',
@@ -237,7 +237,7 @@ const data = {
               tags: ['Arrays'],
             },
             {
-              id: '34b47090-cc60-4ca1-a5de-98536a70ec16',
+              id: '40ece3f5-212e-4d29-b308-4b818d521b61',
               isFolder: false,
               name: 'IsStringASubSequence.java',
               code: 'public class IsStringASubSequence {\n    public static boolean check(String s1, String s2) {\n        int i = 0, j = 0;\n        return checkRecursively(s1, s2, i, j);\n\n        // int i = 0, j = 0;\n        // while (i < A.length() && j < B.length()) {\n        //     if (A.charAt(i) == B.charAt(j)) i++;\n        //     j++;\n        // }\n        // return i >= A.length();\n    }\n    public static boolean checkRecursively(String s1, String s2, int i, int j) {\n        if (i >= s1.length()) return true;\n        if (j >= s2.length()) return false;\n        if (s1.charAt(i) == s2.charAt(j)) {\n            return checkRecursively(s1, s2, i+1, j+1);\n        }\n        return checkRecursively(s1, s2, i, j+1);\n    }\n    public static void main(String[] args) {\n        String s1 = "ABCD";\n        String s2 = "ADB";\n        System.out.println(check(s1, s2));\n    }\n}',
@@ -246,7 +246,7 @@ const data = {
               tags: ['Arrays'],
             },
             {
-              id: 'ed9104af-78d7-45ca-bf29-37e2af758bd0',
+              id: 'c32ecf2e-8134-48dd-aae7-904c21955232',
               isFolder: false,
               name: 'JumpGame.java',
               code: 'public class JumpGame {\n    public boolean canJump(int[] nums) {\n        int n = nums.length - 1;\n        int goal = n;\n        for (int i = n; i >= 0; i--) {\n            if (i + nums[i] >= goal)\n                goal = i;\n        }\n        return goal == 0;\n    }\n}',
@@ -255,7 +255,7 @@ const data = {
               tags: ['Arrays'],
             },
             {
-              id: '4d783071-798f-4494-9c49-247ffec866ba',
+              id: '3070e7b0-6e42-42b8-8b7c-05fa4bfec19e',
               isFolder: false,
               name: 'LeftMostRepeatingCharacter.java',
               code: "public class LeftMostRepeatingCharacter {\n    public static int indexLeftMostRepeatedCharacter (String str) {\n//        Brute force approach: O(N^2)\n//        Use 2 nested loops to check every character's occurrence it found break loop and return index\n//        for (int i = 0; i < str.length(); i++) {\n//            char ch = str.charAt(i);\n//            for (int j = i+1; j < str.length(); j++) {\n//                if (str.charAt(j) == ch) return i;\n//            }\n//        }\n//        return -1;\n\n//        Better Solution: O(2N)\n//        Uses 1 integer array to store count of all characters in 1 iteration, then in next iteration is count is > 1 that's the index else -1\n//        int[] bucket = new int[26];\n//        for (int i = 0; i < str.length(); i++) {\n//            bucket[str.charAt(i) - 'a']++;\n//        }\n//        for (int j = 0; j < str.length(); j++) {\n//            if (bucket[str.charAt(j) - 'a'] > 1) return j;\n//        }\n//        return -1;\n\n//        Best Solution: O(N)\n//        Use the bucket concept along with a min index value variable that will hold the min possible value of index as I traverse the array\n        int[] bucket = new int[26];\n        int minIdx = Integer.MAX_VALUE;\n        for (int i = str.length() - 1; i >= 0; i--) {\n            int idx = str.charAt(i) - 'a';\n            bucket[idx]++;\n            if (bucket[idx] > 1) {\n                minIdx = i;\n            }\n        }\n        if (minIdx == Integer.MAX_VALUE) return -1;\n        return minIdx;\n    }\n    public static void main(String[] args) {\n//        Only considering lowercase alphabets\n        String s = \"geeksforgeeks\";\n        int ans = indexLeftMostRepeatedCharacter(s);\n        System.out.println(ans);\n    }\n}",
@@ -264,7 +264,7 @@ const data = {
               tags: ['Arrays'],
             },
             {
-              id: '11ed0bed-c390-4186-bc91-ddb5980363e9',
+              id: '2e5ebc80-33b4-450f-8377-81eeb6d959fe',
               isFolder: false,
               name: 'LongestOddEvenSubarray.java',
               code: "public class LongestOddEvenSubarray {\n    public static int longestOddEvenCount (int[] arr) {\n//        Brute force\n//        int count = 0;\n//        for (int i = 0; i < arr.length; i++) {\n//            int c = 1;\n//            for (int j = i+1; j < arr.length; j++) {\n//                if (arr[j]%2 == 0 && arr[j-1]%2!= 0 || arr[j]%2 != 0 && arr[j-1]%2== 0) {\n//                    c++;\n//                } else {\n//                    break;\n//                }\n//            }\n//            count = Math.max(c, count);\n//        }\n//        return count;\n\n//        Optimised: Kadane's algorithm\n        int count = 1;\n        int max = 1;\n        for (int i = 1; i < arr.length; i++) {\n            if (arr[i]%2 == 0 && arr[i-1]%2!= 0 || arr[i]%2 != 0 && arr[i-1]%2== 0) {\n                count++;\n                max = Math.max(count, max);\n            } else {\n                count = 1;\n            }\n        }\n        return max;\n    }\n    public static void main(String[] args) {\n        int[] arr = {5, 10, 20, 6, 3, 8};\n        int count = longestOddEvenCount(arr);\n        System.out.println(count);\n    }\n}",
@@ -273,7 +273,7 @@ const data = {
               tags: ['Arrays'],
             },
             {
-              id: '2ea35388-49d3-4d1d-b311-5e39b8ba05cc',
+              id: 'f745a600-7e5b-43fa-8f53-111aa9fb1771',
               isFolder: false,
               name: 'MaxCircularSubarraySum.java',
               code: "public class MaxCircularSubarraySum {\n    public static int normalSubarrayMaxSum(int[] arr) {\n        int sum = arr[0];\n        int maxSum = arr[0];\n        int n = arr.length;\n        for (int i = 1; i < n; i++) {\n            sum += arr[i];\n            maxSum = Math.max(sum, maxSum);\n            if (sum < 0) sum = 0;\n        }\n        return maxSum;\n    }\n\n    public static int maxCircularSubarraySum(int[] arr) {\n//        Brute force approach\n//        int n = arr.length;\n//        int sum = arr[0];\n//        for (int i = 0; i < n; i++) {\n//            int curr_sum = arr[i];\n//            int curr_max = arr[i];\n//            for (int j = 1; j < n; j++) {\n//                curr_sum += arr[(i+j)%n];\n//                curr_max = Math.max(curr_sum, curr_max);\n//            }\n//            sum = Math.max(sum, curr_max);\n//        }\n//        return sum;\n\n//        Optimised approach\n        int normalSum = normalSubarrayMaxSum(arr);\n        if (normalSum < 0) return normalSum;\n        int circularSum = arr[0];\n        int sum = arr[0];\n        int wholeSum = arr[0];\n//        We can also invert the array and get normal max sum using same function instead of modifying kadane's algorithm\n//        In that case we add it with wholeSum\n        for (int i = 1; i < arr.length; i++) {\n            wholeSum += arr[i];\n            sum += arr[i];\n            circularSum = Math.min(circularSum, sum);\n            if (sum > 0) sum = 0;\n        }\n        return Math.max(normalSum, wholeSum - circularSum);\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {-10, -5, -5, -1, -2, -4};\n        int ans = maxCircularSubarraySum(arr);\n        System.out.println(ans);\n    }\n}",
@@ -282,7 +282,7 @@ const data = {
               tags: ['Arrays'],
             },
             {
-              id: '6a120a63-e195-4ca4-8035-545afac8d50b',
+              id: '3121f2ad-98b0-4d04-89c6-5531b1164411',
               isFolder: false,
               name: 'NumberOfGoodPairs.java',
               code: 'import java.util.*;\n\npublic class NumberOfGoodPairs {\n    public static int numIdenticalPairs(int[] nums) {\n        // O(n) solution\n        int numberOfGoodPairs = 0;\n        HashMap<Integer, Integer> hm = new HashMap<>();\n        for (int i: nums) {\n            if (hm.containsKey(i)) {\n                numberOfGoodPairs += hm.get(i);\n            }\n            hm.put(i, hm.getOrDefault(i, 0) + 1);\n        }\n        return numberOfGoodPairs;\n\n        // O(n^2) solution\n        // int numberOfGoodPairs = 0;\n        // for (int i=0; i < nums.length -1; i++) {\n        //     for (int j=i+1; j < nums.length; j++) {\n        //         if (nums[i] == nums[j]) {\n        //             numberOfGoodPairs++;\n        //         }\n        //     }\n        // }\n        // return numberOfGoodPairs;\n    }\n}',
@@ -291,7 +291,7 @@ const data = {
               tags: ['Arrays'],
             },
             {
-              id: '0ff00706-c751-4ddc-bed4-200d77d75e73',
+              id: 'cb9e2759-3e91-42f9-8541-8e156cbabb2e',
               isFolder: false,
               name: 'NumbersSmallerThanCurrentNumber.java',
               code: 'public class NumbersSmallerThanCurrentNumber {\n    public int[] smallerNumbersThanCurrent(int[] nums) {\n        int[] counts = new int[102];\n        for (int num : nums)\n            counts[num]++;\n        for (int j = 1; j < counts.length; j++)\n            counts[j] += counts[j - 1];\n        int[] ans = new int[nums.length];\n        for (int i = 0; i < nums.length; i++) {\n            if (nums[i] == 0)\n                ans[i] = 0;\n            else\n                ans[i] = counts[nums[i] - 1];\n        }\n        return ans;\n    }\n}',
@@ -300,7 +300,7 @@ const data = {
               tags: ['Arrays'],
             },
             {
-              id: '56a0b2c4-b479-4991-bd0e-1b549f3f5f3f',
+              id: 'c2b2ff60-a685-47a5-a119-570a4245d8ad',
               isFolder: false,
               name: 'SpiralMatrix3.java',
               code: 'public class SpiralMatrix3 {\n    public int[][] spiralMatrixIII(int rows, int cols, int rStart, int cStart) {\n        int[] directions = {0, 1, 0, -1, 0};\n        int[][] ans = new int[rows*cols][2];\n        ans[0] = new int[] {rStart, cStart};\n        int len = 0, d = 0, ptr = 1;\n        while (ptr < ans.length) {\n            if (d == 0 || d == 2) len++;\n            for (int i = 0; i < len; i++) {\n                rStart += directions[d];\n                cStart += directions[d+1];\n                if (rStart >= 0 && rStart < rows && cStart >= 0 && cStart < cols) {\n                    ans[ptr++] = new int[] {rStart, cStart};\n                }\n            }\n            d = ++d%4;\n        }\n        return ans;\n    }\n}',
@@ -309,7 +309,7 @@ const data = {
               tags: ['Arrays'],
             },
             {
-              id: '2ff02106-e4f0-42ec-83c2-ed8abbd7b185',
+              id: 'c6e2ed9d-1e01-4595-96e3-9f4e0583408a',
               isFolder: false,
               name: 'WavePrint.java',
               code: 'import java.util.Arrays;\n\npublic class WavePrint {\n    public static int[] wavePrint(int arr[][], int nRows, int mCols) {\n        // Write your code here.\n        int[] ans = new int[nRows*mCols];\n        int ptr = 0;\n        for (int i = 0; i < mCols; i++) {\n            if ((i&1) == 0) {\n                // TB\n                for (int j = 0; j < nRows; j++) {\n                    ans[ptr++] = arr[j][i];\n                }\n            } else {\n                // BT\n                for (int j = nRows - 1; j >= 0; j--) {\n                    ans[ptr++] = arr[j][i];\n                }\n            }\n        }\n        return ans;\n    }\n\n    public static void main(String[] args) {\n        int[][] mat = {\n                {1,2,3,4},\n                {5,6,7,8},\n                {9,10,11,12}\n        };\n        int[] ans = wavePrint(mat, mat.length, mat[0].length);\n        System.out.println(Arrays.toString(ans));\n    }\n}',
@@ -318,7 +318,7 @@ const data = {
               tags: ['Arrays'],
             },
             {
-              id: '95a09369-418b-4cf4-85fd-0d2e6af89b80',
+              id: 'd89a213b-ee68-4a9f-aed2-43a83be48fa3',
               isFolder: false,
               name: 'ArrangingCoins.java',
               code: 'public class ArrangingCoins {\n    public static int arrangeCoins(int n) {\n//        Brute force solution\n//        if (n <= 1) return n;\n//        int i;\n//        for (i = 0; i < n; i++) {\n//            long ans = ((long) i *(i+1))/2;\n//            if (ans > n) break;\n//        }\n//        return i-1;\n\n//        Better solution\n//        long start = 0, end = n;\n//        while (start <= end) {\n//            long mid = start + (end - start)/2;\n//            long val = (mid * (mid+1))/2;\n//            if (val == n) return (int) mid;\n//            if (val > n) {\n//                end = mid - 1;\n//            } else {\n//                start = mid + 1;\n//            }\n//        }\n//        return (int) end;\n\n//        Optimised solution\n//         Equation: k(k+1)/2 = n\n//         k^2 + k = 2*n\n//         k^2 + k + 1/4 = 2*n + 1/4\n//         (k + 1/2)^2 = 2n + 1/4\n//         k = sqrt(2n + 1/4) - 1/2\n        return (int) (Math.sqrt(2L*n + 0.25) - 0.5);\n    }\n\n    public static void main(String[] args) {\n        int ans = arrangeCoins(1804289383);\n        System.out.println(ans);\n    }\n}',
@@ -327,7 +327,7 @@ const data = {
               tags: ['Binary Search'],
             },
             {
-              id: '6d59d3bc-b0b7-4cad-a6b6-c2a1a8e6a022',
+              id: '402439c2-e12d-4bb4-a514-7afc0376abec',
               isFolder: false,
               name: 'FindRightInterval.java',
               code: 'import java.util.*;\npublic class FindRightInterval {\n    public static int[] findRightInterval(int[][] intervals) {\n        int[][] copy = new int[intervals.length][2];\n        HashMap<Integer, Integer> hm = new HashMap<>();\n        for (int i = 0; i < intervals.length; i++) {\n            copy[i] = intervals[i];\n            hm.put(intervals[i][0], i);\n        }\n        Arrays.sort(copy, Comparator.comparingInt(a -> a[0]));\n        int[] ans = new int[intervals.length];\n        for (int i = 0; i < intervals.length; i++) {\n            int pos = search(copy, intervals[i][1]);\n            ans[i] = pos == -1 ? pos : hm.get(copy[pos][0]);\n        }\n        return ans;\n    }\n    public static int search(int[][] arr, int target) {\n        int start = 0, end = arr.length - 1;\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            if (arr[mid][0] == target) return mid;\n            if (arr[mid][0] > target)\n                end = mid - 1;\n            else\n                start = mid + 1;\n        }\n        if (start == arr.length) return -1;\n        return start;\n    }\n}',
@@ -336,7 +336,7 @@ const data = {
               tags: ['Binary Search'],
             },
             {
-              id: '75790244-1682-45a5-9f8b-cc39e023b9dd',
+              id: '8ff95551-120c-43f4-9ef6-ce99ff66a027',
               isFolder: false,
               name: 'FrequencyOfMostFrequentElement.java',
               code: 'import java.util.*;\n\npublic class FrequencyOfMostFrequentElement {\n    public int maxFrequency(int[] nums, int k) {\n        Arrays.sort(nums);\n        int l = 0, r = 0;\n        long maxLen = 1, total = 0;\n        while (r < nums.length) {\n            total += nums[r];\n            while ((long) nums[r] * (r - l + 1) > total + k) {\n                total -= nums[l++];\n            }\n            maxLen = Math.max(maxLen, r - l + 1);\n            r++;\n        }\n        return (int) maxLen;\n    }\n}',
@@ -345,7 +345,7 @@ const data = {
               tags: ['Binary Search'],
             },
             {
-              id: 'c8cbfc9c-6259-461b-b2e2-4cafa41e2a06',
+              id: '2a13f123-0d0e-4b75-ade0-91b18e7c034f',
               isFolder: false,
               name: 'MaxValueAtGivenIndexInBoundedArray.java',
               code: 'public class MaxValueAtGivenIndexInBoundedArray {\n    public long getFormulaSum(int count, long mid) {\n        long c = Math.min(count, mid-1);\n        return c*mid - c*(c+1)/2 + Math.max(count - (mid-1), 0); // Adds extra 1s if any\n    }\n    public int maxValue(int n, int index, int maxSum) {\n        long start = 1;\n        long end = maxSum;\n        long result = 0;\n        while (start <= end) {\n            long mid = start + (end - start)/2;\n            long totalSum = getFormulaSum(index, mid);\n            totalSum += mid;\n            totalSum += getFormulaSum(n-index-1, mid);\n            if (totalSum <= maxSum) {\n                result = mid;\n                start = mid + 1;\n            } else {\n                end = mid - 1;\n            }\n        }\n        return (int)result;\n    }\n}',
@@ -354,7 +354,7 @@ const data = {
               tags: ['Binary Search'],
             },
             {
-              id: 'f4365662-f54d-47cf-80bb-7d976b8aa5ea',
+              id: '919d972f-ee40-4c39-a496-489fe089b386',
               isFolder: false,
               name: 'MinAbsoluteSumDifference.java',
               code: 'import java.util.*;\npublic class MinAbsoluteSumDifference {\n    public int minAbsoluteSumDiff(int[] N, int[] M) {\n        int[] abs = new int[N.length];\n        long maxSum = 0;\n        for (int i = 0; i < N.length; i++) {\n            abs[i] = Math.abs(N[i] - M[i]);\n            maxSum += abs[i];\n        }\n        Arrays.sort(N);\n        int max = 0;\n        for (int j = 0; j < N.length; j++) {\n            int minValue = Math.abs(M[j] - bSearch(N, M[j]));\n            int diff = abs[j] - minValue;\n            max = Math.max(max, diff);\n        }\n        return (int)((maxSum - max) % 1000000007);\n    }\n    public static int bSearch(int[] N, int target){\n        int start = 0, end = N.length - 1;\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            if (N[mid] == target) return N[mid];\n            if (N[mid] > target) {\n                end = mid - 1;\n            } else {\n                start = mid + 1;\n            }\n        }\n        if (start == N.length) start--;\n        if (end == -1) end++;\n        int diff1 = Math.abs(target - N[start]);\n        int diff2 = Math.abs(target - N[end]);\n        if (diff1 > diff2) return N[end];\n        return N[start];\n    }\n}',
@@ -363,7 +363,7 @@ const data = {
               tags: ['Binary Search'],
             },
             {
-              id: 'b14ee416-7f85-480c-af21-e13436db90d8',
+              id: '7e5f597d-fd87-4a66-a1ed-765f8c101b03',
               isFolder: false,
               name: 'ReachANumber.java',
               code: 'public class ReachANumber {\n    public static long formula(long n) {\n        return (n*(n+1))>>1;\n    }\n\n    public int reachNumber(int target) {\n        target = Math.abs(target);\n        long start = 1, end = target;\n        int steps = 0;\n        while (start <= end) {\n            long mid = start + (end - start)/2;\n            long distance = formula(mid);\n            if (distance >= target) {\n                steps = (int) mid;\n                end = mid - 1;\n            } else {\n                start = mid + 1;\n            }\n        }\n        long dist = formula(steps) - target;\n        if ((dist&1) != 0) {\n            return steps + ((steps&1) == 0 ? 1 : 2);\n        }\n        return steps;\n    }\n}',
@@ -372,7 +372,7 @@ const data = {
               tags: ['Binary Search'],
             },
             {
-              id: 'a3ab5f60-2c6e-424a-b76e-e39083d200c3',
+              id: 'f194784a-7bee-4636-a223-da4270d8da95',
               isFolder: false,
               name: 'CousinsInBinaryTree.java',
               code: 'import java.util.*;\npublic class CousinsInBinaryTree {\n    static class Pair {\n        int val, parent, lvl;\n        Pair (int v, int p, int lvl) {\n            this.val = v;\n            this.parent = p;\n            this.lvl = lvl;\n        }\n    }\n    public boolean isCousins(TreeNode root, int x, int y) {\n        if (root.val == x || root.val == y) return false;\n        Queue<TreeNode> q = new LinkedList<>();\n        q.add(root);\n        int lvl = 0, idx = 0;\n        Pair[] ans = new Pair[2];\n        while (!q.isEmpty()) {\n            int size = q.size();\n            for (int i = 0; i < size; i++) {\n                TreeNode node = q.poll();\n                if (node.left != null) {\n                    q.add(node.left);\n                    if (node.left.val == x || node.left.val == y) {\n                        ans[idx++] = new Pair(node.left.val, node.val, lvl+1);\n                    }\n                }\n                if (node.right != null) {\n                    q.add(node.right);\n                    if (node.right.val == x || node.right.val == y) {\n                        ans[idx++] = new Pair(node.right.val, node.val, lvl+1);\n                    }\n                }\n            }\n            if (idx == 2) break;\n            lvl++;\n        }\n        return ans[0].parent != ans[1].parent && ans[0].lvl == ans[1].lvl;\n    }\n}',
@@ -381,7 +381,7 @@ const data = {
               tags: ['Binary Trees'],
             },
             {
-              id: '04d804ce-0070-4006-98fe-9973853558d5',
+              id: 'b6245a45-09b7-4998-8814-b486bd0ede84',
               isFolder: false,
               name: 'DiagonalTraversalBT.java',
               code: 'import java.util.*;\npublic class DiagonalTraversalBT {\n    public ArrayList<Integer> diagonal(TreeNode root) {\n        //add your code here.\n        ArrayList<Integer> ans = new ArrayList<>();\n        if (root == null) return ans;\n        Queue<TreeNode> q = new LinkedList<>();\n        q.add(root);\n        while (!q.isEmpty()) {\n            TreeNode curr = q.poll();\n            while (curr != null) {\n                ans.add(curr.val);\n                if (curr.left != null) {\n                    q.add(curr.left);\n                }\n                curr = curr.right;\n            }\n        }\n        return ans;\n    }\n}',
@@ -390,7 +390,7 @@ const data = {
               tags: ['Binary Trees'],
             },
             {
-              id: 'c22ab5a3-4386-4dc4-8353-b1cfce9d00b4',
+              id: '3701c47e-3e46-47f9-b13d-11168f48a57f',
               isFolder: false,
               name: 'KSumPaths.java',
               code: 'import java.util.*;\npublic class KSumPaths {\n    void solve(int sum, TreeNode root, int k, HashMap<Integer, Integer> hm, int[] count) {\n        if (root == null) return;\n        sum += root.val;\n        if (hm.containsKey(sum - k)) {\n            count[0] += hm.get(sum - k);\n        }\n        hm.put(sum, hm.getOrDefault(sum, 0) + 1);\n        solve(sum, root.left, k, hm, count);\n        solve(sum, root.right, k, hm, count);\n        hm.put(sum, hm.get(sum) - 1);\n    }\n    public int sumK(TreeNode root,int k) {\n        HashMap<Integer, Integer> hm = new HashMap<>();\n        hm.put(0, 1);\n        int[] count = new int[1];\n        solve(0, root, k, hm, count);\n        return count[0];\n    }\n}',
@@ -399,7 +399,7 @@ const data = {
               tags: ['Binary Trees'],
             },
             {
-              id: 'c6036175-73fe-4b8a-acd4-263c235601da',
+              id: '04b8db8f-b7ea-408a-87f1-3b9662adc686',
               isFolder: false,
               name: 'KthAncestorInBinaryTree.java',
               code: 'import java.util.*;\npublic class KthAncestorInBinaryTree {\n    public boolean solve(TreeNode root, int node, List<Integer> temp) {\n        if (root == null) return false;\n        temp.add(root.val);\n        if (root.val == node || solve(root.left, node, temp) || solve(root.right, node, temp)) return true;\n        temp.remove(temp.size() - 1);\n        return false;\n    }\n    public int kthAncestor(TreeNode root, int k, int node) {\n        List<Integer> temp = new ArrayList<>();\n        if (!solve(root, node, temp) || k > temp.size() - 1 || root.val == node)\n            return -1;\n        return temp.get(temp.size() - k - 1);\n    }\n}',
@@ -408,7 +408,7 @@ const data = {
               tags: ['Binary Trees'],
             },
             {
-              id: '9e9f706b-1013-4c1b-98c6-18005deab0f1',
+              id: '18ab64aa-7c3d-4f47-9be1-ffe2e9ed1d6a',
               isFolder: false,
               name: 'LongestPathRootToLeafSum.java',
               code: 'public class LongestPathRootToLeafSum {\n    public static void solve(TreeNode root, int[] ans, int sum, int length) {\n        if (root == null) {\n            if (length > ans[1]) {\n                ans[1] = length;\n                ans[0] = sum;\n            } else if (length == ans[1]) {\n                ans[0] = Math.max(sum, ans[0]);\n            }\n            return;\n        }\n        solve(root.left, ans, sum + root.val, length + 1);\n        solve(root.right, ans, sum + root.val, length + 1);\n    }\n    public int sumOfLongRootToLeafPath(TreeNode root) {\n        //code here\n        // { maxSum, maxLength }\n        int[] ans = new int[2];\n        solve(root, ans, 0, 0);\n        return ans[0];\n    }\n}',
@@ -417,7 +417,7 @@ const data = {
               tags: ['Binary Trees'],
             },
             {
-              id: '14fe7f4d-49ba-410b-afba-259ec0eae417',
+              id: 'fa72ed19-8b44-41bd-8138-314625bfbaa1',
               isFolder: false,
               name: 'MaximumSumOfNonAdjacentNodes.java',
               code: 'public class MaximumSumOfNonAdjacentNodes {\n    static class Pair {\n        int f, s;\n\n        Pair(int f, int s) {\n            this.f = f;\n            this.s = s;\n        }\n    }\n\n    //Function to return the maximum sum of non-adjacent nodes.\n    static Pair solve(TreeNode root) {\n        if (root == null) {\n            return new Pair(0, 0);\n        }\n        Pair l = solve(root.left);\n        Pair r = solve(root.right);\n        int first = root.val + l.s + r.s;\n        int second = Math.max(l.f, l.s) + Math.max(r.f, r.s);\n        return new Pair(first, second);\n    }\n\n    static int getMaxSum(TreeNode root) {\n        // add your code here\n        // Pair(include, exclude)\n        Pair p = solve(root);\n        return Math.max(p.f, p.s);\n    }\n}',
@@ -426,7 +426,7 @@ const data = {
               tags: ['Binary Trees'],
             },
             {
-              id: '99887e41-074e-4943-91da-db3b2077ee28',
+              id: 'e8636b60-6b64-47fe-b0d7-12e9cc10ef0e',
               isFolder: false,
               name: 'PopulatingNextRightPointersInEachNode.java',
               code: 'import java.util.*;\n\npublic class PopulatingNextRightPointersInEachNode {\n    // Definition for a Node.\n    public static class Node {\n        public int val;\n        public Node left;\n        public Node right;\n        public Node next;\n\n        public Node() {}\n\n        public Node(int _val) {\n            val = _val;\n        }\n\n        public Node(int _val, Node _left, Node _right, Node _next) {\n            val = _val;\n            left = _left;\n            right = _right;\n            next = _next;\n        }\n    };\n    public Node connect(Node root) {\n        if (root == null) return null;\n        Queue<Node> q = new LinkedList<>();\n        q.add(root);\n        while (!q.isEmpty()) {\n            int size = q.size();\n            for (int i = 0; i < size; i++) {\n                Node node = q.poll();\n                if (!q.isEmpty() && i != size - 1) {\n                    node.next = q.peek();\n                }\n                if (node.left != null) q.add(node.left);\n                if (node.right != null) q.add(node.right);\n            }\n        }\n        return root;\n    }\n}',
@@ -435,7 +435,7 @@ const data = {
               tags: ['Binary Trees'],
             },
             {
-              id: '987d35d5-3398-407d-81c9-b782ffdd3869',
+              id: 'bd6f4c56-ae12-48c9-8509-c79bc21f0d4c',
               isFolder: false,
               name: 'SumAtKLevel.java',
               code: 'import java.util.LinkedList;\nimport java.util.Queue;\n\npublic class SumAtKLevel {\n    public static int sumAtKLevel(TreeNode root, int k) {\n        Queue<TreeNode> q = new LinkedList<>();\n        int sum = 0;\n        int lvl = 0;\n        q.add(root);\n        while (!q.isEmpty()) {\n            int size = q.size();\n            for (int i = 0; i < size; i++) {\n                TreeNode temp = q.poll();\n                if (temp != null) {\n                    if (lvl == k) {\n                        sum += temp.val;\n                    }\n                    if (temp.left != null) q.add(temp.left);\n                    if (temp.right != null) q.add(temp.right);\n                }\n            }\n            lvl++;\n        }\n        return sum;\n    }\n\n//    public static void main(String[] args) {\n////        Tree building\n//        BinarySearchTree tree = new BinarySearchTree();\n//        int[] input = {7, 3, 5, 11, 17, 1, 8};\n//        for (int j : input) tree.insert(j);\n//        int k = 0;\n//        int ans = sumAtKLevel(tree.buildTree(), k);\n//        System.out.println(ans);\n//    }\n}',
@@ -444,7 +444,7 @@ const data = {
               tags: ['Binary Trees'],
             },
             {
-              id: '50ce55c2-beda-4130-bc34-1cad8c959931',
+              id: '3c6728c7-11c9-4175-a603-695ea234e631',
               isFolder: false,
               name: 'SumTree.java',
               code: 'public class SumTree {\n    int solve(TreeNode root) {\n        if (root == null) return 0;\n        if (root.left == null && root.right == null) return root.val;\n        int l = solve(root.left);\n        int r = solve(root.right);\n        if (l == - 1 || r == - 1 || root.val != (l + r)) return -1;\n        return l + r + root.val;\n    }\n    boolean isSumTree(TreeNode root) {\n        return solve(root) != -1;\n    }\n}',
@@ -453,7 +453,7 @@ const data = {
               tags: ['Binary Trees'],
             },
             {
-              id: '3195c82d-6397-40b6-8483-6ff7ca0b2065',
+              id: '394eebda-0764-45e9-b82c-26db3aaad72b',
               isFolder: false,
               name: 'KClosestNumbers.java',
               code: 'import java.util.*;\n\npublic class KClosestNumbers {\n    static class Pair {\n        int val;\n        int key;\n        Pair(int v, int k) {\n            this.val = v;\n            this.key = k;\n        }\n    }\n\n    public static List<Integer> findClosestElements(int[] arr, int k, int x) {\n        PriorityQueue<Pair> pq = new PriorityQueue<>((a, b) -> b.key == a.key ? b.val - a.val : b.key - a.key);\n        for (int num : arr) {\n            pq.add(new Pair(num, Math.abs(x - num)));\n            if (pq.size() > k) pq.poll();\n        }\n        List<Integer> ans = new ArrayList<>();\n        while (!pq.isEmpty()) ans.add(pq.poll().val);\n        Collections.sort(ans);\n        return ans;\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {1, 2, 3, 4, 5};\n        int k = 4, x = 3;\n        List<Integer> ans = findClosestElements(arr, k, x);\n        System.out.println("Final: " + ans);\n    }\n}',
@@ -462,7 +462,7 @@ const data = {
               tags: ['Heaps'],
             },
             {
-              id: '55d7a2d5-442b-4337-a178-65c1a4953253',
+              id: '78680c70-843d-41f1-93c0-2d3d5d28004c',
               isFolder: false,
               name: 'KClosestPointsToOrigin.java',
               code: 'import java.util.Arrays;\nimport java.util.PriorityQueue;\n\npublic class KClosestPointsToOrigin {\n    static class Pair {\n        int key;\n        int x, y;\n\n        Pair(int coor_x, int coor_y, int k) {\n            this.key = k;\n            this.x = coor_x;\n            this.y = coor_y;\n        }\n    }\n\n    public static int[][] kClosest(int[][] points, int k) {\n        PriorityQueue<Pair> pq = new PriorityQueue<>((a, b) -> b.key - a.key);\n        for (int[] point : points) {\n            int x = point[0];\n            int y = point[1];\n            pq.add(new Pair(x, y, x * x + y * y));\n            if (pq.size() > k) pq.poll();\n        }\n        int[][] ans = new int[pq.size()][2];\n        int idx = 0;\n        while (!pq.isEmpty()) {\n            Pair p = pq.poll();\n            ans[idx++] = new int[]{p.x, p.y};\n        }\n        return ans;\n    }\n\n    public static void main(String[] args) {\n        int[][] points = {{3, 3}, {5, -1}, {-2, 4}};\n        int k = 2;\n        int[][] ans = kClosest(points, k);\n        for (int[] arr : ans) {\n            System.out.println(Arrays.toString(arr));\n        }\n    }\n}',
@@ -471,7 +471,7 @@ const data = {
               tags: ['Heaps'],
             },
             {
-              id: 'e7b0cb36-7a6a-469a-acd8-ee4e26f5e11d',
+              id: 'acbc17db-1a32-486f-bed8-72ff2acedf39',
               isFolder: false,
               name: 'SquareRootWithPrecision.java',
               code: 'public class SquareRootWithPrecision {\n    public static int sqrt(int n) {\n        int start = 0, end = n;\n        while (start <= end) {\n            int mid = start + (end - start) / 2;\n            int root = mid * mid;\n            if (root == n) return mid;\n            if (root > n)\n                end = mid - 1;\n            else\n                start = mid + 1;\n        }\n        return end;\n    }\n\n    public static int getClosestSqrt(double n, int val, int num) {\n        int start = 0, end = 9;\n        while (start <= end) {\n            int mid = start + (end - start) / 2;\n            double x = n + mid / (double) val;\n            double root = x * x;\n            if (root < num)\n                start = mid + 1;\n            else\n                end = mid - 1;\n        }\n        return end;\n    }\n\n    public static double getSquareRootWithPrecision(int n, int p) {\n        double num = sqrt(n);\n        int increment = 10;\n        for (int i = 0; i < p; i++) {\n            int x = getClosestSqrt(num, increment, n); // log10\n            num += (double) x / increment;\n            increment *= 10;\n        }\n        return num;\n    }\n\n    public static void main(String[] args) {\n        int n = 40;\n        int p = 3;\n        double ans = getSquareRootWithPrecision(n, p);\n        System.out.printf("%.{%d}f", p, ans);\n    }\n}',
@@ -480,7 +480,7 @@ const data = {
               tags: ['Maths'],
             },
             {
-              id: '0c561cbf-3cf8-4523-a271-af87abbe1538',
+              id: '851804f9-dd60-480b-b55d-d750d0ecadd8',
               isFolder: false,
               name: 'XorOfRange.java',
               code: 'public class XorOfRange {\n    public static void main(String[] args) {\n        int n = 9;\n        int ans1 = computeXor(n);\n        int ans2 = computeXorEfficient(n);\n        System.out.println(ans1 + "  " + ans2);\n    }\n\n    static int computeXor(int n) {\n        if (n == 0) return 0;\n        int uni = 0;\n        for (int i = 1; i <= n; i++) {\n            uni = uni ^ i;\n        }\n        return uni;\n    }\n\n    static int computeXorEfficient(int n) {\n        int rem = n % 4;\n        switch (rem) {\n            case 0 -> {\n                return n;\n            }\n            case 1 -> {\n                return 1;\n            }\n            case 2 -> {\n                return n + 1;\n            }\n        }\n        return 0;\n    }\n}',
@@ -489,7 +489,7 @@ const data = {
               tags: ['Maths'],
             },
             {
-              id: '74beadd5-cf79-4435-b8f1-2b839ed20866',
+              id: 'fc7d4160-3031-4ba5-87c6-d86bb03fd73a',
               isFolder: false,
               name: 'CircularTour.java',
               code: 'public class CircularTour {\n    int tour(int[] petrol, int[] distance) {\n        // Your code here\n        int start = 0, b = 0, d = 0;\n        for (int i = 0; i < petrol.length; i++) {\n            b += petrol[i] - distance[i];\n            if (b < 0) {\n                d += b;\n                start = i + 1;\n                b = 0;\n            }\n        }\n        return b + d > 0 ? start : -1;\n    }\n}',
@@ -498,7 +498,7 @@ const data = {
               tags: ['Queue'],
             },
             {
-              id: '4237d29f-460d-41d8-8b4b-8a478f996412',
+              id: '73ffe499-663d-4c22-a805-565525ef90a8',
               isFolder: false,
               name: 'FirstNonRepeatingCharacterInAStream.java',
               code: "import java.util.*;\npublic class FirstNonRepeatingCharacterInAStream {\n    public String FirstNonRepeating(String A) {\n        // code here\n        StringBuilder sb = new StringBuilder();\n        Queue<Character> q = new LinkedList<>();\n        int[] bucket = new int[26];\n        for (int i = 0; i < A.length(); i++) {\n            char ch = A.charAt(i);\n            q.offer(ch);\n            bucket[ch - 'a']++;\n            while (!q.isEmpty() && bucket[q.peek() - 'a'] > 1) q.poll();\n            sb.append(q.isEmpty() ? '#' : q.peek());\n        }\n        return sb.toString();\n    }\n}",
@@ -507,7 +507,7 @@ const data = {
               tags: ['Queue'],
             },
             {
-              id: '04a56c6a-71b0-45fa-b1ca-4848e8aa3cdb',
+              id: '8f28b07a-6e7f-4f0b-8795-d1fd487ba53a',
               isFolder: false,
               name: 'NegativeNumberInWindowOfSizeK.java',
               code: 'import java.util.*;\npublic class NegativeNumberInWindowOfSizeK {\n    public long[] printFirstNegativeInteger(long A[], int N, int k) {\n        Queue<Integer> q = new LinkedList<>();\n        long[] ans = new long[N - k + 1];\n        int i = 0;\n        for (int j = 0; j < N; j++) {\n            if (A[j] < 0) q.offer(j);\n            if (j - i + 1 == k) {\n                if (!q.isEmpty() && q.peek() < i) q.poll();\n                ans[i] = q.isEmpty() ? 0 : A[q.peek()];\n                i++;\n            }\n        }\n        return ans;\n    }\n}',
@@ -516,7 +516,7 @@ const data = {
               tags: ['Queue'],
             },
             {
-              id: 'ac6c4d73-7a57-4982-9d06-2e082a5172de',
+              id: 'bfde5fba-0326-4b1f-919c-d6a3b453da54',
               isFolder: false,
               name: 'ReverseFirstKElementsOfQueue.java',
               code: 'import java.util.*;\npublic class ReverseFirstKElementsOfQueue {\n    public Queue<Integer> modifyQueue(Queue<Integer> q, int k) {\n        // add code here.\n        Stack<Integer> st = new Stack<>();\n        // k = k % q.size();\n        for (int i = 0; i < k; i++) st.push(q.poll());\n        while (!st.isEmpty()) q.offer(st.pop());\n        int n = q.size();\n        for (int i = 0; i < n - k; i++) q.offer(q.poll());\n        return q;\n    }\n}',
@@ -525,7 +525,7 @@ const data = {
               tags: ['Queue'],
             },
             {
-              id: 'a0741505-a313-489c-b135-1adc4134438b',
+              id: '94cc5d42-583b-4e28-937a-252c41349467',
               isFolder: false,
               name: 'ReverseQueue.java',
               code: 'import java.util.*;\n\npublic class ReverseQueue {\n    //Function to reverse the queue. (Did it with recursion as well but stackoverflow)\n    public Queue<Integer> rev(Queue<Integer> q){\n        //add code here.\n        Stack<Integer> st = new Stack<>();\n        while (!q.isEmpty()) st.push(q.poll());\n        while (!st.isEmpty()) q.offer(st.pop());\n        return q;\n    }\n\n    public static void main(String[] args) {\n        Queue<Integer> q = new LinkedList<>();\n\n    }\n}',
@@ -534,7 +534,7 @@ const data = {
               tags: ['Queue'],
             },
             {
-              id: '43450b4a-74dc-4111-8e04-a406df19b1ab',
+              id: '50900645-97ba-4b74-b61b-a7455b18b7e8',
               isFolder: false,
               name: 'SlidingWindowMaximum.java',
               code: 'import java.util.*;\n\npublic class SlidingWindowMaximum {\n    public static int[] maxInEachWindow(int[] arr, int k) {\n        int n = arr.length;\n        int[] ans = new int[n - k + 1];\n        Deque<Integer> dq = new ArrayDeque<>();\n        int i = 0;\n        for (int j = 0; j < n; j++) {\n            if (!dq.isEmpty() && i > dq.peekFirst()) dq.pollFirst();\n            while (!dq.isEmpty() && arr[j] > arr[dq.peekLast()]) dq.pollLast();\n            dq.offerLast(j);\n            if (j - i + 1 == k) {\n                ans[i++] = arr[dq.peekFirst()];\n            }\n        }\n        return ans;\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {10, 8, 5, 12, 15, 7, 6};\n        int k = 3;\n        int[] ans = maxInEachWindow(arr, k);\n        System.out.println(Arrays.toString(ans));\n    }\n}',
@@ -543,7 +543,7 @@ const data = {
               tags: ['Queue'],
             },
             {
-              id: '8d696b8b-31a4-402a-be4a-616fa5fe2860',
+              id: '0f8500de-01bf-4649-afa7-3601294173cb',
               isFolder: false,
               name: 'SumMinMaxElementsSubarraysSizeK.java',
               code: 'import java.util.ArrayDeque;\nimport java.util.Deque;\n\npublic class SumMinMaxElementsSubarraysSizeK {\n    public static int SumOfKsubArray(int[] arr, int k) {\n        int n = arr.length;\n        int ans = 0;\n        Deque<Integer> dq1 = new ArrayDeque<>();\n        Deque<Integer> dq2 = new ArrayDeque<>();\n        int i = 0;\n        for (int j = 0; j < n; j++) {\n            if (!dq1.isEmpty() && i > dq1.peekFirst()) dq1.pollFirst();\n            if (!dq2.isEmpty() && i > dq2.peekFirst()) dq2.pollFirst();\n            while (!dq1.isEmpty() && arr[j] < arr[dq1.peekLast()]) dq1.pollLast();\n            while (!dq2.isEmpty() && arr[j] > arr[dq2.peekLast()]) dq2.pollLast();\n            dq1.offerLast(j);\n            dq2.offerLast(j);\n            if (j - i + 1 == k) {\n                ans += arr[dq1.peekFirst()];\n                ans += arr[dq2.peekFirst()];\n                i++;\n            }\n        }\n        return ans;\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {2, 5, -1, 7, -3, -1, -2};\n        int k = 3;\n        int ans = SumOfKsubArray(arr, k);\n        System.out.println(ans);\n    }\n}',
@@ -552,7 +552,7 @@ const data = {
               tags: ['Queue'],
             },
             {
-              id: '693e948e-8e2d-4888-9f4a-312d8454442d',
+              id: '909ca681-174c-4991-8b60-5bbc799d1390',
               isFolder: false,
               name: 'Fibo.java',
               code: 'public class Fibo {\n    public static long fibo(int n, long[] temp) {\n        if (n <= 1) return n;\n        if (temp[n] != 0) return temp[n];\n        temp[n] = fibo(n-1, temp) + fibo(n-2, temp);\n        return temp[n];\n    }\n    // Optimised\n    public static long getFibo2(int n) {\n        long[] arr = new long[n + 1];\n        arr[1] = 1;\n        return fibo(n, arr);\n    }\n\n    // slow\n    public static long getFibo(int n) {\n        if (n <= 1) return n;\n        return getFibo(n-1) + getFibo(n-2);\n    }\n}',
@@ -561,7 +561,7 @@ const data = {
               tags: ['Recursion'],
             },
             {
-              id: '8480c6e4-d393-47a9-b893-dedf7afa83f0',
+              id: 'a74ce75f-1e44-4edd-ab6e-bd6d4270f83f',
               isFolder: false,
               name: 'LetterCombinationsOfPhoneNumber.java',
               code: 'import java.util.*;\npublic class LetterCombinationsOfPhoneNumber {\n    public List<String> letterCombinations(String digs) {\n        List<String> ans = new ArrayList<>();\n        if (digs.length() == 0) return ans;\n        StringBuilder sb = new StringBuilder();\n        String[] mappings = {"", "", "abc", "def", "ghi", "jkl","mno","pqrs","tuv","wxyz"};\n        solve(mappings, digs, ans, sb, 0);\n        return ans;\n    }\n    public static void solve(String[] mappings, String digs, List<String> ans, StringBuilder sb, int idx) {\n        // Base case\n        if (idx >= digs.length()) {\n            ans.add(sb.toString());\n            return;\n        }\n        // Get index\n        int index = digs.charAt(idx) - \'0\';\n        String val = mappings[index];\n        // Get all letters from mapping[index]\n        for (int i = 0; i < val.length(); i++) {\n            sb.append(val.charAt(i));\n            solve(mappings, digs, ans, sb, idx + 1);\n            sb.replace(sb.length() - 1, sb.length(), "");\n        }\n    }\n}',
@@ -570,7 +570,7 @@ const data = {
               tags: ['Recursion'],
             },
             {
-              id: 'a01bc906-3b25-48b2-8b3c-671c3ecf2707',
+              id: '92cf5b4b-7dfb-46d5-a8c2-cf0c6160166f',
               isFolder: false,
               name: 'MatrixFindPaths.java',
               code: 'import java.util.ArrayList;\nimport java.util.List;\n\npublic class MatrixFindPaths {\n    //    Given a n x m matrix, you are only allowed to move right and down direction\n//    find the of paths to reach the corner right of the matrix\n    public static void findPaths(int m, int n, int i, int j, List<String> paths, String path) {\n        if (i >= m || j >= n) return;\n        if (i == m - 1 && j == n - 1) {\n            paths.add(path);\n            return;\n        }\n        findPaths(m, n, i, j+1, paths, path+"R");\n        findPaths(m, n, i+1, j, paths, path + "D");\n    }\n\n    public static void main(String[] args) {\n        List<String> ans = new ArrayList<>();\n        findPaths(3, 2, 0, 0, ans, "");\n        System.out.println(ans);\n    }\n}',
@@ -579,7 +579,7 @@ const data = {
               tags: ['Recursion'],
             },
             {
-              id: '02e6ae88-4727-4543-b6f3-7a713d2a7e09',
+              id: 'fcb4256a-a545-4ef7-ba67-5a27daf7f893',
               isFolder: false,
               name: 'NKnightsProblem.java',
               code: "import java.util.Arrays;\n\npublic class NKnightsProblem {\n    static boolean isPossible(char[][] board, int row, int col) {\n//        Coordinates\n        int[][] coordinates = {\n                {col - 2, row - 1},\n                {col - 1, row - 2},\n                {col + 1, row - 2},\n                {col + 2, row - 1},\n                {col + 2, row + 1},\n                {col + 1, row + 2},\n                {col - 1, row + 2},\n                {col - 2, row + 1},\n        };\n        for (int[] coordinate : coordinates) {\n            int r = coordinate[1], c = coordinate[0];\n            if (r >= 0 && c >= 0 && r < board.length && c < board.length)\n                if (board[r][c] == 'K') return false;\n        }\n        return true;\n    }\n\n    static void solve(char[][] board, int col) {\n        if (col == board.length) {\n            for (char[] chars : board)\n                System.out.println(Arrays.toString(chars));\n            System.out.println();\n            return;\n        }\n        for (int row = 0; row < board.length; row++) {\n            if (isPossible(board, row, col)) {\n                board[row][col] = 'K';\n                solve(board, col + 1);\n                board[row][col] = '0';\n            }\n        }\n\n    }\n\n    public static void nKnights(int n, char[][] board) {\n        solve(board, 0);\n    }\n\n    public static void main(String[] args) {\n        int n = 1;\n        char[][] board = new char[n][n];\n        for (int i = 0; i < n; i++) {\n            Arrays.fill(board[i], '0');\n        }\n        nKnights(n, board);\n    }\n}",
@@ -588,7 +588,7 @@ const data = {
               tags: ['Recursion'],
             },
             {
-              id: '4f6a3af0-72b3-4c0a-b5ae-0063e1ee0883',
+              id: '700dcf1c-0844-46a5-afa4-9373a2f750a3',
               isFolder: false,
               name: 'Permutations.java',
               code: 'import java.util.*;\npublic class Permutations {\n    public List<List<Integer>> permute(int[] nums) {\n        List<List<Integer>> ans = new ArrayList<>();\n        List<Integer> op = new ArrayList<>();\n        solve(nums, ans, op, 0);\n        return ans;\n    }\n\n    public static void solve(int[] nums, List<List<Integer>> ans, List<Integer> op, int idx) {\n        // Base case\n        if (idx >= nums.length) {\n            ans.add(new ArrayList<>(op));\n            return;\n        }\n\n        for (int i = idx; i < nums.length; i++) {\n            op.add(nums[i]);\n            swap(nums, idx, i);\n            solve(nums, ans, op, idx + 1);\n            swap(nums, idx, i);\n            op.remove(op.size() - 1);\n        }\n    }\n    public static void swap(int[] arr, int i, int j) {\n        int temp = arr[i];\n        arr[i] = arr[j];\n        arr[j] = temp;\n    }\n}',
@@ -597,7 +597,7 @@ const data = {
               tags: ['Recursion'],
             },
             {
-              id: '88b3dc6c-644c-4f20-8881-d84970f6a8e3',
+              id: 'ca51ecb1-9f0c-4f7c-80b9-37c19333fc67',
               isFolder: false,
               name: 'PermutationsOfString.java',
               code: 'import java.util.ArrayList;\nimport java.util.List;\n\npublic class PermutationsOfString {\n    public static void swap(StringBuilder s, int i, int j) {\n        char temp = s.charAt(i);\n        s.setCharAt(i, s.charAt(j));\n        s.setCharAt(j, temp);\n    }\n    public static void getPermutations(StringBuilder s, List<String> ans, int idx) {\n        if (idx == s.length()) {\n            ans.add(s.toString());\n            return;\n        }\n        for (int i = idx; i < s.length(); i++) {\n            swap(s, idx, i);\n            getPermutations(s, ans, idx + 1);\n            swap(s, idx, i);\n        }\n    }\n\n    public static void main(String[] args) {\n        List<String> ans = new ArrayList<>();\n        StringBuilder s = new StringBuilder("ABC");\n        getPermutations(s, ans, 0);\n        System.out.println(ans);\n    }\n}',
@@ -606,7 +606,7 @@ const data = {
               tags: ['Recursion'],
             },
             {
-              id: '7797066d-ab01-4ca0-8abb-03187ba18060',
+              id: '0202712b-74c7-43f5-a867-6c0a7056e524',
               isFolder: false,
               name: 'RopeCuttingProblem.java',
               code: 'public class RopeCuttingProblem {\n    public static int maxCuts(int n, int a, int b, int c, int count) {\n//        Base case\n        if (n == 0) return count;\n        if (n < 0) return -1;\n        int aCut = maxCuts(n - a, a, b, c, count + 1);\n        int bCut = maxCuts(n - b, a, b, c, count + 1);\n        int cCut = maxCuts(n - c, a, b, c, count + 1);\n        return Math.max(aCut, Math.max(bCut, cCut));\n    }\n\n    public static void main(String[] args) {\n        int ans = maxCuts(9,2,2,2, 0);\n        System.out.println(ans);\n    }\n}',
@@ -615,7 +615,7 @@ const data = {
               tags: ['Recursion'],
             },
             {
-              id: '25967cbd-6947-4f05-982a-435e449277e7',
+              id: '4649ce9e-17b5-457a-9265-38187552958a',
               isFolder: false,
               name: 'SubsequencesOfString.java',
               code: 'import java.util.*;\n// This is the same question as power set but the solution is using recursion\npublic class SubsequencesOfString {\n    public static void getSubsequences(String str, ArrayList<String> ans, StringBuilder sb, int index) {\n        if (index >= str.length()) {\n            if (sb.length() != 0) {\n                ans.add(sb.toString());\n            }\n            return;\n        }\n//        Exclude\n        getSubsequences(str, ans, sb, index+1);\n//        Include\n        sb.append(str.charAt(index));\n        getSubsequences(str, ans, sb, index+1);\n        sb.replace(sb.length() - 1, sb.length(),"");\n    }\n    public static ArrayList<String> subsequences(String str) {\n        // Write your code here\n        ArrayList<String> ans = new ArrayList<>();\n        StringBuilder sb = new StringBuilder();\n        getSubsequences(str, ans, sb, 0);\n        return ans;\n    }\n    public static void main(String[] args) {\n        ArrayList<String> ans = subsequences("abc");\n        System.out.println(ans);\n    }\n}',
@@ -624,7 +624,7 @@ const data = {
               tags: ['Recursion'],
             },
             {
-              id: '2cda446a-e8b5-49c4-bfb6-791b2fd13e18',
+              id: '660d7c86-6df5-4cc6-8eb9-57666fd02b5d',
               isFolder: false,
               name: 'SubsetDuplicate.java',
               code: 'import java.util.*;\n\npublic class SubsetDuplicate {\n\n    public static void solve(int[] arr, List<List<Integer>> ans) {\n        ans.add(new ArrayList<>());\n        for (int i = 0; i < arr.length; i++) {\n            int n = ans.size();\n            int start = 0;\n            if (i > 0 && arr[i] == arr[i-1]) {\n                start = n/2;\n            }\n            for (int j = start; j < n; j++) {\n                List<Integer> list = new ArrayList<>(ans.get(j));\n                list.add(arr[i]);\n                ans.add(list);\n            }\n        }\n    }\n    public static void main(String[] args) {\n        int[] arr = {1, 2, 2};\n        List<List<Integer>> ans = new ArrayList<>();\n        solve(arr, ans);\n        System.out.println(ans);\n    }\n}',
@@ -633,7 +633,7 @@ const data = {
               tags: ['Recursion'],
             },
             {
-              id: '3e89167b-4bf0-4fd1-b972-f6f0b598cf5e',
+              id: 'a6ecbde5-4cdb-412a-9856-1311ed275526',
               isFolder: false,
               name: 'Subsets.java',
               code: 'import java.util.*;\n\npublic class Subsets {\n    public static void solve(int[] nums, List<List<Integer>> ans, List<Integer> op, int index) {\n        if (index >= nums.length) {\n            ans.add(new ArrayList<>(op));\n            return;\n        }\n//        Exclude\n        solve(nums, ans, op, index+1);\n//        Include\n        op.add(nums[index]);\n        solve(nums, ans, op, index+1);\n        op.remove(op.size() - 1);\n    }\n    public static List<List<Integer>> subsets(int[] nums) {\n        List<List<Integer>> ans = new ArrayList<>();\n        List<Integer> op = new ArrayList<>();\n        solve(nums, ans, op, 0);\n        return ans;\n    }\n\n    public static void main(String[] args) {\n        int[] nums = {1,2,3};\n        List<List<Integer>> ans =  subsets(nums);\n        System.out.println(ans);\n    }\n}',
@@ -642,7 +642,7 @@ const data = {
               tags: ['Recursion'],
             },
             {
-              id: 'ba7a541d-0e58-43b8-939f-2e5ca6385505',
+              id: '9046e138-bd17-48fe-bfc4-4c9f200b0dc9',
               isFolder: false,
               name: 'TowerOfHanoi.java',
               code: 'import java.util.*;\n\npublic class TowerOfHanoi {\n    public static void towerOfHanoi(int n, String src, String helper, String dest) {\n        if (n == 1) {\n            System.out.println("Transferring " + n + " from: " + src + " to: " + dest);\n            return;\n        }\n        towerOfHanoi(n-1, src,  dest, helper);\n        System.out.println("Transferring " + n + " from: " + src + " to: " + dest);\n        towerOfHanoi(n-1, helper, src, dest);\n    }\n\n    public static void solve(int n, int src, int helper, int dest, ArrayList<ArrayList<Integer>> ans) {\n        if (n == 1) {\n            ans.add(new ArrayList<>(Arrays.asList(src, dest)));\n            return;\n        }\n        solve(n - 1, src, helper, dest, ans);\n        ans.add(new ArrayList<>(Arrays.asList(src, dest)));\n        solve(n - 1, helper, src, dest, ans);\n    }\n    public static void main(String[] args) {\n        towerOfHanoi(3, "S", "h", "D");\n    }\n}',
@@ -651,7 +651,7 @@ const data = {
               tags: ['Recursion'],
             },
             {
-              id: 'dc3305a6-ff0a-4030-a826-7777180e8660',
+              id: '8957c34c-fcfe-4f9a-bc48-f387f4774b1b',
               isFolder: false,
               name: 'CountOccuranceOfAnagrams.java',
               code: 'import java.util.HashMap;\n\npublic class CountOccuranceOfAnagrams {\n    public static int search(String pat, String txt) {\n        // code here\n        HashMap<Character, Integer> map = new HashMap<>();\n        int count = 0;\n        for (int i = 0; i < txt.length(); i++) {\n            char ch = txt.charAt(i);\n            map.put(ch, map.getOrDefault(ch, 0) + 1);\n        }\n        int uniqueCount = map.size();\n        int i = 0, j = 0, k = txt.length();\n        while (j < pat.length()) {\n            char ch = pat.charAt(j);\n            if (map.containsKey(ch)) {\n                int c = map.get(ch);\n                map.put(ch, c - 1);\n                if (c == 1) uniqueCount--;\n            }\n            if (j - i + 1 < k) j++;\n            else if (j - i + 1 == k) {\n                if (uniqueCount == 0) count++;\n                char ch2 = pat.charAt(i);\n                if (map.containsKey(ch2)) {\n                    int c2 = map.get(ch2);\n                    map.put(ch2, c2 + 1);\n                    if (c2 == 0) uniqueCount++;\n                }\n                i++;\n                j++;\n            }\n        }\n        return count;\n    }\n\n    public static void main(String[] args) {\n        String pat = "aabaabaa";\n        String txt = "aaba";\n        System.out.println(search(pat, txt));\n    }\n}',
@@ -660,7 +660,7 @@ const data = {
               tags: ['Sliding Window'],
             },
             {
-              id: '8e95302a-c365-4259-99f2-72a5444825c2',
+              id: '5442ca2a-b6d9-4afc-83a1-a4f641b800a5',
               isFolder: false,
               name: 'AssignCookies.java',
               code: 'import java.util.Arrays;\n\npublic class AssignCookies {\n    public static int findContentChildren(int[] g, int[] s) {\n        Arrays.sort(g);\n        Arrays.sort(s);\n        int gLast = g.length - 1;\n        int sLast = s.length - 1;\n        int count = 0;\n        while (gLast >= 0 && sLast >= 0) {\n            if (g[gLast] <= s[sLast]) {\n                gLast--;\n                sLast--;\n                count++;\n            } else {\n                gLast--;\n            }\n        }\n        return count;\n    }\n}',
@@ -669,7 +669,7 @@ const data = {
               tags: ['Sorting'],
             },
             {
-              id: 'bb6d1890-0ab2-48c0-a50f-045a946180da',
+              id: '42efad14-ce50-4abb-acc9-cd87c702408c',
               isFolder: false,
               name: 'CanMakeAPFromSequence.java',
               code: 'public class CanMakeAPFromSequence {\n    public static void swap(int[] arr, int i, int j) {\n        int temp = arr[i];\n        arr[i] = arr[j];\n        arr[j] = temp;\n    }\n    public static boolean canMakeArithmeticProgression(int[] arr) {\n//        Brute force\n//         Arrays.sort(arr);\n//         int diff = arr[1] - arr[0];\n//         for (int i = 1; i < arr.length; i++) {\n//             if (arr[i] - arr[i-1] != diff) return false;\n//         }\n//         return true;\n\n//        Optimal solution\n        int min = Integer.MAX_VALUE, max =Integer.MIN_VALUE;\n        for (int num: arr){\n            min = Math.min(min, num);\n            max = Math.max(max, num);\n        }\n        int n = arr.length;\n//        If difference is not perfectly divisible then return false\n        if ((max - min) % (n - 1) != 0) return false;\n//        To get the difference between any 2 element in a AP\n        int diff = (max - min) / (n - 1);\n        int i = 0;\n        while (i < n) {\n            if (arr[i] == min + i*diff) i++;\n            else if ((arr[i] - min)%diff != 0) return false;\n            else {\n                int j = (arr[i] - min)/diff;\n                if (arr[i] == arr[j]) return false;\n                swap(arr, i, j);\n            }\n        }\n        return true;\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {13, 12, -12, 9, 9, 16, 7, -10, -20, 0, 18, -1, -20, -10, -8, 15, 15, 16, 2, 15};\n        System.out.println(canMakeArithmeticProgression(arr));\n    }\n}',
@@ -678,7 +678,7 @@ const data = {
               tags: ['Sorting'],
             },
             {
-              id: '24f75d91-cf40-4289-9eb7-bcb2c8066bff',
+              id: '776fc1be-4b0c-4a2b-bf54-e5dda40e2fc1',
               isFolder: false,
               name: 'InsertionSortList.java',
               code: 'public class InsertionSortList {\n    static class ListNode {\n        int val;\n        ListNode next;\n        ListNode() {}\n        ListNode(int val) {\n            this.val = val;\n        }\n        ListNode(int val, ListNode next) {\n            this.val = val;\n            this.next = next;\n        }\n    }\n\n    public static ListNode insertionSortList(ListNode head) {\n        if (head == null || head.next == null)  return head;\n        ListNode dummy = new ListNode(0, head);\n        ListNode prev = head;\n        ListNode curr = head.next;\n        while (curr != null) {\n            if (curr.val >= prev.val) {\n                prev = curr;\n                curr = curr.next;\n                continue;\n            }\n            ListNode temp = dummy;\n            while (curr.val > temp.next.val) {\n                temp = temp.next;\n            }\n            prev.next = curr.next;\n            curr.next = temp.next;\n            temp.next = curr;\n            curr = prev.next;\n        }\n        return dummy.next;\n    }\n\n    public static void main(String[] args) {\n        int[] arr= {1,5,-3,4,1};\n        ListNode head = new ListNode();\n        ListNode temp = head;\n        for (int j : arr) {\n            temp.next = new ListNode(j);\n            temp = temp.next;\n        }\n        head = head.next;\n        head = insertionSortList(head);\n        temp = head;\n        while (temp != null) {\n            if (temp.next == null) {\n                System.out.print(temp.val);\n                break;\n            }\n            System.out.print(temp.val + " => ");\n            temp = temp.next;\n        }\n    }\n}',
@@ -687,7 +687,7 @@ const data = {
               tags: ['Sorting'],
             },
             {
-              id: '18c1e01e-c759-41fe-91f9-63fd0d115f93',
+              id: '037f6e24-b24d-4f16-a9de-aa187118d6cb',
               isFolder: false,
               name: 'LargestNumber.java',
               code: 'import java.util.*;\npublic class LargestNumber {\n    public String largestNumber(int[] nums) {\n        Comparator<String> comp = (i, j) -> (j+i).compareTo(i+j);\n        List<String> list = new ArrayList<>();\n        for (int num : nums) {\n            list.add(String.valueOf(num));\n        }\n        list.sort(comp);\n        StringBuilder sb = new StringBuilder();\n        for (String l : list) {\n            sb.append(l);\n        }\n        return String.valueOf(Integer.parseInt(String.valueOf(sb)));\n    }\n\n}',
@@ -696,7 +696,7 @@ const data = {
               tags: ['Sorting'],
             },
             {
-              id: '145a6c6e-a136-4cb9-9c47-e90a21669355',
+              id: '4e230515-3540-4636-adf3-78f295de784a',
               isFolder: false,
               name: 'MaxProductOfTwoElementsInAnArray.java',
               code: 'public class MaxProductOfTwoElementsInAnArray {\n    public int maxProduct(int[] nums) {\n        int f = 0, s = 0;\n        for (int num : nums) {\n            if (num > f) {\n                s = f;\n                f = num;\n            } else if (num > s) {\n                s = num;\n            }\n        }\n        return (f-1)*(s-1);\n    }\n}',
@@ -705,7 +705,7 @@ const data = {
               tags: ['Sorting'],
             },
             {
-              id: '8bbc09cc-9a31-4595-b7f3-854e732ae449',
+              id: '86abf6df-03e8-44ac-9a0d-6a1c46892fe1',
               isFolder: false,
               name: 'RankTransformOfAnArray.java',
               code: 'import java.util.*;\n\npublic class RankTransformOfAnArray {\n    public int[] arrayRankTransform(int[] arr) {\n        HashMap<Integer, Integer> hm = new HashMap<Integer, Integer>();\n        int[] h = arr.clone();\n        Arrays.sort(h);\n        int rank = 1;\n        for (int i = 0; i < h.length; i++) {\n            if (!hm.containsKey(h[i])) {\n                hm.put(h[i], rank++);\n            }\n        }\n        for (int i = 0; i < arr.length; i++) {\n            h[i] = hm.get(arr[i]);\n        }\n        return h;\n    }\n}',
@@ -714,7 +714,7 @@ const data = {
               tags: ['Sorting'],
             },
             {
-              id: 'fa24bde1-ecb8-482e-b783-97ef7f05862b',
+              id: 'c5a4c688-d70e-48bc-b9c9-b9fc7ff2a29c',
               isFolder: false,
               name: 'RelativeSortArray.java',
               code: 'import java.util.Arrays;\n\npublic class RelativeSortArray {\n    public static int[] relativeSortArray(int[] arr1, int[] arr2) {\n        int[] count = new int[1001];\n        int totalCount = arr1.length;\n        for (int i : arr1) {\n            count[i]++;\n        }\n        int j = 0;\n        for (int k : arr2) {\n            while (count[k] != 0) {\n                arr1[j++] = k;\n                count[k]--;\n                totalCount--;\n            }\n        }\n        if (totalCount != 0) {\n            for (int i = 0; i < 1001; i++) {\n                while (count[i] != 0) {\n                    arr1[j++] = i;\n                    count[i]--;\n                }\n            }\n        }\n        return arr1;\n    }\n    public static void main(String[] args) {\n//        Input:\n        int[] arr1 = {2,3,1,3,2,4,6,7,9,2,19};\n        int[] arr2 = {2,1,4,3,9,6};\n        int[] ans = relativeSortArray(arr1, arr2);\n        System.out.println(Arrays.toString(ans));\n//        Output: [2,2,2,1,4,3,3,9,6,7,19]\n    }\n}',
@@ -723,7 +723,7 @@ const data = {
               tags: ['Sorting'],
             },
             {
-              id: 'a9e684d9-da74-4055-bc71-40e18cce5ef3',
+              id: 'fa80f4e6-2c88-46ad-b936-6f46f2697300',
               isFolder: false,
               name: 'SortArrayByIncreasingFrequency.java',
               code: 'import java.util.*;\npublic class SortArrayByIncreasingFrequency {\n    public static int[] frequencySort(int[] nums) {\n        // Count the frequency of each number\n        Map<Integer, Integer> hm = new HashMap<>();\n        for (int num : nums) {\n            hm.put(num, hm.getOrDefault(num, 0) + 1);\n        }\n        // Sort the unique numbers by frequency and then by value\n        List<Integer> numList = new ArrayList<>(hm.keySet());\n        numList.sort((a, b) -> {\n            int freqCompare = Integer.compare(hm.get(a), hm.get(b));\n            return (freqCompare != 0) ? freqCompare : Integer.compare(b, a);\n        });\n        // Populate the sorted result array -> O(n) operation\n        int index = 0;\n        for (int num : numList) {\n            int freq = hm.get(num);\n            for (int i = 0; i < freq; i++) {\n                nums[index++] = num;\n            }\n        }\n        return nums;\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {-1,1,-6,4,5,-6,1,4,1};\n        int[] ans = frequencySort(arr);\n        System.out.println(Arrays.toString(ans));\n    }\n}',
@@ -732,7 +732,7 @@ const data = {
               tags: ['Sorting'],
             },
             {
-              id: '4e7d5d4b-cba4-4e07-a7ef-846ae5bfaf70',
+              id: '04304bd7-599b-45ac-b84d-27808e646989',
               isFolder: false,
               name: 'SortIntegersByNumberOf1Bits.java',
               code: 'import java.util.*;\n\npublic class SortIntegersByNumberOf1Bits {\n    public static void swap(int[] arr, int i, int j) {\n        int temp = arr[i];\n        arr[i] = arr[j];\n        arr[j] = temp;\n    }\n\n    public static int compare(int a, int b) {\n        int aBits = Integer.bitCount(a);\n        int bBits = Integer.bitCount(b);\n        if (aBits != bBits) return aBits - bBits;\n        return a - b;\n    }\n\n    public static void mergeSort(int[] arr, int low, int high) {\n        if (low == high) return;\n        int mid = low + (high - low)/2;\n        mergeSort(arr, low, mid);\n        mergeSort(arr, mid+1, high);\n        merge(arr, low, mid, high);\n    }\n\n    public static void merge(int[] arr, int low, int mid, int high) {\n        int[] temp = new int[high - low + 1];\n        int i = 0, left = low, right = mid+1;\n        while (left <= mid && right <= high) {\n            if (compare(arr[left], arr[right]) > 0)\n                temp[i++] = arr[right++];\n            else\n                temp[i++] = arr[left++];\n        }\n        while (left <= mid) temp[i++] = arr[left++];\n        while (right <= high) temp[i++] = arr[right++];\n\n        for (int j = 0; j < temp.length; j++)\n            arr[j+low] = temp[j];\n    }\n\n    public static int[] sortByBits(int[] arr) {\n//        Brute force solution\n//        int n = arr.length - 1;\n//        for (int i = 0; i < n; i++) {\n//            boolean swapped = false;\n//            for (int j = 0; j < n - i; j++) {\n//                if (compare(arr[j], arr[j + 1]) > 0) {\n//                    swap(arr, j, j + 1);\n//                    swapped = true;\n//                }\n//            }\n//            if (!swapped) break;\n//        }\n//        return arr;\n\n//        Better solution\n//        for (int i = 0; i < arr.length; i++) {\n//            arr[i] += Integer.bitCount(arr[i]) * 10001;\n//        }\n//        Arrays.sort(arr);\n//        for (int i = 0; i < arr.length; i++) {\n//            arr[i] = arr[i] % 10001;\n//        }\n//        return arr;\n\n//        Optimised solution\n        mergeSort(arr, 0, arr.length - 1);\n        return arr;\n    }\n\n    public static void main(String[] args) {\n//        int[] arr = {0, 1, 2, 3, 4, 5, 6, 7, 8};\n//        int[] arr = {1024, 512, 256, 128, 64, 32, 16, 8, 4, 2, 1};\n        int[] arr = {2, 3, 5, 7, 11, 13, 17, 19};\n        int[] ans = sortByBits(arr);\n        System.out.println(Arrays.toString(ans));\n    }\n}',
@@ -741,7 +741,7 @@ const data = {
               tags: ['Sorting'],
             },
             {
-              id: '63e0eba0-3bbe-4681-a490-f6a5d4122b1b',
+              id: 'a3229a3d-9d38-41c6-8cb4-c9494ed1e7db',
               isFolder: false,
               name: 'SortList.java',
               code: 'class SortList {\n    static class ListNode {\n            int val;\n            ListNode next;\n            ListNode() {}\n            ListNode(int val) {\n                this.val = val;\n            }\n            ListNode(int val, ListNode next) {\n                this.val = val;\n                this.next = next;\n            }\n\n    }\n\n    public static ListNode mergeSort(ListNode head) {\n        if (head == null || head.next == null) return head;\n        ListNode slow = head;\n        ListNode fast = head.next;\n        while (fast != null && fast.next != null) {\n            slow = slow.next;\n            fast = fast.next.next;\n        }\n        ListNode list2Head = slow.next;\n        slow.next = null;\n        head = mergeSort(head);\n        list2Head = mergeSort(list2Head);\n        return merge(head, list2Head);\n    }\n\n    public static ListNode merge(ListNode left, ListNode right) {\n        ListNode temp = new ListNode();\n        ListNode head = temp;\n        while (left != null && right != null) {\n            if (left.val <= right.val) {\n                temp.next = left;\n                left = left.next;\n            } else {\n                temp.next = right;\n                right = right.next;\n            }\n            temp = temp.next;\n        }\n        if (left != null) {\n            temp.next = left;\n        }\n        if (right != null) {\n            temp.next = right;\n        }\n        return head.next;\n    }\n    public static ListNode sortList(ListNode head) {\n        return mergeSort(head);\n    }\n\n    public static void main(String[] args) {\n        int[] arr= {1,5,-3,4,1};\n        ListNode head = new ListNode();\n        ListNode temp = head;\n        for (int j : arr) {\n            temp.next = new ListNode(j);\n            temp = temp.next;\n        }\n        head = head.next;\n        head = sortList(head);\n        temp = head;\n        while (temp != null) {\n            if (temp.next == null) {\n                System.out.print(temp.val);\n                break;\n            }\n            System.out.print(temp.val + " => ");\n            temp = temp.next;\n        }\n    }\n}',
@@ -750,7 +750,7 @@ const data = {
               tags: ['Sorting'],
             },
             {
-              id: '89586713-26d5-4668-94df-f4c61f86d47f',
+              id: '11de1266-2ab5-4457-a072-d950ae3ed391',
               isFolder: false,
               name: 'SplArrayWithXElementsGTEToX.java',
               code: 'public class SplArrayWithXElementsGTEToX {\n    public int specialArray(int[] nums) {\n        int start = 1, end = nums.length;\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            int count = 0;\n            for (int i: nums) {\n                if (i >= mid) count++;\n            }\n            if (count == mid) return mid;\n            if (count > mid)\n                start = mid + 1;\n            else\n                end = mid - 1;\n        }\n        return -1;\n    }\n}',
@@ -759,7 +759,7 @@ const data = {
               tags: ['Sorting'],
             },
             {
-              id: 'ca727c1d-0770-4fa0-8fca-2b9dfaa20e65',
+              id: '5f6efefe-5318-4562-9db4-f014480646e9',
               isFolder: false,
               name: 'SquaresOfASortedArray.java',
               code: 'public class SquaresOfASortedArray {\n    public int[] sortedSquares(int[] nums) {\n//        Brute force\n//        int[] ans = new int[nums.length];\n//        for (int i=0; i < nums.length; i++) {\n//            ans[i] = nums[i]*nums[i];\n//        }\n//        Arrays.sort(ans);\n//        return ans;\n//        Best solution\n        int n = nums.length - 1;\n        int[] ans = new int[n+1];\n        int start = 0, end = n;\n        while(start <= end) {\n            if (Math.abs(nums[start]) >= Math.abs(nums[end])) {\n                ans[n--] = nums[start]*nums[start];\n                start++;\n            } else {\n                ans[n--] = nums[end]*nums[end];\n                end--;\n            }\n        }\n        return ans;\n    }\n\n    public static void main(String[] args) {\n\n    }\n}',
@@ -768,7 +768,7 @@ const data = {
               tags: ['Sorting'],
             },
             {
-              id: '1324855c-a5b8-4100-9ed5-622e7920498f',
+              id: '585c0662-0222-4a6f-877d-ff1099b76b95',
               isFolder: false,
               name: 'ThirdMaximumNumber.java',
               code: "// Approach: Ranking technique with conditions to handle the same values as first and second;\n// Use Long instead of int as min and max value is Integer's min and max value\n\npublic class ThirdMaximumNumber {\n    public static int getThirdMaxNumber(int[] arr) {\n        long f = Long.MIN_VALUE;\n        long s = Long.MIN_VALUE;\n        long t = Long.MIN_VALUE;\n        for (int num : arr) {\n            if (num > f) {\n                t = s;\n                s = f;\n                f = num;\n            } else if (num > s && num != f) {\n                t = s;\n                s = num;\n            } else if (num > t && num != s && num != f) {\n                t = num;\n            }\n        }\n        if (t == Long.MIN_VALUE) {\n            return (int)f;\n        }\n        return (int)t;\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {1,2,2,5,3,5};\n        int ans = getThirdMaxNumber(arr);\n        System.out.println(ans);\n    }\n}",
@@ -777,7 +777,7 @@ const data = {
               tags: ['Sorting'],
             },
             {
-              id: '05dbdfa3-e339-4dd7-a7bc-08f13ff8bac8',
+              id: 'b5e40af9-7518-402d-b077-14a998b7968a',
               isFolder: false,
               name: 'ThreeSumClosest.java',
               code: 'import java.util.*;\npublic class ThreeSumClosest {\n    public static int threeSumClosest(int[] nums, int target) {\n        Arrays.sort(nums);\n        int n = nums.length;\n\n        int first3Sum = nums[0]+nums[1]+nums[2];\n        int last3Sum = nums[n-1]+nums[n-2]+nums[n-3];\n        if (first3Sum >= target) return first3Sum;\n        if (last3Sum <= target) return last3Sum;\n\n        int diff = Integer.MAX_VALUE;\n        int closest = Integer.MAX_VALUE;\n        for (int i = 0; i < n; i++) {\n            if (i > 0 && nums[i] == nums[i-1]) continue;\n            int j = i+1;\n            int k = nums.length - 1;\n            while (j < k) {\n                int sum = nums[i] + nums[j] + nums[k];\n                if (sum == target) return sum;\n\n                int abs = Math.abs(target - sum);\n                if (diff > abs) {\n                    closest = sum;\n                    diff = abs;\n                }\n                if (sum > target) k--;\n                else j++;\n            }\n        }\n        return closest;\n    }\n}',
@@ -786,7 +786,7 @@ const data = {
               tags: ['Sorting'],
             },
             {
-              id: 'a2d0f635-2b7e-41ec-b9cc-1dc009f1bf93',
+              id: 'd8862fd6-eda2-4cef-9b72-9a641d405a10',
               isFolder: false,
               name: 'MaximumOccuringCharacter.java',
               code: "public class MaximumOccuringCharacter {\n//    Use a hashmap or counts array to store the count of all the elements\n//    ans iterate over it to get the max count;\n    public static char getMaxOccuringChar(String line)\n    {\n        // Your code here\n        int[] count = new int[26];\n        for (int i = 0; i < line.length(); i++) {\n            count[(int) line.charAt(i) - 'a']++;\n        }\n        int max = count[0];\n        int idx = 0;\n        for (int j = 0; j < count.length; j++) {\n            if (count[j] > max) {\n                idx = j;\n                max = count[j];\n            }\n        }\n        return (char) (idx + 'a');\n    }\n\n    public static void main(String[] args) {\n        String s = \"testsample\";\n        char ans = getMaxOccuringChar(s);\n        System.out.println(ans);\n    }\n}",
@@ -795,7 +795,7 @@ const data = {
               tags: ['Strings'],
             },
             {
-              id: 'b830797d-9b50-4dae-bebc-e66a509c1b42',
+              id: '6a9d97d1-7e2e-4dd5-b847-33843751fe97',
               isFolder: false,
               name: 'PermutationInString.java',
               code: 'public class PermutationInString {\n    public static boolean checkCount(int[] arr1, int[] arr2) {\n        for (int i = 0; i < arr1.length; i++) {\n            if (arr1[i] != arr2[i]) return false;\n        }\n        return true;\n    }\n\n    public static boolean checkInclusion(String s1, String s2) {\n        if (s1.length() > s2.length()) return false;\n        int[] count1 = new int[26];\n        for (int i = 0; i < s1.length(); i++) {\n            count1[s1.charAt(i) - 97]++;\n        }\n        int[] count2 = new int[26];\n        int windowSize = s1.length();\n        int i = 0;\n        while (i < windowSize) {\n            count2[s2.charAt(i) - 97]++;\n            i++;\n        }\n        if (checkCount(count1, count2)) return true;\n        while (i < s2.length()) {\n            // Add\n            count2[s2.charAt(i) -97]++;\n            // Minus\n            count2[s2.charAt(i-windowSize) -97]--;\n\n            i++;\n            if (checkCount(count1, count2)) return true;\n        }\n        return false;\n    }\n    public static void main(String[] args) {\n        String s1 = "ab";\n        String s2 = "eidboaoo";\n        boolean ans = checkInclusion(s1, s2);\n        System.out.println(ans);\n    }\n}',
@@ -804,7 +804,7 @@ const data = {
               tags: ['Strings'],
             },
             {
-              id: 'eb2fed7f-b98b-4995-9bd9-7a621e0861d5',
+              id: 'b73ff35e-1569-4035-be78-50cb925078a8',
               isFolder: false,
               name: 'PowerSet.java',
               code: 'import java.util.*;\npublic class PowerSet {\n    public List<List<Integer>> powerSet(int[] nums) {\n        List<List<Integer>> ans = new ArrayList<>();\n        for (int i = 0; i < Math.pow(2, nums.length); i++) {\n            List<Integer> list = new ArrayList<>();\n            int idx = 0;\n            while(idx < nums.length) {\n                if (((i >> idx)&1) == 1) {\n                    list.add(nums[idx]);\n                }\n                idx++;\n            }\n            ans.add(list);\n        }\n        return ans;\n    }\n}',
@@ -813,7 +813,7 @@ const data = {
               tags: ['Strings'],
             },
             {
-              id: '8c536d7f-e059-47b4-baca-507c7b7ce484',
+              id: '6ec84294-cc5c-40e4-9b3d-ec88ef248891',
               isFolder: false,
               name: 'RemoveAllAdjacentDuplicates.java',
               code: 'public class RemoveAllAdjacentDuplicates {\n    public static String removeDuplicates(String s) {\n//        Brute force solution\n//        Stack<Character> stack = new Stack<>();\n//        StringBuilder sb = new StringBuilder();\n//        for (int i = 0; i < s.length(); i++) {\n//            char ch = s.charAt(i);\n//            if (!stack.isEmpty() && stack.peek() == ch)\n//                stack.pop();\n//            else\n//                stack.push(ch);\n//        }\n//        while (!stack.isEmpty()) sb.append(stack.pop());\n//        return sb.reverse().toString();\n\n//        Better solution using stack\n        char[] stack = new char[s.length()];\n        int i = 0;\n        for (int j = 0; j < s.length(); j++) {\n            char ch = s.charAt(j);\n            if (i > 0 && stack[i-1] == ch)\n                i = Math.max(0, i - 1);\n            else\n                stack[i++] = ch;\n        }\n        return new String(stack, 0, i);\n    }\n    public static void main(String[] args) {\n        String s = "abbaca";\n        String ans = removeDuplicates(s);\n        System.out.println(ans);\n    }\n}',
@@ -822,7 +822,7 @@ const data = {
               tags: ['Strings'],
             },
             {
-              id: 'dc4e225a-1f96-4df3-9052-d68ca831ae96',
+              id: 'c1a592a0-f546-4f9f-b7f5-bf8fa09cf269',
               isFolder: false,
               name: 'RemoveAllOccurrencesOfSubstring.java',
               code: 'public class RemoveAllOccurrencesOfSubstring {\n    public static String removeOccurrences(String s, String part) {\n        StringBuilder sb = new StringBuilder(s);\n        while (sb.length()!=0 && sb.indexOf(part)>=0) {\n            int idx = sb.indexOf(part);\n            sb.delete(idx, idx+part.length());\n        }\n        return sb.toString();\n    }\n    public static void main(String[] args) {\n        String s = "daabcbaabcbc";\n        String part = "abc";\n        String ans = removeOccurrences(s, part);\n        System.out.println(ans);\n    }\n}',
@@ -831,7 +831,7 @@ const data = {
               tags: ['Strings'],
             },
             {
-              id: 'ff9c9431-6e98-4b95-b466-9893b64d3521',
+              id: '28518a6f-95d0-44ad-b905-1c501fa49e7f',
               isFolder: false,
               name: 'ReplaceSpaces.java',
               code: 'public class ReplaceSpaces {\n    public static StringBuilder replaceSpaces(StringBuilder str) {\n        // Write your code here.\n        // return new StringBuilder(str.toString().replace(" ", "@40"));\n        StringBuilder sb = new StringBuilder();\n        for (int i = 0; i < str.length(); i++) {\n            if (str.charAt(i) == \' \')\n                sb.append("@40");\n            else\n                sb.append(str.charAt(i));\n        }\n        return sb;\n    }\n\n    public static void main(String[] args) {\n        StringBuilder str = new StringBuilder("Coding Ninjas Is A Coding Platform");\n        StringBuilder ans = replaceSpaces(str);\n        System.out.println(ans);\n    }\n}',
@@ -840,7 +840,7 @@ const data = {
               tags: ['Strings'],
             },
             {
-              id: '89a22a7d-8b49-427b-82ab-29ec558ec98e',
+              id: '26818c89-ab83-4daa-b20b-928a7f177d43',
               isFolder: false,
               name: 'ReverseWords1.java',
               code: 'public class ReverseWords1 {\n    public static String reverseWords(String s) {\n//        Brute force solution\n//        String[] sArr = s.split(" ");\n//        StringBuilder sb = new StringBuilder();\n//        for (int i = sArr.length - 1; i >= 0; i--) {\n//            if (sArr[i].trim().length() != 0) {\n//                sb.append(sArr[i]).append(" ");\n//            }\n//        }\n//        return sb.toString().trim();\n\n//        Best: 2 pointer approach\n        int i = s.length() - 1, j = 0;\n        StringBuilder sb = new StringBuilder();\n        while (i >= 0) {\n            while (i >= 0 && s.charAt(i) == \' \') i--;\n            j = i;\n            while (i >= 0 && s.charAt(i) != \' \') i--;\n            if (i == -1) sb.append(s, 0, j+1);\n            else sb.append(s, i+1, j+1).append(\' \');\n        }\n        return sb.toString().trim();\n    }\n    public static void main(String[] args) {\n        String s = "a good   example";\n//        The string can have more than 1 space anywhere in the array\n        String ans = reverseWords(s);\n        System.out.println(ans);\n    }\n}',
@@ -849,7 +849,7 @@ const data = {
               tags: ['Strings'],
             },
             {
-              id: 'cb30a5f0-4b9f-4d55-8b9b-22de0142dfc2',
+              id: 'd7bdd60d-3c56-4a3b-9e5c-9f5bec48237e',
               isFolder: false,
               name: 'ReverseWordsInAString2.java',
               code: "import java.util.Arrays;\n\npublic class ReverseWordsInAString2 {\n//    Input: s = \"the sky is blue\"\n//    Output: \"blue is sky the\"\n    public static void reverse(char[] arr, int start, int end) {\n        while (start < end) {\n            char temp = arr[start];\n            arr[start++] = arr[end];\n            arr[end--] = temp;\n        }\n    }\n\n    public static char[] reverseWords(char[] arr) {\n//        int start = 0;\n//        int end = arr.length;\n//        reverse(arr, start, end - 1);\n//        for (int i = 0; i < end; i++) {\n//            if (arr[i] == ' ') {\n//                reverse(arr, start, i-1);\n//                start = i+1;\n//            } else if (i == end - 1) {\n//                reverse(arr, start, i);\n//            }\n//        }\n//        return arr;\n        int start = 0;\n        int end = arr.length - 1;\n        reverse(arr, start, end);\n        for (int i = 0; i <= end; i++) {\n            if (arr[i] == ' ') {\n                reverse(arr, start, i - 1);\n                start = i + 1;\n            }\n        }\n        reverse(arr, start, end);\n        return arr;\n    }\n    public static void main(String[] args) {\n        char[] arr = {'t', 'h', 'e', ' ', 's', 'k', 'y', ' ', 'i', 's', ' ', 'b', 'l', 'u', 'e'};\n        char[] ans = reverseWords(arr);\n        System.out.println(Arrays.toString(ans));\n    }\n}",
@@ -858,7 +858,7 @@ const data = {
               tags: ['Strings'],
             },
             {
-              id: '425851fb-a556-483f-808c-d7fdf8c709cd',
+              id: 'ca25f97e-ffac-4b8a-9441-87aec073b776',
               isFolder: false,
               name: 'StringCompression.java',
               code: "public class StringCompression {\n    public static int compress(char[] chars) {\n        // Best solution O(n)\n        int n = chars.length;\n        if (n == 1)\n            return 1;\n        int i = 0, j = 0, slow = 0;\n        while (j < n) {\n            while (j < n && chars[i] == chars[j])\n                j++;\n            chars[slow++] = chars[i];\n            if (j - i > 1) {\n                String diff = j - i + \"\";\n                for (int k = 0; k < diff.length(); k++) {\n                    chars[slow++] = diff.charAt(k);\n                }\n            }\n            i = j;\n        }\n        return slow;\n    }\n\n    public static void main(String[] args) {\n        char[] chars = { 'a', 'a', 'b', 'b', 'c', 'c', 'c' };\n        int ans = compress(chars);\n        System.out.println(ans);\n    }\n}",
@@ -867,7 +867,7 @@ const data = {
               tags: ['Strings'],
             },
             {
-              id: 'a0d797a9-b5cd-4bcf-9650-8cb8bc128b28',
+              id: '11227ef6-2eff-494c-88c2-0a1451357273',
               isFolder: false,
               name: 'ValidPalindrome.java',
               code: '//    The given string is polluted with characters other than numbers and alphabets.\n//    Also ignore the case while solving for the answer\n\npublic class ValidPalindrome {\n    public static boolean isPalindrome(String s) {\n//        Brute force: Remove every character that is not valid using replaceAll method\n//        This will take O(n) time to replace and O(n) time to make it lowercase and then\n//        another O(n) to iterate the array\n//        Total TC = O(3n)\n//        s = s.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();\n//        int start = 0;\n//        int end = s.length() - 1;\n//        while (start < end) {\n//            if (s.charAt(start) != s.charAt(end)) return false;\n//            start++;\n//            end--;\n//        }\n//        return true;\n\n//        Best approach: Two pointer approach\n//        Total TC = O(2n) => (lowercase and iterating)\n         int n = s.length();\n         int start = 0;\n         int end = n-1;\n         s = s.toLowerCase();\n         while (start < end) {\n             if (!Character.isLetterOrDigit(s.charAt(start))) start++;\n             else if (!Character.isLetterOrDigit(s.charAt(end))) end--;\n             else {\n                 if (s.charAt(start) != s.charAt(end)) return false;\n                 start++;\n                 end--;\n             }\n         }\n         return true;\n\n    }\n    public static void main(String[] args) {\n        String s = "A man, a plan, a canal: Panama";\n        boolean ans = isPalindrome(s);\n        System.out.println(ans);\n    }\n}',
@@ -878,12 +878,12 @@ const data = {
           ],
         },
         {
-          id: 'fedfc66a-9202-4d19-8c14-432e7d0c2250',
+          id: '0803c626-81f7-4f15-b47b-a1518a5894a6',
           isFolder: true,
           name: 'Neetcode 150',
           content: [
             {
-              id: '120cd496-4964-4e60-aa6a-6820909b4374',
+              id: '740c959d-502c-4cd7-9fe3-f1ff140cd061',
               isFolder: false,
               name: 'ContainsDuplicate.java',
               code: 'import java.util.*;\n\nclass ContainsDuplicate {\n    public boolean containsDuplicate(int[] nums) {\n        HashSet<Integer> hs = new HashSet<>();\n        for (int i : nums) {\n            if (hs.contains(i)) return true;\n            hs.add(i);\n        }\n        return false;\n    }\n}',
@@ -892,7 +892,7 @@ const data = {
               tags: ['Arrays & Hashing'],
             },
             {
-              id: '6fdda777-3c97-48d8-89f2-f55f213edd3e',
+              id: '0addc83d-4fd6-4f5a-ae16-ec10848b8f63',
               isFolder: false,
               name: 'GroupAnagrams.java',
               code: 'import java.util.*;\n/*\n* Sorting and storing in hashmap and value list\n* if a duplicate string is found store it in value list.\n* If it does not exist create a new key value pair in hashmap\n*/\n\npublic class GroupAnagrams {\n    public static List<List<String>> groupAnagrams(String[] strs) {\n        HashMap<String, List<String>> hm = new HashMap<>();\n        for (String str : strs) {\n            char[] ch = str.toCharArray();\n            Arrays.sort(ch);\n            String s = new String(ch);\n            if (!hm.containsKey(s)) {\n                hm.put(s, new ArrayList<>());\n            }\n            hm.get(s).add(str);\n        }\n        System.out.println(hm);\n        return new ArrayList<>(hm.values());\n    }\n\n    public static void main(String[] args) {\n//        String[] arr = {"eat","tea","tan","ate","nat","bat"};\n        String[] arr = {""};\n        List<List<String>> ans = groupAnagrams(arr);\n        System.out.println(ans);\n    }\n}',
@@ -901,7 +901,7 @@ const data = {
               tags: ['Arrays & Hashing'],
             },
             {
-              id: 'c22eafc1-d476-4c7a-a897-784dac213ef4',
+              id: '10e7e215-f6e1-4de0-8c03-c712648e3aba',
               isFolder: false,
               name: 'LongestConsecutiveSequence.java',
               code: 'import java.util.*;\n\npublic class LongestConsecutiveSequence {\n    public static int longestConsecutive(int[] N) {\n//        Brute force solution\n//        if (N.length == 0) return 0;\n//        Arrays.sort(N);\n//        int maxLen = 0, len = 1, last = Integer.MIN_VALUE;\n//        for (int k : N) {\n//            if (k - 1 == last) len++;\n//            else if (k != last)len = 1;\n//            last = k;\n//            maxLen = Math.max(maxLen, len);\n//        }\n//        return maxLen;\n\n//        Best solution\n        HashSet<Integer> hs = new HashSet<>();\n        int maxCount = 0;\n        for (int num: N) hs.add(num);\n        for (int j : N) {\n            if (!hs.contains(j - 1)) {\n                int x = j;\n                int count = 1;\n                while (hs.contains(x+1)) {\n                    count++;\n                    x++;\n                }\n                maxCount = Math.max(maxCount, count);\n            }\n        }\n        return maxCount;\n    }\n    public static void main(String[] args) {\n\n    }\n}',
@@ -910,7 +910,7 @@ const data = {
               tags: ['Arrays & Hashing'],
             },
             {
-              id: '655422c9-08ad-4e0a-b630-e86556bf0651',
+              id: '133bae3d-b021-4085-83ae-46f7fcd834af',
               isFolder: false,
               name: 'ProductArrayExceptSelf.java',
               code: 'public class ProductArrayExceptSelf {\n    public int[] productExceptSelf(int[] nums) {\n        int zeroCount = 0;\n        int zeroIdx = -1;\n        int[] ans = new int[nums.length];\n        int product = 1;\n        for (int i = 0; i < nums.length; i++) {\n            if (nums[i] == 0) {\n                zeroCount++;\n                if (zeroCount > 1) return ans;\n                zeroIdx = i;\n                continue;\n            }\n            product *= nums[i];\n        }\n        if (zeroCount == 1) {\n            ans[zeroIdx] = product;\n            return ans;\n        }\n        for (int j = 0; j < nums.length; j++) {\n            ans[j] = product / nums[j];\n        }\n        return ans;\n    }\n}',
@@ -919,7 +919,7 @@ const data = {
               tags: ['Arrays & Hashing'],
             },
             {
-              id: 'c1be2e20-2fc5-4c00-b228-a0edfd63e48a',
+              id: '3ee45fb8-08c2-4cc6-bcc4-50e1e48930b5',
               isFolder: false,
               name: 'TopKFrequentElements.java',
               code: 'import java.util.*;\n\npublic class TopKFrequentElements {\n    public static int[] topKFrequent(int[] nums, int k) {\n        // This is the O(klogN) solution\n        // int[] kArr = new int[k];\n        // HashMap<Integer, Integer> hm = new HashMap<>();\n        // for (int num : nums) {\n        //     hm.put(num, hm.getOrDefault(num, 0) + 1);\n        // }\n        // PriorityQueue<Map.Entry<Integer, Integer>> pq = new PriorityQueue<>(Map.Entry.comparingByValue());\n        // for (Map.Entry<Integer, Integer> it : hm.entrySet()) {\n        //     pq.add(it);\n        //     if (pq.size() > k) pq.poll();\n        // }\n        // while (!pq.isEmpty()) {\n        //     kArr[--k] = pq.poll().getKey();\n        // }\n        // return kArr;\n\n        // Most efficient solution: O(n)\n        Map<Integer, Integer> hm = new HashMap<>();\n        for (int num : nums) {\n            hm.put(num, hm.getOrDefault(num, 0) + 1);\n        }\n        List<List<Integer>> countList = new ArrayList<>();\n        for (int i = 0; i < nums.length; i++) {\n            countList.add(new ArrayList<>());\n        }\n        for(Map.Entry<Integer, Integer> val : hm.entrySet()) {\n            countList.get(val.getValue()-1).add(val.getKey());\n        }\n        int[] ans = new int[k];\n        int ptr = 0;\n        for (int i = countList.size() - 1; i >= 0; i--) {\n            if (countList.get(i).size() != 0) {\n                for (int j: countList.get(i)) {\n                    if (ptr == k) break;\n                    ans[ptr++] = j;\n                }\n            }\n        }\n        return ans;\n    }\n\n    public static void main(String[] args) {\n        int[] nums = {1, 1, 1, 2, 2, 3};\n        int k = 2;\n        int[] ans = topKFrequent(nums, k);\n        System.out.println(Arrays.toString(ans));\n    }\n}',
@@ -928,7 +928,7 @@ const data = {
               tags: ['Arrays & Hashing'],
             },
             {
-              id: 'c8c5fd85-bc1e-4c8d-abb2-c9135d939e57',
+              id: '61d74b57-bb72-4dd7-ad6c-a7d62bef255e',
               isFolder: false,
               name: 'TwoSum.java',
               code: 'import java.util.HashMap;\n\npublic class TwoSum {\n  public int[] twoSum(int[] nums, int target) {\n    HashMap<Integer, Integer> hm = new HashMap<>();\n    for (int j = 0; j < nums.length; j++) {\n      if (hm.containsKey(target - nums[j]))\n        return new int[] { j, hm.get(target - nums[j]) };\n      hm.put(nums[j], j);\n    }\n    return new int[] { -1, -1 };\n  }\n}',
@@ -937,7 +937,7 @@ const data = {
               tags: ['Arrays & Hashing'],
             },
             {
-              id: '50a2b9f1-ef9d-4c61-9f8d-0d875c66c90a',
+              id: '49cb4f91-d67e-417e-a936-a5ca0bc23784',
               isFolder: false,
               name: 'ValidAnagram.java',
               code: "public class ValidAnagram {\n  public boolean isAnagram(String s, String t) {\n    if (s.length() != t.length())\n      return false;\n    int[] count = new int[26];\n    for (int i = 0; i < s.length(); i++) {\n      count[s.charAt(i) - 'a']++;\n      count[t.charAt(i) - 'a']--;\n    }\n    for (int i = 0; i < 26; i++) {\n      if (count[i] != 0)\n        return false;\n    }\n    return true;\n  }\n}",
@@ -946,7 +946,7 @@ const data = {
               tags: ['Arrays & Hashing'],
             },
             {
-              id: 'b8e085a9-ef86-4790-8fa8-90af26760a7a',
+              id: '07d84374-e63f-4fee-a56e-3d72b9079975',
               isFolder: false,
               name: 'ValidSudoku.java',
               code: "import java.util.HashSet;\n\npublic class ValidSudoku {\n    public static boolean checkBlock(int iIdx, int jIdx, char[][] board) {\n        HashSet<Character> hs = new HashSet<>();\n        int rows = iIdx + 3;\n        int cols = jIdx + 3;\n        for (int i = iIdx; i < rows; i++) {\n            for (int j = jIdx; j < cols; j++) {\n                char curr = board[i][j];\n                if (curr != '.') {\n                    if (hs.contains(curr)) return false;\n                    hs.add(curr);\n                }\n            }\n        }\n        return true;\n    }\n    public static boolean isValidSudoku(char[][] board) {\n//        Row column check\n        for (int i = 0; i < board.length; i++) {\n            HashSet<Character> row = new HashSet<>();\n            HashSet<Character> col = new HashSet<>();\n            for (int j = 0; j < board.length; j++) {\n                char r = board[i][j], c = board[j][i];\n                if (r != '.' && row.contains(r)) return false;\n                else row.add(r);\n                if (c != '.' && col.contains(c)) return false;\n                else col.add(c);\n            }\n        }\n//        3x3 box check\n        for (int i = 0; i < 9; i += 3)\n            for (int j = 0; j < 9; j += 3)\n                if (!checkBlock(i, j, board)) return false;\n\n        return true;\n    }\n}",
@@ -955,7 +955,7 @@ const data = {
               tags: ['Arrays & Hashing'],
             },
             {
-              id: 'f44b4f6a-48f3-4eda-9333-5da682e243bc',
+              id: 'aad401a1-c526-4658-b429-9d412c8f103d',
               isFolder: false,
               name: 'FindMinInSortedRotatedArray.java',
               code: 'public class FindMinInSortedRotatedArray {\n    public int findMin(int[] arr) {\n        int start = 0;\n        int end = arr.length - 1;\n        int ans = Integer.MAX_VALUE;\n        while (start <= end) {\n            int mid = start + (end - start) / 2;\n            if (arr[mid] > arr[end]) {\n                ans = Math.min(ans, arr[start]);\n                start = mid + 1;\n            } else {\n                ans = Math.min(ans, arr[mid]);\n                end = mid - 1;\n            }\n        }\n        return ans;\n    }\n}',
@@ -964,7 +964,7 @@ const data = {
               tags: ['Binary Search'],
             },
             {
-              id: '21e1b66c-292b-4496-98d7-61c6bd042e60',
+              id: 'acaf3ea4-c4a2-49df-8016-ecf49e3b06c5',
               isFolder: false,
               name: 'kokoEatingBananas.java',
               code: 'public class kokoEatingBananas {\n    public long totalTimeToEat(int mid, int[] piles) {\n        long hours = 0;\n        for (int i : piles) {\n            hours += (i + mid - 1) / mid;\n        }\n        return hours;\n    }\n\n    public int minEatingSpeed(int[] piles, int h) {\n        int start = 1;\n        int end = 0;\n        for(int i: piles) {\n            end = Math.max(end, i);\n        }\n        int ans = 0;\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            if (totalTimeToEat(mid, piles) <= h) {\n                ans = mid;\n                end = mid - 1;\n            } else {\n                start = mid + 1;\n            }\n        }\n        return ans;\n    }\n}',
@@ -973,7 +973,7 @@ const data = {
               tags: ['Binary Search'],
             },
             {
-              id: 'a5787e7f-70a6-4ec9-9713-1125cca6b3b2',
+              id: '86483a91-b323-4660-8e43-b7494745c4dc',
               isFolder: false,
               name: 'MedianOfTwoSortedArrays.java',
               code: 'public class MedianOfTwoSortedArrays {\n    public double findMedianSortedArrays(int[] M, int[] N) {\n       int m = M.length, n = N.length;\n       if (m > n) return findMedianSortedArrays(N, M);\n       int k = (m + n + 1)/2;\n       int start = 0, end = m;\n       while (start <= end) {\n           int mid1 = start + (end - start)/2;\n           int mid2 = k - mid1;\n           int l1 = mid1 > 0 ? M[mid1 - 1] : Integer.MIN_VALUE;\n           int l2 = mid2 > 0 ? N[mid2 - 1] : Integer.MIN_VALUE;\n           int r1 = mid1 < m ? M[mid1] : Integer.MIN_VALUE;\n           int r2 = mid2 < n ? N[mid2] : Integer.MIN_VALUE;\n           if (l1 <= r2 && l2 <= r1) {\n               double median = Math.max(l1, l2);\n               if ((m+n) %2 == 0) {\n                   median += Math.min(r1, r2);\n                   return median / 2;\n               }\n               return median;\n           }\n           if (l1 > r2) {\n               end = mid1 - 1;\n           } else {\n               start = mid1 + 1;\n           }\n       }\n       return -1;\n    }\n}',
@@ -982,7 +982,7 @@ const data = {
               tags: ['Binary Search'],
             },
             {
-              id: 'e6e0a480-c4ff-4e98-9049-d62bb966917a',
+              id: '17f83d96-f24c-459d-87a0-2d8142481044',
               isFolder: false,
               name: 'Search2DMatrix.java',
               code: 'public class Search2DMatrix {\n    public boolean searchMatrix(int[][] matrix, int target) {\n        int n = matrix.length;\n        int m = matrix[0].length;\n        int start = 0;\n        int end = n*m -1;\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            if (matrix[mid/m][mid%m] == target)\n                return true;\n            if (matrix[mid/m][mid%m] > target) {\n                end = mid - 1;\n            } else {\n                start = mid + 1;\n            }\n        }\n        return false;\n    }\n}',
@@ -991,7 +991,7 @@ const data = {
               tags: ['Binary Search'],
             },
             {
-              id: '4287ae31-e99a-4b13-bd0e-c883d7d2b37d',
+              id: '330ec412-32b5-4ad1-86df-334affeae01f',
               isFolder: false,
               name: 'SearchInRotatedSortedArray.java',
               code: 'public class SearchInRotatedSortedArray {\n    public int search(int[] arr, int target) {\n        int start = 0; int end = arr.length - 1;\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            if (target == arr[mid]) return mid;\n            if (arr[mid] >= arr[start]) {\n                if (target >= arr[start] && target < arr[mid])\n                    end = mid - 1;\n                else\n                    start = mid + 1;\n            } else {\n                if (target <= arr[end] && target > arr[mid])\n                    start = mid + 1;\n                else\n                    end = mid - 1;\n            }\n        }\n        return -1;\n    }\n}',
@@ -1000,7 +1000,7 @@ const data = {
               tags: ['Binary Search'],
             },
             {
-              id: '8f0c9302-8f60-424e-922b-6b2f0c01711c',
+              id: '380f9376-1b35-4497-981d-1263c5922d95',
               isFolder: false,
               name: 'TimeMap.java',
               code: 'import java.util.*;\n\nclass TimeMap {\n    HashMap<String, List<String[]>> hm;\n    public TimeMap() {\n        hm = new HashMap<>();\n    }\n\n    public void set(String key, String value, int timestamp) {\n        if (!hm.containsKey(key))\n            hm.put(key, new ArrayList<>());\n        hm.get(key).add(new String[]{ value, String.valueOf(timestamp) });\n    }\n\n    public String get(String key, int timestamp) {\n        if (!hm.containsKey(key)) return "";\n        List<String[]> list = hm.get(key);\n        int pos = findPos(list, timestamp);\n        if (pos == -1) return "";\n        return list.get(pos)[0];\n    }\n\n    public static int findPos(List<String[]> list, int target) {\n        int start = 0, end = list.size() - 1;\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            int val = Integer.parseInt(list.get(mid)[1]);\n            if (val == target) return mid;\n            if (val > target)\n                end = mid - 1;\n            else\n                start = mid + 1;\n        }\n        return end;\n    }\n\n    public static void main(String[] args) {\n        String[] operations = {"TimeMap", "set", "set", "get", "get", "get", "get", "get"};\n        String[][] values = {{}, {"love", "high", "10"}, {"love", "low", "20"}, {"love", "5"}, {"love", "10"}, {"love", "15"}, {"love", "20"}, {"love", "25"}};\n        TimeMap timeMap = null;\n        List<String> output = new ArrayList<>();\n        for (int i = 0; i < operations.length; i++) {\n            String[] val = values[i];\n            switch (operations[i]) {\n                case "TimeMap" -> {\n                    timeMap = new TimeMap();\n                    output.add(null);\n                }\n                case "set" -> {\n                    timeMap.set(val[0], val[1], Integer.parseInt(val[2]));\n                    output.add(null);\n                }\n                case "get" -> {\n                    output.add(timeMap.get(val[0], Integer.parseInt(val[1])));\n                }\n            }\n        }\n        System.out.println(output);\n    }\n}\n\n/**\n * Your TimeMap object will be instantiated and called as such:\n * TimeMap obj = new TimeMap();\n * obj.set(key,value,timestamp);\n * String param_2 = obj.get(key,timestamp);\n */',
@@ -1009,7 +1009,7 @@ const data = {
               tags: ['Binary Search'],
             },
             {
-              id: '287ba71a-f3ed-4c13-98b1-114af90a4fb7',
+              id: '19d5ece9-19c2-4d35-92ac-c5109d019d0c',
               isFolder: false,
               name: 'ReverseBits.java',
               code: 'public class ReverseBits {\n    // you need treat n as an unsigned value\n    public static int setBit (int n, int mask) {\n        return n | mask;\n    }\n    public static int clearBit (int n, int mask) {\n        return n & ~mask;\n    }\n    public int reverseBits(int n) {\n//        int start = 31;\n//        int end = 0;\n//        while (start > end) {\n//            int startMask = 1<<start;\n//            int endMask = 1<<end;\n//            int a = (n&startMask) != 0 ? 1 : 0;\n//            int b = (n&endMask) != 0 ? 1 : 0;\n//            if (a != b) {\n//                if (a == 1) {\n//                    n = clearBit(n, startMask);\n//                    n = setBit(n, endMask);\n//                } else {\n//                    n = clearBit(n, endMask);\n//                    n = setBit(n, startMask);\n//                }\n//            }\n//            start--;\n//            end++;\n//        }\n//        return n;\n\n        int ans = 0;\n        for (int i = 0; i < 32; i++) {\n            ans <<= 1;\n            ans |= (n&1);\n            n >>= 1;\n        }\n        return ans;\n    }\n}',
@@ -1018,7 +1018,7 @@ const data = {
               tags: ['Bit Manipulation'],
             },
             {
-              id: '5eefb3e4-1a11-4149-a6ac-ab562256ee4a',
+              id: 'ded33b8a-7629-47c7-9d8f-9fd7e2cd90be',
               isFolder: false,
               name: 'ReverseInteger.java',
               code: 'public class ReverseInteger {\n    public int reverse(int n) {\n        boolean isNegative = n < 0;\n        int num = 0;\n        n = Math.abs(n);\n        while (n > 0) {\n            if (Integer.MAX_VALUE / 10 < num) return 0;\n            num = num * 10 + n % 10;\n            n = n / 10;\n        }\n        return isNegative ? -num : num;\n    }\n}',
@@ -1027,7 +1027,7 @@ const data = {
               tags: ['Bit Manipulation'],
             },
             {
-              id: '4e9e5068-1f01-4432-a17f-c3f5f1643583',
+              id: 'a293eec2-b48f-4f5b-aec2-46e904e969e4',
               isFolder: false,
               name: 'AddTwoNumbers.java',
               code: 'public class AddTwoNumbers {\n    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {\n        ListNode sum = new ListNode(0);\n        ListNode sumHead = sum;\n        int carry = 0;\n        while (l1 != null || l2 != null || carry != 0) {\n            int d1 = l1 != null ? l1.val : 0;\n            int d2 = l2 != null ? l2.val : 0;\n            carry += d1 + d2;\n            sum.next = new ListNode(carry%10);\n            sum = sum.next;\n            carry /= 10;\n            l1 = l1 != null ? l1.next : null;\n            l2 = l2 != null ? l2.next : null;\n        }\n        return sumHead.next;\n    }\n}',
@@ -1036,7 +1036,7 @@ const data = {
               tags: ['Linked List'],
             },
             {
-              id: '64df597e-747f-47ff-ba11-c27781baed17',
+              id: '86bc5519-40d6-48aa-9fdc-6b9a57c7804d',
               isFolder: false,
               name: 'CopyListWithRandomPointer.java',
               code: 'public class CopyListWithRandomPointer {\n    public Node copyRandomList(Node head) {\n        // Optimised solution\n        if (head == null) return null;\n        // Step 1: Create a new linked list in between the nodes of current LL\n        Node curr = head;\n        while (curr != null) {\n            Node newNode = new Node(curr.val);\n            newNode.next = curr.next;\n            curr.next = newNode;\n            curr = newNode.next;\n        }\n        // Step 2: Assign random pointers to the deep copy\n        curr = head;\n        while (curr != null) {\n            if (curr.random != null)\n                curr.next.random = curr.random.next;\n            curr = curr.next.next;\n        }\n        // Step 3: Separate both the linked list and return Head\n        Node copy = head.next;\n        Node temp = copy;\n        curr = head;\n        while (temp != null) {\n            curr.next = temp.next;\n            curr = curr.next;\n            if (curr == null) break;\n            temp.next = curr.next;\n            temp = temp.next;\n        }\n        return copy;\n    }\n}',
@@ -1045,7 +1045,7 @@ const data = {
               tags: ['Linked List'],
             },
             {
-              id: 'b979ef67-ad19-4697-b426-12d01247ee4d',
+              id: '6a319dc1-52e4-4b42-bace-1f64b0074bab',
               isFolder: false,
               name: 'FindTheDuplicateNumber.java',
               code: "public class FindTheDuplicateNumber {\n    public int findDuplicate(int[] nums) {\n        // To solve this in linear time and constant space we use FLOYD'S Algorithm\n        int slow = 0;\n        int fast = 0;\n        do {\n            slow = nums[slow];\n            fast = nums[nums[fast]];\n        } while (slow != fast);\n\n        int slow2 = 0;\n        while (slow != slow2) {\n            slow = nums[slow];\n            slow2 = nums[slow2];\n        }\n        return slow;\n    }\n}",
@@ -1054,7 +1054,7 @@ const data = {
               tags: ['Linked List'],
             },
             {
-              id: '6d9e5e16-50cd-45db-a9f9-7e2a24f8d866',
+              id: 'f475aa9f-7394-42f3-8573-dc36369b00b9',
               isFolder: false,
               name: 'LinkedListCycle.java',
               code: 'public class LinkedListCycle {\n    public boolean hasCycle(ListNode head) {\n        // Brute force\n        // HashSet<ListNode> hs = new HashSet<>();\n        // ListNode curr = head;\n        // while (curr != null) {\n        //     if (hs.contains(curr)) return true;\n        //     hs.add(curr);\n        //     curr = curr.next;\n        // }\n        // return false;\n\n        // Optimised\n        ListNode slow = head, fast = head;\n        while (fast != null && fast.next != null) {\n            slow = slow.next;\n            fast = fast.next.next;\n            if (slow == fast) return true;\n        }\n        return false;\n    }\n}',
@@ -1063,7 +1063,7 @@ const data = {
               tags: ['Linked List'],
             },
             {
-              id: '1c21c590-2da4-4cbf-9b15-d93aeb1e3305',
+              id: '05500c11-4e2b-44fa-be39-1f0994f20145',
               isFolder: false,
               name: 'ListNode.java',
               code: '// !ignore\npublic class ListNode {\n    int val;\n    ListNode next;\n\n    ListNode() {\n    }\n\n    ListNode(int val) {\n        this.val = val;\n    }\n\n    ListNode(int val, ListNode next) {\n        this.val = val;\n        this.next = next;\n    }\n}',
@@ -1072,7 +1072,7 @@ const data = {
               tags: ['Linked List'],
             },
             {
-              id: '788807b3-49d9-4fc8-a880-29795f0dd051',
+              id: '2fb8b303-0baa-42e8-9d7d-e4f6007c54c4',
               isFolder: false,
               name: 'MergeKSortedLists.java',
               code: 'public class MergeKSortedLists {\n    public static ListNode merge(ListNode left, ListNode right) {\n        ListNode tHead = new ListNode(0);\n        ListNode temp = tHead;\n        while (left != null && right != null) {\n            if (left.val <= right.val) {\n                temp.next = left;\n                left = left.next;\n            } else {\n                temp.next = right;\n                right = right.next;\n            }\n            temp = temp.next;\n        }\n        temp.next = left != null ? left : right;\n        return tHead.next;\n    }\n    public ListNode mergeKLists(ListNode[] lists) {\n        int size = lists.length;\n        int interval = 1;\n        while (interval < size) {\n            for (int i = 0; i < size - interval; i += interval*2) {\n                lists[i] = merge(lists[i], lists[i+interval]);\n            }\n            interval *= 2;\n        }\n        return size > 0 ? lists[0] : null;\n    }\n}',
@@ -1081,7 +1081,7 @@ const data = {
               tags: ['Linked List'],
             },
             {
-              id: 'f137c83d-09a9-475d-9b00-aeef68a4a324',
+              id: '6cfb81cb-e552-4c20-b580-346057a2dc2a',
               isFolder: false,
               name: 'MergeTwoSortedLists.java',
               code: 'public class MergeTwoSortedLists {\n    public static ListNode merge(ListNode left, ListNode right) {\n        ListNode tHead = new ListNode(0);\n        ListNode temp = tHead;\n        while (left != null && right != null) {\n            if (left.val <= right.val) {\n                temp.next = left;\n                left = left.next;\n            } else {\n                temp.next = right;\n                right = right.next;\n            }\n            temp = temp.next;\n        }\n        if (left != null) {\n            temp.next = left;\n        } else {\n            temp.next = right;\n        }\n        return tHead.next;\n    }\n    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {\n        return merge(list1, list2);\n    }\n}',
@@ -1090,7 +1090,7 @@ const data = {
               tags: ['Linked List'],
             },
             {
-              id: 'cff95c0d-7dff-46a7-a4d5-78d4967be30b',
+              id: '6ef4baa9-d886-408f-8020-9e251d0c3030',
               isFolder: false,
               name: 'Node.java',
               code: '// !ignore\nclass Node {\n    int val;\n    Node next;\n    Node random;\n\n    public Node(int val) {\n        this.val = val;\n        this.next = null;\n        this.random = null;\n    }\n}',
@@ -1099,7 +1099,7 @@ const data = {
               tags: ['Linked List'],
             },
             {
-              id: 'b32a4387-d0fa-49fa-95ac-39643949b0b5',
+              id: 'c7cab875-8022-4fe0-a762-2cbf07e07ae6',
               isFolder: false,
               name: 'RemoveNthNodeFromEndOfList.java',
               code: 'public class RemoveNthNodeFromEndOfList {\n    public ListNode removeNthFromEnd(ListNode head, int n) {\n        // Optimised approach\n        ListNode start = new ListNode(0, head);\n        ListNode slow = start;\n        ListNode fast = start;\n        for (int i = 0; i < n; i++) {\n            fast = fast.next;\n        }\n        while (fast.next != null) {\n            fast = fast.next;\n            slow = slow.next;\n        }\n        slow.next = slow.next.next;\n        return start.next;\n    }\n}',
@@ -1108,7 +1108,7 @@ const data = {
               tags: ['Linked List'],
             },
             {
-              id: '2fda0e17-c274-42b6-ab46-3daafe745c1f',
+              id: 'a4f432c0-2d4f-43b0-9fdb-1adfd5ddb49f',
               isFolder: false,
               name: 'ReorderList.java',
               code: 'public class ReorderList {\n    public static ListNode revLL(ListNode head) {\n        ListNode prev = null;\n        ListNode curr = head;\n        ListNode next = null;\n        while (curr != null) {\n            next = curr.next;\n            curr.next = prev;\n            prev = curr;\n            curr = next;\n        }\n        return prev;\n    }\n\n    public static ListNode merge(ListNode left, ListNode right) {\n        ListNode tHead = new ListNode(0);\n        ListNode temp = tHead;\n        while (left != null && right != null) {\n            temp.next = left;\n            left = left.next;\n            temp = temp.next;\n            temp.next = right;\n            right = right.next;\n            temp = temp.next;\n        }\n        temp.next = left != null ? left : right;\n        return tHead.next;\n    }\n\n    public void reorderList(ListNode head) {\n        if (head == null || head.next == null) return;\n        ListNode slow = head, fast = head, prev = null;\n        while (fast != null && fast.next != null) {\n            prev = slow;\n            slow = slow.next;\n            fast = fast.next.next;\n        }\n        prev.next = null;\n        slow = revLL(slow);\n        head = merge(head, slow);\n    }\n}',
@@ -1117,7 +1117,7 @@ const data = {
               tags: ['Linked List'],
             },
             {
-              id: '69b1c142-79b5-4be2-8bff-d58750786cc2',
+              id: 'fac8c043-1e00-4f34-ab64-14cc62014113',
               isFolder: false,
               name: 'ReverseLinkedList.java',
               code: 'public class ReverseLinkedList {\n    public ListNode reverseList(ListNode head) {\n        ListNode prev = null, curr = head, next = null;\n        while (curr != null) {\n            next = curr.next;\n            curr.next = prev;\n            prev = curr;\n            curr = next;\n        }\n        return prev;\n    }\n}',
@@ -1126,7 +1126,7 @@ const data = {
               tags: ['Linked List'],
             },
             {
-              id: 'f976a6f4-4043-4036-80c9-023e5fa0273a',
+              id: '9b07deaa-5100-4bdb-ba77-c373070f0b64',
               isFolder: false,
               name: 'ReverseNodesInKGroups.java',
               code: 'public class ReverseNodesInKGroups {\n    public static ListNode revLL(ListNode head) {\n        ListNode prev = null;\n        ListNode curr = head;\n        ListNode next = head;\n        while (curr != null) {\n            next = curr.next;\n            curr.next = prev;\n            prev = curr;\n            curr = next;\n        }\n        return prev;\n    }\n    public ListNode reverseKGroup(ListNode head, int k) {\n        ListNode curr = head, start = head, prev = head;\n        ListNode newHead = new ListNode(0, head);\n        ListNode temp = newHead;\n\n        while (curr != null) {\n            for (int i = 1; i <= k; i++) {\n                if (curr.next == null && i < k) return newHead.next;\n                prev = curr;\n                curr = curr.next;\n            }\n            prev.next = null;\n            temp.next = revLL(start);\n            start.next = curr;\n            temp = start;\n            start = curr;\n        }\n        return newHead.next;\n    }\n}',
@@ -1135,7 +1135,7 @@ const data = {
               tags: ['Linked List'],
             },
             {
-              id: '19a8079b-f944-41aa-a6ad-4cca2a975d81',
+              id: '12c78e90-4956-4596-9240-0c3b89cf8391',
               isFolder: false,
               name: 'CarFleet.java',
               code: 'import java.util.Arrays;\nimport java.util.Stack;\n\npublic class CarFleet {\n    static class Pair {\n        int position;\n        int speed;\n\n        Pair(int p, int s) {\n            this.position = p;\n            this.speed = s;\n        }\n\n        @Override\n        public String toString() {\n            return "Pair{" + "P=" + position + ", S=" + speed + \'}\';\n        }\n    }\n\n    public static int carFleet(int target, int[] position, int[] speed) {\n        Pair[] arr = new Pair[speed.length];\n        for (int i = 0; i < speed.length; i++) {\n            arr[i] = new Pair(position[i], speed[i]);\n        }\n        Arrays.sort(arr, (a, b) -> b.position - a.position);\n        Stack<Double> st = new Stack<>();\n        for (Pair pair : arr) {\n            double curr = (double) (target - pair.position) / pair.speed;\n            if (st.isEmpty() || curr > st.peek()) {\n                st.push(curr);\n            }\n        }\n        return st.size();\n    }\n\n    public static void main(String[] args) {\n        int[] position = {10, 8, 0, 5, 3};\n        int[] speed = {2, 4, 1, 1, 3};\n        System.out.println(carFleet(12, position, speed));\n    }\n}',
@@ -1144,7 +1144,7 @@ const data = {
               tags: ['Stack'],
             },
             {
-              id: 'b0e529d2-e8ef-499a-97ff-446f27542652',
+              id: '19357ec0-2e1d-4627-b6bf-fc936a3716e5',
               isFolder: false,
               name: 'MinStack.java',
               code: 'import java.util.*;\n\nclass MinStack {\n    Stack<Integer> stack;\n    Stack<Integer> minStack;\n\n    public MinStack() {\n        stack = new Stack<>();\n        minStack = new Stack<>();\n    }\n\n    public void push(int val) {\n        stack.push(val);\n        int minValue = minStack.empty() ? val : Math.min(minStack.peek(), val);\n        minStack.push(minValue);\n    }\n\n    public void pop() {\n        minStack.pop();\n        stack.pop();\n    }\n\n    public int top() {\n        return stack.peek();\n    }\n\n    public int getMin() {\n        return minStack.peek();\n    }\n\n    public static void main(String[] args) {\n//        ["MinStack","push","push","push","top","pop","getMin","pop","getMin","pop","push","top","getMin","push","top","getMin","pop","getMin"]\n//        [[],[2147483646],[2147483646],[2147483647],[],[],[],[],[],[],[2147483647],[],[],[-2147483648],[],[],[],[]]\n        MinStack st = new MinStack();\n        st.push(2147483646);\n        st.push(2147483646);\n        st.push(2147483647);\n        System.out.println(st.top());\n        st.pop();\n        System.out.println(st.getMin());\n        st.pop();\n        System.out.println(st.getMin());\n        st.pop();\n//        System.out.println(st.top());\n\n    }\n}\n\n/*\n * Your MinStack object will be instantiated and called as such:\n * MinStack obj = new MinStack();\n * obj.push(val);\n * obj.pop();\n * int param_3 = obj.top();\n * int param_4 = obj.getMin();\n */',
@@ -1153,7 +1153,7 @@ const data = {
               tags: ['Stack'],
             },
             {
-              id: '488fc20e-dcb3-4c32-8e92-257f443ec48c',
+              id: '8aa85ec5-5fa9-4d8d-a45a-5809976c88a9',
               isFolder: false,
               name: 'ReversePolishNotation.java',
               code: 'import java.util.*;\n\nclass ReversePolishNotation {\n    public static int operate(String op, int first, int second) {\n        if (op.equals("-")) return second - first;\n        if (op.equals("*")) return second * first;\n        if (op.equals("/")) return second / first;\n        return second + first; // op = +\n    }\n\n    public int evalRPN(String[] tokens) {\n        // Basically secondPop operation firstPop\n        Stack<Integer> stack = new Stack<>();\n        for (String token : tokens) {\n            if (token.equals("+") || token.equals("-") || token.equals("*") || token.equals("/"))\n                stack.push(operate(token, stack.pop(), stack.pop()));\n            else\n                stack.add(Integer.parseInt(token));\n        }\n        return stack.pop();\n    }\n}',
@@ -1162,7 +1162,7 @@ const data = {
               tags: ['Stack'],
             },
             {
-              id: 'c68db450-f3d7-4f1f-9dd7-8536e79a493f',
+              id: 'bec28494-5b8a-44be-81b9-d6e9e256614f',
               isFolder: false,
               name: 'ValidParentheses.java',
               code: "import java.util.*;\npublic class ValidParentheses {\n    public static boolean isValid(String s) {\n//        Best w Stack\n//        int len = s.length();\n//        if ((len&1) == 1) return false;\n//        HashMap<Character, Character> hm = new HashMap<>();\n//        hm.put('(', ')');\n//        hm.put('[', ']');\n//        hm.put('{', '}');\n//        char[] charArr = s.toCharArray();\n//        Stack<Character> stack = new Stack<>();\n//        for (int i = 0; i < len; i++) {\n//            char ch = charArr[i];\n//            if (hm.containsKey(ch)) stack.push(ch);\n//            else {\n//                if(stack.empty()) return false;\n//                char top = stack.pop();\n//                if (hm.get(top) != ch) return false;\n//            }\n//        }\n//        return stack.empty();\n\n//     Best w/o stack\n        int len = s.length();\n        if ((len&1) == 1) return false;\n        char[] stack = new char[len];\n        char[] charArr = s.toCharArray();\n        HashMap<Character, Character> hm = new HashMap<>();\n        hm.put('(', ')');\n        hm.put('[', ']');\n        hm.put('{', '}');\n        int ptr = -1;\n        for (int i = 0; i < len; i++) {\n            char ch = charArr[i];\n            if (hm.containsKey(ch)) {\n                stack[++ptr] = ch;\n            } else {\n                if(ptr == -1) return false;\n                char top = stack[ptr--];\n                if (hm.get(top) != ch) return false;\n            }\n        }\n        return ptr == -1;\n    }\n\n    public static void main(String[] args) {\n        String s = \"()\";\n        System.out.println(isValid(s));\n    }\n}",
@@ -1171,7 +1171,7 @@ const data = {
               tags: ['Stack'],
             },
             {
-              id: '99557aa7-a014-4358-81c6-ef8be8201c1a',
+              id: 'aa52ed9e-f387-46d3-acff-989e00b1e919',
               isFolder: false,
               name: 'ContainerWithMostWater.java',
               code: 'public class ContainerWithMostWater {\n    public static int maxArea(int[] heights) {\n        int i = 0;\n        int j = heights.length - 1;\n        int area = 0;\n        int max = 0;\n        while (i < j) {\n            if (heights[i] <= heights[j]) i++;\n            else if (heights[i] > heights[j]) j--;\n\n            area = (j - i) * Math.min(heights[i], heights[j]);\n            max = Math.max(max, area);\n        }\n        return max;\n    }\n\n    public static void main(String[] args) {\n        int[] heights = {1, 8, 6, 2, 5, 4, 8, 3, 7};\n        int ans = maxArea(heights);\n        System.out.println(ans);\n    }\n}',
@@ -1180,7 +1180,7 @@ const data = {
               tags: ['Two Pointers'],
             },
             {
-              id: 'eda01f40-33e1-489e-a362-91245288d440',
+              id: 'fc5b3124-ceb6-4361-bf4d-4ea384de06d0',
               isFolder: false,
               name: 'ThreeSum.java',
               code: 'import java.util.*;\npublic class ThreeSum {\n    public List<List<Integer>> threeSum(int[] N) {\n        Arrays.sort(N);\n        List<List<Integer>> ans = new ArrayList<>();\n        int n = N.length;\n        for (int i = 0; i < n; i++) {\n            if (i > 0 && N[i] == N[i-1]) continue;\n            int j = i+1;\n            int k = n-1;\n            while (j < k) {\n                int sum = N[i] + N[j] + N[k];\n                if (sum > 0) k--;\n                else if (sum < 0) j++;\n                else {\n                    ans.add(Arrays.asList(N[i], N[j], N[k]));\n                    j++;\n                    k--;\n                    while (j < k && N[j] == N[j-1]) j++;\n                    while (j < k && N[k] == N[k+1]) k--;\n                }\n            }\n        }\n        return ans;\n    }\n}',
@@ -1189,7 +1189,7 @@ const data = {
               tags: ['Two Pointers'],
             },
             {
-              id: 'c1463817-f5b4-46ba-b273-c67d950fb135',
+              id: '10220f5b-e889-40c0-bd99-3c22e8ec51e0',
               isFolder: false,
               name: 'TrappingRainWater.java',
               code: '// import java.util.Arrays;\npublic class TrappingRainWater {\n    public static int trap(int[] height) {\n        int n = height.length;\n//        int[] maxLeft = new int[n];\n//        int[] maxRight = new int[n];\n//        int leftMax = 0, rightMax = 0;\n//        for (int i = 0; i < n; i++) {\n//            maxLeft[i] = leftMax;\n//            leftMax = Math.max(leftMax, height[i]);\n//            maxRight[n - i - 1] = rightMax;\n//            rightMax = Math.max(rightMax, height[n - i - 1]);\n//        }\n//        int count = 0;\n//        for (int j = 0; j < n; j++) {\n//            count += Math.max(Math.min(maxLeft[j], maxRight[j]) - height[j], 0);\n//        }\n//        return count;\n        int start = 0, end = n - 1;\n        int maxL = height[start], maxR = height[end];\n        int c = 0;\n        while (start < end) {\n            if (height[start] <= height[end]) {\n                start++;\n                maxL = Math.max(maxL, height[start]);\n                c += Math.max(maxL - height[start], 0);\n\n            } else {\n                end--;\n                maxR = Math.max(maxR, height[end]);\n                c += Math.max(maxR - height[end], 0);\n            }\n        }\n        return c;\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};\n        int ans = trap(arr);\n        System.out.println(ans);\n    }\n}',
@@ -1198,7 +1198,7 @@ const data = {
               tags: ['Two Pointers'],
             },
             {
-              id: '3be79644-1f9f-4377-885c-2e736bff9b26',
+              id: '880cdf0e-2869-4075-a972-7c8305a04332',
               isFolder: false,
               name: 'TwoSumSortedArray.java',
               code: 'public class TwoSumSortedArray {\n    public static int[] twoSum(int[] N, int target) {\n//        Brute force: Linear search the pair using 2 for loops (nested) O(N^2)\n\n//        Better solution: Use 2 pointer from left and right to get sum\n\n//        Optimised solution: Binary search\n        int start = 0;\n        int end = N.length - 1;\n        int[] ans = {-1, -1};\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            int sum = N[start] + N[end];\n            if (sum == target){\n                ans[0] = start + 1;\n                ans[1] = end + 1;\n                return ans;\n            }\n            if (sum > target)\n                end = N[start] + N[mid] > target ? mid - 1 : end - 1;\n            else\n                start = N[end] + N[mid] < target ? mid + 1 : start + 1;\n        }\n        return ans;\n    }\n}',
@@ -1207,7 +1207,7 @@ const data = {
               tags: ['Two Pointers'],
             },
             {
-              id: '11402507-ba86-4a53-9f69-085a4de399f3',
+              id: '2fc9868d-17be-410c-99d8-6023ac7bb36d',
               isFolder: false,
               name: 'ValidPalindrome.java',
               code: 'public class ValidPalindrome {\n    public boolean isPalindrome(String s) {\n//        Brute force solution\n//        s = s.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();\n//        int start = 0;\n//        int end = s.length() - 1;\n//        while (start < end) {\n//            if (s.charAt(start) != s.charAt(end)) return false;\n//            start++;\n//            end--;\n//        }\n//        return true;\n\n//        Optimised solution\n         int n = s.length();\n         int start = 0;\n         int end = n-1;\n         s = s.toLowerCase();\n         while (start < end) {\n             if (!Character.isLetterOrDigit(s.charAt(start))) start++;\n             else if (!Character.isLetterOrDigit(s.charAt(end))) end--;\n             else {\n                 if (s.charAt(start) != s.charAt(end)) return false;\n                 start++;\n                 end--;\n             }\n         }\n         return true;\n    }\n}',
@@ -1218,17 +1218,17 @@ const data = {
           ],
         },
         {
-          id: '9f81f8c5-6a10-4d40-94e3-369e7fb6590d',
+          id: 'f8c855e2-702f-48f2-bcb8-f603edaf69c2',
           isFolder: true,
           name: 'stiver_dsa_sheet',
           content: [
             {
-              id: '43d5d260-cc65-4c4a-a869-29789762bb41',
+              id: '26e1611c-8c91-4635-93fd-d83e9b116eb8',
               isFolder: true,
               name: 'Arrays',
               content: [
                 {
-                  id: 'd247f048-afc5-48eb-8945-a8e9435e372a',
+                  id: '550a516f-3bf5-4616-b003-0dae5c8c7001',
                   isFolder: false,
                   name: 'MajorityFrequency.java',
                   code: 'import java.util.*;\n\npublic class MajorityFrequency {\n    public static int majorityElement(int[] v) {\n        // Write your code here\n        HashMap<Integer, Integer> hm = new HashMap<>();\n        int maxFrequency = v.length / 2;\n        for (int i = 0 ; i <  v.length; i++) {\n            if (hm.containsKey(v[i])) {\n                hm.put(v[i], hm.get(v[i]) + 1);\n                if (hm.get(v[i]) > maxFrequency) {\n                    return v[i];\n                }\n            } else {\n                hm.put(v[i], 1);\n            }\n        }\n        return -1;\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {2, 2, 1, 3, 1, 1, 3, 1, 1};\n        int ans = majorityElement(arr);\n        System.out.println(ans);\n    }\n}',
@@ -1237,7 +1237,7 @@ const data = {
                   tags: ['EASY'],
                 },
                 {
-                  id: '7a5e8252-fad1-4aa1-9976-dd1fc6db5391',
+                  id: '4b5e4d52-d93f-48fa-828f-cff2b8a8571e',
                   isFolder: false,
                   name: 'MaximumConsecutiveOnes.java',
                   code: 'public class MaximumConsecutiveOnes {\n    public static int findMaxConsecutiveOnes(int[] N) {\n        int count = 0;\n        int maxCount = 0;\n        for (int i = 0; i < N.length; i++) {\n            if (N[i] == 0) {\n                count = 0;\n            } else {\n                count++;\n            }\n            maxCount = Math.max(count, maxCount);\n        }\n        return maxCount;\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {1, 0, 1, 1, 0, 1};\n        int ans = findMaxConsecutiveOnes(arr);\n        System.out.println(ans);\n    }\n}',
@@ -1246,7 +1246,7 @@ const data = {
                   tags: ['EASY'],
                 },
                 {
-                  id: '8557463a-1e65-4775-b9d0-532be1899752',
+                  id: '55be1b65-4122-478f-aa2a-d4c7b08cca2b',
                   isFolder: false,
                   name: 'MergeSortedArraysDuplicates.java',
                   code: 'import java.util.*;\n\npublic class MergeSortedArraysDuplicates {\n    public static List< Integer > sortedArray(int []a, int []b) {\n        // Write your code here\n        List<Integer> ans = new ArrayList<>();\n        int i = 0, j = 0;\n        while (i < a.length && j < b.length) {\n            if (a[i] <= b[j]) {\n                if (ans.size() == 0 || ans.get(ans.size() - 1) != a[i])\n                    ans.add(a[i]);\n                i++;\n            } else {\n                if (ans.size() == 0 || ans.get(ans.size() - 1) != b[j])\n                    ans.add(b[j]);\n                j++;\n            }\n        }\n        while (i < a.length) {\n            if (ans.get(ans.size() - 1) != a[i])\n                ans.add(a[i]);\n            i++;\n        }\n        while (j < b.length) {\n            if (ans.get(ans.size() - 1) != b[j])\n                ans.add(b[j]);\n            j++;\n        }\n        return ans;\n    }\n}',
@@ -1255,7 +1255,7 @@ const data = {
                   tags: ['EASY'],
                 },
                 {
-                  id: '02216564-13c5-4d1e-bd8a-dc9e8d865a4c',
+                  id: '59999704-5bfb-4905-97b5-d821bca5849d',
                   isFolder: false,
                   name: 'ZeroOneTwo.java',
                   code: 'import java.util.*;\n\npublic class ZeroOneTwo {\n    public static void sortArray(ArrayList<Integer> arr, int n) {\n        // Write your code here.\n        int start = 0, end = n-1, element = 0;\n        while (element < 2) {\n            if (start >= end) {\n                element++;\n                end = n-1;\n            }\n            if (arr.get(start) == element) start++;\n            else if (arr.get(end) != element) end--;\n            else {\n                arr.set(end, arr.get(start));\n                arr.set(start, element);\n            }\n        }\n    }\n\n    public static void main(String[] args) {\n        ArrayList<Integer> arr = new ArrayList<>();\n        arr.add(2);\n        arr.add(2);\n        arr.add(2);\n        arr.add(2);\n        arr.add(0);\n        arr.add(0);\n        arr.add(1);\n        arr.add(0);\n        sortArray(arr, arr.size());\n        System.out.println(arr);\n    }\n}',
@@ -1264,7 +1264,7 @@ const data = {
                   tags: ['EASY'],
                 },
                 {
-                  id: 'd2f2b44f-3d51-4b3f-ba72-707435db2248',
+                  id: 'feb8c643-ffa5-4078-87e0-0c7bbe942415',
                   isFolder: false,
                   name: 'CountInversions.java',
                   code: 'public class CountInversions {\n    public static int merge(int[] A, int low, int mid, int high) {\n        int left = low, right = mid + 1, i = 0;\n        int count = 0;\n        int[] temp = new int[high - low + 1];\n        while (left <= mid && right <= high) {\n            if (A[left] <= A[right]) {\n                temp[i++] = A[left++];\n            } else {\n                count += mid - left + 1;\n                temp[i++] = A[right++];\n            }\n        }\n        while (left <= mid)\n            temp[i++] = A[left++];\n        while (right <= high)\n            temp[i++] = A[right++];\n        for (int j = 0; j < temp.length; j++)\n            A[j + low] = temp[j];\n        return count;\n    }\n\n    public static int mergeSort(int[] A, int low, int high) {\n        if (low == high) return 0;\n        int mid = (low + high) / 2;\n        int count = 0;\n        count += mergeSort(A, low, mid);\n        count += mergeSort(A, mid + 1, high);\n        count += merge(A, low, mid, high);\n        return count;\n    }\n\n    public static int numberOfInversions(int[] A, int n) {\n        // Write your code here.\n        return mergeSort(A, 0, n - 1);\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {5, 4, 3, 2, 1};\n//        int[] arr = {1, 2, 3, 4, 5};\n        int inversions = numberOfInversions(arr, arr.length);\n        System.out.println(inversions);\n    }\n}',
@@ -1273,7 +1273,7 @@ const data = {
                   tags: ['HARD'],
                 },
                 {
-                  id: '88678cf4-736c-46f4-adb2-ec998ca48487',
+                  id: '074ab9c2-bc0f-4413-9d57-7d2782c6d107',
                   isFolder: false,
                   name: 'FourSum.java',
                   code: 'import java.util.*;\n\npublic class FourSum {\n    public static void fourSum(int[] A, int target) {\n        int n = A.length;\n//        BETTER APPROACH\n//         HashSet<List<Integer>> unique = new HashSet<>();\n//         for (int i = 0; i < n; i++) {\n//             for (int j = i + 1; j < n; j++) {\n//                 HashSet<Integer> hs = new HashSet<>();\n//                 for (int k = j + 1; k < n; k++) {\n//                     int fourth = target - (A[i] + A[j] + A[k]);\n//                     if (hs.contains(fourth)) {\n//                         List<Integer> temp = Arrays.asList(A[i], A[j], A[k], fourth);\n//                         temp.sort(null);\n//                         unique.add(temp);\n//                     }\n//                     hs.add(A[k]);\n//                 }\n//             }\n//         }\n//         List<List<Integer>> X = new ArrayList<>(unique);\n\n//        BEST APPROACH\n       Arrays.sort(A);\n       List<List<Integer>> ans = new ArrayList<>();\n       for (int i = 0; i < n; i++) {\n           if (i > 0 && A[i] == A[i - 1]) continue;\n           for (int j = i + 1; j < n - 1; j++) {\n               if (j > i+1 && A[j] == A[j - 1]) continue;\n               int k = j + 1;\n               int l = n - 1;\n               while (k < l) {\n                   int sum = A[i];\n                   sum += A[j];\n                   sum += A[k];\n                   sum += A[l];\n                   if (sum > target) l--;\n                   else if (sum < target) k++;\n                   else {\n                       ans.add(Arrays.asList(A[i], A[j], A[k], A[l]));\n                       k++;\n                       l--;\n                       while (k < l && A[k] == A[k - 1]) k++;\n                       while (k < l && A[l] == A[l + 1]) l--;\n                   }\n               }\n           }\n       }\n       System.out.println(ans);\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {1, 0, -1, 0, -2, 2};\n        fourSum(arr, 0);\n    }\n}',
@@ -1282,7 +1282,7 @@ const data = {
                   tags: ['HARD'],
                 },
                 {
-                  id: '0e9c0d24-1065-43f5-8177-5c861a7eaab4',
+                  id: '9f9681a5-5101-4f0b-b492-e9dc28046efe',
                   isFolder: false,
                   name: 'LargestSubArray0Sum.java',
                   code: 'import java.util.HashMap;\n\npublic class LargestSubArray0Sum {\n    public static int longestSubArrayWith0Sum(int[] arr) {\n        int longest = 0;\n//        Better solution O(N^2)\n//        for (int i = 0; i < arr.length; i++) {\n//            int sum = 0;\n//            for (int j = i; j < arr.length; j++) {\n//                sum += arr[j];\n//                if (sum == 0)\n//                    longest = Math.max(longest, j - i + 1);\n//            }\n//        }\n\n//        Best solution\n        HashMap<Integer, Integer> hm = new HashMap<>();\n        int sum = 0;\n        for (int i = 0; i < arr.length; i++) {\n            sum += arr[i];\n            if (sum == 0)\n                longest = Math.max(longest, i + 1);\n            else if (hm.containsKey(sum))\n                longest = Math.max(longest, i - hm.get(sum));\n            if (!hm.containsKey(sum)) hm.put(sum, i);\n        }\n        return  longest;\n    }\n    public static void main(String[] args) {\n        int[] arr = {9, -3, 3, -1, 6, -5};\n        int ans = longestSubArrayWith0Sum(arr);\n        System.out.println(ans);\n    }\n}',
@@ -1291,7 +1291,7 @@ const data = {
                   tags: ['HARD'],
                 },
                 {
-                  id: '305e3b87-43aa-4a1d-870b-0057dc90c470',
+                  id: '7f64f921-0114-45c5-926a-1ab0bfdb0a81',
                   isFolder: false,
                   name: 'MajorityElementNBy3.java',
                   code: 'import java.util.*;\n\npublic class MajorityElementNBy3 {\n    public static void printMajorityElements(int[] arr) {\n        List<Integer> ans = new ArrayList<>();\n        int majority = (arr.length / 3) + 1;\n//        Better approach\n//        HashMap<Integer, Integer> hm = new HashMap<>();\n//        for (int j : arr) {\n//            hm.put(j, hm.getOrDefault(j, 0) + 1);\n//        }\n//        for (Map.Entry<Integer, Integer> x: hm.entrySet()) {\n//            if (x.getValue() > majority) ans.add(x.getKey());\n//            if (ans.size() == 2) break;\n//        }\n\n//        Best approach\n        int c1 = 0, c2 = 0, e1 = -1, e2 = -1;\n        for (int j : arr) {\n            if (c1 == 0 && e2 != j) {\n                c1 = 1;\n                e1 = j;\n            } else if (c2 == 0 && e1 != j) {\n                c2 = 1;\n                e2 = j;\n            } else if (j == e1) c1++;\n            else if (j == e2) c2++;\n            else {\n                c1--;\n                c2--;\n            }\n        }\n//        We got elements\n        c1 = 0;\n        c2 = 0;\n        for (int i: arr) {\n            if (i == e1) c1++;\n            else if (i == e2) c2++;\n        }\n        if (c1 >= majority) ans.add(e1);\n        if (c2 >= majority) ans.add(e2);\n        System.out.println(ans);\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {2, 1, 1, 3, 1, 4, 5, 6};\n        printMajorityElements(arr);\n    }\n}',
@@ -1300,7 +1300,7 @@ const data = {
                   tags: ['HARD'],
                 },
                 {
-                  id: '63657e9d-cb71-464b-b3a6-f5852d8facce',
+                  id: '59278c72-af5f-4119-a927-69791c4d0924',
                   isFolder: false,
                   name: 'MaximumProductSubArray.java',
                   code: 'public class MaximumProductSubArray {\n    public static int subarrayWithMaxProduct(int []arr){\n        // Brute force\n//        int maxProd = 0;\n//        for (int i = 0; i < arr.length; i++) {\n//            int prod = arr[i];\n//            for (int j = i+1; j < arr.length; j++) {\n//                prod *= arr[j];\n//                maxProd = Math.max(maxProd, prod);\n//            }\n//        }\n//        return maxProd;\n        // Best approach\n        int maxProd = arr[0];\n        int prodLeft = 1;\n        int prodRight = 1;\n        for (int i = 0; i < arr.length; i++) {\n            prodLeft *= arr[i];\n            prodRight *= arr[arr.length - i - 1];\n            maxProd = Math.max(maxProd, Math.max(prodLeft, prodRight));\n            if (prodLeft == 0) prodLeft++;\n            if (prodRight == 0) prodRight++;\n        }\n        return maxProd;\n    }\n    public static void main(String[] args) {\n        int[] arr = {-2, 3, -4, 0};\n        int ans = subarrayWithMaxProduct(arr);\n        System.out.println(ans);\n    }\n}',
@@ -1309,7 +1309,7 @@ const data = {
                   tags: ['HARD'],
                 },
                 {
-                  id: 'f9916b31-1bea-4c03-a965-f2b20fd11ba0',
+                  id: 'f98c3ba5-86cf-45db-adf0-885d97c039b4',
                   isFolder: false,
                   name: 'MergeOverlappingSubIntervals.java',
                   code: 'import java.util.*;\n\npublic class MergeOverlappingSubIntervals {\n    public static void mergeIntervals(int[][] arr) {\n        Arrays.sort(arr, Comparator.comparingInt(a -> a[0]));\n        int start = arr[0][0], end = arr[0][1];\n        List<List<Integer>> ans = new ArrayList<>();\n        for (int i = 1; i < arr.length; i++) {\n            if (end >= arr[i][0])\n                end = Math.max(end, arr[i][1]);\n            else {\n                ans.add(Arrays.asList(start, end));\n                start = arr[i][0];\n                end = arr[i][1];\n            }\n        }\n        ans.add(Arrays.asList(start, end));\n        System.out.println(ans);\n    }\n    public static void main(String[] args) {\n//        int[][] arr = {{1, 3}, {2, 6}, {8, 10}, {15, 18}};\n        int[][] arr = {{1, 4}, {4, 5}};\n        mergeIntervals(arr);\n    }\n}',
@@ -1318,7 +1318,7 @@ const data = {
                   tags: ['HARD'],
                 },
                 {
-                  id: 'f4aa42b4-b80c-4cb4-b441-2db1cc03788c',
+                  id: '6e9a2946-bacb-47a5-88d0-1e420a1309b8',
                   isFolder: false,
                   name: 'MergeTwoSortedArrays.java',
                   code: 'import java.util.Arrays;\n\npublic class MergeTwoSortedArrays {\n//    Variation 1\n    public static void mergeSortedArrays(int[] a, int[] b, int m, int n) {\n        int i = m - 1;\n        int j = n - 1;\n        int k = m + n - 1;\n        while (j >= 0) {\n            if (a[i] >= b[j])\n                a[k--] = a[i--];\n            else\n                a[k--] = b[j--];\n        }\n        System.out.println(Arrays.toString(a));\n    }\n    public static void mergeSortedArrays2(int[] a, int[] b) {\n        int m = a.length, n = b.length;\n//        int[] temp = new int[m+n];\n//        int left = 0, right = 0, index = 0;\n//        while (left < m && right < n) {\n//            if (a[left] <= b[right]) {\n//                temp[index++] = a[left++];\n//            } else {\n//                temp[index++] = b[right++];\n//            }\n//        }\n//        while (left < m) temp[index++] = a[left++];\n//        while (right < n) temp[index++] = b[right++];\n//        for (int i = 0; i < temp.length; i++) {\n//            if (i < m)\n//                a[i] = temp[i];\n//            else\n//                b[i-m] = temp[i];\n//        }\n        int l = m - 1;\n        int r = 0;\n        while (l >=0 && r < n) {\n            if (a[l] <= b[r]) break;\n            int temp = a[l];\n            a[l--] = b[r];\n            b[r++] = temp;\n        }\n        Arrays.sort(a);\n        Arrays.sort(b);\n        System.out.println(Arrays.toString(a));\n        System.out.println(Arrays.toString(b));\n    }\n\n    public static void main(String[] args) {\n//        Type 1:\n//        int[] a = {1, 4, 8, 10, 0, 0, 0};\n//        int[] b = {2, 3, 9};\n//        mergeSortedArrays(a, b, 4,3);\n        int[] a = {1, 4, 8, 10};\n        int[] b = {2, 3, 9};\n        mergeSortedArrays2(a, b);\n    }\n}',
@@ -1327,7 +1327,7 @@ const data = {
                   tags: ['HARD'],
                 },
                 {
-                  id: 'ad5d8d9b-0991-48bc-a69a-3668db99ca42',
+                  id: '2e516a90-b27e-4ce5-8aab-5cbc7312750f',
                   isFolder: false,
                   name: 'MissingAndDuplicateNumber.java',
                   code: 'public class MissingAndDuplicateNumber {\n    //    Without changing the input array\n    public static void findMissingRepeatingNumbers(int[] arr) {\n//        Mathematical equation technique\n        int n = arr.length;\n        long S = 0;\n        long S2 = 0;\n        long SN = (long) n * (n + 1) /2;\n        long S2N = n * (n + 1) * (2L * n + 1) /6;\n        for (int i : arr) {\n            S += i;\n            S2 += (long) i *i;\n        }\n        long val1 = S - SN; // (X - Y)\n        long val2 = S2 - S2N; // (X - Y) (X + Y)\n        long x = (val2/val1 + val1)/2;\n        long y = x - val1;\n        System.out.println("x: " + x + " y: " + y);\n\n//        int[] count = new int[arr.length];\n//        for (int i : arr) {\n//            count[i - 1]++;\n//        }\n//        int missing = -1, duplicate = -1;\n//        for (int i = 0; i < count.length; i++) {\n//            if (count[i] == 0)\n//                missing = i+1;\n//            else if (count[i] == 2)\n//                duplicate = i+1;\n//            if (missing != -1 && duplicate != -1) break;\n//        }\n//        System.out.println(Arrays.asList(duplicate, missing));\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {3, 1, 2, 5, 3};\n        findMissingRepeatingNumbers(arr);\n    }\n}',
@@ -1336,7 +1336,7 @@ const data = {
                   tags: ['HARD'],
                 },
                 {
-                  id: '35f8cfa9-6a3d-4e4f-b83d-64a8c473614d',
+                  id: 'd37587eb-5901-4367-b478-32839afebe88',
                   isFolder: false,
                   name: 'PascalsTriangle.java',
                   code: "import java.util.Arrays;\n\npublic class PascalsTriangle {\n    //    static int fact(int x) {\n//        int product = 1;\n//        for (int i = 2; i <= x; i++)\n//            product *= i;\n//        return product;\n//    }\n    static int getNCR(int n, int r) {\n//        int numerator = fact(n);\n//        int denominator = fact(r) * fact(n-r);\n//        return (int) (numerator / denominator);\n        long res = 1;\n        for (int i = 0; i < r; i++) {\n            res *= n - i;\n            res /= i + 1;\n        }\n        return (int) res;\n    }\n\n    //    Type 1:  Given row r and column c. Print the element at position (r, c) in Pascal's triangle.\n    public static int getTriangleValue(int row, int col) {\n        return getNCR(row - 1, col - 1);\n    }\n\n    //    Type 2: Given the row number n. Print the n-th row of Pascal's triangle.\n    public static int[] printRowPascalsTriangle(int n) {\n        int[] arr = new int[n];\n        int ans = 1;\n        arr[0] = ans;\n        for (int i = 1; i < n; i++) {\n            ans *= n - i;\n            ans /= i;\n            arr[i] = ans;\n        }\n//        for (int i = 0; i < n; i++) {\n//            ans[i] = getNCR(n-1, i);\n//        }\n        return arr;\n    }\n\n    //    Type 3: Given the number of rows n. Print the first n rows of Pascal's triangle.\n    public static void printPascalsTriangle(int n) {\n        int[][] ans = new int[n][];\n        for (int i = 1; i <= n; i++) {\n            ans[i-1] = printRowPascalsTriangle(i);\n        }\n        for (int[] a: ans) {\n            System.out.println(Arrays.toString(a));\n        }\n    }\n\n    public static void main(String[] args) {\n        int ans = getTriangleValue(5, 3);\n        System.out.println(ans);\n        int[] row = printRowPascalsTriangle(5);\n        System.out.println(Arrays.toString(row));\n        printPascalsTriangle(9);\n    }\n}",
@@ -1345,7 +1345,7 @@ const data = {
                   tags: ['HARD'],
                 },
                 {
-                  id: '9862c10a-0d70-4802-a18e-37ecfa006b8a',
+                  id: '8f3805c6-a84c-43e6-8ad9-18f530f5415f',
                   isFolder: false,
                   name: 'ReversePairs.java',
                   code: 'public class ReversePairs {\n    public static int countPairs(int[] A, int low, int mid, int high) {\n        int count = 0;\n        int right = mid + 1;\n        for (int i = low; i <= mid; i++) {\n            while (right <= high && A[i] > 2*A[right]) {\n                right++;\n            }\n            count += right - mid - 1;\n        }\n        return count;\n    }\n\n    public static void merge(int[] A, int low, int mid, int high) {\n        int left = low, right = mid + 1, i = 0;\n        int[] temp = new int[high - low + 1];\n        while (left <= mid && right <= high) {\n            if (A[left] <= A[right])\n                temp[i++] = A[left++];\n            else\n                temp[i++] = A[right++];\n        }\n        while (left <= mid)\n            temp[i++] = A[left++];\n        while (right <= high)\n            temp[i++] = A[right++];\n        for (int j = 0; j < temp.length; j++)\n            A[j + low] = temp[j];\n    }\n\n    public static int mergeSort(int[] A, int low, int high) {\n        if (low == high) return 0;\n        int mid = (low + high) / 2;\n        int count = 0;\n        count += mergeSort(A, low, mid);\n        count += mergeSort(A, mid + 1, high);\n        count += countPairs(A, low, mid,  high);\n        merge(A, low, mid, high);\n        return count;\n    }\n\n    public static int reversePairsCount(int[] A, int n) {\n        // Write your code here.\n        return mergeSort(A, 0, n - 1);\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {4, 1, 2, 3, 1};\n        int count = reversePairsCount(arr,  5);\n        System.out.println(count);\n    }\n}',
@@ -1354,7 +1354,7 @@ const data = {
                   tags: ['HARD'],
                 },
                 {
-                  id: '76a86ac2-28de-4828-8d4c-9bb76d7f352f',
+                  id: '16b27ed0-9f80-4192-b202-dfc736c39f0b',
                   isFolder: false,
                   name: 'SubArraysWithXORK.java',
                   code: 'import java.util.HashMap;\n\npublic class SubArraysWithXORK {\n    public static int getSubArrayCountWithXORK (int[] arr, int k) {\n//        Best solution\n        int count = 0;\n        int xor = 0;\n        HashMap<Integer, Integer> hm = new HashMap<>();\n        hm.put(0, 1);\n        for (int i = 0; i < arr.length; i++) {\n            xor ^= arr[i];\n            if (hm.containsKey(xor^k)) {\n                count += hm.get(xor^k);\n            }\n            hm.put(xor, hm.getOrDefault(xor, 0)+1);\n        }\n        return count;\n\n//        Better Solution\n//        int count = 0;\n//        for (int i = 0; i < arr.length; i++) {\n//            int xor = 0;\n//            for (int j = i; j < arr.length; j++) {\n//                xor ^= arr[j];\n//                if (xor == k)\n//                    count++;\n//            }\n//        }\n//        return count;\n    }\n    public static void main(String[] args) {\n        int[] arr = {5, 6, 7, 8, 9};\n        int count = getSubArrayCountWithXORK(arr, 5);\n        System.out.println(count);\n    }\n}',
@@ -1363,7 +1363,7 @@ const data = {
                   tags: ['HARD'],
                 },
                 {
-                  id: 'd3efbb87-1cb5-42fc-9e73-323ff3e44c15',
+                  id: '6c2464e1-5887-4a27-8d56-16ffe9f01c93',
                   isFolder: false,
                   name: 'ThreeSum.java',
                   code: 'import java.util.*;\n\npublic class ThreeSum {\n    public static List<List<Integer>> threeSum(int[] arr) {\n//        HashSet<List<Integer>> hs = new HashSet<>();\n//        for (int i = 0; i < arr.length; i++) {\n//            HashMap<Integer, Integer> hm = new HashMap<>();\n//            for (int j = i+1; j < arr.length; j++) {\n//                int temp = -1 * (arr[i] + arr[j]);\n//                if (hm.containsKey(temp)) {\n//                    List<Integer> tempArr = new ArrayList<>(Arrays.asList(arr[i], arr[j], temp));\n//                    tempArr.sort(null);\n//                    hs.add(tempArr);\n//                }\n//                hm.put(arr[j], j);\n//            }\n//        }\n//        return new ArrayList<>(hs);\n        int n = arr.length;\n        List<List<Integer>> ans = new ArrayList<>();\n        Arrays.sort(arr);\n        for (int i = 0; i < n; i++) {\n            if (i > 0 && arr[i] == arr[i-1]) continue;\n            int j = i + 1;\n            int k = n - 1;\n            while (j < k) {\n                int sum = arr[i] + arr[j] + arr[k];\n                if (sum < 0) {\n                    j++;\n                } else if (sum > 0) {\n                    k--;\n                } else {\n                    ans.add(Arrays.asList(arr[i], arr[j], arr[k]));\n                    j++;\n                    k--;\n                    while (j < k && arr[j] == arr[j-1]) j++;\n                    while (j < k && arr[k] == arr[k+1]) k--;\n                }\n            }\n        }\n        return ans;\n    }\n    public static void main(String[] args) {\n        int[] arr = {-1, 0, 1, 0};\n        List<List<Integer>> ans = threeSum(arr);\n        System.out.println(ans);\n    }\n}',
@@ -1372,7 +1372,7 @@ const data = {
                   tags: ['HARD'],
                 },
                 {
-                  id: '25db59ed-b986-4498-8137-34c793ca718f',
+                  id: '6a7c21e7-335c-4393-8b47-7c71120a91ce',
                   isFolder: false,
                   name: 'ArrayMaxSumSubarray.java',
                   code: 'import java.util.Arrays;\n\npublic class ArrayMaxSumSubarray {\n    public static int[] getMaxSubarraySumArray(int[] arr) {\n        int start = -1, end = -1;\n        int sum = 0, maxSum = arr[0];\n        int temp = -1;\n        for (int i = 0; i < arr.length; i++) {\n            if (sum == 0) temp = i;\n            sum += arr[i];\n            if (maxSum < sum) {\n                maxSum = sum;\n                start = temp;\n                end = i;\n            }\n            if (sum < 0) sum = 0;\n        }\n\n        System.out.println(start + " " + end);\n        return Arrays.copyOfRange(arr, start, end+1);\n    }\n\n    public static int getMaxSubarraySumLength(int[] arr) {\n        int start = -1, end = -1, temp = 0;\n        int sum = 0, maxSum = arr[0];\n        for (int i = 0; i < arr.length; i++) {\n            if (sum == 0) temp = i;\n            sum += arr[i];\n            if (maxSum < sum) {\n                maxSum = sum;\n                start = temp;\n                end = i;\n            }\n            if (sum < 0) sum = 0;\n        }\n        return end - start+1;\n    }\n\n    public static int getMaxSubarraySum(int[] arr) {\n        int sum = 0, maxSum = arr[0];\n        for (int j : arr) {\n            sum += j;\n            if (maxSum < sum) maxSum = sum;\n            if (sum < 0) sum = 0;\n        }\n        return maxSum;\n    }\n\n    public static void main(String[] args) {\n//        TESTING\n//        int[] arr = {-4, 1, -2, 1, 5, -3, 1, 3, -1, -2};\n//        int[] arr = {-4, -1, -2, -1, -5, -3, 1, -3, -1, -2};\n        int[] arr = {-4, 1, 2, 1, -5, 3, 1, 3, 1, -2};\n//        int[] arr = {-4, 5, 7, -6, 10, -15, 3};\n//        int[] arr = {-3, 2, -1, 4, -2};\n//        int[] arr = {-1,2};\n//        int[] arr = {-2,-1};\n        int ans = getMaxSubarraySumLength(arr);\n        int[] ansArray = getMaxSubarraySumArray(arr);\n        int ansSum = getMaxSubarraySum(arr);\n        System.out.println("Length: " + ans);\n        System.out.println("Sum: " + ansSum);\n        System.out.println("Array: " + Arrays.toString(ansArray));\n    }\n}',
@@ -1381,7 +1381,7 @@ const data = {
                   tags: ['MEDIUM'],
                 },
                 {
-                  id: '98d21d0b-522e-410f-8994-5ea1774b0033',
+                  id: '1bc87a23-6de4-4f5c-8537-9668d80c0567',
                   isFolder: false,
                   name: 'LongestConsecutiveSequence.java',
                   code: 'import java.util.Arrays;\nimport java.util.HashSet;\n\npublic class LongestConsecutiveSequence {\n    public static boolean found(int[] arr, int target) {\n        for (int i : arr)\n            if (target == i) return true;\n        return false;\n    }\n\n    public static int longestConsecutiveSequenceLength(int[] arr) {\n//        Brute force: O(N^2) time\n//        int longest = 1;\n//        for (int j : arr) {\n//            int count = 1;\n//            int x = j;\n//            while (found(arr, x+1)) {\n//                x++;\n//                count++;\n//            }\n//            longest = Math.max(longest, count);\n//        }\n//        return longest;\n\n//        Better Solution\n//        Arrays.sort(arr);\n//        int longest = 1;\n//        int currentCount = 0;\n//        int last = Integer.MIN_VALUE;\n//        for (int i = 0; i < arr.length; i++) {\n//            if (arr[i] - 1 == last) {\n//                currentCount++;\n//            } else if (arr[i] != last) {\n//                currentCount = 1;\n//            }\n//            longest = Math.max(longest, currentCount);\n//            last = arr[i];\n//        }\n//        return longest;\n\n//        Best\n        int longest = 1;\n        HashSet<Integer> hs = new HashSet<>();\n        for (int i : arr) {\n            hs.add(i);\n        }\n        for (int j : arr) {\n            if (!hs.contains(j - 1)) {\n                int count = 1;\n                int element = j;\n                while (hs.contains(element + 1)) {\n                    count++;\n                    element++;\n                }\n                longest = Math.max(longest, count);\n            }\n        }\n        return longest;\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {1, 3, 9, 4, 5};\n        int ans = longestConsecutiveSequenceLength(arr);\n        System.out.println(ans);\n    }\n}',
@@ -1390,7 +1390,7 @@ const data = {
                   tags: ['MEDIUM'],
                 },
                 {
-                  id: 'f7a659ec-0791-4efe-9fb0-36b1f2dbd667',
+                  id: 'b00d5461-2250-4d39-aaf4-a7e0d671086d',
                   isFolder: false,
                   name: 'NextPermutation.java',
                   code: 'import java.util.Arrays;\n\npublic class NextPermutation {\n    // Reverse\n    public static void reverse(int[] arr, int start, int end) {\n        while (start < end) {\n            swap(arr, start++, end--);\n        }\n    }\n\n    public static void swap(int[] arr, int i, int j) {\n        int temp = arr[i];\n        arr[i] = arr[j];\n        arr[j] = temp;\n    }\n\n    public static int[] nextPermutation(int[] arr) {\n        int n = arr.length;\n        int bp = -1;\n        for (int i = n - 1; i > 0; i--) {\n            if (arr[i] > arr[i - 1]) {\n                bp = i - 1;\n                break;\n            }\n        }\n        if (bp == -1) {\n            reverse(arr, 0, n - 1);\n            return arr;\n        }\n//        Ceiling\n        for (int j = n - 1; j > bp; j--) {\n            if (arr[j] > arr[bp]) {\n                swap(arr, j, bp);\n                break;\n            }\n        }\n        reverse(arr, bp+1, n - 1);\n        return arr;\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {1, 3, 2};\n        int[] ans = nextPermutation(arr);\n        System.out.println(Arrays.toString(ans));\n    }\n}',
@@ -1399,7 +1399,7 @@ const data = {
                   tags: ['MEDIUM'],
                 },
                 {
-                  id: 'e4d7bf7d-8ad3-4956-a66c-7c49547aced8',
+                  id: '2a5a348b-f350-4aee-ae8e-1d0f09eb5c3c',
                   isFolder: false,
                   name: 'RotateBy90.java',
                   code: 'import java.util.Arrays;\n\npublic class RotateBy90 {\n    public static  void reverse (int[] arr) {\n        int start = 0, end = arr.length - 1;\n        while (start < end) {\n            int temp = arr[start];\n            arr[start++] = arr[end];\n            arr[end--] = temp;\n        }\n    }\n    public static void rotateMatrix(int[][] mat) {\n        // Brute force solution\n//        int[][] newMat = new int[mat.length][mat[0].length];\n//        for (int r = 0; r < mat.length; r++) {\n//            for (int c = 0; c < mat[r].length; c++) {\n//                newMat[c][mat[r].length - r - 1] = mat[r][c];\n//            }\n//        }\n//        return newMat;\n//                if (r != c) System.out.println("r: "+r + " c: " + c + " A: " + mat[r][c] + " B: " + mat[c][r]);\n        // Best solution\n        for (int r = 0; r < mat.length; r++) {\n            for (int c = r; c < mat[r].length; c++) {\n                int temp = mat[r][c];\n                mat[r][c] = mat[c][r];\n                mat[c][r] = temp;\n            }\n        }\n        for (int[] row : mat) reverse(row);\n    }\n\n    public static void main(String[] args) {\n        int[][] mat = {\n                {1, 2, 3},\n                {4, 5, 6},\n                {7, 8, 9},\n        };\n        rotateMatrix(mat);\n        for (int[] a : mat) {\n            System.out.println(Arrays.toString(a));\n        }\n    }\n}',
@@ -1408,7 +1408,7 @@ const data = {
                   tags: ['MEDIUM'],
                 },
                 {
-                  id: '25df425f-9c85-4258-8f2f-6336af96baa9',
+                  id: '5092ab0f-2b72-4555-bfa9-9f37b4b293d6',
                   isFolder: false,
                   name: 'SetMatrixZero.java',
                   code: 'import java.util.Arrays;\n\npublic class SetMatrixZero {\n    //    Helper functions\n    public static void setRow(int[][] mat, int index) {\n        for (int i = 0; i < mat.length; i++)\n            mat[index][i] = -1;\n    }\n\n    public static void setCol(int[][] mat, int index) {\n        for (int i = 0; i < mat.length; i++)\n            mat[i][index] = -1;\n    }\n\n    public static int[][] setMatrixZero(int[][] mat) {\n//        Brute force\n//        for (int i = 0; i < mat.length; i++) {\n//            for (int j = 0; j < mat[i].length; j++) {\n//                if (mat[i][j] == 0) {\n//                    setRow(mat, i);\n//                    setCol(mat, j);\n//                }\n//            }\n//        }\n//        for (int i = 0; i < mat.length; i++)\n//            for (int j = 0; j < mat[i].length; j++)\n//                if (mat[i][j] == -1) mat[i][j] = 0;\n\n//        Better\n//        int[] rows = new int[mat.length];\n//        int[] cols = new int[mat[0].length];\n//        for (int i = 0; i < mat.length; i++) {\n//            for (int j = 0; j < mat[i].length; j++) {\n//                if (mat[i][j] == 0) {\n//                    rows[i] = -1;\n//                    cols[j] = -1;\n//                }\n//            }\n//        }\n//        for (int i = 0; i < mat.length; i++)\n//            for (int j = 0; j < mat[i].length; j++)\n//                if (cols[j] == -1 || rows[i] == -1) mat[i][j] = 0;\n\n//        Best\n        int col0 = 1;\n        for (int i = 0; i < mat.length; i++) {\n            if (mat[i][0] == 0) col0 = 0; // One column\n            // Rest of the columns\n            for (int j = 1; j < mat[i].length; j++) {\n                if (mat[i][j] == 0) {\n                    mat[i][0] = 0;\n                    mat[0][j] = 0;\n                }\n            }\n        }\n        for (int r = mat.length  - 1; r >= 0; r--) {\n            for (int c = mat[r].length - 1; c > 0; c--) {\n                if (mat[r][0] == 0 || mat[0][c] == 0) mat[r][c] = 0;\n            }\n            // First column\n            if (col0 == 0) {\n                mat[r][0] = 0;\n            }\n        }\n\n        return mat;\n    }\n\n    public static void main(String[] args) {\n        int[][] mat = {\n                {1, 1, 1, 1},\n                {1, 0, 0, 1},\n                {1, 1, 0, 1},\n                {1, 1, 1, 1}\n        };\n        int[][] ans = setMatrixZero(mat);\n        for (int[] a : ans) {\n            System.out.println(Arrays.toString(a));\n        }\n    }\n}',
@@ -1417,7 +1417,7 @@ const data = {
                   tags: ['MEDIUM'],
                 },
                 {
-                  id: 'ffd72b66-5ea3-4edb-98c5-ffe196737bf8',
+                  id: '4bae6704-ded1-4c52-ae00-16467047d4e9',
                   isFolder: false,
                   name: 'SpiralMatrix1.java',
                   code: 'import java.util.Arrays;\n\npublic class SpiralMatrix1 {\n    public static int[] printSpiralMatrix(int[][] mat) {\n        int n = mat.length;\n        int m = mat[0].length;\n        int rStart = 0, rEnd = n - 1;\n        int cStart = 0, cEnd = m - 1;\n        int[] ans = new int[n*m];\n        int index = 0;\n        while (rStart <= rEnd && cStart <= cEnd) {\n//            LR\n            for (int i = cStart; i <= cEnd; i++) {\n                ans[index++] = mat[rStart][i];\n            }\n            rStart++;\n//            TB\n            for (int i = rStart; i <= rEnd; i++) {\n                ans[index++] = mat[i][cEnd];\n            }\n            cEnd--;\n            if (index == n*m) break;\n//            RL\n            for (int i = cEnd; i >= cStart; i--) {\n                ans[index++] = mat[rEnd][i];\n            }\n            rEnd--;\n//            BT\n            for (int i = rEnd; i >= rStart; i--) {\n                ans[index++] = mat[i][cStart];\n            }\n            cStart++;\n        }\n        return ans;\n    }\n    public static void main(String[] args) {\n        int[][] mat = {\n                { 1, 2, 3 },\n                { 4, 5, 6 },\n                { 7, 8, 9 }\n        };\n        int[] ans = printSpiralMatrix(mat);\n        System.out.println(Arrays.toString(ans));\n    }\n}',
@@ -1426,7 +1426,7 @@ const data = {
                   tags: ['MEDIUM'],
                 },
                 {
-                  id: 'abeaa5ab-5528-4dab-ba7a-8dda55cd7516',
+                  id: 'd6ca2f2b-222a-4273-bb0f-12ca7fd743f9',
                   isFolder: false,
                   name: 'SubArraysWithGivenSum.java',
                   code: 'import java.util.HashMap;\n\npublic class SubArraysWithGivenSum {\n    public static int getSubArraysWithGivenSum(int[] arr, int k) {\n        // This solution wont handle negative numbers\n//        int l = 0, r = 0;\n//        int count = 0;\n//        int sum = 0;\n//        while (r < arr.length) {\n//            sum += arr[r];\n//            while (l <= r && sum > k)\n//                sum -= arr[l++];\n//            if (sum == k) count++;\n//            r++;\n//        }\n//        return count;\n//        This can handle positive and negative numbers\n        HashMap<Integer, Integer> hm = new HashMap<>();\n        hm.put(0, 1);\n        int count = 0, sum = 0;\n        for (int j : arr) {\n            sum += j;\n            if (hm.containsKey(sum - k))\n                count += hm.get(sum - k);\n            hm.put(sum, hm.getOrDefault(sum, 0) + 1);\n        }\n        return count;\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {1, 2, 3, -3, 1, 1, 1, 4, 2, -3};\n        int ans = getSubArraysWithGivenSum(arr, 3);\n        System.out.println(ans);\n    }\n}',
@@ -1437,12 +1437,12 @@ const data = {
               ],
             },
             {
-              id: '9b8edc1c-c24c-4d80-98df-b94a42a6928e',
+              id: '14658ef8-acb1-499a-997b-d8184f05fe4c',
               isFolder: true,
               name: 'Binary Search',
               content: [
                 {
-                  id: '6d5b7571-80a4-46a5-940e-ad42b5036ae5',
+                  id: '0426cbe8-4b19-4da2-b1bd-27eca7739920',
                   isFolder: false,
                   name: 'CeilAndFloor.java',
                   code: 'import java.util.*;\nimport java.io.*;\n\npublic class CeilAndFloor {\n    public static int floor(int[] arr, int target, int n) {\n        int start = 0;\n        int end = n - 1;\n        while (start <= end) {\n            int mid = start + (end - start) / 2;\n            if (arr[mid] == target) return mid;\n            if (arr[mid] > target)\n                end = mid - 1;\n            else\n                start = mid + 1;\n        }\n        return end;\n    }\n\n    public static int ceil(int[] arr, int target, int n) {\n        int start = 0;\n        int end = n - 1;\n        while (start <= end) {\n            int mid = start + (end - start) / 2;\n            if (arr[mid] == target) return mid;\n            if (arr[mid] > target)\n                end = mid - 1;\n            else\n                start = mid + 1;\n        }\n        return start;\n    }\n\n    public static int ceilingInSortedArray(int n, int x, int[] arr) {\n        // Write your code here.\n        Arrays.sort(arr);\n        int ceilElement = ceil(arr, x, n);\n        int floorElement = floor(arr, x, n);\n        if (ceilElement != n) {\n            ceilElement = arr[ceilElement];\n        } else {\n            ceilElement = -1;\n        }\n        if (floorElement != -1) {\n            floorElement = arr[floorElement];\n        }\n\n        System.out.print(floorElement + " ");\n        return ceilElement;\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {48, 26, 2, 6, 10, 48, 11, 21, 47, 50, 50, 45, 43, 27};\n        int ans = ceilingInSortedArray(arr.length, 51, arr);\n        System.out.println(ans);\n    }\n}',
@@ -1451,7 +1451,7 @@ const data = {
                   tags: ['BS on 1D arrays'],
                 },
                 {
-                  id: '476bced0-d180-4f5c-8743-0f41cb2f43eb',
+                  id: '0754c47d-a604-489c-8451-77e63fdd2305',
                   isFolder: false,
                   name: 'CountOccurrencesSortedArrayWithDuplicates.java',
                   code: 'public class CountOccurrencesSortedArrayWithDuplicates {\n    public static int count(int[] arr, int n, int x) {\n        //Your code goes here\n        int first = bs(arr, x, true);\n        if (first == -1)\n            return 0;\n        int second = bs(arr, x, false);\n        return second - first + 1;\n    }\n\n    public static int bs(int[] arr, int target, boolean lookLeft) {\n        int start = 0;\n        int end = arr.length - 1;\n        int ans = -1;\n        while (start <= end) {\n            int mid = start + (end - start) / 2;\n            if (arr[mid] == target) {\n                ans = mid;\n                if (lookLeft)\n                    end = mid - 1;\n                else\n                    start = mid + 1;\n            } else if (arr[mid] > target)\n                end = mid - 1;\n            else\n                start = mid + 1;\n        }\n        return ans;\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {1, 1, 1, 2, 2, 3, 3};\n        int count = count(arr, arr.length,1);\n        System.out.println(count);\n    }\n}',
@@ -1460,7 +1460,7 @@ const data = {
                   tags: ['BS on 1D arrays'],
                 },
                 {
-                  id: '15957e89-c051-4c40-8dc5-fb2d5ddeaa1a',
+                  id: 'a47f8c5c-4a86-4958-ab90-11fa22451793',
                   isFolder: false,
                   name: 'FindMinimumRotatedSortedArray.java',
                   code: 'public class FindMinimumRotatedSortedArray {\n    public static int getMinimumInRotatedSortedArray(int[] arr) {\n        int start = 0;\n        int end = arr.length - 1;\n        int ans = Integer.MAX_VALUE;\n        while (start <= end) {\n            int mid = start + (end - start) / 2;\n//            Condition to handle duplicates\n            if (arr[mid] == arr[start] && arr[mid] == arr[end]) {\n                ans = Math.min(ans, arr[start]);\n                end--;\n                continue;\n            }\n            if (arr[mid] > arr[end]) {\n                // left sorted\n                ans = Math.min(ans, arr[start]);\n                start = mid + 1;\n            } else {\n                // right sorted\n                ans = Math.min(ans, arr[mid]);\n                end = mid - 1;\n            }\n        }\n        return ans;\n    }\n\n    public static int getPivot(int[] arr) {\n//        PIVOT: Index of the point till where the array is rotated (MAX Element)\n        int start = 0;\n        int end = arr.length - 1;\n        while (start <= end) {\n            int mid = start + (end - start) / 2;\n            if (mid < end && arr[mid] > arr[mid + 1]) return mid;\n            if (mid > start && arr[mid - 1] > arr[mid]) return mid - 1;\n            if (arr[mid] > arr[end])\n                start = mid + 1;\n            else\n                end = mid - 1;\n        }\n        return -1;\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {3, 3, 1, 3, 3, 3, 3, 3};\n        int ans = getMinimumInRotatedSortedArray(arr);\n        System.out.println(ans);\n        int pivot = getPivot(arr);\n        System.out.println(pivot + 1);\n    }\n}',
@@ -1469,7 +1469,7 @@ const data = {
                   tags: ['BS on 1D arrays'],
                 },
                 {
-                  id: 'a0a535b4-9723-4991-aaeb-d0d5800eae2f',
+                  id: 'e74a6729-fa8b-4ffb-965f-783d217a0171',
                   isFolder: false,
                   name: 'FindPeakElement.java',
                   code: 'public class FindPeakElement {\n    public static int getPeakIndex(int[] arr) {\n//        Brute force solution\n//        int n = arr.length;\n//        if (n == 1 || arr[0] > arr[1]) return 0;\n//        if (arr[n-1] > arr[n-2]) return n-1;\n//        for (int i = 1; i < arr.length - 1; i++) {\n//            if (arr[i] > arr[i-1] && arr[i] > arr[i+1]) {\n//                return i;\n//            }\n//        }\n//        return -1;\n//        Optimised approach\n        int n = arr.length;\n        int start = 0;\n        int end = n-1;\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            boolean isLeftBig = mid > start && arr[mid - 1] > arr[mid];\n            boolean isRightBig = mid < end && arr[mid + 1] > arr[mid];\n            if (!isLeftBig && !isRightBig) return mid;\n            if (isLeftBig) {\n                end = mid - 1;\n            } else {\n                start = mid + 1;\n            }\n        }\n        return -1;\n    }\n    public static void main(String[] args) {\n        int[] arr = {1,2,1,3,4};\n        int ans = getPeakIndex(arr);\n        System.out.println(arr[ans]);\n    }\n}',
@@ -1478,7 +1478,7 @@ const data = {
                   tags: ['BS on 1D arrays'],
                 },
                 {
-                  id: 'c7a64860-58a3-45b2-a94f-2045e3d73ce3',
+                  id: '04cb37bd-f94b-44d8-a1c6-10f393e77cac',
                   isFolder: false,
                   name: 'FirstAndLastPosition.java',
                   code: 'import java.util.* ;\nimport java.io.*;\npublic class FirstAndLastPosition {\n    public static int lower_bound(ArrayList<Integer> arr, int n, int k) {\n        int start = 0;\n        int end = n - 1;\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            if (arr.get(mid) >= k) {\n                end = mid - 1;\n            } else {\n                start = mid + 1;\n            }\n        }\n        return start;\n    }\n    public static int upper_bound(ArrayList<Integer> arr, int n, int k) {\n        int start = 0;\n        int end = n - 1;\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            if (arr.get(mid) > k) {\n                end = mid - 1;\n            } else {\n                start = mid + 1;\n            }\n        }\n        return start;\n    }\n\n    public  static int bSearchFirstLast(ArrayList<Integer> arr, int target, boolean lookLeft) {\n        int start = 0;\n        int end = arr.size() - 1;\n        int ans = -1;\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            if (arr.get(mid) == target) {\n                ans = mid;\n                if (lookLeft)\n                    end = mid - 1;\n                else\n                    start = mid + 1;\n            }\n            else  if (arr.get(mid) > target)\n                end = mid - 1;\n            else\n                start = mid + 1;\n        }\n        return ans;\n    }\n\n    public static int[] firstAndLastPosition(ArrayList<Integer> arr, int n, int k) {\n        // Write your code here.\n//        int first = lower_bound(arr, n, k);\n//        int last = upper_bound(arr, n, k) - 1;\n        int first = bSearchFirstLast(arr, k, true);\n        int last = bSearchFirstLast(arr, k, false);\n        return new int[] {first, last};\n    }\n\n};',
@@ -1487,7 +1487,7 @@ const data = {
                   tags: ['BS on 1D arrays'],
                 },
                 {
-                  id: 'b2f6f0b6-6021-49b5-894a-daeaef1c7163',
+                  id: '8cf7f16e-814e-4320-883e-46ef24b6b9f3',
                   isFolder: false,
                   name: 'LowerBound.java',
                   code: 'public class LowerBound {\n//    Brute force is Linear search or a simple for loop\n\n//    If the arr has duplicates go left\n    public static int lowerBound(int []arr, int n, int x) {\n        int start = 0;\n        int end = n-1;\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            if (arr[mid] >= x)\n                end = mid - 1;\n            else\n                start = mid + 1;\n        }\n        return start;\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {1, 2, 2, 3, 3, 5};\n//        int[] arr = {1, 2, 2, 2, 2, 2};\n        int ans = lowerBound(arr, arr.length, 2);\n        System.out.println(ans);\n    }\n}',
@@ -1496,7 +1496,7 @@ const data = {
                   tags: ['BS on 1D arrays'],
                 },
                 {
-                  id: '2561e650-1d6f-4198-a163-667c3e7d3a7f',
+                  id: 'ac62266f-3998-4007-bb27-1fb904a0af9d',
                   isFolder: false,
                   name: 'SearchIndexPosition.java',
                   code: 'public class SearchIndexPosition {\n    public static int searchInsert(int [] arr, int m){\n        // Write your code here.\n        int start = 0; \n        int end = arr.length - 1;\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            if (arr[mid] >= m) {\n                end = mid - 1;\n            } else {\n                start = mid + 1;\n            }\n        }\n        return start;\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {1, 2, 4, 7};\n        int ans = searchInsert(arr, 9);\n        System.out.println(ans);\n    }\n}',
@@ -1505,7 +1505,7 @@ const data = {
                   tags: ['BS on 1D arrays'],
                 },
                 {
-                  id: '06f953f5-9b92-49fe-9216-a6f399b9f05f',
+                  id: '21c0fb0d-e3fe-4f37-aab7-1e97285de459',
                   isFolder: false,
                   name: 'SearchInRotatedArray1.java',
                   code: 'import java.util.*;\n\npublic class SearchInRotatedArray1 {\n    public static int search(ArrayList<Integer> arr, int n, int k) {\n        int start = 0;\n        int end = n-1;\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            int midValue = arr.get(mid);\n            if (midValue == k) return mid;\n            if (midValue < arr.get(end)) {\n                if (k > midValue && k <= arr.get(end))\n                    start = mid + 1;\n                else\n                    end = mid - 1;\n            } else {\n                if (k >= arr.get(start) && k < midValue)\n                    end = mid - 1;\n                else\n                    start = mid + 1;\n            }\n        }\n        return -1;\n    }\n    public static void main(String[] args) {\n        ArrayList<Integer> arr = new ArrayList<>(Arrays.asList(8, 9, 4, 5));\n        int search = search(arr, 4, 8);\n        System.out.println(search);\n    }\n}',
@@ -1514,7 +1514,7 @@ const data = {
                   tags: ['BS on 1D arrays'],
                 },
                 {
-                  id: '96b42555-9573-4e12-b54a-31fd1431c273',
+                  id: 'a8e84ec3-2aa7-4a08-89fc-2bc072b255ce',
                   isFolder: false,
                   name: 'SearchInRotatedArray2.java',
                   code: 'public class SearchInRotatedArray2 {\n    public static boolean searchInARotatedSortedArrayII(int[] arr, int k) {\n        int start = 0;\n        int end = arr.length - 1;\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            if (arr[mid] == k) return true;\n            if (arr[mid] == arr[start] && arr[mid] == arr[end]) {\n                start++;\n                end--;\n                continue;\n            }\n            if (arr[mid] < arr[end]) { //Right sorted\n                if (k > arr[mid] && k <= arr[end])\n                    start = mid + 1;\n                else\n                    end = mid - 1;\n            } else { // Left sorted\n                if (k >= arr[start] && k < arr[mid])\n                    end = mid - 1;\n                else\n                    start = mid + 1;\n            }\n        }\n        return false;\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {3, 3, 1, 3, 3, 3, 3};\n        boolean found = searchInARotatedSortedArrayII(arr, 10);\n        System.out.println(found);\n    }\n}',
@@ -1523,7 +1523,7 @@ const data = {
                   tags: ['BS on 1D arrays'],
                 },
                 {
-                  id: '6ee6ad5b-4b3b-4383-b946-43384ccb1976',
+                  id: 'a071cc44-ae52-4971-b9c7-c6eee80fa24f',
                   isFolder: false,
                   name: 'SingleNonDuplicateElementSortedArray.java',
                   code: 'public class SingleNonDuplicateElementSortedArray {\n    public static int singleNonDuplicate(int[] arr) {\n//        Write the code here\n//        int n = arr.length;\n//        for (int i = 0; i < n; i++) {\n//            if (i == 0) {\n//                if (arr[0] != arr[1])\n//                    return 0;\n//            } else if (i == n - 1) {\n//                if (arr[n-1] != arr[n-2])\n//                    return n-1;\n//            } else {\n//                if (arr[i-1] != arr[i] && arr[i+1] != arr[i])\n//                    return i;\n//            }\n//        }\n//        return -1;\n        int n = arr.length;\n        if (n == 1) return arr[0];\n        if (arr[0] != arr[1]) return arr[0];\n        if (arr[n-1] != arr[n-2]) return arr[n-1];\n        int start = 1;\n        int end = n-2;\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            if (arr[mid] != arr[mid + 1] && arr[mid] != arr[mid - 1]) return arr[mid];\n            if ((mid%2==0 && arr[mid] == arr[mid+1]) || (mid%2==1 && arr[mid] == arr[mid - 1])) {\n                start = mid + 1;\n            } else {\n                end = mid - 1;\n            }\n        }\n        return -1;\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {1, 1, 2, 2, 3, 4, 4, 5, 5, 6, 6};\n        int ans = singleNonDuplicate(arr);\n        System.out.println(ans);\n    }\n}',
@@ -1532,7 +1532,7 @@ const data = {
                   tags: ['BS on 1D arrays'],
                 },
                 {
-                  id: '35ffb593-96cb-46f3-accd-b9b9a43ad9d5',
+                  id: '656cd08a-e181-47ee-878d-4b9b0ae5551a',
                   isFolder: false,
                   name: 'SortedArrayRotationCount.java',
                   code: 'public class SortedArrayRotationCount {\n    public static int findKRotation(int[] arr) {\n        int start = 0;\n        int end = arr.length - 1;\n        int ans = Integer.MAX_VALUE;\n        int idx = 0;\n        while (start <= end) {\n            int mid = start + (end - start) / 2;\n//            For removing duplicates\n            if (arr[mid] == arr[start] && arr[mid] == arr[end]) {\n                if (ans > arr[mid]) {\n                    ans = arr[mid];\n                    idx = mid;\n                }\n                end--;\n                continue;\n            }\n            if (arr[mid] > arr[end]) {\n                if (ans > arr[start]) {\n                    ans = arr[start];\n                    idx = start;\n                }\n                start = mid + 1;\n            } else {\n                if (ans > arr[mid]) {\n                    ans = arr[mid];\n                    idx = mid;\n                }\n                end = mid - 1;\n            }\n        }\n        return idx;\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {4, 4, 4, 4, 4, 4, 4, 4};\n        int ans = findKRotation(arr);\n        System.out.println(ans);\n    }\n}',
@@ -1541,7 +1541,7 @@ const data = {
                   tags: ['BS on 1D arrays'],
                 },
                 {
-                  id: 'ee0e4345-3571-4b1f-8a7f-874579ac15b0',
+                  id: '6213c8de-5fc3-4abf-880d-e55c5904b562',
                   isFolder: false,
                   name: 'UpperBound.java',
                   code: 'public class UpperBound {\n    public static int upperBound(int[] arr, int x, int n) {\n        // Write your code here.\n        int start = 0;\n        int end = n - 1;\n        while (start <= end) {\n            int mid = start + (end - start) / 2;\n            if (arr[mid] <= x) {\n                start = mid + 1;\n            } else {\n                end = mid - 1;\n            }\n        }\n        return start;\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {4, 14, 16, 23};\n        int ans = upperBound(arr, 12, arr.length);\n        System.out.println(ans);\n    }\n}',
@@ -1550,7 +1550,7 @@ const data = {
                   tags: ['BS on 1D arrays'],
                 },
                 {
-                  id: '60a3c704-9ce7-41a4-bfa4-45a5eb3b8a2c',
+                  id: '40e937bf-9ab1-454f-b24b-af2b3735cf4f',
                   isFolder: false,
                   name: 'FindPeakElementInGrid.java',
                   code: 'import java.util.Arrays;\n\npublic class FindPeakElementInGrid {\n    public static int[] findPeakGrid(int [][]mat) {\n// Brute force solution\n//        int n = mat.length;\n//        int m = mat[0].length;\n//        int max = Integer.MIN_VALUE;\n//        int[] ans = {-1, -1};\n//        for (int i = 0; i < n; i++) {\n//            for (int j = 0; j < m; j++) {\n//                if (mat[i][j] > max) {\n//                    max = mat[i][j];\n//                    ans[0] = i;\n//                    ans[1] = j;\n//                }\n//            }\n//        }\n//        return ans;\n\n        // Optimal solution\n        int start = 0;\n        int end = mat[0].length - 1;\n        while (start <= end) {\n            int maxRow = 0;\n            int mid = start + (end - start)/2;\n            for (int i = 0; i < mat.length; i++) {\n                if (mat[maxRow][mid] < mat[i][mid])\n                    maxRow = i;\n            }\n            boolean leftBig = mid > start && mat[maxRow][mid] < mat[maxRow][mid-1];\n            boolean rightBig = mid < end && mat[maxRow][mid] < mat[maxRow][mid+1];\n            if (!leftBig && !rightBig) return new int[]{maxRow, mid};\n            if (leftBig) end = mid - 1;\n            else start = mid + 1;\n        }\n        return new int[]{-1, -1};\n    }\n\n    public static void main(String[] args) {\n        int[][] values = {\n                {6},\n                {1},\n                {10}\n        };\n        int[] ans = findPeakGrid(values);\n        System.out.println(Arrays.toString(ans));\n    }\n}',
@@ -1559,7 +1559,7 @@ const data = {
                   tags: ['BS on 2D arrays'],
                 },
                 {
-                  id: 'b70c0354-bbc2-4663-afe2-4b0eafe00e07',
+                  id: 'f9fdfff0-51d2-47b4-bc2d-5d42b26b3b69',
                   isFolder: false,
                   name: 'MatrixMaximumOnesRow.java',
                   code: 'import java.util.ArrayList;\n\npublic class MatrixMaximumOnesRow {\n    public static int maximumOnesRow(ArrayList<ArrayList<Integer>> matrix, int n, int m) {\n        //\t  Brute force O(m*n)\n//        int maxRow = 0;\n//        int maxCount = 0;\n//        for (int i = 0; i < n; i++) {\n//            int count = 0;\n//            for (int j = 0; j < m; j++) {\n//                if (matrix.get(i).get(j) == 1) count++;\n//            }\n//            if (count > maxCount) {\n//                maxCount = count;\n//                maxRow = i;\n//            }\n//        }\n//        return maxRow;\n\n//        Optimal solution\n        int lastIdx = m - 1;\n        int maxRow = -1;\n        for (int i = 0; i < n; i++) {\n            if (lastIdx < 0) break;\n            if (matrix.get(i).get(lastIdx) == 1) {\n                while (lastIdx >= 0 && matrix.get(i).get(lastIdx) == 1) {\n                    lastIdx--;\n                }\n                maxRow = i;\n            }\n        }\n        return maxRow;\n    }\n\n    public static void main(String[] args) {\n        int[][] values = {\n                {0, 0, 1},\n                {0, 0, 1},\n                {0, 1, 1}\n        };\n\n        // Create a 2D ArrayList and populate it with values from the array\n        ArrayList<ArrayList<Integer>> matrix = new ArrayList<>();\n        for (int[] row : values) {\n            ArrayList<Integer> arrayListRow = new ArrayList<>();\n            for (int num : row) {\n                arrayListRow.add(num);\n            }\n            matrix.add(arrayListRow);\n        }\n        int ans = maximumOnesRow(matrix, 3,3);\n        System.out.println(ans);\n    }\n}',
@@ -1568,7 +1568,7 @@ const data = {
                   tags: ['BS on 2D arrays'],
                 },
                 {
-                  id: '2025d5a8-e49e-4920-b0ff-8a5db16197a3',
+                  id: 'a5fc8115-8c75-4dff-84fd-74d8da2a2eb2',
                   isFolder: false,
                   name: 'MatrixMedian.java',
                   code: 'public class MatrixMedian {\n    public static int getCount(int[] arr, int target) {\n        int start = 0, end = arr.length - 1;\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            if (arr[mid] > target) {\n                end = mid - 1;\n            } else {\n                start = mid + 1;\n            }\n        }\n        return start;\n    }\n    public static int findMedian(int[][] M, int m, int n) {\n        // Write your code here\n        int start = 1;\n        int end = 1000000000;\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            int count = 0;\n            for (int i = 0; i < M.length; i++) {\n                count += getCount(M[i], mid);\n            }\n            if (count <= (n*m)/2) {\n                start = mid + 1;\n            } else {\n                end = mid - 1;\n            }\n        }\n        return start;\n    }\n    public static void main(String[] args) {\n        int row = 3, col = 3;\n        int[][] arr = {{1, 3, 8},\n                {2, 3, 4},\n                {1, 2, 5}};\n        System.out.println("The median of the row-wise sorted matrix is: "+ findMedian(arr, row, col));\n    }\n}',
@@ -1577,7 +1577,7 @@ const data = {
                   tags: ['BS on 2D arrays'],
                 },
                 {
-                  id: 'd684d954-b27d-47f7-b4e1-1b48f6a72c82',
+                  id: '71ce5081-2cb7-4ce4-b945-05248c1657b3',
                   isFolder: false,
                   name: 'Search2DMatrixRowsSorted.java',
                   code: 'import java.util.ArrayList;\n\npublic class Search2DMatrixRowsSorted {\n    //    A Row-wise sorted matrix where the first element of each row is\n//    greater than the last element of previous row\n    static boolean searchMatrix(ArrayList<ArrayList<Integer>> mat, int target) {\n        // Optimised\n        int n = mat.size();\n        int m = mat.get(0).size();\n        int start = 0, end = n*m - 1;\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            int element = mat.get(mid/m).get(mid%m);\n            if (element == target) return true;\n            if (element > target) {\n                end = mid - 1;\n            } else {\n                start = mid + 1;\n            }\n        }\n        return false;\n    }\n    public static void main(String[] args) {\n        int[][] values = {\n                {1, 2, 4},\n                {6, 7, 8},\n                {9, 10, 34}\n        };\n\n        // Create a 2D ArrayList and populate it with values from the array\n        ArrayList<ArrayList<Integer>> matrix = new ArrayList<>();\n        for (int[] row : values) {\n            ArrayList<Integer> arrayListRow = new ArrayList<>();\n            for (int num : row) {\n                arrayListRow.add(num);\n            }\n            matrix.add(arrayListRow);\n        }\n        boolean ans = searchMatrix(matrix, 78);\n        System.out.println(ans);\n    }\n}',
@@ -1586,7 +1586,7 @@ const data = {
                   tags: ['BS on 2D arrays'],
                 },
                 {
-                  id: '6ed46e34-d59a-4b07-8a11-2eb15c46ff0a',
+                  id: 'cb3f8ee3-f27c-462b-bcfc-8331bde990b1',
                   isFolder: false,
                   name: 'SearchRowColSortedMatrix.java',
                   code: 'import java.util.ArrayList;\n\npublic class SearchRowColSortedMatrix {\n    public static int bS(int[] arr, int target) {\n        int start = 0, end = arr.length;\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            if (arr[mid] == target) return mid;\n            if (arr[mid] > target) end = mid - 1;\n            else start = mid + 1;\n        }\n        return -1;\n    }\n    public static boolean searchElement(int [][]mat, int target) {\n//        Better solution\n//        int n = mat.length;\n//        int m = mat[0].length;\n//        // Write your code here.\n//        for (int i = 0; i < n; i++) {\n//            if (mat[i][m-1] >= target) {\n//                int result = bS(mat[i], target);\n//                if (result != -1) return true;\n//                break;\n//            }\n//        }\n//        return false;\n        int j = mat[0].length - 1;\n        int i = 0;\n        while (i < mat.length && j >= 0) {\n            System.out.println(mat[i][j]);\n            if (mat[i][j] == target) return true;\n            if (mat[i][j] < target) i++;\n            else if (mat[i][j] > target) j--;\n        }\n        return false;\n    }\n\n    public static void main(String[] args) {\n        int[][] matrix = {\n                {1, 2, 4},\n                {6, 7, 8},\n                {9, 10, 34}\n        };\n        boolean ans = searchElement(matrix, 11);\n        System.out.println(ans);\n    }\n}',
@@ -1595,7 +1595,7 @@ const data = {
                   tags: ['BS on 2D arrays'],
                 },
                 {
-                  id: '6d187d57-f1d0-4fba-85b1-68c190bc87b1',
+                  id: '6ae9f708-80f0-4505-8ebf-02a144a5825a',
                   isFolder: false,
                   name: 'AggressiveCows.java',
                   code: 'import java.util.Arrays;\npublic class AggressiveCows {\n    public static boolean isPossible(int[] stalls, int k, int minDiff) {\n        int totalCows = 1;\n        int last = stalls[0];\n        for (int i = 1; i < stalls.length; i++) {\n            if (stalls[i] - last >= minDiff) {\n                totalCows++;\n                last = stalls[i];\n            }\n            if (totalCows >= k) return true;\n        }\n        return false;\n    }\n    public static int aggressiveCows(int []stalls, int k) {\n        int n = stalls.length;\n        Arrays.sort(stalls);\n//        Brute force\n//        int maxDifference = stalls[n-1] - stalls[0];\n//        for (int i = 1; i <= maxDifference; i++) {\n//            if (!isPossible(stalls, k, i)) return i-1;\n//        }\n//        return maxDifference;\n\n//        Optimised approach\n        int start = 1, end = stalls[n-1] - stalls[0];\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            if (isPossible(stalls, k, mid)) {\n                start = mid + 1;\n            } else {\n                end = mid - 1;\n            }\n        }\n        return end;\n    }\n    public static void main(String[] args) {\n        int[] stalls = {4,2,1,3,6};\n        int k = 2;\n        int ans = aggressiveCows(stalls, k);\n        System.out.println("The maximum possible minimum distance is: " + ans);\n    }\n}',
@@ -1604,7 +1604,7 @@ const data = {
                   tags: ['BS on Answers'],
                 },
                 {
-                  id: '91781f21-c371-4ffe-9d2e-7a56f4f0a133',
+                  id: '59d99a1d-6a2d-4d79-8d43-3ee0be9678b3',
                   isFolder: false,
                   name: 'BookAllocation.java',
                   code: 'import java.util.*;\npublic class BookAllocation {\n    public static boolean isPossible(ArrayList<Integer> arr, int j, int m) {\n        int students = 1;\n        int sum = 0;\n        for (int i = 0; i < arr.size(); i++) {\n            if (sum + arr.get(i) <= j) {\n                sum += arr.get(i);\n            } else {\n                sum = arr.get(i);\n                students++;\n            }\n        }\n        return students <= m;\n    }\n    public static int findPages(ArrayList<Integer> arr, int n, int m) {\n//        Brute force\n//        if (m > n) return -1;\n//        int min = arr.get(0);\n//        int max = arr.get(0);\n//        for (int i = 1; i < n; i++) {\n//            min = Math.max(min, arr.get(i));\n//            max += arr.get(i);\n//        }\n//        for (int j = min; j <= max; j++) {\n//            if (isPossible(arr, j, m)) return j;\n//        }\n//        return -1;\n\n//        Optimized\n        if (m > n) return -1;\n        int start = arr.get(0);\n        int end = arr.get(0);\n        for (int i = 1; i < n; i++) {\n            start = Math.max(start, arr.get(i));\n            end += arr.get(i);\n        }\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            if (isPossible(arr, mid, m))\n                end = mid - 1;\n            else\n                start = mid + 1;\n        }\n        return start;\n    }\n\n    public static void main(String[] args) {\n        ArrayList<Integer> arr = new ArrayList<>(Arrays.asList(25, 46, 28, 49, 24));\n        int n = 5;\n        int m = 4;\n        int ans = findPages(arr, n, m);\n        System.out.println("The answer is: " + ans);\n    }\n}',
@@ -1613,7 +1613,7 @@ const data = {
                   tags: ['BS on Answers'],
                 },
                 {
-                  id: 'fc05cc03-23a3-4f0a-85e5-026595fee096',
+                  id: 'b43e6ee7-ee70-4625-b026-aa0d3f6b7454',
                   isFolder: false,
                   name: 'CapacityToShipPackages.java',
                   code: 'public class CapacityToShipPackages {\n    public static boolean isPossible(int[] arr, int d, int capaciity) {\n        int total = 1;\n        int sum = 0;\n        for (int i = 0; i < arr.length; i++) {\n            if (sum + arr[i] <= capaciity) {\n                sum += arr[i];\n            } else {\n                total++;\n                sum = arr[i];\n            }\n        }\n        return total <= d;\n    }\n\n    public static int leastWeightCapacity(int[] arr, int d) {\n        // Write your code here.\n//        Brute force\n//        int max = arr[0];\n//        int min = arr[0];\n//        for (int i = 1; i < arr.length; i++) {\n//            max += arr[i];\n//            min = Math.max(arr[i], min);\n//        }\n//        for (int i = min; i <= max; i++) {\n//            if (isPossible(arr, d, i)) return i;\n//        }\n//        return -1;\n\n//        Optimised approach\n        int start = arr[0], end = arr[0];\n        for (int i = 1; i < arr.length; i++) {\n            end += arr[i];\n            start = Math.max(arr[i], start);\n        }\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            if (isPossible(arr, d, mid)) {\n                end = mid - 1;\n            } else {\n                start = mid + 1;\n            }\n        }\n        return start;\n    }\n    public static void main(String[] args) {\n        int[] arr = {5, 4, 5, 2, 3, 4, 5, 6};\n        int ans = leastWeightCapacity(arr, 5);\n        System.out.println(ans);\n    }\n}',
@@ -1622,7 +1622,7 @@ const data = {
                   tags: ['BS on Answers'],
                 },
                 {
-                  id: '307d7416-e9a8-4d73-b39a-aa2766e6dc0a',
+                  id: '90f0c9fb-e55b-4e60-8fe5-cf9c2a0a2f55',
                   isFolder: false,
                   name: 'FindSmallestDivisor.java',
                   code: 'public class FindSmallestDivisor {\n    public static boolean isPossible(int[] arr, int limit, int divisor) {\n        int total = 0;\n        for (int i = 0; i < arr.length; i++) {\n            total += (arr[i] + divisor - 1) / divisor;\n        }\n        return total <= limit;\n    }\n    public static int smallestDivisor(int[] arr, int limit) {\n        // Write your coder here\n//        Brute force\n//        int maxi = arr[0];\n//        for (int i = 1; i < arr.length; i++) {\n//            maxi = Math.max(maxi, arr[i]);\n//        }\n//        for (int ans = 1; ans <= maxi; ans++) {\n//            if (isPossible(arr, limit, ans)) return ans;\n//        }\n//        return -1;\n\n//        Optimal approach\n        int start = 1;\n        int end = arr[0];\n        for (int i = 1; i < arr.length; i++) {\n            end = Math.max(end, arr[i]);\n        }\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            if (isPossible(arr, limit, mid)) {\n                end = mid - 1;\n            } else {\n                start = mid + 1;\n            }\n        }\n        return start;\n    }\n    public static void main(String[] args) {\n        int[] arr = {1, 2, 3, 4, 5};\n        int ans = smallestDivisor(arr, 8);\n        System.out.println(ans);\n    }\n}',
@@ -1631,7 +1631,7 @@ const data = {
                   tags: ['BS on Answers'],
                 },
                 {
-                  id: 'fd5da51c-595b-4302-9aa2-2148f459c607',
+                  id: 'e35349a9-65c2-4789-85ed-04cf80c6eb70',
                   isFolder: false,
                   name: 'KokoEatingBananas.java',
                   code: 'public class KokoEatingBananas {\n    public static boolean isPossible(int[] v, int h, int rate) {\n        int hourCount = 0;\n        for (int i = 0; i < v.length; i++) {\n            hourCount += (v[i] + rate - 1)/rate;\n            if (hourCount > h) return false;\n        }\n        return hourCount <= h;\n    }\n    public static int minimumRateToEatBananas(int []v, int h) {\n        // Write Your Code Here\n//        Brute force\n//        int max = v[0];\n//        for (int i: v) {\n//            max = Math.max(max, i);\n//        }\n//        for (int ans = 1; ans <= max; ans++) {\n//            if (isPossible(v, h, ans)) return ans;\n//        }\n//        return -1;\n\n//        Best approach: Binary search\n        int start = 1;\n        int end = v[0];\n        for (int i = 1; i < v.length; i++) {\n            end = Math.max(end, v[i]);\n        }\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            if (isPossible(v, h, mid)) {\n                end = mid - 1;\n            } else {\n                start = mid + 1;\n            }\n        }\n        return start;\n    }\n    public static void main(String[] args) {\n        int[] v = {7, 15, 6, 3};\n        int h = 8;\n        int ans = minimumRateToEatBananas(v,h);\n        System.out.println(ans);\n    }\n}',
@@ -1640,7 +1640,7 @@ const data = {
                   tags: ['BS on Answers'],
                 },
                 {
-                  id: '744e9004-2a3a-4076-807a-bc39f47b6e65',
+                  id: '90bc8b4f-fc4c-4a58-ad2d-08778fa19be1',
                   isFolder: false,
                   name: 'KthElementOf2SortedArrays.java',
                   code: 'import java.util.ArrayList;\nimport java.util.Arrays;\n\npublic class KthElementOf2SortedArrays {\n    public static int kthElement(ArrayList<Integer> a, ArrayList<Integer> b, int n, int m, int k) {\n//        Brute force solution\n//        int[] temp = new int[n + m];\n//        int left = 0, right = 0, i = 0;\n//        while (left < n && right < m) {\n//            if (a.get(left) <= b.get(right))\n//                temp[i++] = a.get(left++);\n//            else\n//                temp[i++] = b.get(right++);\n//        }\n//        while (left < n) temp[i++] = a.get(left++);\n//        while (right < m) temp[i++] = b.get(right++);\n//        return temp[k-1];\n\n//        Better solution\n//        int left = 0, right = 0, i = 0;\n//        while (left < n && right < m) {\n//            if (a.get(left) <= b.get(right)) {\n//                if (i == k - 1) return a.get(left);\n//                left++;\n//            } else {\n//                if (i == k - 1) return b.get(right);\n//                right++;\n//            }\n//            i++;\n//        }\n//        while (left < n) {\n//            if (i == k - 1) return a.get(left);\n//            left++;\n//            i++;\n//        }\n//        while (right < m) {\n//            if (i == k - 1) return b.get(right);\n//            right++;\n//            i++;\n//        }\n//        return Math.max(a.get(n-1), b.get(m-1));\n\n//        Optimal approach\n        if (n > m) return kthElement(b, a, m, n, k);\n        int start = Math.max(0, k-m), end = Math.min(k,n);\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            int mid2 = k - mid;\n            int l1 = mid > 0 ? a.get(mid - 1) : Integer.MIN_VALUE;\n            int l2 = mid2 > 0 ? b.get(mid2 - 1) : Integer.MIN_VALUE;\n            int r1 = mid < n? a.get(mid) : Integer.MAX_VALUE;\n            int r2 = mid2 < m? b.get(mid2) : Integer.MAX_VALUE;\n            if (l1 <= r2 && l2 <= r1) return Math.max(l1, l2);\n            if (l1 > r2) end = mid - 1;\n            else start = mid + 1;\n        }\n        return 0;\n    }\n\n    public static void main(String[] args) {\n        ArrayList<Integer> arr1 = new ArrayList<>(Arrays.asList(2, 3, 6, 7, 9));\n        ArrayList<Integer> arr2 = new ArrayList<>(Arrays.asList(1, 4, 8, 10));\n        int m = arr1.size();\n        int n = arr2.size();\n        int k = 5;\n        System.out.println("The element at the kth position in the final sorted array is " + kthElement(arr1, arr2, m, n, k));\n    }\n}',
@@ -1649,7 +1649,7 @@ const data = {
                   tags: ['BS on Answers'],
                 },
                 {
-                  id: '5331b8e2-412f-4baf-ad0e-f781dfdf1923',
+                  id: '771eaee7-26f6-49db-b037-d04093035121',
                   isFolder: false,
                   name: 'KthMissingPositiveNumber.java',
                   code: 'public class KthMissingPositiveNumber {\n    public static int missingK(int[] arr, int n, int k) {\n//        Brute force solution\n//        for (int i = 0; i < n; i++) {\n//            if (arr[i] > k) break;\n//            k++;\n//        }\n//        return k;\n\n//        Optimised approach\n        int start = 0;\n        int end = n-1;\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            int missing = arr[mid] - (mid + 1);\n            if (missing < k) {\n                start = mid + 1;\n            } else {\n                end = mid - 1;\n            }\n        }\n        return start + k;\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {2, 4, 5, 7};\n        int ans = missingK(arr, arr.length, 3);\n        System.out.println(ans);\n    }\n}',
@@ -1658,7 +1658,7 @@ const data = {
                   tags: ['BS on Answers'],
                 },
                 {
-                  id: '14458504-a044-4b10-a60a-5ea14164660f',
+                  id: '4e9cef2b-5911-4180-b772-30771fee7ec1',
                   isFolder: false,
                   name: 'MedianOfTwoSortedArrays.java',
                   code: 'public class MedianOfTwoSortedArrays {\n    public static double median(int[] a, int[] b) {\n//        Brute force solution\n//        Use another array ans add all elements in sorted order, then calculate median\n//        int n1 = a.length;\n//        int n2 = b.length;\n//        int[] temp = new int[n1 + n2];\n//        int left = 0, right = 0, i = 0;\n//        while (left < n1 && right < n2) {\n//            if (a[left] <= b[right]) {\n//                temp[i++] = a[left++];\n//            } else {\n//                temp[i++] = b[right++];\n//            }\n//        }\n//        while (left < n1) {\n//            temp[i++] = a[left++];\n//        }\n//        while (right < n2) {\n//            temp[i++] = b[right++];\n//        }\n////        returning median\n//        int m1 = temp.length / 2;\n//        if (temp.length % 2 == 0) {\n//            int m2 = m1 - 1;\n//            return (temp[m1] + temp[m2]) / 2.0;\n//        }\n//        return temp[m1];\n\n//        Better solution\n//        We don\'t need to store all the elements just medians elements are needed to calculate median\n//        int n1 = a.length, n2 = b.length;\n//        int left = 0, right = 0, i = 0;\n//        int m1 = (n1 + n2) / 2;\n//        int mid1 = -1,  mid2 = -1;\n//        while (left < n1 && right < n2) {\n//            if (a[left] <= b[right]) {\n//                if (i == m1 - 1) mid1 = a[left];\n//                else if (i == m1) mid2 = a[left];\n//                left++;\n//            } else {\n//                if (i == m1 - 1) mid1 = b[right];\n//                else if (i == m1) mid2 = b[right];\n//                right++;\n//            }\n//            i++;\n//        }\n//        while (left < n1) {\n//            if (i == m1 - 1) mid1 = a[left];\n//            else if (i == m1) mid2 = a[left];\n//            i++;\n//            left++;\n//        }\n//        while (right < n2) {\n//            if (i == m1 - 1) mid1 = b[right];\n//            else if (i == m1) mid2 = b[right];\n//            i++;\n//            right++;\n//        }\n//        if ((n1 + n2) % 2 == 1) return mid2;\n//        return (double)(mid1 + mid2) / 2.0;\n\n//        Optimal solution\n//        Use binary search to get the mid value of the merged array (without merging)\n        int n1 = a.length, n2 = b.length;\n        if (n1 > n2) return median(b, a);\n        int n = n1 + n2;\n        int minElements = (n + 1) / 2;\n        int start = 0, end = n1;\n        while (start <= end) {\n            int mid1 = start + (end - start) / 2;\n            int mid2 = minElements - mid1;\n            int l1 = Integer.MIN_VALUE, l2 = Integer.MIN_VALUE;\n            int r1 = Integer.MAX_VALUE, r2 = Integer.MAX_VALUE;\n            if (mid1 > 0) l1 = a[mid1 - 1];\n            if (mid2 > 0) l2 = b[mid2 - 1];\n            if (mid1 < n1) r1 = a[mid1];\n            if (mid2 < n2) r2 = b[mid2];\n            if (l1 <= r2 && l2 <= r1) {\n                double median = Math.max(l1, l2);\n                if (n % 2 == 0) {\n                    median += Math.min(r1, r2);\n                    return median / 2.0;\n                }\n                return median;\n            }\n            if (l1 > r2) end = mid1 - 1;\n            else start = mid1 + 1;\n        }\n        return 0.0;\n    }\n\n    public static void main(String[] args) {\n        int[] a = {2, 4, 6};\n        int[] b = {1, 3};\n        System.out.println("The median of two sorted arrays is " + median(a, b));\n    }\n}',
@@ -1667,7 +1667,7 @@ const data = {
                   tags: ['BS on Answers'],
                 },
                 {
-                  id: '459812ab-9b36-4a00-a5e6-71927da457e0',
+                  id: '653c2b3a-a062-42b9-9af2-951cc1dc9ae5',
                   isFolder: false,
                   name: 'MinimiseMaximumDistanceBetweenGasStations.java',
                   code: 'import java.util.*;\n\npublic class MinimiseMaximumDistanceBetweenGasStations {\n    public static double minimiseMaxDistance(int []arr, int k){\n//        Brute force\n//        1. Make a sections array to store the count of added gas stations in each section\n//        int[] sections = new int[arr.length - 1];\n//        for (int i = 0; i < k; i++) {\n//            double maxVal = -1;\n//            int maxIdx = -1;\n//            for (int j = 0; j < sections.length; j++) {\n//                double distance = arr[j+1] - arr[j];\n//                double sectionLength = distance/(sections[j]+1);\n//                if (sectionLength > maxVal) {\n//                    maxVal = sectionLength;\n//                    maxIdx = j;\n//                }\n//            }\n//            sections[maxIdx]++;\n//        }\n//        2. Iterate sections to get the maxLength of the difference\n//        double maxLength = 0;\n//        for (int i  = 0; i < sections.length; i++) {\n//            double distance = arr[i+1] - arr[i];\n//            double len = distance / (sections[i]+ 1);\n//            maxLength = Math.max(maxLength, len);\n//        }\n//        return maxLength;\n\n//        Optimised approach - Priority queue\n//        Add all sections current length to the pq\n//        Iterate on range k and update the highest element pair in pq\n//        return the pq.peek();\n        PriorityQueue<Map.Entry<Double, Integer>> pq = new PriorityQueue<>(Map.Entry.comparingByKey(Collections.reverseOrder()));\n        for (int i = 0; i < arr.length - 1; i++) {\n            pq.add(new AbstractMap.SimpleEntry<>((double) arr[i+1] - arr[i], i));\n        }\n        int[] sections = new int[arr.length - 1];\n        for (int j = 0; j < k; j++) {\n            int idx = pq.remove().getValue();\n            sections[idx]++;\n            double distance = arr[idx+1] - arr[idx];\n            double sectionLength = distance / (sections[idx] + 1);\n            pq.add(new AbstractMap.SimpleEntry<>(sectionLength, idx));\n        }\n        return pq.remove().getKey();\n    }\n    public static void main(String[] args) {\n        int[] arr = {1, 2, 3, 4, 5};\n        int k = 4;\n        double ans = minimiseMaxDistance(arr, k);\n        System.out.println("The answer is: " + ans);\n    }\n}',
@@ -1676,7 +1676,7 @@ const data = {
                   tags: ['BS on Answers'],
                 },
                 {
-                  id: 'b3f19d87-c944-49dc-966f-1d2cea0e5e7a',
+                  id: '8cf02195-c584-436b-8361-9b1b4e2d8959',
                   isFolder: false,
                   name: 'NthRoot.java',
                   code: 'public class NthRoot {\n    public static int getNthPower(int num, int pow, int m) {\n        long ans = 1;\n        for (int i = 0; i < pow; i++) {\n            ans *= num;\n            if (ans > m) return 1;\n        }\n        if (ans == m) return 0;\n        return -1;\n    }\n    public static int getNthRoot(int n, int m) {\n//        for (int i = 1; i < m; i++) {\n//            int x = getNthPower(i, n);\n//            if (x == m) return i;\n//        }\n//        return -1;\n\n        int start = 0;\n        int end = m;\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            int res = getNthPower(mid, n, m);\n            if (res == 0) return mid;\n            if (res == 1) {\n                end = mid - 1;\n            } else {\n                start = mid + 1;\n            }\n        }\n        return -1;\n    }\n    public static void main(String[] args) {\n        int n = 9;\n        int m = 262144;\n        int ans = getNthRoot(n,m);\n        System.out.println(ans);\n    }\n}',
@@ -1685,7 +1685,7 @@ const data = {
                   tags: ['BS on Answers'],
                 },
                 {
-                  id: '6eddaf35-2d1a-4ddf-bb99-39d0ef2eee06',
+                  id: '19d47f3b-3e39-4816-a78d-615d3840df9e',
                   isFolder: false,
                   name: 'PaintersPartition.java',
                   code: 'import java.util.ArrayList;\n\npublic class PaintersPartition {\n    public static boolean isPossible(ArrayList<Integer> arr, int k, int maxArea) {\n        int sum = 0;\n        int totalPainters = 1;\n        for (int i = 0; i < arr.size(); i++) {\n            if (sum + arr.get(i) <= maxArea) {\n                sum += arr.get(i);\n            } else {\n                sum = arr.get(i);\n                totalPainters++;\n            }\n        }\n        return totalPainters <= k;\n    }\n    public static int findLargestMinDistance(ArrayList<Integer> arr, int k) {\n        int min = arr.get(0);\n        int max = arr.get(0);\n        for (int i = 1; i < arr.size(); i++) {\n            min = Math.max(min, arr.get(i));\n            max += arr.get(i);\n        }\n\n//        Brute force\n//        for (int i = min; i <= max; i++) {\n//            if (isPossible(arr, k, i)) return i;\n//        }\n//        return -1;\n\n//        Optimised solution\n        int start = min, end = max;\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            if (isPossible(arr, k, mid))\n                end = mid - 1;\n            else\n                start = mid + 1;\n        }\n        return start;\n\n    }\n    public static void main(String[] args) {\n\n    }\n}',
@@ -1694,7 +1694,7 @@ const data = {
                   tags: ['BS on Answers'],
                 },
                 {
-                  id: 'f157106f-a917-4df2-a00b-77f855e055ca',
+                  id: 'f3fe5d9d-3682-4e0e-a629-760d10e12570',
                   isFolder: false,
                   name: 'RoseGarden.java',
                   code: 'public class RoseGarden {\n    public static boolean isPossible(int[] arr, int r, int b, int d) {\n        int totalBouquets = 0;\n        int rCount = 0;\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] <= d) {\n                rCount++;\n            } else {\n                totalBouquets += rCount / r;\n                rCount = 0;\n            }\n        }\n        totalBouquets += rCount / r;\n        return totalBouquets >= b;\n    }\n\n    public static int roseGarden(int[] arr, int r, int b) {\n//        Brute force\n//        int max = arr[0];\n//        for (int i = 1; i < arr.length; i++) {\n//            max = Math.max(max, arr[i]);\n//        }\n//        for (int ans = 1; ans <= max; ans++) {\n//            if (isPossible(arr, r, b, ans)) return ans;\n//        }\n//        return -1;\n\n//        Optimised approach\n        if (b*r > arr.length) return -1;\n        int start = arr[0];\n        int end = arr[0];\n        for (int i = 1; i < arr.length; i++) {\n            end = Math.max(arr[i], end);\n            start = Math.min(arr[i], start);\n        }\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            if (isPossible(arr, r, b, mid)) {\n                end = mid - 1;\n            } else {\n                start = mid + 1;\n            }\n        }\n        return start;\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {3, 3, 6, 8, 13, 17, 6, 16};\n        int ans = roseGarden(arr, 2, 2);\n        System.out.println(ans);\n    }\n}',
@@ -1703,7 +1703,7 @@ const data = {
                   tags: ['BS on Answers'],
                 },
                 {
-                  id: '40cdc7d0-48d9-45ea-85e1-5cb35c431a81',
+                  id: 'bcdacf47-eea6-434d-92e3-472cad4bb8cd',
                   isFolder: false,
                   name: 'SplitArrayLargestSum.java',
                   code: 'public class SplitArrayLargestSum {\n\n    public static boolean isPossible(int[] arr, int limit, int splits) {\n        int totalSplits = 1;\n        int sum = 0;\n        for (int i = 0; i < arr.length; i++) {\n            if (sum + arr[i] <= limit) {\n                sum += arr[i];\n            } else {\n                sum = arr[i];\n                totalSplits++;\n            }\n            if (totalSplits > splits) return false;\n        }\n        return true;\n    }\n\n    public static int largestSubarraySumMinimized(int []arr, int k) {\n        // Write Your Code Here\n//        Brute same as book allocation problem\n        int n = arr.length;\n        if (k > n) return -1;\n        int start = arr[0];\n        int end = arr[0];\n        for (int i = 1; i < n; i++) {\n            start = Math.max(start, arr[i]);\n            end += arr[i];\n        }\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            if (isPossible(arr, mid, k))\n                end = mid - 1;\n            else\n                start = mid + 1;\n        }\n        return start;\n    }\n    public static void main(String[] args) {\n        int[] a = {10, 20, 30, 40};\n        int k = 2;\n        int ans = largestSubarraySumMinimized(a, k);\n        System.out.println("The answer is: " + ans);\n    }\n}',
@@ -1712,7 +1712,7 @@ const data = {
                   tags: ['BS on Answers'],
                 },
                 {
-                  id: '37f5155b-555a-4f92-a375-29b7b45cb0b5',
+                  id: 'de8150a1-90de-4263-9d96-afc3fa007712',
                   isFolder: false,
                   name: 'SquareRoot.java',
                   code: 'public class SquareRoot {\n    public static int getSQRT(int x) {\n//        Brute force\n//        int ans = 1;\n//        for (int i = 1; i <= x; i++) {\n//            if (i*i <= x) {\n//                ans = i;\n//            } else {\n//                break;\n//            }\n//        }\n//        return ans;\n\n//        Optimised approach\n        int start = 1;\n        int end = x;\n        while (start <= end) {\n            int mid = start + (end - start)/2;\n            int root = x/mid;\n            if (mid == root) {\n                return mid;\n            }\n            if (mid > root) {\n                end = mid - 1;\n            } else {\n                start = mid + 1;\n            }\n        }\n        return end;\n    }\n    public static void main(String[] args) {\n        int num = 21;\n        int ans = getSQRT(num);\n        System.out.println(ans);\n    }\n}',
@@ -1723,12 +1723,12 @@ const data = {
               ],
             },
             {
-              id: 'f0fe4b52-f2aa-40e5-a9bb-9944606617fd',
+              id: '3b4fc1ff-5d57-4b07-b170-e59ce471e7d1',
               isFolder: true,
               name: 'Binary Search Trees',
               content: [
                 {
-                  id: 'bc5782b8-f6ec-41fe-a404-e6aaccc8bca6',
+                  id: '1c2dfc7b-4971-47bc-a2e6-7495a4b33dfc',
                   isFolder: false,
                   name: 'MinMaxInBST.java',
                   code: 'public class MinMaxInBST {\n    public static int minValue(TreeNode root) {\n        // Write your code here.\n        TreeNode temp = root;\n        if (root == null) return -1;\n        while (temp.left != null) {\n            temp = temp.left;\n        }\n        return temp.val;\n    }\n    public static int maxValue(TreeNode root) {\n        // Write your code here.\n        TreeNode temp = root;\n        if (root == null) return -1;\n        while (temp.right != null) {\n            temp = temp.right;\n        }\n        return temp.val;\n    }\n}',
@@ -1737,7 +1737,7 @@ const data = {
                   tags: ['Concepts'],
                 },
                 {
-                  id: '2f7d5f38-b0d3-471a-8edb-9f7b06a08249',
+                  id: '16e4c043-aa72-4866-8759-f879fd20f0c8',
                   isFolder: false,
                   name: 'SearchInBST.java',
                   code: 'public class SearchInBST {\n    public TreeNode searchBST(TreeNode root, int val) {\n        if (root == null) return null;\n        if (root.val == val) return root;\n        if (val > root.val) return searchBST(root.right, val);\n        return searchBST(root.left, val);\n    }\n}',
@@ -1746,7 +1746,7 @@ const data = {
                   tags: ['Concepts'],
                 },
                 {
-                  id: '819aa1a1-0259-4ff0-8e2e-0fc520662496',
+                  id: 'b1ababf1-0a70-4f27-87bb-da2cc743cbe4',
                   isFolder: false,
                   name: 'BSTFromPreorder.java',
                   code: 'import java.util.*;\npublic class BSTFromPreorder {\n    public TreeNode bstFromPreorder(int[] preorder) {\n        if (preorder.length == 0) return null;\n        TreeNode root = new TreeNode(preorder[0]);\n        int start = 1;\n        for (int i = 1; i < preorder.length; i++) {\n            if (preorder[0] < preorder[i]) break;\n            start++;\n        }\n        int[] left = Arrays.copyOfRange(preorder, 1, start);\n        int[] right = Arrays.copyOfRange(preorder, start, preorder.length);\n        root.left = bstFromPreorder(left);\n        root.right = bstFromPreorder(right);\n        return root;\n    }\n}',
@@ -1755,7 +1755,7 @@ const data = {
                   tags: ['Practice Problems'],
                 },
                 {
-                  id: '78412533-b62c-44e1-b47f-13820f23e640',
+                  id: 'ed099feb-9d18-421a-a6c5-32663f1a374a',
                   isFolder: false,
                   name: 'CeilBST.java',
                   code: 'public class CeilBST {\n    public  static int findCeil(TreeNode node, int x) {\n        // Write your code here\n        TreeNode curr = node;\n        int ceil = -1;\n        while (curr != null) {\n            if (curr.val == x) {\n                return curr.val;\n            }\n            if (curr.val > x) {\n                ceil = curr.val;\n                curr = curr.left;\n            } else {\n                curr = curr.right;\n            }\n        }\n        return ceil;\n    }\n}',
@@ -1764,7 +1764,7 @@ const data = {
                   tags: ['Practice Problems'],
                 },
                 {
-                  id: 'c2a1c7f8-8e62-4be7-bc02-fe4d2acbb91d',
+                  id: 'f3846e38-d132-44e5-b6ae-79f03d5dfbc3',
                   isFolder: false,
                   name: 'DeleteNodeBST.java',
                   code: 'public class DeleteNodeBST {\n    public int getMinNodeVal(TreeNode root) {\n        TreeNode curr = root;\n        while (curr.left != null)\n            curr = curr.left;\n        return curr.val;\n    }\n    public TreeNode deleteNode(TreeNode root, int key) {\n        if (root == null) return null;\n        if (key > root.val)\n            root.right = deleteNode(root.right, key);\n        else if (key < root.val)\n            root.left = deleteNode(root.left, key);\n        else {\n            if (root.left == null)\n                root = root.right;\n            else if (root.right == null)\n                root = root.left;\n            else {\n                root.val = getMinNodeVal(root.right);\n                root.right = deleteNode(root.right, root.val);\n            }\n        }\n        return root;\n    }\n}',
@@ -1773,7 +1773,7 @@ const data = {
                   tags: ['Practice Problems'],
                 },
                 {
-                  id: 'f808d834-dd15-4099-a316-c209b8c9e677',
+                  id: '99c0dbd0-8651-4bf5-9fa5-0e87aea8b881',
                   isFolder: false,
                   name: 'FixBST.java',
                   code: 'public class FixBST {\n    TreeNode node1, node2, prev;\n    public void inoFix(TreeNode root) {\n        if (root == null) return;\n        inoFix(root.left);\n        if (prev != null && prev.val > root.val) {\n            if (node1 == null) {\n                node1 = prev;\n            }\n            node2 = root;\n        }\n        prev = root;\n        inoFix(root.right);\n    }\n    public void recoverTree(TreeNode root) {\n        inoFix(root);\n        int temp = node1.val;\n        node1.val = node2.val;\n        node2.val = temp;\n    }\n}',
@@ -1782,7 +1782,7 @@ const data = {
                   tags: ['Practice Problems'],
                 },
                 {
-                  id: '0fc1f18d-e907-4c4d-82ce-4464d8971ffb',
+                  id: '1243a0af-558d-448f-90cb-4a2f2ce35a25',
                   isFolder: false,
                   name: 'FloorBST.java',
                   code: 'public class FloorBST {\n    public static int Floor(TreeNode node, int x) {\n        TreeNode curr = node;\n        int floor = -1;\n        while (curr != null) {\n            if (curr.val == x) return x;\n            if (curr.val < x) {\n                floor = curr.val;\n                curr = curr.right;\n            } else {\n                curr = curr.left;\n            }\n        }\n        return floor;\n    }\n}',
@@ -1791,7 +1791,7 @@ const data = {
                   tags: ['Practice Problems'],
                 },
                 {
-                  id: 'b0dfbe63-20cf-4057-a562-d3b758750e3f',
+                  id: 'e0cf53b7-db06-435d-a462-796ca99bae7b',
                   isFolder: false,
                   name: 'InorderSuccessorPredecessorOfBST.java',
                   code: 'import java.util.*;\npublic class InorderSuccessorPredecessorOfBST {\n    public static List<Integer> predecessorSuccessor(TreeNode root, int key) {\n        // Write your code here.\n        List<Integer> ans = new ArrayList<>();\n        // predecessor\n        int p = -1;\n        TreeNode curr = root;\n        while (curr != null) {\n            if (curr.val < key) {\n                p = curr.val;\n                curr = curr.right;\n            } else {\n                curr = curr.left;\n            }\n        }\n        // successor\n        int s = -1;\n        curr = root;\n        while (curr != null) {\n            if (curr.val > key) {\n                s = curr.val;\n                curr = curr.left;\n            } else {\n                curr = curr.right;\n            }\n        }\n        ans.add(p);\n        ans.add(s);\n        return ans;\n    }\n}',
@@ -1800,7 +1800,7 @@ const data = {
                   tags: ['Practice Problems'],
                 },
                 {
-                  id: '3f0e58ad-6dfd-401f-a30b-2420e0fa3378',
+                  id: '7a92c401-2128-47e9-8a70-3108d93a2f87',
                   isFolder: false,
                   name: 'InsertNodeBST.java',
                   code: 'public class InsertNodeBST {\n    public TreeNode insertIntoBST(TreeNode root, int val) {\n        if (root == null) return new TreeNode(val);\n        if (val > root.val) {\n            root.right = insertIntoBST(root.right, val);\n        } else {\n            root.left = insertIntoBST(root.left, val);\n        }\n        return root;\n    }\n}',
@@ -1809,7 +1809,7 @@ const data = {
                   tags: ['Practice Problems'],
                 },
                 {
-                  id: 'ecd86617-3c92-4fad-b229-8b3d28d5b833',
+                  id: '8f3b8743-7a43-47f8-8893-154078b915e9',
                   isFolder: false,
                   name: 'KthSmallestElementBST.java',
                   code: 'public class KthSmallestElementBST {\n    public static void solve(TreeNode root, int[] ans, int k) {\n        if (root == null) return;\n        solve(root.left, ans, k);\n        ans[1]++;\n        if (ans[1] == k) {\n            ans[0] = root.val;\n            return;\n        }\n        solve(root.right, ans, k);\n    }\n    public int kthSmallest(TreeNode root, int k) {\n        int[] ans = { -1, 0 };\n        solve(root, ans, k);\n        return ans[0];\n    }\n}',
@@ -1818,7 +1818,7 @@ const data = {
                   tags: ['Practice Problems'],
                 },
                 {
-                  id: 'e5a1220d-dfd8-4370-b609-de4491a4dde2',
+                  id: 'eead73dc-d8c6-4b50-a6b3-5fdd307d456c',
                   isFolder: false,
                   name: 'LCAOfBST.java',
                   code: 'public class LCAOfBST {\n    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {\n        if (p.val > root.val && q.val > root.val) return lowestCommonAncestor(root.right ,p,q);\n        if (p.val < root.val && q.val < root.val) return lowestCommonAncestor(root.left ,p,q);\n        return root;\n    }\n}',
@@ -1827,7 +1827,7 @@ const data = {
                   tags: ['Practice Problems'],
                 },
                 {
-                  id: 'a3f7b1fc-dd6b-493f-82e8-c4ff79100154',
+                  id: '5a766223-d0aa-4464-a4a2-34a849dadd72',
                   isFolder: false,
                   name: 'Merge2BST.java',
                   code: '// https://www.codingninjas.com/studio/problems/merge-two-bsts_920474\nimport java.util.*;\npublic class Merge2BST {\n    public static List<Integer> mergeLL(TreeNode list1, TreeNode list2, List<Integer> ans) {\n        TreeNode i = list1;\n        TreeNode j = list2;\n        while (i != null && j != null) {\n            if (i.val <= j.val) {\n                ans.add(i.val);\n                i = i.right;\n            } else {\n                ans.add(j.val);\n                j = j.right;\n            }\n        }\n        while (i != null) {\n            ans.add(i.val);\n            i = i.right;\n        }\n        while (j != null) {\n            ans.add(j.val);\n            j = j.right;\n        }\n        return ans;\n    }\n    public static List<Integer> merge(List<Integer> list1, List<Integer> list2) {\n        List<Integer> ans = new ArrayList<>();\n        int i = 0, j = 0;\n        while (i < list1.size() && j < list2.size()) {\n            int l1 = list1.get(i), l2 = list2.get(j);\n            if (l1 <= l2) {\n                ans.add(l1);\n                i++;\n            } else {\n                ans.add(l2);\n                j++;\n            }\n        }\n        while (i < list1.size()) ans.add(list1.get(i++));\n        while (j < list2.size()) ans.add(list2.get(j++));\n        return ans;\n    }\n    public static void ino(TreeNode root, List<Integer> ans) {\n        if (root == null) return;\n        Stack<TreeNode> st = new Stack<>();\n        TreeNode node = root;\n        while (node != null || !st.isEmpty()) {\n            while (node != null) {\n                node = st.push(node).left;\n            }\n            node = st.pop();\n            ans.add(node.val);\n            node = node.right;\n        }\n    }\n\n    static TreeNode head = new TreeNode(0);\n    public static void sortedFlatten(TreeNode root) {\n        if (root == null) return;\n        sortedFlatten(root.left);\n        head.right = root;\n        head = head.right;\n        head.left = null;\n        sortedFlatten(root.right);\n    }\n\n    public static List<Integer> mergeBST(TreeNode root1, TreeNode root2) {\n        // Write your code here.\n        // List<Integer> list1 = new ArrayList<>();\n        // List<Integer> list2 = new ArrayList<>();\n        // return merge(list1, list2);\n        TreeNode list1 = head;\n        sortedFlatten(root1);\n        head = new TreeNode(0);\n        TreeNode list2 = head;\n        sortedFlatten(root2);\n        List<Integer> ans = new ArrayList<>();\n        return mergeLL(list1.right, list2.right, ans);\n    }\n}',
@@ -1836,7 +1836,7 @@ const data = {
                   tags: ['Practice Problems'],
                 },
                 {
-                  id: '056f5df5-3f6a-4747-a5b5-2d1600198bc3',
+                  id: 'c2db98cd-f476-4004-ae58-50f347d0e654',
                   isFolder: false,
                   name: 'SizeOfLargestBST.java',
                   code: 'public class SizeOfLargestBST {\n    static class TreeInfo {\n        int size, max, min;\n        TreeInfo(int s, int min, int max) {\n            this.size = s;\n            this.min = min;\n            this.max = max;\n        }\n    }\n    public static TreeInfo solve(TreeNode root) {\n        if (root == null)\n            return new TreeInfo(0, Integer.MAX_VALUE, Integer.MIN_VALUE);\n        if (root.left == null && root.right == null)\n            return new TreeInfo(1, root.val, root.val);\n        TreeInfo l = solve(root.left);\n        TreeInfo r = solve(root.right);\n        if (root.val > l.max && root.val < r.min) {\n            int min = Math.min(l.min, root.val);\n            int max = Math.max(r.max, root.val);\n            return new TreeInfo(l.size + r.size + 1, min, max);\n        }\n        return new TreeInfo(Math.max(l.size, r.size), Integer.MIN_VALUE, Integer.MAX_VALUE);\n    }\n\n    public static int largestBST(TreeNode root) {\n        // Write your code here.\n        TreeInfo temp = solve(root);\n        return temp.size;\n    }\n}',
@@ -1845,7 +1845,7 @@ const data = {
                   tags: ['Practice Problems'],
                 },
                 {
-                  id: '5b79b0e0-c7e6-4c44-b919-e9cfcab3a0ca',
+                  id: '1ba2178e-fe0f-470c-9400-9c35c85f0f9f',
                   isFolder: false,
                   name: 'TwoSum4.java',
                   code: 'import java.util.*;\npublic class TwoSum4 {\n    public static void ino(TreeNode root, List<Integer> ans) {\n        if (root == null) return;\n        ino(root.left, ans);\n        ans.add(root.val);\n        ino(root.right, ans);\n    }\n    public boolean findTarget(TreeNode root, int k) {\n        List<Integer> inorder = new ArrayList<>();\n        ino(root, inorder);\n        int i = 0, j = inorder.size() - 1;\n        while (i < j) {\n            int sum = inorder.get(i) + inorder.get(j);\n            if (sum > k) j--;\n            else if (sum < k) i++;\n            else return true;\n        }\n        return false;\n    }\n}',
@@ -1854,7 +1854,7 @@ const data = {
                   tags: ['Practice Problems'],
                 },
                 {
-                  id: '4b71dd72-635d-4c3d-9ee1-8d95949649d0',
+                  id: '8f10dafd-13e9-41d8-a309-e955ec1f512e',
                   isFolder: false,
                   name: 'ValidateBST.java',
                   code: 'public class ValidateBST {\n    public static boolean solve(TreeNode root, Integer low, Integer high) {\n        if (root == null) return true;\n        if (low != null && root.val <= low) return false;\n        if (high != null && root.val >= high) return false;\n        return solve(root.left, low, root.val) && solve(root.right, root.val, high);\n    }\n    public boolean isValidBST(TreeNode root) {\n        return solve(root, null, null);\n    }\n}',
@@ -1865,12 +1865,12 @@ const data = {
               ],
             },
             {
-              id: '3ecb6cb7-4aea-413e-b652-9ec1c20c2895',
+              id: 'd554f157-d9fa-489a-973a-9e55e435e970',
               isFolder: true,
               name: 'Binary Trees',
               content: [
                 {
-                  id: '3aa60867-3318-4a91-8397-d58c5c52fd78',
+                  id: '3de4b27f-9223-41c4-844c-929302efda21',
                   isFolder: false,
                   name: 'AllNodesDistanceKInBinaryTree.java',
                   code: 'import java.util.*;\npublic class AllNodesDistanceKInBinaryTree {\n    public static void markParents(TreeNode root, HashMap<Integer, TreeNode> hm) {\n        Queue<TreeNode> q = new LinkedList<>();\n        q.add(root);\n        while (!q.isEmpty()) {\n            TreeNode node = q.poll();\n            if (node.left != null) {\n                q.add(node.left);\n                hm.put(node.left.val, node);\n            }\n            if (node.right != null) {\n                q.add(node.right);\n                hm.put(node.right.val, node);\n            }\n        }\n    }\n    public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {\n        HashMap<Integer, TreeNode> hm = new HashMap<>();\n        markParents(root, hm);\n        Queue<TreeNode> q = new LinkedList<>();\n        HashSet<Integer> hs = new HashSet<>();\n        q.add(target);\n        hs.add(target.val);\n        int range = 0;\n        while (!q.isEmpty()) {\n            int size = q.size();\n            if (range == k) break;\n            for (int i = 0; i < size; i++) {\n                TreeNode node = q.poll();\n                TreeNode parent = hm.getOrDefault(node.val, null);\n                if (parent != null && !hs.contains(parent.val)) {\n                    q.add(parent);\n                    hs.add(parent.val);\n                }\n                if (node.left != null && !hs.contains(node.left.val)) {\n                    q.add(node.left);\n                    hs.add(node.left.val);\n                }\n                if (node.right != null && !hs.contains(node.right.val)) {\n                    q.add(node.right);\n                    hs.add(node.right.val);\n                }\n            }\n            range++;\n        }\n        List<Integer> ans = new ArrayList<>();\n        while (!q.isEmpty()) ans.add(q.poll().val);\n        return ans;\n    }\n}',
@@ -1879,7 +1879,7 @@ const data = {
                   tags: ['Hard Problems'],
                 },
                 {
-                  id: 'bfe5aa48-9627-402c-a433-73f769f66b5d',
+                  id: '229d309a-e1b6-4fca-9f1a-194625b70d39',
                   isFolder: false,
                   name: 'AllPathsToLeafNodeFromRoot.java',
                   code: 'import java.util.*;\npublic class AllPathsToLeafNodeFromRoot {\n    public static void solve(TreeNode root, String path, List<String> ans) {\n        if (root == null) return;\n        if (root.left == null && root.right == null) ans.add(path + root.val);\n        solve(root.left, path + root.val +" ", ans);\n        solve(root.right, path + root.val + " ", ans);\n    }\n    public static List<String> allRootToLeaf(TreeNode root) {\n        // Write your code here.\n        List<String> ans = new ArrayList<>();\n        solve(root, "", ans);\n        return ans;\n    }\n}',
@@ -1888,7 +1888,7 @@ const data = {
                   tags: ['Hard Problems'],
                 },
                 {
-                  id: '9c086925-0205-4d48-8f31-00d51551946f',
+                  id: '0bede12d-6bd5-4a42-b1b9-6962de4f043f',
                   isFolder: false,
                   name: 'BinaryTreeFromInorderPostorder.java',
                   code: 'import java.util.Arrays;\n\npublic class BinaryTreeFromInorderPostorder {\n    public static TreeNode solve(int[] inorder, int[] postorder) {\n        if (inorder.length == 0 || postorder.length == 0) return null;\n        TreeNode root = new TreeNode(postorder[postorder.length - 1]);\n        int start = 0;\n        for (int j : inorder) {\n            if (j == postorder[postorder.length - 1]) break;\n            start++;\n        }\n        int[] left_inorder = Arrays.copyOfRange(inorder, 0, start);\n        int[] left_postorder = Arrays.copyOfRange(postorder, 0, start);\n        int[] right_inorder = Arrays.copyOfRange(inorder, start + 1, inorder.length);\n        int[] right_postorder = Arrays.copyOfRange(postorder, start, postorder.length - 1);\n        root.left = solve(left_inorder, left_postorder);\n        root.right = solve(right_inorder, right_postorder);\n        return root;\n    }\n\n    public static TreeNode buildTree(int[] inorder, int[] postorder) {\n        return solve(inorder, postorder);\n    }\n\n    public static void main(String[] args) {\n        int[] inorder = {9, 3, 15, 20, 7};\n        int[] postorder = {9, 15, 7, 20, 3};\n        TreeNode root = buildTree(inorder, postorder);\n        System.out.println(root.val);\n        System.out.println(root.left.val);\n        System.out.println(root.right.val);\n        System.out.println(root.right.left.val);\n        System.out.println(root.right.right.val);\n    }\n}',
@@ -1897,7 +1897,7 @@ const data = {
                   tags: ['Hard Problems'],
                 },
                 {
-                  id: '13eadc6a-f39b-4544-9085-965257f7e49b',
+                  id: '02035d24-fd81-4866-b72d-7c8dfa6357f3',
                   isFolder: false,
                   name: 'BinaryTreeFromInorderPreorder.java',
                   code: 'import java.util.Arrays;\n\npublic class BinaryTreeFromInorderPreorder {\n    public static TreeNode solve(int[] preorder, int[] inorder) {\n        if (preorder.length == 0 || inorder.length == 0) return null;\n        TreeNode root = new TreeNode(preorder[0]);\n        int start = 0;\n        for (int j : inorder) {\n            if (j == preorder[0]) break;\n            start++;\n        }\n        int[] left_inorder = Arrays.copyOfRange(inorder, 0, start);\n        int[] left_preorder = Arrays.copyOfRange(preorder, 1, start+1);\n        int[] right_inorder = Arrays.copyOfRange(inorder, start+1, inorder.length);\n        int[] right_preorder = Arrays.copyOfRange(preorder, start+1, preorder.length);\n        root.left = solve(left_preorder, left_inorder);\n        root.right = solve(right_preorder, right_inorder);\n        return root;\n    }\n\n    public static TreeNode buildTree(int[] preorder, int[] inorder) {\n        return solve(preorder, inorder);\n    }\n\n    public static void main(String[] args) {\n        int[] inorder = {9, 3, 15, 20, 7};\n        int[] preorder = {3, 9, 20, 15, 7};\n        TreeNode root = buildTree(preorder, inorder);\n        System.out.println(root.val);\n        System.out.println(root.left.val);\n        System.out.println(root.right.val);\n        System.out.println(root.right.left.val);\n        System.out.println(root.right.right.val);\n    }\n}',
@@ -1906,7 +1906,7 @@ const data = {
                   tags: ['Hard Problems'],
                 },
                 {
-                  id: '1a45c4da-217d-4d2c-b11a-6aebfb2316e7',
+                  id: '977cbe61-fbc0-40af-a3ec-ec45a0f19f5e',
                   isFolder: false,
                   name: 'CountTotalNodesInBinaryTree.java',
                   code: 'public class CountTotalNodesInBinaryTree {\n    public int countNodes(TreeNode root) {\n        if (root == null) return 0;\n        int l = countNodes(root.left);\n        int r = countNodes(root.right);\n        return l + r + 1;\n    }\n}',
@@ -1915,7 +1915,7 @@ const data = {
                   tags: ['Hard Problems'],
                 },
                 {
-                  id: 'c33a34bc-d6a1-41eb-b08e-ca94a892af37',
+                  id: '65c00f22-e93f-41f7-b67b-41a85fc760cb',
                   isFolder: false,
                   name: 'FlattenBinaryTreeToLinkedList.java',
                   code: 'public class FlattenBinaryTreeToLinkedList {\n    public void flatten(TreeNode root) {\n        TreeNode curr = root;\n        while (curr != null) {\n            if (curr.left != null) {\n                TreeNode temp = curr.left;\n                while (temp.right != null) {\n                    temp = temp.right;\n                }\n                temp.right = curr.right;\n                curr.right = curr.left;\n                curr.left = null;\n            }\n            curr = curr.right;\n        }\n    }\n}',
@@ -1924,7 +1924,7 @@ const data = {
                   tags: ['Hard Problems'],
                 },
                 {
-                  id: '90ee5b45-36fc-4b79-abc6-87b001cff18b',
+                  id: 'ee53aa5f-3a58-44d1-a1ac-decf068e50a5',
                   isFolder: false,
                   name: 'ImmediateChildrenSumProperty.java',
                   code: 'public class ImmediateChildrenSumProperty {\n    public static int solve(TreeNode root) {\n        if (root == null) return 0;\n        if (root.left == null && root.right == null) return root.val;\n        int l = solve(root.left);\n        int r = solve(root.right);\n        if (l == - 1 || r == - 1 || root.val != (l + r)) return -1;\n        return root.val;\n    }\n    public static boolean isParentSum(TreeNode root) {\n        // Write your code here.\n        // int[] flag = {1};\n        int val = solve(root);\n        return val != -1;\n        // return flag[0] == 1;\n    }\n}',
@@ -1933,7 +1933,7 @@ const data = {
                   tags: ['Hard Problems'],
                 },
                 {
-                  id: 'aab03e0f-e671-4b2a-952a-1c215e7a7a51',
+                  id: '2a35336f-441e-4a8e-b4dc-5a6954f2b731',
                   isFolder: false,
                   name: 'LowestCommonAncestor.java',
                   code: 'public class LowestCommonAncestor {\n    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {\n        // return solve(root, p, q);\n        if (root == null || root == p || root == q) return root;\n        TreeNode l = lowestCommonAncestor(root.left, p, q);\n        TreeNode r = lowestCommonAncestor(root.right, p, q);\n        if (l != null && r != null) return root;\n        return l != null ? l : r;\n    }\n}',
@@ -1942,7 +1942,7 @@ const data = {
                   tags: ['Hard Problems'],
                 },
                 {
-                  id: '55b3cb80-08e9-4142-8d86-118f481a35dd',
+                  id: '935feeb9-9d3f-43e2-bff2-c837d017a7ff',
                   isFolder: false,
                   name: 'MaximumWidthOfBinaryTree.java',
                   code: 'import java.util.*;\npublic class MaximumWidthOfBinaryTree {\n    static class Pair {\n        int idx;\n        TreeNode node;\n        Pair (TreeNode n, int i) {\n            this.idx = i;\n            this.node = n;\n        }\n    }\n    public int widthOfBinaryTree(TreeNode root) {\n        ArrayDeque<Pair> q = new ArrayDeque<>();\n        q.add(new Pair(root, 0));\n        int maxWidth = 1;\n        while (!q.isEmpty()) {\n            int size = q.size();\n            if (size > 1) {\n                Pair min = q.peekFirst();\n                Pair max = q.peekLast();\n                maxWidth = Math.max(max.idx - min.idx + 1, maxWidth);\n            }\n            for (int i = 0; i < size; i++) {\n                Pair p = q.pollFirst();\n                if (p.node.left != null) {\n                    q.add(new Pair(p.node.left, 2*p.idx + 1));\n                }\n                if (p.node.right != null) {\n                    q.add(new Pair(p.node.right, 2*p.idx + 2));\n                }\n            }\n        }\n        return maxWidth;\n    }\n}',
@@ -1951,7 +1951,7 @@ const data = {
                   tags: ['Hard Problems'],
                 },
                 {
-                  id: 'be211ec8-d86b-4baa-b892-72d401a974b8',
+                  id: '60baf549-3de9-4f6a-a0f5-14d82ca7361c',
                   isFolder: false,
                   name: 'MorrisTraversalInorder.java',
                   code: 'import java.util.*;\npublic class MorrisTraversalInorder {\n    public List<Integer> inorderTraversal(TreeNode root) {\n        List<Integer> ans = new ArrayList<>();\n        TreeNode curr = root;\n        while (curr != null) {\n            if (curr.left == null) {\n                ans.add(curr.val);\n                curr = curr.right;\n            } else {\n                TreeNode prev = curr.left;\n                while (prev.right != null && prev.right != curr) {\n                    prev = prev.right;\n                }\n                if (prev.right == null) {\n                    prev.right = curr;\n                    curr = curr.left;\n                } else {\n                    prev.right = null;\n                    ans.add(curr.val);\n                    curr = curr.right;\n                }\n            }\n        }\n        return ans;\n    }\n}',
@@ -1960,7 +1960,7 @@ const data = {
                   tags: ['Hard Problems'],
                 },
                 {
-                  id: 'ae9bf46d-6f9e-4c8e-a93b-bcd3680d963d',
+                  id: '1c14fced-a918-4d8e-a999-406603198b06',
                   isFolder: false,
                   name: 'MorrisTraversalPreorder.java',
                   code: 'import java.util.*;\npublic class MorrisTraversalPreorder {\n    public List<Integer> preorderTraversal(TreeNode root) {\n        List<Integer> ans = new ArrayList<>();\n        TreeNode curr = root;\n        while (curr != null) {\n            if (curr.left == null) {\n                ans.add(curr.val);\n                curr = curr.right;\n            } else {\n                TreeNode prev = curr.left;\n                while (prev.right != null && prev.right != curr) {\n                    prev = prev.right;\n                }\n                if (prev.right == null) {\n                    prev.right = curr;\n                    ans.add(curr.val);\n                    curr = curr.left;\n                } else {\n                    prev.right = null;\n                    curr = curr.right;\n                }\n            }\n        }\n        return ans;\n    }\n}',
@@ -1969,7 +1969,7 @@ const data = {
                   tags: ['Hard Problems'],
                 },
                 {
-                  id: '78b9b976-e1dd-41a0-a247-9b48a14901e1',
+                  id: 'd6196b43-a4ad-4ee5-bd6c-fa4ba73133e9',
                   isFolder: false,
                   name: 'SerializeAndDeserialize.java',
                   code: 'public class SerializeAndDeserialize {\n    public static void preorder(TreeNode root, StringBuilder sb) {\n        if (root == null) {\n            sb.append("N,");\n            return;\n        }\n        sb.append(root.val).append(",");\n        preorder(root.left, sb);\n        preorder(root.right, sb);\n    }\n\n    // Encodes a tree to a single string.\n    public static String serialize(TreeNode root) {\n        StringBuilder sb = new StringBuilder();\n        preorder(root, sb);\n        sb.deleteCharAt(sb.length() - 1);\n        return sb.toString();\n    }\n\n    public static TreeNode solve(String[] arr, int[] idx) {\n        if (idx[0] == arr.length || arr[idx[0]].compareTo("N") == 0) {\n            idx[0]++;\n            return null;\n        }\n        TreeNode root = new TreeNode(Integer.parseInt(arr[idx[0]]));\n        idx[0]++;\n        root.left = solve(arr, idx);\n        root.right = solve(arr, idx);\n        return root;\n    }\n    // Decodes your encoded data to tree.\n    public static TreeNode deserialize(String data) {\n        String[] arr = data.split(",");\n        return solve(arr, new int[] {0});\n    }\n}',
@@ -1978,7 +1978,7 @@ const data = {
                   tags: ['Hard Problems'],
                 },
                 {
-                  id: '130d13cf-485e-4672-8c2f-f47d400e47ba',
+                  id: 'a5e5d08a-32b3-4b59-929c-5c0dc815c83b',
                   isFolder: false,
                   name: 'TimeToBurnBinaryTree.java',
                   code: 'import java.util.*;\npublic class TimeToBurnBinaryTree {\n    public static TreeNode getNode(TreeNode root, int val) {\n        if (root == null) return null;\n        if (root.val == val) return root;\n        TreeNode l = getNode(root.left, val);\n        TreeNode r = getNode(root.right, val);\n        return l == null ? r : l;\n    }\n    public static void markParents(TreeNode root, HashMap<Integer, TreeNode> hm) {\n        Queue<TreeNode> q = new LinkedList<>();\n        q.add(root);\n        while(!q.isEmpty()) {\n            TreeNode node = q.poll();\n            if (node.left != null) {\n                q.add(node.left);\n                hm.put(node.left.val, node);\n            }\n            if (node.right != null) {\n                q.add(node.right);\n                hm.put(node.right.val, node);\n            }\n        }\n    }\n    public static int timeToBurnTree(TreeNode root, int start) {\n        TreeNode target = getNode(root, start);\n        HashMap<Integer, TreeNode> hm = new HashMap<>();\n        markParents(root, hm);\n        Queue<TreeNode> q = new LinkedList<>();\n        HashSet<Integer> hs = new HashSet<>();\n        q.add(target);\n        hs.add(target.val);\n        int count = 0;\n        while (!q.isEmpty()) {\n            int size = q.size();\n            boolean flag = false;\n            for(int i = 0; i < size; i++) {\n                TreeNode node = q.poll();\n                TreeNode parent = hm.getOrDefault(node.val, null);\n                if (parent != null && !hs.contains(parent.val)) {\n                    hs.add(parent.val);\n                    q.add(parent);\n                    flag = true;\n                }\n                if (node.left != null && !hs.contains(node.left.val)) {\n                    hs.add(node.left.val);\n                    q.add(node.left);\n                    flag = true;\n                }\n                if (node.right != null && !hs.contains(node.right.val)) {\n                    hs.add(node.right.val);\n                    q.add(node.right);\n                    flag = true;\n                }\n            }\n            if (flag) count++;\n        }\n        return count;\n    }\n}',
@@ -1987,7 +1987,7 @@ const data = {
                   tags: ['Hard Problems'],
                 },
                 {
-                  id: '9430a0e9-fe21-4485-8658-585e6afcd760',
+                  id: '9407eac3-f2f1-4e82-9602-d58a47523850',
                   isFolder: false,
                   name: 'BalancedBinaryTree.java',
                   code: 'public class BalancedBinaryTree {\n    public int solve(TreeNode root) {\n        if (root == null) return 0;\n        int left = solve(root.left);\n        int right = solve(root.right);\n        if (left == -1 || right == -1 || Math.abs(left - right) > 1) return -1;\n        return Math.max(left, right) + 1;\n    }\n    public boolean isBalanced(TreeNode root) {\n        return solve(root) != -1;\n    }\n}',
@@ -1996,7 +1996,7 @@ const data = {
                   tags: ['Medium Problems'],
                 },
                 {
-                  id: '2e4f87ad-a2c0-4cc4-a673-18d01b1ef04c',
+                  id: '21589e60-762b-4eee-b92d-edffed4fb4e8',
                   isFolder: false,
                   name: 'BinaryTreeMaximumPathSum.java',
                   code: 'class BinaryTreeMaximumPathSum {\n    public static int solve(TreeNode root, int[] maxSum) {\n        if (root == null) return 0;\n        int l = Math.max(0, solve(root.left, maxSum));\n        int r = Math.max(0, solve(root.right, maxSum));\n        maxSum[0] = Math.max(maxSum[0], l + r + root.val);\n        return Math.max(l, r) + root.val;\n    }\n    public int maxPathSum(TreeNode root) {\n        int[] maxSum = new int[1];\n        maxSum[0] = Integer.MIN_VALUE;\n        solve(root, maxSum);\n        return maxSum[0];\n    }\n}',
@@ -2005,7 +2005,7 @@ const data = {
                   tags: ['Medium Problems'],
                 },
                 {
-                  id: '214e9f01-5585-4d86-8c48-31eb028b4ada',
+                  id: '1cf61871-3fc6-4238-a599-2576b7e75d94',
                   isFolder: false,
                   name: 'BottomViewBinaryTree.java',
                   code: 'import java.util.*;\npublic class BottomViewBinaryTree {\n    static class Pair{\n        int idx;\n        TreeNode node;\n        Pair(int idx, TreeNode node) {\n            this.idx = idx;\n            this.node = node;\n        }\n    }\n    public static ArrayList<Integer> verticalTraversal(TreeNode root) {\n        HashMap<Integer, Integer> hm = new HashMap<>();\n        Queue<Pair> q = new LinkedList<>();\n        int min = 0, max = 0;\n        q.add(new Pair(0, root));\n        while (!q.isEmpty()) {\n            int size = q.size();\n            for (int i = 0; i < size; i++) {\n                Pair p = q.poll();\n                TreeNode node = p.node;\n                hm.put(p.idx, node.val);\n                if (node.left != null) {\n                    min = Math.min(min, p.idx - 1);\n                    q.add(new Pair(p.idx - 1, node.left));\n                }\n                if (node.right != null) {\n                    max = Math.max(max, p.idx + 1);\n                    q.add(new Pair(p.idx + 1, node.right));\n                }\n            }\n        }\n        ArrayList<Integer> ans = new ArrayList<>();\n        for (int i = min; i <= max; i++) ans.add(hm.get(i));\n        return ans;\n    }\n    //Function to return a list containing the bottom view of the given tree.\n    public ArrayList <Integer> bottomView(TreeNode root)\n    {\n        // Code here\n        return verticalTraversal(root);\n    }\n}',
@@ -2014,7 +2014,7 @@ const data = {
                   tags: ['Medium Problems'],
                 },
                 {
-                  id: '58ff3830-e8a4-4a46-b344-489adc9f9685',
+                  id: 'b597ebf3-7f88-4739-ae51-07c36ef2b723',
                   isFolder: false,
                   name: 'BoundaryTraversalOfBinaryTree.java',
                   code: 'import java.util.*;\npublic class BoundaryTraversalOfBinaryTree {\n    public static boolean isLeaf(TreeNode root) {\n        return root != null && root.left == null && root.right == null;\n    }\n    public static void addLeafNodes(TreeNode root, List<Integer> ans) {\n        if (root == null) return;\n        if (isLeaf(root)) ans.add(root.val);\n        addLeafNodes(root.left, ans);\n        addLeafNodes(root.right, ans);\n    }\n    public static void addLeftNodes(TreeNode curr, List<Integer> ans) {\n        while (curr != null) {\n            if (!isLeaf(curr)) ans.add(curr.val);\n            curr = curr.left != null ? curr.left : curr.right;\n        }\n    }\n    public static void addRightNodes(TreeNode curr, List<Integer> ans) {\n        Stack<Integer> st = new Stack<>();\n        while (curr != null) {\n            if (!isLeaf(curr)) st.add(curr.val);\n            curr = curr.right != null ? curr.right : curr.left;\n        }\n        while (!st.isEmpty()) ans.add(st.pop());\n    }\n    public static List<Integer> traverseBoundary(TreeNode root){\n        // Write your code here.\n        List<Integer> ans = new ArrayList<>();\n        if (root == null) return ans;\n        ans.add(root.val);\n        addLeftNodes(root.left, ans);\n        addLeafNodes(root, ans);\n        addRightNodes(root.right, ans);\n        return ans;\n    }\n}',
@@ -2023,7 +2023,7 @@ const data = {
                   tags: ['Medium Problems'],
                 },
                 {
-                  id: 'bd4425be-1901-4970-b821-3ef9c01e8a7f',
+                  id: '041f8f67-5b43-4e4c-9306-d3f67b4f7d6c',
                   isFolder: false,
                   name: 'DiameterOfBinaryTree.java',
                   code: 'public class DiameterOfBinaryTree {\n    public static int solve(TreeNode root, int[] ans) {\n        // Write your code here.\n        if (root == null) return 0;\n        int l = solve(root.left, ans);\n        int r = solve(root.right, ans);\n        ans[0] = Math.max(ans[0], l+r);\n        return 1 + Math.max(l,r);\n    }\n    public int diameterOfBinaryTree(TreeNode root) {\n        int[] ans = new int[1];\n        solve(root, ans);\n        return ans[0];\n    }\n}',
@@ -2032,7 +2032,7 @@ const data = {
                   tags: ['Medium Problems'],
                 },
                 {
-                  id: '058614bd-b194-40e0-992b-082db2b81031',
+                  id: 'cff54f77-6c7b-428c-97af-ac1c53cd9367',
                   isFolder: false,
                   name: 'HeightOfABinaryTree.java',
                   code: 'public class HeightOfABinaryTree {\n    public int maxDepth(TreeNode root) {\n        if (root == null) return 0;\n        int depthL = maxDepth(root.left);\n        int depthR = maxDepth(root.right);\n        return Math.max(depthL, depthR) + 1;\n    }\n}',
@@ -2041,7 +2041,7 @@ const data = {
                   tags: ['Medium Problems'],
                 },
                 {
-                  id: '71a80f67-a9ad-4a02-928a-679b1feda1cc',
+                  id: '822a02e5-9ca9-4a4b-a96d-6c8cc0a3a425',
                   isFolder: false,
                   name: 'LeftRightViewBinaryTree.java',
                   code: 'import java.util.*;\npublic class LeftRightViewBinaryTree {\n    void solve(TreeNode root, List<Integer> ans, int lvl) {\n        if (root == null) return;\n        if (ans.size() <= lvl) ans.add(root.val);\n        solve(root.right, ans, lvl + 1);\n        solve(root.left, ans, lvl + 1);\n    }\n    public List<Integer> rightSideView(TreeNode root) {\n        List<Integer> ans = new ArrayList<>();\n        solve(root, ans, 0);\n        return ans;\n    }\n}',
@@ -2050,7 +2050,7 @@ const data = {
                   tags: ['Medium Problems'],
                 },
                 {
-                  id: 'a8e6676f-f0b3-44e5-9b86-4ac0357b99cf',
+                  id: 'b25ddbb3-5174-4b1c-a97e-04f43b3ea5b0',
                   isFolder: false,
                   name: 'SameTree.java',
                   code: 'class SameTree {\n    public boolean isSameTree(TreeNode p, TreeNode q) {\n        if (p == null && q == null) return true;\n        if (p == null || q == null || p.val != q.val) return false;\n        return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);\n    }\n}',
@@ -2059,7 +2059,7 @@ const data = {
                   tags: ['Medium Problems'],
                 },
                 {
-                  id: '81dddc83-1671-4b44-84da-b11e2bec83ac',
+                  id: '84dc2056-7214-44d3-96d0-b800257ebdf7',
                   isFolder: false,
                   name: 'SymmetricBinaryTree.java',
                   code: 'public class SymmetricBinaryTree {\n    public static boolean solve(TreeNode p, TreeNode q) {\n        if (p == null && q == null) return true;\n        if (p == null || q == null || p.val != q.val) return false;\n        return solve(p.left, q.right) && solve(p.right, q.left);\n    }\n    public boolean isSymmetric(TreeNode root) {\n        return root == null || solve(root.left, root.right);\n    }\n}',
@@ -2068,7 +2068,7 @@ const data = {
                   tags: ['Medium Problems'],
                 },
                 {
-                  id: 'fa7e45d5-f529-41b3-b797-56e1af5be219',
+                  id: 'c641a78f-f9e6-4994-a677-dbcaffa3e360',
                   isFolder: false,
                   name: 'TopViewBinaryTree.java',
                   code: 'import java.util.*;\npublic class TopViewBinaryTree {\n    static class Pair{\n        int idx;\n        TreeNode node;\n        Pair(int idx, TreeNode node) {\n            this.idx = idx;\n            this.node = node;\n        }\n    }\n    public static ArrayList<Integer> verticalTraversal(TreeNode root) {\n        HashMap<Integer, Integer> hm = new HashMap<>();\n        Queue<Pair> q = new LinkedList<>();\n        int min = 0, max = 0;\n        q.add(new Pair(0, root));\n        while (!q.isEmpty()) {\n            int size = q.size();\n            for (int i = 0; i < size; i++) {\n                Pair p = q.poll();\n                TreeNode node = p.node;\n                if (!hm.containsKey(p.idx))\n                    hm.put(p.idx, node.val);\n                if (node.left != null) {\n                    min = Math.min(min, p.idx - 1);\n                    q.add(new Pair(p.idx - 1, node.left));\n                }\n                if (node.right != null) {\n                    max = Math.max(max, p.idx + 1);\n                    q.add(new Pair(p.idx + 1, node.right));\n                }\n            }\n        }\n        ArrayList<Integer> ans = new ArrayList<>();\n        for (int i = min; i <= max; i++) ans.add(hm.get(i));\n        return ans;\n    }\n    static ArrayList<Integer> topView(TreeNode root) {\n        // add your code\n        return verticalTraversal(root);\n    }\n}',
@@ -2077,7 +2077,7 @@ const data = {
                   tags: ['Medium Problems'],
                 },
                 {
-                  id: 'eb5a7e2b-433c-487d-8fca-6df8ab54bb3c',
+                  id: '7d2744b5-d6ed-442d-b19b-ba54698c40f9',
                   isFolder: false,
                   name: 'VerticalOrderTraversalBinaryTree.java',
                   code: 'import java.util.*;\n\npublic class VerticalOrderTraversalBinaryTree {\n    static class Pair{\n        int idx, row;\n        TreeNode node;\n        Pair(int idx, int row, TreeNode node) {\n            this.idx = idx;\n            this.row = row;\n            this.node = node;\n        }\n    }\n    public List<List<Integer>> verticalTraversal(TreeNode root) {\n        HashMap<Integer, List<Integer>> hm = new HashMap<>();\n        PriorityQueue<Pair> q = new PriorityQueue<>((a,b) -> a.row == b.row ? a.node.val - b.node.val : a.row - b.row);\n        int min = 0, max = 0;\n        q.add(new Pair(0, 0, root));\n        int row = 0;\n        while (!q.isEmpty()) {\n            int size = q.size();\n            for (int i = 0; i < size; i++) {\n                Pair p = q.poll();\n                TreeNode node = p.node;\n                if (!hm.containsKey(p.idx))\n                    hm.put(p.idx, new ArrayList<>());\n                hm.get(p.idx).add(node.val);\n                if (node.left != null) {\n                    min = Math.min(min, p.idx - 1);\n                    q.add(new Pair(p.idx - 1, row, node.left));\n                }\n                if (node.right != null) {\n                    max = Math.max(max, p.idx + 1);\n                    q.add(new Pair(p.idx + 1, row, node.right));\n                }\n            }\n            row++;\n        }\n        List<List<Integer>> ans = new ArrayList<>();\n        for (int i = min; i <= max; i++) ans.add(hm.get(i));\n        return ans;\n    }\n}',
@@ -2086,7 +2086,7 @@ const data = {
                   tags: ['Medium Problems'],
                 },
                 {
-                  id: 'a407d42a-36d5-4e08-8397-7caa099df854',
+                  id: '316a0814-7a0b-4e51-845f-d22efac4aa18',
                   isFolder: false,
                   name: 'ZigZagLevelOrderTraversal.java',
                   code: 'import java.util.*;\nclass ZigZagLevelOrderTraversal {\n    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {\n        List<List<Integer>> ans = new ArrayList<>();\n        if (root == null) return ans;\n        boolean flip = true;\n        Queue<TreeNode> q = new LinkedList<>();\n        q.add(root);\n        while (!q.isEmpty()) {\n            List<Integer> temp = new ArrayList<>();\n            int size = q.size();\n            for (int i = 0; i < size; i++) {\n                TreeNode node = q.poll();\n                if (node != null) {\n                    if (flip) temp.add(node.val);\n                    else temp.add(0, node.val);\n\n                    if (node.left != null) q.add(node.left);\n                    if (node.right != null) q.add(node.right);\n                }\n            }\n            flip ^= true;\n            ans.add(temp);\n        }\n        return ans;\n    }\n}',
@@ -2095,7 +2095,7 @@ const data = {
                   tags: ['Medium Problems'],
                 },
                 {
-                  id: '568a7966-d3ea-460a-9e92-48a5256b2515',
+                  id: 'fa31379b-a6c8-4dc4-926f-2e7c45181469',
                   isFolder: false,
                   name: 'BinarySearchTree.java',
                   code: 'import java.util.*;\n\npublic class BinarySearchTree {\n    public static class TreeNode {\n        int val;\n        TreeNode left, right;\n        TreeNode(int val) {\n            this.val = val;\n            this.left = this.right = null;\n        }\n    }\n    public static class Pair {\n        TreeNode node;\n        int s;\n        Pair (TreeNode n, int s) {\n            this.node = n;\n            this.s = s;\n        }\n    }\n    TreeNode treeRoot;\n\n    TreeNode buildTree () {\n        return treeRoot;\n    }\n\n    //    TREE TRAVERSALS\n    //    DFS\n    public void printTree(String type) {\n        System.out.print(type + " traversal of Tree: [ ");\n        switch (type) {\n            case "Inorder" -> printTreeInOrder(treeRoot);\n            case "Preorder" -> printTreePreOrder(treeRoot);\n            case "Postorder" -> printTreePostOrder(treeRoot);\n        }\n        System.out.print("]\\n");\n    }\n\n    private void printTreeInOrder(TreeNode root) {\n//        Recursive\n//        if (root == null) return;\n//        printTreeInOrder(root.left);\n//        System.out.print(root.val + " ");\n//        printTreeInOrder(root.right);\n\n//        Iterative\n        Stack<TreeNode> st = new Stack<>();\n        TreeNode node = root;\n        while (node != null || !st.isEmpty()) {\n            while (node != null) {\n                st.push(node);\n                node = node.left;\n            }\n            node = st.pop();\n            System.out.print(root.val + " ");\n            node = node.right;\n        }\n    }\n\n    private void printTreePreOrder(TreeNode root) {\n//        Recursive\n//        if (root == null) return;\n//        System.out.print(root.val + " ");\n//        printTreePreOrder(root.left);\n//        printTreePreOrder(root.right);\n\n//        Iterative\n        Stack<TreeNode> st = new Stack<>();\n        TreeNode node = root;\n        while (node != null || !st.isEmpty()) {\n            while (node != null) {\n                System.out.print(root.val + " ");\n                st.push(node);\n                node = node.left;\n            }\n            node = st.pop().right;\n        }\n    }\n\n    private void printTreePostOrder(TreeNode root) {\n//        Recursive\n//        if (root == null) return;\n//        printTreePostOrder(root.left);\n//        printTreePostOrder(root.right);\n//        System.out.print(root.val + " ");\n\n//        Iterative (2 stack)\n//        if (root == null) return;\n//        Stack<TreeNode> st = new Stack<>();\n//        Stack<Integer> st2 = new Stack<>();\n//        st.push(root);\n//        while (!st.isEmpty()) {\n//            TreeNode temp = st.pop();\n//            st2.push(temp.val);\n//            if (temp.left != null) st.push(temp.left);\n//            if (temp.right != null) st.push(temp.right);\n//        }\n//        while (!st2.isEmpty()) {\n//            System.out.print(st2.pop() + " ");\n//        }\n\n//        Iterative (1 Stack)\n        TreeNode curr = root;\n        Stack<TreeNode> st = new Stack<>();\n        while (curr != null || !st.isEmpty()) {\n            if (curr != null) {\n                st.push(curr);\n                curr = curr.left;\n            } else {\n                TreeNode temp = st.peek().right;\n                if (temp == null) {\n                    temp = st.pop();\n                    System.out.print(temp.val + " ");\n                    while (!st.isEmpty() && temp == st.peek().right) {\n                        temp = st.pop();\n                        System.out.print(temp.val + " ");\n                    }\n                } else {\n                    curr = temp;\n                }\n            }\n        }\n    }\n\n    //    Level order traversal / BFS\n    public void levelOrderTraversal() {\n        Queue<TreeNode> q = new LinkedList<>();\n        if (treeRoot != null) q.add(treeRoot);\n        int level = 0;\n        while (!q.isEmpty()) {\n            System.out.print("level " + level + ": ");\n            int lvlLength = q.size();\n            for (int i = 0; i < lvlLength; i++) {\n                TreeNode temp = q.poll();\n                if (temp != null) {\n                    System.out.print(temp.val + " ");\n                    if (temp.left != null) q.add(temp.left);\n                    if (temp.right != null) q.add(temp.right);\n                }\n            }\n            level++;\n            System.out.println();\n        }\n    }\n\n    public void reverseLevelOrderTraversal() {\n        Queue<TreeNode> q = new LinkedList<>();\n        Stack<Integer> st = new Stack<>();\n        if (treeRoot != null) q.add(treeRoot);\n        int level = 0;\n        while (!q.isEmpty()) {\n            int lvlLength = q.size();\n            for (int i = 0; i < lvlLength; i++) {\n                TreeNode temp = q.poll();\n                if (temp != null) {\n                    st.add(temp.val);\n                    if (temp.right != null) q.add(temp.right);\n                    if (temp.left != null) q.add(temp.left);\n                }\n            }\n            st.push(null);\n            level++;\n        }\n        while (!st.isEmpty()) {\n            if (st.peek() == null) {\n                System.out.print("\\nlevel " + --level + ": ");\n                st.pop();\n            }\n            System.out.print(st.pop() + " ");\n        }\n    }\n\n\n    //    Insert\n    public void insert(int val) {\n        treeRoot = insert(treeRoot, val);\n    }\n\n    private TreeNode insert(TreeNode root, int val) {\n        if (root == null) {\n            return new TreeNode(val);\n        }\n        if (val >= root.val) {\n            root.right = insert(root.right, val);\n        } else {\n            root.left = insert(root.left, val);\n        }\n        return root;\n    }\n\n    //    Remove\n    public void remove(int val) {\n        treeRoot = remove(treeRoot, val);\n    }\n\n    public int findMinNodeValue() {\n        TreeNode node = findMinNode(treeRoot);\n        return node.val;\n    }\n\n    private TreeNode findMinNode(TreeNode root) {\n        TreeNode temp = root;\n        while (temp != null && temp.left != null) {\n            temp = temp.left;\n        }\n        return temp;\n    }\n\n    private TreeNode remove(TreeNode root, int val) {\n        if (root == null) return null;\n        if (val > root.val) {\n            root.right = remove(root.right, val);\n        } else if (val < root.val) {\n            root.left = remove(root.left, val);\n        } else {\n            if (root.left == null) return root.right;\n            if (root.right == null) return root.left;\n            TreeNode minNode = findMinNode(root.right);\n            root.val = minNode.val;\n            root.right = remove(root.right, minNode.val);\n        }\n        return root;\n    }\n\n    private void preInPostSingleTraversal(TreeNode root) {\n        Stack<Pair> st = new Stack<>();\n        List<Integer> inorder = new ArrayList<>();\n        List<Integer> preorder = new ArrayList<>();\n        List<Integer> postorder = new ArrayList<>();\n        st.push(new Pair(root, 1));\n        while (!st.isEmpty()) {\n            Pair temp = st.pop();\n            if (temp.s == 1) {\n                preorder.add(temp.node.val);\n                st.push(new Pair(temp.node, temp.s+1));\n                if (temp.node.left != null) {\n                    st.push(new Pair(temp.node.left, 1));\n                }\n            } else if (temp.s == 2) {\n                inorder.add(temp.node.val);\n                st.push(new Pair(temp.node, temp.s+1));\n                if (temp.node.right != null) {\n                    st.push(new Pair(temp.node.right, 1));\n                }\n            } else {\n                postorder.add(temp.node.val);\n            }\n        }\n        System.out.println("Pre: " + preorder);\n        System.out.println("In: " + inorder);\n        System.out.println("Post: " + postorder);\n\n    }\n\n    public static void main(String[] args) {\n        BinarySearchTree tree = new BinarySearchTree();\n        int[] input = {7, 3, 5, 11, 17, 1, 8};\n        for (int j : input) tree.insert(j);\n//        tree.printTree("Inorder");\n//        tree.printTree("Preorder");\n//        tree.printTree("Postorder");\n//        tree.remove(7);\n//        tree.printTree("Inorder");\n//        HW\n        tree.levelOrderTraversal();\n//        tree.reverseLevelOrderTraversal();\n//        inorder, preorder, postorder traversal using iteration\n//        tree.preInPostSingleTraversal(tree.treeRoot);\n    }\n}',
@@ -2106,7 +2106,7 @@ const data = {
               ],
             },
             {
-              id: '128f10bd-def6-4253-8e52-1f1d660cb3c1',
+              id: 'b5789c1d-a77c-476f-aaaa-cdeaee9932a2',
               isFolder: false,
               name: 'AdvancedMaths.java',
               code: 'import java.util.*;\n\npublic class AdvancedMaths {\n    public static List< Integer > countPrimes(int n) {\n        // Write your code here.\n        List<Integer> ans = new ArrayList<>();\n        boolean[] check = new boolean[n+1];\n        check[0] = true;\n        check[1] = true;\n        for (int i = 2; i <= n; i++) {\n            if (!check[i]) {\n                if (n%i == 0) {\n                    ans.add(i);\n                }\n                for (int j = i*2; j <= n; j += i) {\n                    check[j] = true;\n                }\n            }\n        }\n        return ans;\n    }\n\n//    https://www.codingninjas.com/studio/problems/power-of-numbers_8157729\n    public static long fastExponentiation(int n, int p) {\n        if (p == 0) return 1;\n        else if (p == 1) return n;\n        else {\n            long R = fastExponentiation(n, p/2)%(long)(10e9+7);\n            if (p%2 == 0) return (R*R)%1000000007;\n            else return (((R*n)%1000000007)*R)%1000000007;\n        }\n    }\n    public static int power(int N, int R){\n        // Write your code here.\n        int ans = (int) fastExponentiation(N, R);\n        return ans;\n    }\n\n//    https://www.codingninjas.com/studio/problems/subsequences-of-string_985087\n    public static ArrayList<String> subsequences(String str) {\n        // Write your code here\n        ArrayList<String> ans = new ArrayList<>();\n        for (int i = 1; i < Math.pow(2, str.length()); i++) {\n            StringBuilder sb = new StringBuilder();\n            int idx = 0;\n            while(idx < str.length()) {\n                if (((i >> idx)&1) == 1) {\n                    sb.append(str.charAt(idx));\n                }\n                idx++;\n            }\n            ans.add(sb.toString());\n        }\n        return ans;\n    }\n    public static void main(String[] args) {\n        ArrayList<String> ans = subsequences("hq");\n        System.out.println(ans);\n    }\n}',
@@ -2115,7 +2115,7 @@ const data = {
               tags: ['Bit_Manipulation'],
             },
             {
-              id: '222d6d12-5fc1-489b-80b9-5f8b7d58152f',
+              id: '2e0d3d1c-9c0d-4111-913b-d9dac12bcc2b',
               isFolder: false,
               name: 'InterviewProblems.java',
               code: 'public class InterviewProblems {\n    public static int getCount(int n) {\n        return LearnBitManipulationQuestions.getCount(n);\n    }\n\n    //    https://www.codingninjas.com/studio/problems/flip-bits_8160405\n    public static int flipBits(int A, int B) {\n        // Write your code here.\n        int Xor = A ^ B;\n        return getCount(Xor);\n    }\n\n    //    https://www.codingninjas.com/studio/problems/one-odd-occurring_4606074\n    public static int missingNumber(int n, int[] arr) {\n        // Write your code here.\n        int ans = 0;\n        for (int num : arr) {\n            ans ^= num;\n        }\n        return ans;\n    }\n\n    //    https://www.codingninjas.com/studio/problems/l-to-r-xor_8160412\n    public static int getXOR(int n) {\n        if (n % 4 == 0) return n;\n        if (n % 4 == 1) return 1;\n        if (n % 4 == 2) return n + 1;\n        return 0;\n    }\n\n    public static int findXOR(int L, int R) {\n        // Write your code here.\n        int lXor = getXOR(L - 1);\n        int rXor = getXOR(R);\n        return lXor ^ rXor;\n    }\n\n    public static int[] twoOddNum(int []arr){\n        int xor = 0;\n        for (int j : arr) {\n            xor ^= j;\n        }\n        int pos = 0;\n        while ((xor & 1) == 0) {\n            pos++;\n            xor >>= 1;\n        }\n        int xor1 = 0, xor2 = 0;\n        for (int num : arr) {\n            if (((num >> pos) & 1) == 1) xor1 ^= num;\n            else xor2 ^= num;\n        }\n        return new int[]{Math.max(xor1, xor2), Math.min(xor1, xor2)};\n    }\n\n    public static void main(String[] args) {\n\n    }\n}',
@@ -2124,7 +2124,7 @@ const data = {
               tags: ['Bit_Manipulation'],
             },
             {
-              id: '371c7e70-03c4-403a-8454-8c3a5b5f2332',
+              id: '2fe2ff23-953a-45ca-b387-0f0179139611',
               isFolder: false,
               name: 'LearnBitManipulationQuestions.java',
               code: 'public class LearnBitManipulationQuestions {\n    public static int[] bitManipulation(int num, int i) {\n        int[] ans = new int[3];\n        int mask = 1 << (i - 1);\n        // 1. get ith bit\n        ans[0] = (num & mask) != 0 ? 1 : 0;\n        // 2. set ith bit\n        num = num | mask;\n        ans[1] = num;\n        // 3. clear ith bit\n        ans[2] = num & ~mask;\n        return ans;\n    }\n\n    public static boolean isKthBitSet(int n, int k) {\n        int mask = 1 << (k - 1);\n        return (n & mask) != 0;\n    }\n\n    public static String oddEven(int N) {\n        // Write your code here.\n        return (N & 1) == 0 ? "even" : "odd";\n    }\n\n    public static boolean isPowerOfTwo(int n) {\n        // Write your code here.\n        return (n & (n - 1)) == 0;\n    }\n\n    //    Count set bits in range 1 - N\n    public static int getCount(int n) {\n        int count = 0;\n        while (n != 0) {\n            n = (n & (n - 1));\n            count++;\n        }\n        return count;\n    }\n\n    public static int countSetBits(int n) {\n        //Write your code here\n        int count = 0;\n        for (int i = 1; i <= n; i++) {\n            count += getCount(i);\n        }\n        return count;\n    }\n\n    //    https://www.codingninjas.com/studio/problems/set-the-rightmost-unset-bit_8160456\n    public static int setBits(int N) {\n        // Write your code here\n        int n = N;\n        if ((n & (n + 1)) == 0) return N;\n        int idx = 0;\n        while (n > 0) {\n            if ((n & 1) == 0) break;\n            idx++;\n            n >>= 1;\n        }\n        return N | (1 << idx);\n    }\n\n    //    https://www.codingninjas.com/studio/problems/swap-two-numbers_1380853\n    public static void swapNumber(int[] a, int[] b) {\n        // Write your code here.\n        a[0] = a[0] ^ b[0];\n        b[0] = a[0] ^ b[0];\n        a[0] = a[0] ^ b[0];\n    }\n\n//    https://www.codingninjas.com/studio/problems/flip-bits_8160405\n    public static int flipBits(int A, int B){\n        // Write your code here.\n        int Xor = A^B;\n        return getCount(Xor);\n    }\n\n//    https://www.codingninjas.com/studio/problems/one-odd-occurring_4606074\n    public static int missingNumber(int n, int []arr){\n        // Write your code here.\n        int ans = 0;\n        for (int num : arr) {\n            ans ^= num;\n        }\n        return ans;\n    }\n\n    public static void main(String[] args) {\n//        int n = 11;\n//        int i = 2;\n//        int[] ans = bitManipulation(n, i);\n//        System.out.println(Arrays.toString(ans));\n    }\n}',
@@ -2133,7 +2133,7 @@ const data = {
               tags: ['Bit_Manipulation'],
             },
             {
-              id: '9e176b26-c956-4610-9e9b-05f2131f8a74',
+              id: '5cda63e6-ff0a-4444-83f9-f7d21887b404',
               isFolder: false,
               name: 'SieveOfEratosthenes.java',
               code: 'import java.util.*;\npublic class SieveOfEratosthenes {\n    static List<Integer> getPrime(int n) {\n        List<Integer> ans = new ArrayList<>();\n        boolean[] check = new boolean[n+1];\n        check[0] = true;\n        check[1] = true;\n        for (int i = 2; i <= n; i++) {\n            if (!check[i]) {\n                ans.add(i);\n                for (int j = i*2; j <= n; j += i)\n                    check[j] = true;\n            }\n        }\n        return ans;\n    }\n    public static void main(String[] args) {\n        int n = 10;\n        System.out.println(getPrime(n));\n    }\n}',
@@ -2142,12 +2142,12 @@ const data = {
               tags: ['Bit_Manipulation'],
             },
             {
-              id: '517e0558-e5a2-41d6-94fe-3606a0e6e73d',
+              id: 'e0dd2e95-2110-4572-aa58-9c61bf0e70ae',
               isFolder: true,
               name: 'Dynamic Programming',
               content: [
                 {
-                  id: '6312ec23-d84b-4db8-999f-5106bf9278f6',
+                  id: '78edd694-e840-42de-83c5-bab28ab34a4e',
                   isFolder: false,
                   name: 'ClimbingStairs.java',
                   code: 'import java.util.*;\n\npublic class ClimbingStairs {\n    public int solve(int n, int[] arr) {\n        if (n == 0 || n == 1) return 1;\n        if (arr[n] != 0) return arr[n];\n        arr[n] = solve(n - 1, arr) + solve(n - 2, arr);\n        return arr[n];\n    }\n\n    public int climbStairs(int n) {\n        // Memoization\n        int[] dp = new int[n + 1];\n        return solve(n, dp);\n\n        // Top down\n        // int[] dp = new int[n+1];\n        // dp[0] = dp[1] = 1;\n        // for (int i = 2; i <= n; i++) {\n        //     dp[i] = dp[i-1] + dp[i-2];\n        // }\n        // return dp[n];\n\n        // Space optimized\n        // int prev1 = 1, prev2 = 1;\n        // for (int i = 2; i <= n; i++) {\n        //     int temp = prev1 + prev2;\n        //     prev2 = prev1;\n        //     prev1 = temp;\n        // }\n        // return prev1;\n    }\n}',
@@ -2156,7 +2156,7 @@ const data = {
                   tags: ['1D DP'],
                 },
                 {
-                  id: '15ea8314-86bc-414b-bdb0-856c299d84d5',
+                  id: '1b717e4a-692b-40a6-a5a9-10c19d92ad23',
                   isFolder: false,
                   name: 'FrogJump.java',
                   code: 'import java.util.*;\n\npublic class FrogJump {\n    public static int solve(int[] H, int step, int[] dp, int n) {\n        if (step == n - 1) return 0;\n        if (dp[step] != -1) return dp[step];\n        int a = Integer.MAX_VALUE;\n        if (step + 1 < n) {\n            a = Math.abs(H[step + 1] - H[step]) + solve(H, step + 1, dp, n);\n        }\n        int b = Integer.MAX_VALUE;\n        if (step + 2 < n) {\n            b = Math.abs(H[step + 2] - H[step]) + solve(H, step + 2, dp, n);\n        }\n        return dp[step] = Math.min(a, b);\n    }\n\n    public static int frogJump(int n, int H[]) {\n        // Write your code here..\n        int[] dp = new int[n + 1];\n        Arrays.fill(dp, -1);\n        return solve(H, 0, dp, n);\n//        dp[n] = 0;\n//        dp[n - 1] = Math.abs(H[n - 2] - H[n - 1]);\n//        for (int i = n - 2; i > 0; i--) {\n//            int a = Math.abs(H[i - 1] - H[i]) + dp[i + 1];\n//            int b = Math.abs(H[i - 1] - H[i + 1]) + dp[i + 2];\n//            dp[i] = Math.min(a, b);\n//        }\n//        return dp[1];\n    }\n}',
@@ -2165,7 +2165,7 @@ const data = {
                   tags: ['1D DP'],
                 },
                 {
-                  id: '5834b875-07d3-4821-b661-693e6f1ffe41',
+                  id: 'c6e365f0-e7be-4bdb-9d11-db168198ce74',
                   isFolder: false,
                   name: 'FrogJumpKDistances.java',
                   code: 'import java.util.*;\n\npublic class FrogJumpKDistances {\n    public static int solve(int[] H, int k, int step, int[] dp) {\n        if (step == 0) return 0;\n        if (dp[step] != -1) return dp[step];\n        int result = Integer.MAX_VALUE;\n        for (int j = 1; j <= k; j++) {\n            if (step - j >= 0) {\n                int val = solve(H, k, step - j, dp) + Math.abs(H[step] - H[step - j]);\n                result = Math.min(result, val);\n            }\n        }\n        dp[step] = result;\n        return result;\n    }\n\n    public static int minimizeCost(int n, int k, int[] H) {\n        // Write your code here.\n        int[] dp = new int[n + 1];\n        Arrays.fill(dp, -1);\n        return solve(H, k, n - 1, dp);\n        // dp[0] = 0;\n        // for (int i = 1; i < n; i++) {\n        //     int result = Integer.MAX_VALUE;\n        //     for (int j = 1; j <= k; j++) {\n        //         if (i - j >= 0) {\n        //             int val = dp[i-j] + Math.abs(H[i] - H[i-j]);\n        //             result = Math.min(result, val);\n        //         }\n        //     }\n        //     dp[i] = result;\n        // }\n        // return dp[n-1];\n    }\n}',
@@ -2174,7 +2174,7 @@ const data = {
                   tags: ['1D DP'],
                 },
                 {
-                  id: 'e4b9f790-b8c0-4af1-9e5c-fe4e1a6e4dc6',
+                  id: '7927adb8-71eb-4aa6-9ae0-7d56a025bb8d',
                   isFolder: false,
                   name: 'HouseRobber.java',
                   code: 'import java.util.*;\n\npublic class HouseRobber {\n    public int solve(int[] nums, int idx, int[] dp) {\n        if (idx >= nums.length) return 0;\n        if (idx == nums.length - 1) return nums[idx];\n        if (dp[idx] != -1) return dp[idx];\n        int pick = nums[idx] + solve(nums, idx + 2, dp);\n        int notPick = solve(nums, idx + 1, dp);\n        return dp[idx] = Math.max(pick, notPick);\n    }\n\n    public int rob(int[] nums) {\n        int n = nums.length;\n        int[] dp = new int[n];\n        // Arrays.fill(dp, -1);\n        // return solve(nums, 0, dp);\n\n//        Tabulation\n        dp[n - 1] = nums[n - 1];\n        for (int i = n - 2; i >= 0; i--) {\n            int pick = nums[i];\n            if (i < n - 2) {\n                pick += dp[i + 2];\n            }\n            int notPick = dp[i + 1];\n            dp[i] = Math.max(pick, notPick);\n        }\n        return dp[0];\n    }\n}',
@@ -2183,7 +2183,7 @@ const data = {
                   tags: ['1D DP'],
                 },
                 {
-                  id: 'decade05-2c0b-45bf-8e8e-b11adb1c75d5',
+                  id: '5c05c574-7cb7-46f2-96c0-ea17b8dd0ef4',
                   isFolder: false,
                   name: 'HouseRobber2.java',
                   code: 'import java.util.*;\n\npublic class HouseRobber2 {\n    public int solve(int[] nums, int idx, int[] dp) {\n        if (idx >= nums.length) return 0;\n        if (dp[idx] != -1) return dp[idx];\n        int pick = nums[idx] + solve(nums, idx + 2, dp);\n        int notPick = solve(nums, idx + 1, dp);\n        return dp[idx] = Math.max(pick, notPick);\n    }\n    public int rob(int[] nums) {\n        int n = nums.length;\n        if (n == 1) return nums[0];\n        int[] dp = new int[n];\n        Arrays.fill(dp, -1);\n        int save = nums[n-1];\n        nums[n-1] = -10000;\n        int max1 = solve(nums, 0, dp);\n        Arrays.fill(dp, -1);\n        nums[n-1] = save;\n        nums[0] = -10000;\n        int max2 = solve(nums, 0, dp);\n        return Math.max(max1, max2);\n    }\n}',
@@ -2192,7 +2192,7 @@ const data = {
                   tags: ['1D DP'],
                 },
                 {
-                  id: '4d5d694f-ae9a-48ba-aa44-64ed51779c41',
+                  id: '6133936b-7649-4a62-a965-7a0608f23722',
                   isFolder: false,
                   name: 'MinimumFallingPathSum.java',
                   code: 'import java.util.*;\n\npublic class MinimumFallingPathSum {\n    public int solve(int[][] matrix, int i, int j, int n, int[][] dp) {\n        if (i >= n) return 0;\n        if (j < 0 || j >= n) return (int)1e8;\n        if (dp[i][j] != (int)1e8) return dp[i][j];\n        int l = solve(matrix, i+1, j-1, n, dp);\n        int m = solve(matrix, i+1, j, n, dp);\n        int r = solve(matrix, i+1, j+1, n, dp);\n        return dp[i][j] = matrix[i][j] + Math.min(Math.min(l, m), r);\n    }\n    public int minFallingPathSum(int[][] matrix) {\n        int minSum = (int)1e8;\n        int n = matrix.length;\n        int[][] dp = new int[n][n];\n        for (int i = 0; i < n; i++) {\n            Arrays.fill(dp[i], (int)1e8);\n        }\n        for (int i = 0; i < n; i++) {\n            minSum = Math.min(minSum, solve(matrix, 0, i, n, dp));\n        }\n        return minSum;\n    }\n}',
@@ -2201,7 +2201,7 @@ const data = {
                   tags: ['2D-3D DP and DP on Grids'],
                 },
                 {
-                  id: '04928707-9d75-4e14-9f76-b585382f1db6',
+                  id: 'ffc6c453-f647-42aa-b278-ae43695b359a',
                   isFolder: false,
                   name: 'MinimumPathSum.java',
                   code: 'import java.util.*;\n\npublic class MinimumPathSum {\n    public int paths(int[][] grid, int i, int j, int n, int m, int[][] dp) {\n        if (i > n || j > m) return (int)1e8;\n        if (i == n && j == m) return grid[i][j];\n        if (dp[i][j] != -1) return dp[i][j];\n        int down = paths(grid, i+1, j, n, m, dp);\n        int right = paths(grid, i, j+1, n, m, dp);\n        return dp[i][j] = grid[i][j] + Math.min(down, right);\n    }\n    public int minPathSum(int[][] grid) {\n        int n = grid.length, m = grid[0].length;\n        int[][] dp = new int[n][m];\n        // for (int i = 0; i < n; i++) {\n        //     Arrays.fill(dp[i], -1);\n        // }\n        // return paths(grid, 0, 0, n-1, m-1, dp);\n        dp[n-1][m-1] = grid[n-1][m-1];\n        for (int i = 0; i < n; i++) {\n            for (int j = 0; j < m; j++) {\n                if (i == 0 && j == 0) {\n                    dp[i][j] = grid[i][j];\n                } else {\n                    int down = i > 0 ? dp[i-1][j] : (int)1e8;\n                    int right = j > 0 ? dp[i][j-1] : (int)1e8;\n                    dp[i][j] = grid[i][j] + Math.min(down, right);\n                }\n            }\n        }\n        return dp[n-1][m-1];\n    }\n}',
@@ -2210,7 +2210,7 @@ const data = {
                   tags: ['2D-3D DP and DP on Grids'],
                 },
                 {
-                  id: 'eb200213-79d1-463b-919c-886c7bbf476c',
+                  id: '100b7058-0420-4dc9-920d-b9dbefc495b3',
                   isFolder: false,
                   name: 'NinjaAndHisFriends3D_DP.java',
                   code: 'import java.util.*;\n\npublic class NinjaAndHisFriends3D_DP {\n    static int[] dirs = {1, 0, -1};\n\n    public static int solve(int[][] grid, int i, int j1, int j2, int r, int c, int[][][] dp) {\n        if (j1 < 0 || j1 >= c || j2 < 0 || j2 >= c) return (int) -1e8;\n        if (i == r - 1) return j1 == j2 ? grid[i][j1] : grid[i][j1] + grid[i][j2];\n        if (dp[i][j1][j2] != -1) return dp[i][j1][j2];\n        int sum = 0;\n        for (int x : dirs) {\n            for (int y : dirs) {\n                sum = Math.max(sum, solve(grid, i + 1, j1 + x, j2 + y, r, c, dp));\n            }\n        }\n        return dp[i][j1][j2] = grid[i][j1] + sum + (j1 == j2 ? 0 : grid[i][j2]);\n    }\n\n    public static int maximumChocolates(int r, int c, int[][] grid) {\n        // Write your code here.\n        int[][][] dp = new int[r][c][c];\n        for (int i = 0; i < r; i++) {\n            for (int j = 0; j < c; j++) {\n                Arrays.fill(dp[i][j], -1);\n            }\n        }\n        return solve(grid, 0, 0, c - 1, r, c, dp);\n    }\n}',
@@ -2219,7 +2219,7 @@ const data = {
                   tags: ['2D-3D DP and DP on Grids'],
                 },
                 {
-                  id: 'a5a0fad2-3ba4-43d2-b815-2bb9f7fa3b7a',
+                  id: '6c870807-ba94-4c84-bfc3-0f2cc624f0b5',
                   isFolder: false,
                   name: 'NinjasTraining.java',
                   code: 'import java.util.*;\n\npublic class NinjasTraining {\n    public static int solve(int[][] points, int n, int last, int[][] dp) {\n        if (n < 0) return 0;\n        if (dp[n][last] != -1) return dp[n][last];\n        int max = 0;\n        for (int i = 0; i < 3; i++) {\n            if (i != last) {\n                int a = points[n][i] + solve(points, n - 1, i, dp);\n                max = Math.max(max, a);\n            }\n        }\n        return dp[n][last] = max;\n    }\n\n    public static int ninjaTraining(int n, int[][] points) {\n        // Write your code here..\n        int[][] dp = new int[n][3];\n        for (int i = 0; i < n; i++) {\n            Arrays.fill(dp[i], -1);\n        }\n        int maxMerit = 0;\n        for (int i = 0; i < 3; i++) {\n            maxMerit = Math.max(maxMerit, solve(points, n - 1, i, dp));\n        }\n        return maxMerit;\n    }\n}',
@@ -2228,7 +2228,7 @@ const data = {
                   tags: ['2D-3D DP and DP on Grids'],
                 },
                 {
-                  id: 'a6343b00-9289-4516-9c06-d4c22ce82247',
+                  id: '75ac9d47-bd30-4136-a065-3c12b0a0a3f7',
                   isFolder: false,
                   name: 'Triangle.java',
                   code: 'import java.util.*;\n\npublic class Triangle {\n    public int solve(List<List<Integer>> triangle, int i, int j, int[][] dp) {\n        if (i == triangle.size() - 1) return triangle.get(i).get(j);\n        if (dp[i][j] != -1) return dp[i][j];\n        int same = solve(triangle, i+1, j, dp);\n        int next = solve(triangle, i+1, j+1, dp);\n        return dp[i][j]= triangle.get(i).get(j) + Math.min(same, next);\n    }\n    public int minimumTotal(List<List<Integer>> triangle) {\n        int size = triangle.size();\n        int[][] dp = new int[size][size+1];\n        for (int i = 0; i < size; i++) {\n            Arrays.fill(dp[i], -1);\n        }\n        return solve(triangle, 0, 0, dp);\n    }\n}',
@@ -2237,7 +2237,7 @@ const data = {
                   tags: ['2D-3D DP and DP on Grids'],
                 },
                 {
-                  id: '2b9180d9-bffd-4635-bcc4-1c800ef554c8',
+                  id: 'e5f84618-0cae-4703-acb3-bfae423cfec7',
                   isFolder: false,
                   name: 'UniquePaths.java',
                   code: 'import java.util.*;\n\npublic class UniquePaths {\n    public int paths(int m, int n, int[][] dp) {\n        if (m < 0 || n < 0) return 0;\n        if (m == 0 && n == 0) return 1;\n        if (dp[m][n] != -1) return dp[m][n];\n        return dp[m][n] = paths(m-1, n, dp) + paths(m, n-1, dp);\n    }\n    public int uniquePaths(int m, int n) {\n        int[][] dp = new int[m][n];\n        // for (int i = 0; i < m; i++) {\n        //     Arrays.fill(dp[i], -1);\n        // }\n        // return paths(m-1,n-1,dp);\n        dp[0][0] = 1;\n        for (int i = 0; i < m; i++) {\n            for (int j = 0; j < n; j++) {\n                if (i == 0 && j == 0) {\n                    dp[i][j] = 1;\n                } else {\n                    int a = i > 0 ? dp[i-1][j] : 0;\n                    int b = j > 0 ? dp[i][j-1] : 0;\n                    dp[i][j] = a + b;\n                }\n            }\n        }\n        return dp[m-1][n-1];\n    }\n}',
@@ -2246,7 +2246,7 @@ const data = {
                   tags: ['2D-3D DP and DP on Grids'],
                 },
                 {
-                  id: '09d3a003-bcd0-4044-b51b-9be6d0fae153',
+                  id: '2e2401b9-4628-47e6-8ebe-0ab41101721e',
                   isFolder: false,
                   name: 'UniquePaths2.java',
                   code: 'import java.util.*;\n\npublic class UniquePaths2 {\n    public int paths(int m, int n, int[][] grid, int[][] dp) {\n        if (m < 0 || n < 0 || grid[m][n] == 1) return 0;\n        if (m == 0 && n == 0) return 1;\n        if (dp[m][n] != -1) return dp[m][n];\n        return dp[m][n] = paths(m-1, n, grid, dp) + paths(m, n-1, grid, dp);\n    }\n    public int uniquePathsWithObstacles(int[][] obstacleGrid) {\n        int m = obstacleGrid.length, n = obstacleGrid[0].length;\n        int[][] dp = new int[m][n];\n        for (int i = 0; i < m; i++) {\n            Arrays.fill(dp[i], -1);\n        }\n        // return paths(m-1, n-1, obstacleGrid, dp);\n        dp[0][0] = 1;\n        for (int i = 0; i < m; i++) {\n            for (int j = 0; j < n; j++) {\n                if (obstacleGrid[i][j] == 1) {\n                    dp[i][j] = 0;\n                } else if (i == 0 && j == 0) {\n                    dp[i][j] = 1;\n                } else {\n                    int a = i > 0 ? dp[i-1][j] : 0;\n                    int b = j > 0 ? dp[i][j-1] : 0;\n                    dp[i][j] = a + b;\n                }\n            }\n        }\n        return dp[m-1][n-1];\n    }\n}',
@@ -2255,7 +2255,7 @@ const data = {
                   tags: ['2D-3D DP and DP on Grids'],
                 },
                 {
-                  id: '948ff60a-66eb-4416-b258-e913834a3a80',
+                  id: '8bbb6b96-1410-4aaf-986a-139edfaa1f9b',
                   isFolder: false,
                   name: 'LargestDivisibleSubset.java',
                   code: 'import java.util.*;\n\npublic class LargestDivisibleSubset {\n    public List<Integer> largestDivisibleSubset(int[] nums) {\n        int x = nums.length;\n        Arrays.sort(nums);\n        int[] dp = new int[x], hash = new int[x];\n        Arrays.fill(dp, 1);\n        int maxIdx = 0;\n        for (int i = 0; i < x; i++) {\n            hash[i] = i;\n            for (int prev = 0; prev < i; prev++) {\n                if (nums[i] % nums[prev] == 0 && dp[prev] + 1 > dp[i]) {\n                    dp[i] = dp[prev] + 1;\n                    hash[i] = prev;\n                }\n            }\n            if (dp[i] > dp[maxIdx]) {\n                maxIdx = i;\n            }\n        }\n\n        List<Integer> ans = new ArrayList<>();\n        while (hash[maxIdx] != maxIdx) {\n            ans.add(nums[maxIdx]);\n            maxIdx = hash[maxIdx];\n        }\n        ans.add(nums[maxIdx]);\n        return ans;\n    }\n}',
@@ -2264,7 +2264,7 @@ const data = {
                   tags: ['DP on LIS'],
                 },
                 {
-                  id: '5457a9a7-8099-4932-8551-302dcc5087d2',
+                  id: '7fce99cf-0a16-41f6-8076-0bceaec60449',
                   isFolder: false,
                   name: 'LongestBitonicSubsequence.java',
                   code: 'import java.util.*;\n\npublic class LongestBitonicSubsequence {\n    public static int[] lis(int[] arr, int n) {\n        int[] dp = new int[n];\n        for (int i = 0; i < n; i++) {\n            dp[i] = 1;\n            for (int prev = 0; prev < i; prev++) {\n                if (arr[prev] < arr[i]) {\n                    dp[i] = Math.max(dp[i], dp[prev] + 1);\n                }\n            }\n        }\n        return dp;\n    }\n\n    public static int longestBitonicSequence(int[] arr, int n) {\n        int[] increasing = lis(arr, n);\n        int[] reversedArr = new int[n];\n        for (int i = 0; i < n; i++) {\n            reversedArr[i] = arr[n - i - 1];\n        }\n        int[] decreasing = lis(reversedArr, n);\n        int max = 0;\n        for (int i = 0; i < n; i++) {\n            max = Math.max(increasing[i] + decreasing[n - i - 1] - 1, max);\n        }\n        return max;\n    }\n}',
@@ -2273,7 +2273,7 @@ const data = {
                   tags: ['DP on LIS'],
                 },
                 {
-                  id: '42461158-8ec5-42ba-872d-d1cb53923d3c',
+                  id: '39fdac83-c124-4ac9-a77b-f0a839d84725',
                   isFolder: false,
                   name: 'LongestIncreasingSubsequence.java',
                   code: 'import java.util.*;\n\npublic class LongestIncreasingSubsequence {\n    public int solve(int[] nums, int idx, int lastIdx, int[][] dp) {\n        if (idx == nums.length) return 0;\n        if (dp[idx][lastIdx + 1] != -1) return dp[idx][lastIdx + 1];\n        int notPick = solve(nums, idx + 1, lastIdx, dp), pick = 0;\n        if (lastIdx == -1 || nums[idx] > nums[lastIdx]) {\n            pick = 1 + solve(nums, idx + 1, idx, dp);\n        }\n        return dp[idx][lastIdx + 1] = Math.max(pick, notPick);\n    }\n\n    public int lengthOfLIS(int[] nums) {\n        int n = nums.length;\n        int[][] dp = new int[n + 1][n + 1];\n\n        // Memoization\n        for (int i = 0; i < n; i++) {\n            Arrays.fill(dp[i], -1);\n        }\n        return solve(nums, 0, -1, dp);\n\n        // Tabulation - O(N^2) time and O(N^2) space\n        // for (int idx = n-1; idx >= 0; idx--) {\n        //     for (int lastIdx = idx-1; lastIdx >= -1; lastIdx--) {\n        //         int notPick = dp[idx+1][lastIdx+1], pick = 0;\n        //         if (lastIdx == -1 || nums[idx] > nums[lastIdx]) {\n        //             pick = 1 + dp[idx+1][idx+1];\n        //         }\n        //         dp[idx][lastIdx+1] = Math.max(pick, notPick);\n        //     }\n        // }\n        // return dp[0][0];\n\n        // Different approach - O(N^2) time and O(N) space\n        // int[] dp = new int[n];\n        // Arrays.fill(dp, 1);\n        // int max = 1;\n        // for (int i = 0; i < n; i++) {\n        //     for (int prev = 0; prev < i; prev++) {\n        //         if (nums[prev] < nums[i]) {\n        //             dp[i] = Math.max(dp[prev]+1, dp[i]);\n        //         }\n        //     }\n        //     max = Math.max(max, dp[i]);\n        // }\n        // return max;\n    }\n}',
@@ -2282,7 +2282,7 @@ const data = {
                   tags: ['DP on LIS'],
                 },
                 {
-                  id: '45950803-21e3-4976-82f2-748fa65f8ddc',
+                  id: 'dec138f7-8903-4083-87c9-f9754131e7f0',
                   isFolder: false,
                   name: 'LongestIncreasingSubsequenceBS.java',
                   code: 'import java.util.*;\n\npublic class LongestIncreasingSubsequenceBS {\n    public static int bs(List<Integer> arr, int target) {\n        int start = 0, end = arr.size() - 1;\n        int ans = 0;\n        while (start <= end) {\n            int mid = start + (end - start) / 2;\n            if (target <= arr.get(mid)) {\n                ans = mid;\n                end = mid - 1;\n            } else {\n                start = mid + 1;\n            }\n        }\n        return ans;\n    }\n\n    public int lengthOfLIS(int[] nums) {\n        int n = nums.length;\n        List<Integer> arr = new ArrayList<>();\n        arr.add(nums[0]);\n        for (int i = 1; i < n; i++) {\n            if (arr.get(arr.size() - 1) < nums[i]) {\n                arr.add(nums[i]);\n            } else {\n                int idx = bs(arr, nums[i]);\n                arr.set(idx, nums[i]);\n            }\n        }\n        return arr.size();\n    }\n}',
@@ -2291,7 +2291,7 @@ const data = {
                   tags: ['DP on LIS'],
                 },
                 {
-                  id: '6fb01baf-e278-4a63-a7af-30fb16704523',
+                  id: 'e9e9ca0d-0990-46d3-b87c-40790019ecbf',
                   isFolder: false,
                   name: 'LongestStringChain.java',
                   code: 'import java.util.*;\n\npublic class LongestStringChain {\n    public boolean isPossible(String prev, String curr) {\n        int p = prev.length(), c = curr.length();\n        if (p + 1 != c) return false;\n        int i = 0, j = 0, diff = 0;\n        while (j < c) {\n            if (i < p && prev.charAt(i) == curr.charAt(j)) i++;\n            else diff++;\n            j++;\n            if (diff > 1) return false;\n        }\n        return i == p && j == c;\n    }\n\n    public int longestStrChain(String[] words) {\n        int n = words.length, maxLen = 1;\n        int[] dp = new int[n];\n        Arrays.sort(words, (a, b) -> a.length() - b.length());\n        for (int i = 0; i < n; i++) {\n            dp[i] = 1;\n            for (int prev = 0; prev < i; prev++) {\n                if (isPossible(words[prev], words[i]) && dp[i] < dp[prev] + 1) {\n                    dp[i] = dp[prev] + 1;\n                }\n            }\n            maxLen = Math.max(maxLen, dp[i]);\n        }\n        return maxLen;\n    }\n}',
@@ -2300,7 +2300,7 @@ const data = {
                   tags: ['DP on LIS'],
                 },
                 {
-                  id: '93fb0041-dc70-45f7-9797-c2e09b753e9a',
+                  id: '247b0092-9e64-451d-827b-e17e3932ba27',
                   isFolder: false,
                   name: 'NumberOfLIS.java',
                   code: 'import java.util.*;\n\npublic class NumberOfLIS {\n    public int findNumberOfLIS(int[] nums) {\n        int n = nums.length;\n        int[] dp = new int[n];\n        int[] count = new int[n];\n        int max = 1;\n        for (int i = 0; i < n; i++) {\n            dp[i] = 1;\n            count[i] = 1;\n            for (int prev = 0; prev < i; prev++) {\n                if (nums[prev] < nums[i]) {\n                    if (dp[prev] + 1 > dp[i]) {\n                        dp[i] = dp[prev] + 1;\n                        count[i] = count[prev];\n                    } else if (dp[prev] + 1 == dp[i]) {\n                        count[i] += count[prev];\n                    }\n                }\n            }\n            max = Math.max(dp[i], max);\n        }\n        int c = 0;\n        for (int i = 0; i < n; i++) {\n            if (dp[i] == max) {\n                c += count[i];\n            }\n        }\n        return c;\n    }\n}',
@@ -2309,7 +2309,7 @@ const data = {
                   tags: ['DP on LIS'],
                 },
                 {
-                  id: 'de36cbbe-df3b-4e4c-be64-2a0c26ee4a56',
+                  id: '2ba1e00f-3776-440f-a4ff-becb171e1037',
                   isFolder: false,
                   name: 'PrintLIS.java',
                   code: 'import java.util.*;\n\npublic class PrintLIS {\n    public static List<Integer> printingLongestIncreasingSubsequence(int[] arr, int x) {\n        // Write Your Code Here\n        int[] dp = new int[x], hash = new int[x];\n        Arrays.fill(dp, 1);\n        int maxIdx = 0;\n        for (int i = 0; i < x; i++) {\n            hash[i] = i;\n            for (int prev = 0; prev < i; prev++) {\n                if (arr[prev] < arr[i] && dp[prev] + 1 > dp[i]) {\n                    dp[i] = dp[prev] + 1;\n                    hash[i] = prev;\n                }\n            }\n            if (dp[i] > dp[maxIdx]) {\n                maxIdx = i;\n            }\n        }\n        List<Integer> ans = new ArrayList<>();\n        // int i = maxIdx;\n        while (hash[maxIdx] != maxIdx) {\n            ans.add(0, arr[maxIdx]);\n            maxIdx = hash[maxIdx];\n        }\n        ans.add(0, arr[maxIdx]);\n        return ans;\n    }\n}',
@@ -2318,7 +2318,7 @@ const data = {
                   tags: ['DP on LIS'],
                 },
                 {
-                  id: '346a87e9-747c-444c-b3c5-701d42169225',
+                  id: 'e7993f6b-3894-481f-94f2-262ad38ecd51',
                   isFolder: false,
                   name: 'BurstBalloons.java',
                   code: '// link: https://leetcode.com/problems/burst-balloons/\n\nimport java.util.*;\n\npublic class BurstBalloons {\n    public int solve(int[] nums, int l, int r, int[][] dp) {\n        if (l > r)\n            return 0;\n        if (dp[l][r] != -1)\n            return dp[l][r];\n        int maxi = 0;\n        for (int k = l; k <= r; k++) {\n            int coins = nums[l - 1] * nums[k] * nums[r + 1];\n            coins += solve(nums, l, k - 1, dp) + solve(nums, k + 1, r, dp);\n            maxi = Math.max(maxi, coins);\n        }\n        return dp[l][r] = maxi;\n    }\n\n    public int maxCoins(int[] nums) {\n        int c = nums.length;\n        int[] moreNums = new int[c + 2];\n\n        moreNums[0] = moreNums[c + 1] = 1;\n        for (int i = 0; i < c; i++) {\n            moreNums[i + 1] = nums[i];\n        }\n        int[][] dp = new int[c + 1][c + 1];\n        for (int i = 0; i < dp.length; i++) {\n            Arrays.fill(dp[i], -1);\n        }\n        return solve(moreNums, 1, c, dp);\n    }\n}',
@@ -2327,7 +2327,7 @@ const data = {
                   tags: ['DP on MCM, Partitions'],
                 },
                 {
-                  id: '25104c6d-72ad-4295-b3aa-0dbbb442b91e',
+                  id: '04554fd3-b2a6-4e2f-9a5d-b3f85b772e92',
                   isFolder: false,
                   name: 'MCM.java',
                   code: 'import java.util.*;\n\npublic class MCM {\n    public static int solve(int[] arr, int i, int j, int[][] dp) {\n        if (i >= j) return 0;\n        if (dp[i][j] != -1) return dp[i][j];\n        int min = Integer.MAX_VALUE;\n        for (int k = i; k <= j - 1; k++) {\n            int temp = solve(arr, i, k, dp) + solve(arr, k + 1, j, dp) + arr[i - 1] * arr[k] * arr[j];\n            min = Math.min(min, temp);\n        }\n        return dp[i][j] = min;\n    }\n\n    public static int mcm(int[] p) {\n        int n = p.length;\n        int[][] dp = new int[n][n];\n        // for (int i = 0; i < n; i++) {\n        // \tArrays.fill(dp[i], -1);\n        // }\n        for (int i = n - 1; i >= 1; i--) {\n            for (int j = i + 1; j < n; j++) {\n                int min = Integer.MAX_VALUE;\n                for (int k = i; k <= j - 1; k++) {\n                    int temp = dp[i][k] + dp[k + 1][j] + p[i - 1] * p[k] * p[j];\n                    min = Math.min(min, temp);\n                }\n                dp[i][j] = min;\n            }\n        }\n        return dp[1][n - 1];\n        // return solve(p, 1, n - 1, dp);\n    }\n}',
@@ -2336,7 +2336,7 @@ const data = {
                   tags: ['DP on MCM, Partitions'],
                 },
                 {
-                  id: '79eba347-351b-430d-859e-2e6d88c7a4bc',
+                  id: '329779a5-43b8-4a3d-8e01-3bed7c71f0b3',
                   isFolder: false,
                   name: 'MinimumCostToCutAStick.java',
                   code: 'import java.util.*;\n\npublic class MinimumCostToCutAStick {\n    public int solve(int[] cuts, int i, int j, int[][] dp) {\n        if (i > j) return 0;\n        if (dp[i][j] != -1) return dp[i][j];\n        int min = (int) 1e8;\n        for (int k = i; k <= j; k++) {\n            int temp = cuts[j + 1] - cuts[i - 1]\n                    + solve(cuts, i, k - 1, dp)\n                    + solve(cuts, k + 1, j, dp);\n            min = Math.min(min, temp);\n        }\n        return dp[i][j] = min;\n    }\n\n    public int minCost(int n, int[] cuts) {\n        int c = cuts.length;\n        int[] moreCuts = new int[c + 2];\n        for (int i = 0; i < c; i++) {\n            moreCuts[i + 1] = cuts[i];\n        }\n        moreCuts[c + 1] = n;\n        Arrays.sort(moreCuts);\n\n        int[][] dp = new int[c + 2][c + 2];\n        // for (int i = 0; i < dp.length; i++) {\n        //     Arrays.fill(dp[i], -1);\n        // }\n\n        // return solve(moreCuts, 1, c, dp);\n\n        for (int i = c; i >= 1; i--) {\n            for (int j = 1; j <= c; j++) {\n                if (i > j) continue;\n                int min = (int) 1e8;\n                for (int k = i; k <= j; k++) {\n                    int temp = moreCuts[j + 1] - moreCuts[i - 1]\n                            + dp[i][k - 1]\n                            + dp[k + 1][j];\n                    min = Math.min(min, temp);\n                }\n                dp[i][j] = min;\n            }\n        }\n        return dp[1][c];\n    }\n\n}',
@@ -2345,7 +2345,7 @@ const data = {
                   tags: ['DP on MCM, Partitions'],
                 },
                 {
-                  id: 'c644aee8-ee03-49f9-a435-e0212c41b673',
+                  id: 'ea9f1b53-1460-4f66-a310-df192a31d1c2',
                   isFolder: false,
                   name: 'PalindromePartitioning2.java',
                   code: 'import java.util.*;\n\npublic class PalindromePartitioning2 {\n    public boolean isPalindrome(String s, int start, int end) {\n        while (start < end) {\n            if (s.charAt(start) != s.charAt(end)) return false;\n            start++;\n            end--;\n        }\n        return true;\n    }\n    public int solve(String s, int i, int n, int[] dp) {\n        if (i == n) return 0;\n        if (dp[i] != -1) return dp[i];\n        int mini = Integer.MAX_VALUE;\n        for (int p = i; p < n; p++) {\n            if (isPalindrome(s, i, p)) {\n                int cost = 1 + solve(s, p+1, n, dp);\n                mini = Math.min(mini, cost);\n            }\n        }\n        return dp[i] = mini;\n    }\n    public int minCut(String s) {\n        int n = s.length();\n        int[] dp = new int[n+1];\n        // Arrays.fill(dp, -1);\n        // return solve(s, 0, n, dp) - 1;\n        for (int i = n-1; i >= 0; i--) {\n            int mini = Integer.MAX_VALUE;\n            for (int p = i; p < n; p++) {\n                if (isPalindrome(s, i, p)) {\n                    int cost = 1 + dp[p+1];\n                    mini = Math.min(mini, cost);\n                }\n            }\n            dp[i] = mini;\n        }\n        return dp[0] - 1;\n    }\n}',
@@ -2354,7 +2354,7 @@ const data = {
                   tags: ['DP on MCM, Partitions'],
                 },
                 {
-                  id: '5c901b22-483e-484c-a582-4e54a2bb0642',
+                  id: '22293ac1-e4e8-464d-a085-6bcc67324b77',
                   isFolder: false,
                   name: 'ParseBooleanExpression.java',
                   code: "import java.util.*;\n\npublic class ParseBooleanExpression {\n    static int mod = 1000000007;\n\n    public static long solve(String exp, int i, int j, int isTrue, int[][][] dp) {\n        if (i > j) return 0;\n        if (i == j) {\n            char ch = exp.charAt(i);\n            if (isTrue == 1) return ch == 'T' ? 1 : 0;\n            return ch == 'F' ? 1 : 0;\n        }\n        if (dp[i][j][isTrue] != -1) return dp[i][j][isTrue];\n        int ways = 0;\n        for (int k = i + 1; k < j; k += 2) {\n            long LT = solve(exp, i, k - 1, 1, dp);\n            long RT = solve(exp, k + 1, j, 1, dp);\n            long LF = solve(exp, i, k - 1, 0, dp);\n            long RF = solve(exp, k + 1, j, 0, dp);\n            char sign = exp.charAt(k);\n            long value = 0;\n            if (sign == '&') {\n                value = isTrue == 1 ? LT*RT : LT*RF + RT*LF + LF*RF;\n            } else if (sign == '|') {\n                value = isTrue == 1 ? LT*RF + RT*LF + LT*RT : LF*RF;\n            } else {\n                value = isTrue == 1 ? LT*RF + LF*RT : LF*RF + RT*LT;\n            }\n            ways = (ways + (int)(value % mod)) % mod;\n        }\n        return dp[i][j][isTrue] = ways;\n    }\n\n    public static int evaluateExp(String exp) {\n        // Write your code here.\n        int n = exp.length();\n        int[][][] dp = new int[n][n][2];\n        for (int i = 0; i < n; i++) {\n            for (int j = 0; j < n; j++) {\n                Arrays.fill(dp[i][j], -1);\n            }\n        }\n        return (int) solve(exp, 0, n - 1, 1, dp);\n    }\n}",
@@ -2363,7 +2363,7 @@ const data = {
                   tags: ['DP on MCM, Partitions'],
                 },
                 {
-                  id: 'b85bec51-93b7-487b-bce5-d6c54483d1db',
+                  id: '1caab3ff-0586-4621-a2df-6e88b1559459',
                   isFolder: false,
                   name: 'PartitionArrayForMaxSum.java',
                   code: 'import java.util.*;\n\npublic class PartitionArrayForMaxSum {\n    public int solve(int[] arr, int i, int k, int[] dp) {\n        if (i == arr.length) return 0;\n        if (dp[i] != -1) return dp[i];\n        int ans = Integer.MIN_VALUE;\n        int len = 0;\n        int maxi = 0;\n        for (int j = i; j < arr.length; j++) {\n            if (len == k) break;\n            len++;\n            maxi = Math.max(maxi, arr[j]);\n            int sum = len * maxi + solve(arr, j + 1, k, dp);\n            ans = Math.max(ans, sum);\n        }\n        return dp[i] = ans;\n    }\n\n    public int maxSumAfterPartitioning(int[] arr, int k) {\n        int n = arr.length;\n        int[] dp = new int[n + 1];\n        // Arrays.fill(dp, -1);\n        // return solve(arr, 0, k, dp);\n        for (int i = n - 1; i >= 0; i--) {\n            int ans = Integer.MIN_VALUE;\n            int len = 0;\n            int maxi = 0;\n            for (int j = i; j < n; j++) {\n                if (len == k) break;\n                len++;\n                maxi = Math.max(maxi, arr[j]);\n                int sum = len * maxi + dp[j + 1];\n                ans = Math.max(ans, sum);\n            }\n            dp[i] = ans;\n        }\n        return dp[0];\n    }\n}',
@@ -2372,7 +2372,7 @@ const data = {
                   tags: ['DP on MCM, Partitions'],
                 },
                 {
-                  id: '54c04958-f35f-4529-b926-6bebc243affe',
+                  id: '570b89a3-0437-439c-ab91-cbd4207d90bd',
                   isFolder: false,
                   name: 'CountSquareSubmatricesWithAll1s.java',
                   code: 'import java.util.*;\n\npublic class CountSquareSubmatricesWithAll1s {\n    public int countSquares(int[][] matrix) {\n        int n = matrix.length, m = matrix[0].length;\n        int[][] mat = new int[n][m];\n        for (int i = 0; i < n; i++) {\n            mat[i][0] = matrix[i][0];\n        }\n        for (int i = 0; i < m; i++) {\n            mat[0][i] = matrix[0][i];\n        }\n        int ans = 0;\n        for (int i = 1; i < n; i++) {\n            for (int j = 1; j < m; j++) {\n                if (matrix[i][j] == 1) {\n                    mat[i][j] = 1 + Math.min(Math.min(mat[i - 1][j], mat[i][j - 1]), mat[i - 1][j - 1]);\n                }\n            }\n        }\n        for (int i = 0; i < n; i++) {\n            for (int j = 0; j < m; j++) {\n                ans += mat[i][j];\n            }\n        }\n        return ans;\n    }\n}',
@@ -2381,7 +2381,7 @@ const data = {
                   tags: ['DP on Squares'],
                 },
                 {
-                  id: 'e44b57a3-046f-4fed-bd3b-3027fe092ec1',
+                  id: '41767eb6-c854-4061-b90c-cae2aadce796',
                   isFolder: false,
                   name: 'MaxRectangleAreaWithAll1s.java',
                   code: "import java.util.*;\npublic class MaxRectangleAreaWithAll1s {\n    public static int[] getPSE(char[] arr, int n) {\n        int[] ans = new int[n];\n        Deque<Integer> stack = new ArrayDeque<>();\n        for (int i = n - 1; i >= 0; i--) {\n            while (!stack.isEmpty() && arr[stack.peek()] >= arr[i])\n                ans[stack.pop()] = i;\n            stack.push(i);\n        }\n        while (!stack.isEmpty())\n            ans[stack.pop()] = -1;\n        return ans;\n    }\n\n    public static int[] getNSE(char[] arr, int n) {\n        int[] ans = new int[n];\n        Deque<Integer> stack = new ArrayDeque<>();\n        for (int i = 0; i < n; i++) {\n            while (!stack.isEmpty() && arr[stack.peek()] > arr[i])\n                ans[stack.pop()] = i;\n            stack.push(i);\n        }\n        while (!stack.isEmpty())\n            ans[stack.pop()] = n;\n        return ans;\n    }\n\n    public static int largestRectangleArea(char[] heights) {\n        int n = heights.length;\n        int[] nse = getNSE(heights, n), pse = getPSE(heights, n);\n        int maxArea = 0;\n        for (int i = 0; i < heights.length; i++)\n            maxArea = Math.max(maxArea, (nse[i] - pse[i] - 1) * (heights[i] - '0'));\n        return maxArea;\n    }\n\n    public int maximalRectangle(char[][] M) {\n        int max = largestRectangleArea(M[0]);\n        for (int i = 1; i < M.length; i++) {\n            for (int j = 0; j < M[0].length; j++)\n                if (M[i][j] == '1')\n                    M[i][j] = (char) (M[i][j] + M[i - 1][j] - '0');\n            max = Math.max(max, largestRectangleArea(M[i]));\n        }\n        return max;\n    }\n}",
@@ -2390,7 +2390,7 @@ const data = {
                   tags: ['DP on Squares'],
                 },
                 {
-                  id: '7849725f-6a33-493d-adbb-66bad68ae913',
+                  id: '1f740afe-a70c-4d70-aa4a-2cce8a6bf43c',
                   isFolder: false,
                   name: 'BestTimeToBuySellStocks.java',
                   code: 'import java.util.*;\npublic class BestTimeToBuySellStocks {\n    public int maxProfit(int[] prices) {\n        int minVal = prices[0], maxDiff = 0;\n        for (int i = 1; i < prices.length; i++) {\n            minVal = Math.min(minVal, prices[i]);\n            maxDiff = Math.max(maxDiff, prices[i] - minVal);\n        }\n        return maxDiff;\n    }\n}',
@@ -2399,7 +2399,7 @@ const data = {
                   tags: ['DP on Stocks'],
                 },
                 {
-                  id: '99954ba9-735e-4ba6-9a3f-5ba35b3ec13b',
+                  id: '0d5bc21c-fc97-47db-b627-b5e16d78e407',
                   isFolder: false,
                   name: 'BestTimeToBuySellStocks2.java',
                   code: 'public class BestTimeToBuySellStocks2 {\n    // 0 = sell\n    // 1 = buy\n    public int solve(int[] prices, int i, int last, int[][] dp) {\n        if (i == prices.length) return 0;\n        if (dp[i][last] != -1) return dp[i][last];\n        int sell = 0, notSell = 0, buy = 0, notBuy = 0;\n        if (last == 0) {\n            buy = -prices[i] + solve(prices, i+1, 1, dp);\n            notBuy = solve(prices, i+1, 0, dp);\n        } else {\n            sell = prices[i] + solve(prices, i+1, 0, dp);\n            notSell = solve(prices, i+1, 1, dp);\n        }\n        return dp[i][last] = Math.max(buy + sell, notBuy + notSell);\n    }\n\n    public int maxProfit(int[] prices) {\n        int n = prices.length;\n        int[][] dp = new int[n+1][2];\n        // for (int i = 0; i < n; i++) {\n        //     Arrays.fill(dp[i], -1);\n        // }\n        // return solve(prices, 0, 0, dp);\n\n        for (int i = n-1; i >= 0; i--) {\n            for (int j = 1; j >= 0; j--) {\n                int sell = 0, notSell = 0, buy = 0, notBuy = 0;\n                if (j == 0) {\n                    buy = -prices[i] + dp[i+1][1];\n                    notBuy = dp[i+1][0];\n                } else {\n                    sell = prices[i] + dp[i+1][0];\n                    notSell = dp[i+1][1];\n                }\n                dp[i][j] = Math.max(buy + sell, notBuy + notSell);\n            }\n        }\n        return dp[0][0];\n    }\n}',
@@ -2408,7 +2408,7 @@ const data = {
                   tags: ['DP on Stocks'],
                 },
                 {
-                  id: '6033a16e-39ff-4baa-9330-221024a05a02',
+                  id: 'adf606d6-86ed-4c43-92d8-14e6f1af3ef0',
                   isFolder: false,
                   name: 'BestTimeToBuySellStocks3.java',
                   code: 'import java.util.*;\n\npublic class BestTimeToBuySellStocks3 {\n    public int solve2(int[] prices, int i, int transaction, int[][] dp) {\n        if (i == prices.length || transaction == 4) return 0;\n        if (dp[i][transaction] != -1) return dp[i][transaction];\n        int sell = 0, notSell = 0, buy = 0, notBuy = 0;\n        if ((transaction&1) == 0) {\n            buy = -prices[i] + solve2(prices, i+1, transaction + 1, dp);\n            notBuy = solve2(prices, i+1, transaction, dp);\n        } else {\n            sell = prices[i] + solve2(prices, i+1, transaction + 1, dp);\n            notSell = solve2(prices, i+1, transaction, dp);\n        }\n        return dp[i][transaction] = Math.max(buy + sell, notBuy + notSell);\n    }\n\n    public int solve(int[] prices, int i, int last, int cap, int[][][] dp) {\n        if (i == prices.length || cap == 0) return 0;\n        if (dp[i][last][cap] != -1) return dp[i][last][cap];\n        int sell = 0, notSell = 0, buy = 0, notBuy = 0;\n        if (last == 0) {\n            buy = -prices[i] + solve(prices, i+1, 1, cap, dp);\n            notBuy = solve(prices, i+1, 0, cap, dp);\n        } else {\n            sell = prices[i] + solve(prices, i+1, 0, cap - 1, dp);\n            notSell = solve(prices, i+1, 1, cap, dp);\n        }\n        return dp[i][last][cap] = Math.max(buy + sell, notBuy + notSell);\n    }\n\n    public int maxProfit(int[] prices) {\n        int n = prices.length;\n        // int[][][] dp = new int[n+1][2][3];\n        // for (int i = 0; i < n; i++) {\n        //     for (int j = 0; j < 2; j++) {\n        //         Arrays.fill(dp[i][j], -1);\n        //     }\n        // }\n        // return solve(prices, 0, 0, 2, dp);\n\n        // for (int i = n-1; i >= 0; i--) {\n        //     for (int j = 1; j >= 0; j--) {\n        //         for (int k = 1; k <= 2; k++) {\n        //             int sell = 0, notSell = 0, buy = 0, notBuy = 0;\n        //             if (j == 0) {\n        //                 buy = -prices[i] + dp[i+1][1][k];\n        //                 notBuy = dp[i+1][0][k];\n        //             } else {\n        //                 sell = prices[i] + dp[i+1][0][k-1];\n        //                 notSell = dp[i+1][1][k];\n        //             }\n        //             dp[i][j][k] = Math.max(buy + sell, notBuy + notSell);\n        //         }\n        //     }\n        // }\n        // return dp[0][0][2];\n\n        int[][] dp = new int[n+1][5];\n        for (int i = n-1; i >= 0; i--) {\n            for (int transaction = 3; transaction >= 0; transaction--) {\n                int sell = 0, notSell = 0, buy = 0, notBuy = 0;\n                if ((transaction&1) == 0) {\n                    buy = -prices[i] + dp[i+1][transaction + 1];\n                    notBuy = dp[i+1][transaction];\n                } else {\n                    sell = prices[i] + dp[i+1][transaction + 1];\n                    notSell = dp[i+1][transaction];\n                }\n                dp[i][transaction] = Math.max(buy + sell, notBuy + notSell);\n            }\n        }\n        return dp[0][0];\n    }\n}',
@@ -2417,7 +2417,7 @@ const data = {
                   tags: ['DP on Stocks'],
                 },
                 {
-                  id: '308d6e98-99f3-4c01-bcf7-fa37c0cc9a97',
+                  id: '370baa53-2fe0-458c-a3aa-dd1f347c1922',
                   isFolder: false,
                   name: 'BestTimeToBuySellStocks4.java',
                   code: 'import java.util.*;\n\npublic class BestTimeToBuySellStocks4 {\n    public int maxProfit(int k, int[] prices) {\n        int n = prices.length;\n        int[][] dp = new int[n+1][2*k+1];\n        for (int i = n-1; i >= 0; i--) {\n            for (int transaction = 2*k - 1; transaction >= 0; transaction--) {\n                int sell = 0, notSell = 0, buy = 0, notBuy = 0;\n                if ((transaction&1) == 0) {\n                    buy = -prices[i] + dp[i+1][transaction + 1];\n                    notBuy = dp[i+1][transaction];\n                } else {\n                    sell = prices[i] + dp[i+1][transaction + 1];\n                    notSell = dp[i+1][transaction];\n                }\n                dp[i][transaction] = Math.max(buy + sell, notBuy + notSell);\n            }\n        }\n        return dp[0][0];\n    }\n}',
@@ -2426,7 +2426,7 @@ const data = {
                   tags: ['DP on Stocks'],
                 },
                 {
-                  id: 'b190a247-2ad7-41a9-8792-03fdb469cbef',
+                  id: '22bb2208-8f52-4266-a171-10685f4c9d57',
                   isFolder: false,
                   name: 'BestTimeToBuySellStocksWithCooldown.java',
                   code: 'import java.util.*;\n\npublic class BestTimeToBuySellStocksWithCooldown {\n    public int solve(int[] prices, int i, int last, int[][] dp) {\n        if (i >= prices.length) return 0;\n        if (dp[i][last] != -1) return dp[i][last];\n        int sell = 0, notSell = 0, buy = 0, notBuy = 0;\n        if (last == 0) {\n            buy = -prices[i] + solve(prices, i+1, 1, dp);\n            notBuy = solve(prices, i+1, 0, dp);\n        } else {\n            sell = prices[i] + solve(prices, i+2, 0, dp);\n            notSell = solve(prices, i+1, 1, dp);\n        }\n        return dp[i][last] = Math.max(buy + sell, notBuy + notSell);\n    }\n    public int maxProfit(int[] prices) {\n        int n = prices.length;\n        int[][] dp = new int[n+1][2];\n        for (int i = 0; i < n; i++) {\n            Arrays.fill(dp[i], -1);\n        }\n        return solve(prices, 0, 0, dp);\n    }\n}',
@@ -2435,7 +2435,7 @@ const data = {
                   tags: ['DP on Stocks'],
                 },
                 {
-                  id: 'cdf86642-0ae0-4baf-9989-08bcc53c92b6',
+                  id: '5b7608b0-6dc1-41b8-862c-2f4a92369e1d',
                   isFolder: false,
                   name: 'BestTimeToBuySellStocksWithTransactionFee.java',
                   code: 'import java.util.*;\n\npublic class BestTimeToBuySellStocksWithTransactionFee {\n    public int solve(int[] prices, int i, int last, int[][] dp, int fee) {\n        if (i == prices.length) return 0;\n        if (dp[i][last] != -1) return dp[i][last];\n        int sell = 0, notSell = 0, buy = 0, notBuy = 0;\n        if (last == 0) {\n            buy = -prices[i] + solve(prices, i + 1, 1, dp, fee);\n            notBuy = solve(prices, i + 1, 0, dp, fee);\n        } else {\n            sell = prices[i] - fee + solve(prices, i + 1, 0, dp, fee);\n            notSell = solve(prices, i + 1, 1, dp, fee);\n        }\n        return dp[i][last] = Math.max(buy + sell, notBuy + notSell);\n    }\n\n    public int maxProfit(int[] prices, int fee) {\n        int n = prices.length;\n        // int[][] dp = new int[n+1][2];\n        // for (int i = 0; i < n; i++) {\n        //     Arrays.fill(dp[i], -1);\n        // }\n        // return solve(prices, 0, 0, dp, fee);\n        int[][] dp = new int[n + 1][2];\n        for (int i = n - 1; i >= 0; i--) {\n            int buy = -prices[i] + dp[i + 1][1];\n            int notBuy = dp[i + 1][0];\n            dp[i][0] = Math.max(buy, notBuy);\n            int sell = prices[i] - fee + dp[i + 1][0];\n            int notSell = dp[i + 1][1];\n            dp[i][1] = Math.max(sell, notSell);\n        }\n        return dp[0][0];\n    }\n}',
@@ -2444,7 +2444,7 @@ const data = {
                   tags: ['DP on Stocks'],
                 },
                 {
-                  id: '4d30b7f5-1aed-4b95-81b6-644b534128ff',
+                  id: '5def6e41-c3a5-4d0a-9609-1cdf736184e9',
                   isFolder: false,
                   name: 'DeletionsToMakeStringsEqual.java',
                   code: 'import java.util.*;\n\npublic class DeletionsToMakeStringsEqual {\n    public int minDistance(String word1, String word2) {\n        int n = word1.length();\n        int m = word2.length();\n        int[][] dp = new int[n + 1][m + 1];\n        for (int i = 1; i <= n; i++) {\n            for (int j = 1; j <= m; j++) {\n                if (word1.charAt(i - 1) == word2.charAt(j - 1)) {\n                    dp[i][j] = 1 + dp[i - 1][j - 1];\n                } else {\n                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);\n                }\n            }\n        }\n        return m - dp[n][m] + n - dp[n][m];\n    }\n}',
@@ -2453,7 +2453,7 @@ const data = {
                   tags: ['DP on Strings'],
                 },
                 {
-                  id: '49fbebfb-d9c8-4a08-9023-85fbb4a9589b',
+                  id: '525615f2-8255-475f-b8aa-a87afe2ea880',
                   isFolder: false,
                   name: 'DistinctSubsequences.java',
                   code: 'import java.util.*;\n\npublic class DistinctSubsequences {\n    public int solve(String s, String t, int i, int j, int[][] dp) {\n        if (j == t.length()) return 1;\n        if (i == s.length()) return 0;\n        if (dp[i][j] != -1) return dp[i][j];\n        int count = solve(s, t, i+1, j, dp);\n        if (s.charAt(i) == t.charAt(j)) {\n            count += solve(s, t, i+1, j+1, dp);\n        }\n        return dp[i][j] = count;\n    }\n\n    public int numDistinct(String s, String t) {\n        int[][] dp = new int[s.length()][t.length()];\n        for (int i = 0; i < s.length(); i++) {\n            Arrays.fill(dp[i], -1);\n        }\n        return solve(s, t, 0, 0, dp);\n    }\n}',
@@ -2462,7 +2462,7 @@ const data = {
                   tags: ['DP on Strings'],
                 },
                 {
-                  id: '226cf340-6ee4-4a27-8186-6a48b5db6018',
+                  id: '5d619af1-1bfe-46cd-8396-0890652c15c4',
                   isFolder: false,
                   name: 'EditDistance.java',
                   code: 'import java.util.*;\n\npublic class EditDistance {\n    public int solve(String w1, String w2, int n, int m, int[][] dp) {\n        if (n < 0) return m + 1;\n        if (m < 0) return n + 1;\n        if (dp[n][m] != -1) return dp[n][m];\n        if (w1.charAt(n) == w2.charAt(m)) {\n            return dp[n][m] = solve(w1, w2, n - 1, m - 1, dp);\n        } else {\n            int insert = solve(w1, w2, n, m - 1, dp);\n            int replace = solve(w1, w2, n - 1, m - 1, dp);\n            int delete = solve(w1, w2, n - 1, m, dp);\n            return dp[n][m] = 1 + Math.min(Math.min(insert, delete), replace);\n        }\n    }\n\n    public int minDistance(String word1, String word2) {\n        int n = word1.length(), m = word2.length();\n        int[][] dp = new int[n][m];\n        for (int i = 0; i < n; i++) {\n            Arrays.fill(dp[i], -1);\n        }\n        return solve(word1, word2, n - 1, m - 1, dp);\n    }\n}',
@@ -2471,7 +2471,7 @@ const data = {
                   tags: ['DP on Strings'],
                 },
                 {
-                  id: '671b02f5-bef3-45a1-ad64-f7b93613d0b1',
+                  id: 'dcf69cf0-09c4-469f-b757-c761c4ae1be8',
                   isFolder: false,
                   name: 'LongestCommonSubsequence.java',
                   code: 'import java.util.*;\n\npublic class LongestCommonSubsequence {\n    public int solve(String text1, String text2, int i1, int i2, int[][] dp) {\n        if (i1 < 0 || i2 < 0) return 0;\n        if (dp[i1][i2] != -1) return dp[i1][i2];\n        if (text1.charAt(i1) == text2.charAt(i2)) {\n            return dp[i1][i2] = 1 + solve(text1, text2, i1 - 1, i2 - 1, dp);\n        }\n        return dp[i1][i2] = Math.max(solve(text1, text2, i1 - 1, i2, dp), solve(text1, text2, i1, i2 - 1, dp));\n    }\n\n    public int longestCommonSubsequence(String text1, String text2) {\n        int n = text1.length(), m = text2.length();\n        int[][] dp = new int[n + 1][m + 1];\n        // for (int i = 0; i < n; i++) {\n        //     Arrays.fill(dp[i], -1);\n        // }\n        // return solve(text1, text2, n-1, m-1, dp);\n\n//        Tabulation\n        for (int i = 1; i <= n; i++) {\n            for (int j = 1; j <= m; j++) {\n                if (text1.charAt(i - 1) == text2.charAt(j - 1)) {\n                    dp[i][j] = 1 + dp[i - 1][j - 1];\n                } else {\n                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);\n                }\n            }\n        }\n        return dp[n][m];\n    }\n}',
@@ -2480,7 +2480,7 @@ const data = {
                   tags: ['DP on Strings'],
                 },
                 {
-                  id: '7665dc1a-5570-4ce4-a168-210e94203ada',
+                  id: '83478128-bc38-40ae-b2ce-74a2b686f1de',
                   isFolder: false,
                   name: 'LongestCommonSubstring.java',
                   code: 'import java.util.*;\n\npublic class LongestCommonSubstring {\n    public static int lcs(String str1, String str2) {\n        // Write your code here.\n        int n = str1.length();\n        int m = str2.length();\n        int[][] dp = new int[n + 1][m + 1];\n        int max = 0;\n        for (int i = 1; i <= n; i++) {\n            for (int j = 1; j <= m; j++) {\n                if (str1.charAt(i - 1) == str2.charAt(j - 1)) {\n                    dp[i][j] = 1 + dp[i - 1][j - 1];\n                    max = Math.max(max, dp[i][j]);\n                } else {\n                    dp[i][j] = 0;\n                }\n            }\n        }\n        return max;\n    }\n}',
@@ -2489,7 +2489,7 @@ const data = {
                   tags: ['DP on Strings'],
                 },
                 {
-                  id: '8900fce0-3207-4b4c-9234-65cdea893bbf',
+                  id: '60c318b4-cd38-4925-af2e-bbc16cdea2e6',
                   isFolder: false,
                   name: 'LongestPalindromicSubsequence.java',
                   code: 'import java.util.*;\n\npublic class LongestPalindromicSubsequence {\n    public int solve(String s, int i, int j, int[][] dp) {\n        if (i > j) return 0;\n        if (dp[i][j] != -1) return dp[i][j];\n        if (s.charAt(i) == s.charAt(j)) {\n            return dp[i][j] = (i == j ? 1 : 2) + solve(s, i + 1, j - 1, dp);\n        }\n        return dp[i][j] = Math.max(solve(s, i+1, j, dp), solve(s, i, j-1, dp));\n    }\n    public int longestPalindromeSubseq(String s) {\n//        lcs(s, reversed(s));\n        int n = s.length();\n        if (n <= 1) return n;\n        int[][] dp = new int[n+1][n+1];\n        for (int i = 0; i <= n; i++) Arrays.fill(dp[i], -1);\n        return solve(s, 0, n - 1, dp);\n    }\n}',
@@ -2498,7 +2498,7 @@ const data = {
                   tags: ['DP on Strings'],
                 },
                 {
-                  id: 'da43bbde-b37a-4505-aa1e-1f8867bde3a5',
+                  id: 'db653eed-6451-4021-b1cd-18ff911d1451',
                   isFolder: false,
                   name: 'MinInsertionsToMakeStringPalindrome.java',
                   code: 'import java.util.*;\n\npublic class MinInsertionsToMakeStringPalindrome {\n    public int minInsertions(String s) {\n        // Basically n - longestPalindromicSubsequence(s);\n        int n = s.length();\n        int[][] dp = new int[n + 1][n + 1];\n        for (int i = 1; i <= n; i++) {\n            for (int j = 1; j <= n; j++) {\n                if (s.charAt(i - 1) == s.charAt(n - j)) {\n                    dp[i][j] = 1 + dp[i - 1][j - 1];\n                } else {\n                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);\n                }\n            }\n        }\n        return n - dp[n][n];\n    }\n}',
@@ -2507,7 +2507,7 @@ const data = {
                   tags: ['DP on Strings'],
                 },
                 {
-                  id: 'b99d2128-06e1-4f1f-8691-5b4ac7c7313a',
+                  id: '7a2054e8-7f5e-46b1-9c10-45c41ac67bd2',
                   isFolder: false,
                   name: 'PrintLongestCommonSubsequence.java',
                   code: 'import java.util.*;\n\npublic class PrintLongestCommonSubsequence {\n    public static String solve(int i1, int i2, String s1, String s2, String[][] dp) {\n        if (i1 < 0 || i2 < 0)\n            return "";\n        if (dp[i1][i2] != null) return dp[i1][i2];\n        if (s1.charAt(i1) == s2.charAt(i2)) {\n            return dp[i1][i2] = s1.charAt(i1) + solve(i1 - 1, i2 - 1, s1, s2, dp);\n        }\n        String a = solve(i1 - 1, i2, s1, s2, dp);\n        String b = solve(i1, i2 - 1, s1, s2, dp);\n        if (a.length() >= b.length()) return dp[i1][i2] = a;\n        return dp[i1][i2] = b;\n    }\n\n    public static String findLCS(int n, int m, String s1, String s2) {\n        // Write your code here.\n        // String[][] dp = new String[n][m];\n        // return solve(n-1, m-1, s1, s2, dp);\n        int[][] dp = new int[n + 1][m + 1];\n        for (int i = 1; i <= n; i++) {\n            for (int j = 1; j <= m; j++) {\n                dp[i][j] = s1.charAt(i) == s2.charAt(j)\n                        ? 1 + dp[i - 1][j - 1]\n                        : Math.max(dp[i - 1][j], dp[i][j - 1]);\n            }\n        }\n        char[] str = new char[dp[n][m]];\n        int idx = str.length - 1;\n        int i = n, j = m;\n        while (i > 0 && j > 0) {\n            char ch1 = s1.charAt(i - 1);\n            char ch2 = s2.charAt(j - 1);\n            if (ch1 == ch2) {\n                str[idx--] = ch1;\n                i--;\n                j--;\n            } else if (dp[i - 1][j] >= dp[i][j - 1]) i--;\n            else j--;\n        }\n        return new String(str);\n    }\n}',
@@ -2516,7 +2516,7 @@ const data = {
                   tags: ['DP on Strings'],
                 },
                 {
-                  id: '6e562e6a-b975-4d5e-962f-b287e952c9c9',
+                  id: 'c40ad607-1fe1-445a-8cbc-f6c1a32b87d8',
                   isFolder: false,
                   name: 'ShortestCommonSupersequence.java',
                   code: 'import java.util.*;\n\npublic class ShortestCommonSupersequence {\n    public void lcs(String s1, String s2, int n, int m, int[][] dp) {\n        for (int i = 1; i <= n; i++) {\n            for (int j = 1; j <= m; j++) {\n                if (s1.charAt(i - 1) == s2.charAt(j - 1)) {\n                    dp[i][j] = 1 + dp[i - 1][j - 1];\n                } else {\n                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);\n                }\n            }\n        }\n    }\n\n    public String shortestCommonSupersequence(String s1, String s2) {\n        int n = s1.length(), m = s2.length();\n        int[][] dp = new int[n + 1][m + 1];\n        lcs(s1, s2, n, m, dp);\n        StringBuilder sb = new StringBuilder();\n        while (n > 0 && m > 0) {\n            char a = s1.charAt(n - 1);\n            char b = s2.charAt(m - 1);\n            if (a == b) {\n                sb.append(a);\n                n--;\n                m--;\n            } else if (dp[n - 1][m] >= dp[n][m - 1]) {\n                sb.append(a);\n                n--;\n            } else {\n                sb.append(b);\n                m--;\n            }\n        }\n\n        while (n > 0) {\n            sb.append(s1.charAt(--n));\n        }\n\n        while (m > 0) {\n            sb.append(s2.charAt(--m));\n        }\n        return sb.reverse().toString();\n    }\n}',
@@ -2525,7 +2525,7 @@ const data = {
                   tags: ['DP on Strings'],
                 },
                 {
-                  id: '58431b73-4d19-4c84-9011-102433752775',
+                  id: 'b870b947-8293-4b84-a504-1fa9c1cba939',
                   isFolder: false,
                   name: 'WildcardMatching.java',
                   code: "import java.util.*;\n\npublic class WildcardMatching {\n    public boolean solve(String s, String p, int n, int m, int[][] dp) {\n        if (n < 0 && m < 0) return true;\n        if (n >= 0 && m < 0) return false;\n        if (n < 0 && m >= 0) {\n            for (int i = 0; i <= m; i++) {\n                if (p.charAt(i) != '*') return false;\n            }\n            return true;\n        }\n        if (dp[n][m] != -1) return dp[n][m] == 1;\n        boolean ans = false;\n        if (s.charAt(n) == p.charAt(m) || p.charAt(m) == '?') {\n            ans = solve(s, p, n - 1, m - 1, dp);\n        } else if (p.charAt(m) == '*') {\n            ans = solve(s, p, n, m - 1, dp) || solve(s, p, n - 1, m, dp);\n        }\n        dp[n][m] = ans ? 1 : 0;\n        return ans;\n    }\n\n    public boolean isMatch(String s, String p) {\n        int n = s.length(), m = p.length();\n        int[][] dp = new int[n][m];\n        for (int i = 0; i < n; i++) {\n            Arrays.fill(dp[i], -1);\n        }\n        return solve(s, p, n - 1, m - 1, dp);\n    }\n}",
@@ -2534,7 +2534,7 @@ const data = {
                   tags: ['DP on Strings'],
                 },
                 {
-                  id: '86c193ef-d298-4367-b553-a609c337780d',
+                  id: '9997a222-a4a2-4843-b7ca-c42b16344c02',
                   isFolder: false,
                   name: 'CoinChange.java',
                   code: 'import java.util.*;\n\npublic class CoinChange {\n    public int solve(int[] coins, int amount, int idx, int[][] dp) {\n        if (amount == 0) return 0;\n        if (idx == 0) {\n            if (amount % coins[idx] == 0) return amount / coins[idx];\n            return 10001;\n        }\n        if (dp[idx][amount] != -1) return dp[idx][amount];\n        int notPick = solve(coins, amount, idx - 1, dp), pick = 10001;\n        if (coins[idx] <= amount) {\n            pick = 1 + solve(coins, amount - coins[idx], idx, dp);\n        }\n        return dp[idx][amount] = Math.min(pick, notPick);\n    }\n\n    public int coinChange(int[] coins, int amount) {\n        // int n = coins.length;\n        // int[][] dp = new int[n][amount + 1];\n        // for (int i = 0; i < n; i++) {\n        //     Arrays.fill(dp[i], -1);\n        // }\n        // int ans = solve(coins, amount, n - 1, dp);\n        // return ans > 10000 ? -1 : ans;\n        int n = coins.length;\n        int[][] dp = new int[n][amount + 1];\n        for (int i = 0; i <= amount; i++) {\n            dp[0][i] = (i % coins[0]) == 0 ? i / coins[0] : 10001;\n        }\n        for (int i = 1; i < n; i++) {\n            for (int j = 0; j <= amount; j++) {\n                int notPick = dp[i - 1][j], pick = 10001;\n                if (coins[i] <= j) {\n                    pick = 1 + dp[i][j - coins[i]];\n                }\n                dp[i][j] = Math.min(pick, notPick);\n            }\n        }\n        return dp[n - 1][amount] > 10000 ? -1 : dp[n - 1][amount];\n    }\n}',
@@ -2543,7 +2543,7 @@ const data = {
                   tags: ['DP on Subsequences'],
                 },
                 {
-                  id: 'ba08c696-fbbf-439a-8e05-bde76b18f228',
+                  id: 'd87db9d2-1aba-4b09-9e5e-c8d440652219',
                   isFolder: false,
                   name: 'CoinChange2.java',
                   code: 'import java.util.*;\n\npublic class CoinChange2 {\n    public int solve(int[] coins, int amount, int idx, int[][] dp) {\n        if (idx == 0) {\n            if (amount % coins[idx] == 0) return 1;\n            return 0;\n        }\n        if (dp[idx][amount] != -1) return dp[idx][amount];\n        int notPick = solve(coins, amount, idx - 1, dp);\n        int pick = 0;\n        if (coins[idx] <= amount) {\n            pick = solve(coins, amount - coins[idx], idx, dp);\n        }\n        return dp[idx][amount] = pick + notPick;\n    }\n    public int change(int amount, int[] coins) {\n        int n = coins.length;\n        int[][] dp = new int[n][amount + 1];\n        for (int i = 0; i < n; i++) {\n            Arrays.fill(dp[i], -1);\n        }\n        return solve(coins, amount, n - 1, dp);\n    }\n}',
@@ -2552,7 +2552,7 @@ const data = {
                   tags: ['DP on Subsequences'],
                 },
                 {
-                  id: '9ee31740-3cfb-4e01-b363-fe950d1a6677',
+                  id: '29b9f80b-04bc-46bc-a6ff-1cba133a4b35',
                   isFolder: false,
                   name: 'CountPartitionsWithGivenDifference.java',
                   code: 'import java.util.*;\n\npublic class CountPartitionsWithGivenDifference {\n    static int mod = (int) 1e9+7;\n    public static int solve(int[] arr, int i, int sum, int[][] dp) {\n        if (i == 0) {\n            if (sum == 0 && arr[i] == 0) return 2;\n            if (sum == 0 || sum == arr[i]) return 1;\n            return 0;\n        }\n        if (dp[i][sum] != -1) return dp[i][sum];\n        int np = solve(arr, i-1, sum, dp);\n        int p = arr[i] <= sum ? solve(arr, i - 1, sum - arr[i], dp) : 0;\n        return dp[i][sum] = (p + np)%mod;\n    }\n\n    public static int countPartitions(int n, int d, int[] arr) {\n        // Write your code here.\n        int total = 0;\n        for (int i : arr) {\n            total += i;\n        }\n        int[][] dp = new int[n][((total + d)/2) + 1];\n        for (int i = 0; i < n; i++) {\n            Arrays.fill(dp[i], -1);\n        }\n        if (total + d < 0 || (total+d) % 2 != 0) return 0;\n        return solve(arr, n-1, (total+d)/2, dp);\n    }\n}',
@@ -2561,7 +2561,7 @@ const data = {
                   tags: ['DP on Subsequences'],
                 },
                 {
-                  id: '6737e29a-250d-4eeb-b46f-d802bf8c67c8',
+                  id: 'f83ad397-3d3d-4cfe-9270-1c4efe0c28c3',
                   isFolder: false,
                   name: 'CountSubsetsWithSumK.java',
                   code: 'import java.util.*;\n\npublic class CountSubsetsWithSumK {\n    static int mod = (int) 1e9 + 7;\n\n    public static int solve(int[] arr, int n, int k, int i, int[][] dp) {\n        if (i == n - 1) {\n//            Zero Case\n            if (k == 0 && arr[i] == 0) return 2;\n            if (k == 0 || k == arr[i]) return 1;\n            return 0;\n        }\n        if (dp[i][k] != -1) return dp[i][k];\n        int pick = 0, notpick = 0;\n        if (arr[i] <= k) {\n            pick = solve(arr, n, k - arr[i], i + 1, dp);\n        }\n        notpick = solve(arr, n, k, i + 1, dp);\n        return dp[i][k] = (pick + notpick) % mod;\n    }\n\n    public static int findWays(int[] num, int tar) {\n        // Write your code here\n        int n = num.length;\n        int[][] dp = new int[n][tar + 1];\n        for (int i = 0; i < n; i++) {\n            Arrays.fill(dp[i], -1);\n        }\n        return solve(num, n, tar, 0, dp);\n    }\n}',
@@ -2570,7 +2570,7 @@ const data = {
                   tags: ['DP on Subsequences'],
                 },
                 {
-                  id: '6afc55c2-7187-4fd3-9310-6c0e394b5c7e',
+                  id: 'da8463ca-c1f3-4e51-b1f9-8feea6583b08',
                   isFolder: false,
                   name: 'Knapsack01.java',
                   code: 'import java.util.*;\n\npublic class Knapsack01 {\n    static int solve(int[] weight, int[] value, int n, int maxWeight, int[][] dp) {\n        if (maxWeight == 0) return 0;\n        if (n == 0) {\n            if (maxWeight >= weight[n]) return value[n];\n            return 0;\n        }\n        if (dp[n][maxWeight] != -1) return dp[n][maxWeight];\n        int np = solve(weight, value, n - 1, maxWeight, dp);\n        int p = 0;\n        if (weight[n] <= maxWeight) {\n            p = value[n] + solve(weight, value, n - 1, maxWeight - weight[n], dp);\n        }\n        return dp[n][maxWeight] = Math.max(np, p);\n    }\n\n    static int knapsack(int[] weight, int[] value, int n, int maxWeight) {\n        int[][] dp = new int[n][maxWeight + 1];\n        // for (int i = 0; i < n; i++) {\n        //     Arrays.fill(dp[i], -1);\n        // }\n        // return solve(weight, value, n-1, maxWeight, dp);\n        // BASE CASE\n        for (int i = 0; i <= maxWeight; i++) {\n            if (weight[0] <= i) {\n                dp[0][i] = value[0];\n            }\n        }\n\n        for (int i = 1; i < n; i++) {\n            for (int j = 1; j <= maxWeight; j++) {\n                int np = dp[i - 1][j];\n                int p = 0;\n                if (weight[i] <= j) {\n                    p = value[i] + dp[i - 1][j - weight[i]];\n                }\n                dp[i][j] = Math.max(np, p);\n            }\n        }\n        return dp[n - 1][maxWeight];\n    }\n\n}',
@@ -2579,7 +2579,7 @@ const data = {
                   tags: ['DP on Subsequences'],
                 },
                 {
-                  id: '97d20f32-6855-45a0-9b05-c74414ddb7de',
+                  id: '39e8820b-86c4-4f38-8191-0d5d9ee057bb',
                   isFolder: false,
                   name: 'PartitionEqualSubsetSum.java',
                   code: 'import java.util.*;\n\npublic class PartitionEqualSubsetSum {\n    public static boolean solve(int[] arr, int n, int k, int i, int[][] dp) {\n        if (k == 0) return true;\n        if (i == n || k < 0) return false;\n        if (dp[i][k] != -1) return dp[i][k] == 1;\n        boolean pick = false, notpick = solve(arr, n, k, i + 1, dp);\n        if (arr[i] <= k) {\n            pick = solve(arr, n, k - arr[i], i + 1, dp);\n        }\n        dp[i][k] = (pick || notpick) ? 1 : 0;\n        return pick || notpick;\n    }\n\n    public boolean canPartition(int[] nums) {\n        int n = nums.length, sum = 0;\n        if (n <= 1) return false;\n        for (int i : nums) {\n            sum += i;\n        }\n        if ((sum & 1) == 1) return false;\n        sum = sum / 2;\n        int[][] dp = new int[n][sum + 1];\n        for (int i = 0; i < n; i++) {\n            Arrays.fill(dp[i], -1);\n        }\n        return solve(nums, n, sum, 0, dp);\n    }\n}',
@@ -2588,7 +2588,7 @@ const data = {
                   tags: ['DP on Subsequences'],
                 },
                 {
-                  id: 'a38f0167-1eaf-43eb-8e58-778793d20c4d',
+                  id: 'fa25b246-2247-40ca-b39b-09e1c0babd53',
                   isFolder: false,
                   name: 'PartitionSetInto2SubsetsWithMinDifference.java',
                   code: 'import java.util.*;\n\npublic class PartitionSetInto2SubsetsWithMinDifference {\n    public static int minSubsetSumDifference(int[] nums, int n) {\n        // Write your code here.\n        int sum = 0;\n        for (int i = 0; i < n; i++) {\n            sum += nums[i];\n        }\n        boolean[][] dp = new boolean[n][sum + 1];\n        for (int i = 0; i < n; i++) {\n            dp[i][0] = true;\n        }\n        if (nums[0] <= sum) {\n            dp[0][nums[0]] = true;\n        }\n        for (int i = 1; i < n; i++) {\n            for (int j = 1; j <= sum; j++) {\n                boolean notPick = dp[i - 1][j], pick = false;\n                if (nums[i] <= j) {\n                    pick = dp[i - 1][j - nums[i]];\n                }\n                dp[i][j] = pick || notPick;\n            }\n        }\n        int min = (int) 1e8;\n        for (int i = 0; i <= sum / 2; i++) {\n            if (dp[n - 1][i]) {\n                min = Math.min(min, Math.abs(sum - i - i));\n            }\n        }\n        return min;\n    }\n}',
@@ -2597,7 +2597,7 @@ const data = {
                   tags: ['DP on Subsequences'],
                 },
                 {
-                  id: '40c1c99e-4e40-4bc8-88d5-45a1fb434ef7',
+                  id: '69679342-efdd-414b-9aa1-c8fac3eaa36f',
                   isFolder: false,
                   name: 'RodCuttingProblem.java',
                   code: 'import java.util.*;\n\npublic class RodCuttingProblem {\n    public static int solve(int[] price, int n, int size, int[] dp) {\n        if (size > n) return (int) -1e8;\n        if (size == n) return 0;\n        if (dp[size] != -1) return dp[size];\n        int maxPick = 0;\n        for (int i = 1; i <= price.length - size; i++) {\n            int pick = price[i - 1] + solve(price, n, size + i, dp);\n            maxPick = Math.max(maxPick, pick);\n        }\n        return dp[size] = maxPick;\n    }\n    public static int cutRod(int[] price, int n) {\n        // Write your code here.\n        int[] dp = new int[n+1];\n        Arrays.fill(dp, -1);\n        return solve(price, n, 0, dp);\n    }\n}',
@@ -2606,7 +2606,7 @@ const data = {
                   tags: ['DP on Subsequences'],
                 },
                 {
-                  id: 'c5d49155-0925-4f91-bec2-c089fee02d9e',
+                  id: '9b463639-cf4e-4456-a13d-fa95ca022404',
                   isFolder: false,
                   name: 'SubsetSumEqualToK.java',
                   code: 'import java.util.*;\n\npublic class SubsetSumEqualToK {\n    public static boolean solve(int[] arr, int n, int i, int k, int[][] dp) {\n        if (k == 0) return true;\n        if (i == n) return false;\n        if (dp[i][k] != -1) return dp[i][k] == 1;\n        boolean pick = false;\n        if (arr[i] <= k) {\n            pick = solve(arr, n, i + 1, k - arr[i], dp);\n        }\n        boolean notPick = solve(arr, n, i + 1, k, dp);\n        dp[i][k] = (pick || notPick) ? 1 : 0;\n        return pick || notPick;\n    }\n\n    public static boolean subsetSumToK(int n, int k, int arr[]) {\n        // Write your code here.\n//        MEMOIZATION\n        // int[][] dp = new int[n][k+1];\n        // for (int i = 0; i < n; i++) {\n        //     Arrays.fill(dp[i], -1);\n        // }\n        // return solve(arr, n, 0, k, dp);\n\n//        TABULATION\n        boolean[][] dp = new boolean[n][k + 1];\n        // BASE CASE\n        for (int i = 0; i < n; i++) {\n            dp[i][0] = true;\n        }\n        if (arr[0] <= k) {\n            dp[0][arr[0]] = true;\n        }\n        for (int i = 1; i < n; i++) {\n            for (int j = 1; j <= k; j++) {\n                boolean notPick = dp[i - 1][j], pick = false;\n                if (arr[i] <= j) {\n                    pick = dp[i - 1][j - arr[i]];\n                }\n                dp[i][j] = pick || notPick;\n            }\n        }\n        return dp[n - 1][k];\n    }\n}',
@@ -2615,7 +2615,7 @@ const data = {
                   tags: ['DP on Subsequences'],
                 },
                 {
-                  id: 'cc442917-66ee-4b73-bdb8-26d8be11332a',
+                  id: 'e0eaa2c7-dc3c-40c6-b8cd-187f47eeeb8b',
                   isFolder: false,
                   name: 'TargetSum.java',
                   code: 'import java.util.*;\n\npublic class TargetSum {\n    public static int solve(int[] arr, int i, int sum, int[][] dp) {\n        if (i == 0) {\n            if (sum == 0 && arr[i] == 0) return 2;\n            if (sum == 0 || sum == arr[i]) return 1;\n            return 0;\n        }\n        if (dp[i][sum] != -1) return dp[i][sum];\n        int np = solve(arr, i-1, sum, dp);\n        int p = arr[i] <= sum ? solve(arr, i - 1, sum - arr[i], dp) : 0;\n        return dp[i][sum] = p + np;\n    }\n\n    public static int countPartitions(int n, int d, int[] arr) {\n        // Write your code here.\n        int total = 0;\n        for (int i : arr) {\n            total += i;\n        }\n        if (total + d < 0 || (total+d) % 2 != 0) return 0;\n        int[][] dp = new int[n][((total + d)/2) + 1];\n        for (int i = 0; i < n; i++) {\n            Arrays.fill(dp[i], -1);\n        }\n        return solve(arr, n-1, (total+d)/2, dp);\n    }\n\n    // public int solve(int[] nums, int idx, int target, HashMap<String, Integer> hm) {\n    //     if (idx < 0) {\n    //         if (target == 0) return 1;\n    //         return 0;\n    //     }\n    //     String key = idx + "," + target;\n    //     if (hm.containsKey(key)) return hm.get(key);\n    //     int np = solve(nums, idx - 1, target - nums[idx], hm);\n    //     int p = solve(nums, idx - 1, target + nums[idx], hm);\n    //     hm.put(key, np + p);\n    //     return np + p;\n    // }\n\n    public int findTargetSumWays(int[] nums, int target) {\n        int n = nums.length;\n        // HashMap<String, Integer> hm = new HashMap<>();\n        // return solve(nums, n-1, target, hm);\n        return countPartitions(n, target, nums);\n    }\n}',
@@ -2624,7 +2624,7 @@ const data = {
                   tags: ['DP on Subsequences'],
                 },
                 {
-                  id: '4016327b-dd2a-4f7c-86f9-9d24ed299074',
+                  id: '3470d363-b32d-4c92-8628-ef9599b99a58',
                   isFolder: false,
                   name: 'UnboundedKnapsack.java',
                   code: 'import java.util.*;\n\npublic class UnboundedKnapsack {\n    public static int solve(int idx, int w, int[] profit, int[] weight, int[][] dp) {\n        if (idx == 0) {\n            int times = w / weight[idx];\n            if (times > 0) return times * profit[0];\n            return 0;\n        }\n        if (dp[idx][w] != -1) return dp[idx][w];\n        int pick = 0;\n        if (weight[idx] <= w) {\n            pick = profit[idx] + solve(idx, w - weight[idx], profit, weight, dp);\n        }\n        int notPick = solve(idx-1, w, profit, weight, dp);\n        return dp[idx][w] = Math.max(pick, notPick);\n    }\n    public static int unboundedKnapsack(int n, int w, int[] profit, int[] weight) {\n        // Write your code here.\n        int[][] dp = new int[n][w+1];\n        // for (int i = 0; i < n; i++) Arrays.fill(dp[i], -1);\n        // return solve(n-1, w, profit, weight, dp);\n        // BASE CASE\n        for (int i = 0; i <= w; i++) {\n            if (i >= weight[0]) {\n                int times = i / weight[0];\n                dp[0][i] = times * profit[0];\n            }\n        }\n\n        for (int i = 1; i < n; i++) {\n            for (int j = 0; j <= w; j++) {\n                int pick = 0;\n                if (weight[i] <= j) {\n                    pick = profit[i] + dp[i][j-weight[i]];\n                }\n                int notPick = dp[i-1][j];\n                dp[i][j] = Math.max(pick, notPick);\n            }\n        }\n        return dp[n-1][w];\n    }\n}',
@@ -2635,12 +2635,12 @@ const data = {
               ],
             },
             {
-              id: 'afcfbdc6-6231-4e8e-86a8-80a9c263ae6a',
+              id: '7a82a141-11f1-4a25-9dd4-899ac7bcd5a6',
               isFolder: true,
               name: 'Graphs',
               content: [
                 {
-                  id: 'a4f588aa-fde8-473b-b9f6-a5bd9fa16253',
+                  id: '4ebc54eb-453c-44e8-859d-07de6e42ff85',
                   isFolder: false,
                   name: 'Graph.java',
                   code: 'import java.util.*;\n\npublic class Graph {\n    static class Edge {\n        int source, destination;\n\n        Edge(int s, int d) {\n            this.source = s;\n            this.destination = d;\n        }\n\n        @Override\n        public String toString() {\n            return "Edge{ src=" + source + ", dest=" + destination + \'}\';\n        }\n    }\n\n    static int getNeighbours(List<Edge> adjListItem) {\n        System.out.print("Neighbours: ");\n        for (Edge e : adjListItem) {\n            System.out.print(e.destination + " ");\n        }\n        return adjListItem.size();\n    }\n\n    static void buildGraph(List<Edge>[] adjList) {\n        for (int i = 0; i < adjList.length; i++) {\n            adjList[i] = new ArrayList<>();\n        }\n        adjList[0].add(new Edge(0, 1));\n        adjList[0].add(new Edge(0, 2));\n\n        adjList[1].add(new Edge(1, 0));\n        adjList[1].add(new Edge(1, 3));\n\n        adjList[2].add(new Edge(2, 0));\n        adjList[2].add(new Edge(2, 4));\n\n        adjList[3].add(new Edge(3, 1));\n        adjList[3].add(new Edge(3, 4));\n\n        adjList[4].add(new Edge(4, 2));\n        adjList[4].add(new Edge(4, 5));\n\n        adjList[5].add(new Edge(5, 3));\n        adjList[5].add(new Edge(5, 4));\n        adjList[5].add(new Edge(5, 6));\n\n        adjList[6].add(new Edge(6, 5));\n    }\n\n    static void bfs(List<Edge>[] adjList) {\n        boolean[] visited = new boolean[adjList.length];\n        Queue<Integer> q = new LinkedList<>();\n        q.add(0);\n        while (!q.isEmpty()) {\n            int curr = q.poll();\n            if (!visited[curr]) {\n                System.out.print(curr + " ");\n                visited[curr] = true;\n                for (int i = 0; i < adjList[curr].size(); i++) {\n                    int destination = adjList[curr].get(i).destination;\n                    q.add(destination);\n                }\n            }\n        }\n    }\n    static void bfsDisjoint(List<Edge>[] adjList, boolean[] visited, int start) {\n        Queue<Integer> q = new LinkedList<>();\n        q.add(start);\n        while (!q.isEmpty()) {\n            int curr = q.poll();\n            if (!visited[curr]) {\n                System.out.print(curr + " ");\n                visited[curr] = true;\n                for (int i = 0; i < adjList[curr].size(); i++) {\n                    int destination = adjList[curr].get(i).destination;\n                    q.add(destination);\n                }\n            }\n        }\n    }\n\n    static void dfs(List<Edge>[] adjList, boolean[] visited, int curr) {\n        System.out.print(curr + " ");\n        visited[curr] = true;\n        for (int i = 0; i < adjList[curr].size(); i++) {\n            int dist = adjList[curr].get(i).destination;\n            if (!visited[dist]) {\n                dfs(adjList, visited, dist);\n            }\n        }\n    }\n\n    public static void main(String[] args) {\n        int V = 7;\n        List<Edge>[] adjList = new List[V];\n        buildGraph(adjList);\n        for (int i = 0; i < adjList.length; i++) {\n            System.out.println(i + ": " + adjList[i]);\n        }\n//        Print neighbour information\n//        int len = getNeighbours(adjList[2]);\n//        System.out.println("\\n2 has " + len + " neighbours");\n\n//        BFS\n//        bfs(adjList);\n//        boolean[] visited = new boolean[adjList.length];\n//        for (int i = 0; i < visited.length; i++) {\n//            if (!visited[i]) {\n//                bfsDisjoint(adjList, visited, i);\n//            }\n//        }\n\n//        DFS\n        boolean[] visited = new boolean[adjList.length];\n        dfs(adjList, visited, 0);\n    }\n}',
@@ -2649,7 +2649,7 @@ const data = {
                   tags: ['Learning'],
                 },
                 {
-                  id: '3edad3dd-34d3-4477-97d4-65bfe2dd8838',
+                  id: 'ca5bd361-823c-4b51-a301-e60a01982222',
                   isFolder: false,
                   name: 'AccountsMerge.java',
                   code: 'import java.util.*;\n\npublic class AccountsMerge {\n    public List<List<String>> accountsMerge(List<List<String>> accounts) {\n        int n = accounts.size();\n        DisjointSet ds = new DisjointSet(n);\n        HashMap<String, Integer> hm = new HashMap<>();\n        for (int i = 0; i < n; i++) {\n            List<String> account = accounts.get(i);\n            for (int j = 1; j < account.size(); j++) {\n                String email = account.get(j);\n                if (!hm.containsKey(email)) hm.put(email, i);\n                else ds.unionByRank(i, hm.get(email));\n            }\n        }\n        List<List<String>> temp = new ArrayList<>();\n        for (int i = 0; i < n; i++) {\n            temp.add(new ArrayList<>());\n        }\n        for (Map.Entry m : hm.entrySet()) {\n            int idx = ds.find((int)m.getValue());\n            String email = (String) m.getKey();\n            temp.get(idx).add(email);\n        }\n        List<List<String>> ans = new ArrayList<>();\n        for (int i = 0; i < n; i++) {\n            List<String> ls = temp.get(i);\n            if (!ls.isEmpty()) {\n                Collections.sort(ls);\n                ls.add(0, accounts.get(i).get(0));\n                ans.add(ls);\n            }\n        }\n        return ans;\n    }\n}',
@@ -2658,7 +2658,7 @@ const data = {
                   tags: ['MST and DisjointSet Problems'],
                 },
                 {
-                  id: '2dfdb9d1-3fb5-413c-bab6-48b484d2101b',
+                  id: '15d73cb1-9704-4705-8fd3-70a345ecf839',
                   isFolder: false,
                   name: 'DisjointSet.java',
                   code: '// Link:\nimport java.util.*;\n\npublic class DisjointSet {\n    int[] parent;\n    int[] rank;\n    int[] size;\n\n    DisjointSet(int n) {\n        this.parent = new int[n];\n        this.rank = new int[n];\n        this.size = new int[n];\n        for (int i = 0; i < n; i++) {\n            parent[i] = i;\n            size[i] = 1;\n        }\n    }\n\n    public int find(int num) {\n        if (num == parent[num]) return num;\n        parent[num] = find(parent[num]);\n        return parent[num];\n    }\n\n    public void unionByRank(int u, int v) {\n        int ultParentU = find(u), ultParentV = find(v);\n        if (ultParentU == ultParentV) return;\n        if (rank[ultParentU] > rank[ultParentV]) {\n            parent[ultParentV] = ultParentU;\n        } else if (rank[ultParentU] < rank[ultParentV]) {\n            parent[ultParentU] = ultParentV;\n        } else {\n            parent[ultParentV] = ultParentU;\n            rank[ultParentU]++;\n        }\n    }\n\n    public void unionBySize(int u, int v) {\n        int ultParentU = find(u);\n        int ultParentV = find(v);\n        if (ultParentU == ultParentV) return;\n        if (size[ultParentU] > size[ultParentV]) {\n            parent[ultParentV] = ultParentU;\n            size[ultParentU] += size[ultParentV];\n        } else {\n            parent[ultParentU] = ultParentV;\n            size[ultParentV] += size[ultParentU];\n        }\n    }\n}',
@@ -2667,7 +2667,7 @@ const data = {
                   tags: ['MST and DisjointSet Problems'],
                 },
                 {
-                  id: 'dd11afe7-d560-448c-bf96-0fae525328fc',
+                  id: '5fc87b98-2924-40e1-bc9b-eccc697118c0',
                   isFolder: false,
                   name: 'MakingALargeIsland.java',
                   code: 'import java.util.*;\n\npublic class MakingALargeIsland {\n    public static boolean isInBounds(int r, int c, int n) {\n        return r >= 0 && c >= 0 && r < n && c < n;\n    }\n    public int largestIsland(int[][] grid) {\n        int n = grid.length;\n        DisjointSet ds = new DisjointSet(n * n);\n        int[][] dirs = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };\n        for (int i = 0; i < n; i++) {\n            for (int j = 0; j < n; j++) {\n                if (grid[i][j] == 0) continue;\n                int node1 = i * n + j;\n                for (int d = 0; d < 4; d++) {\n                    int r = i + dirs[d][0];\n                    int c = j + dirs[d][1];\n                    if (isInBounds(r, c, n) && grid[r][c] == 1) {\n                        ds.unionBySize(node1, r * n + c);\n                    }\n                }\n            }\n        }\n        int maxSize = 0;\n        for (int i = 0; i < n; i++) {\n            for (int j = 0; j < n; j++) {\n                if (grid[i][j] == 1) continue;\n                HashSet<Integer> hs = new HashSet<>();\n                int size = 1;\n                for (int d = 0; d < 4; d++) {\n                    int r = i + dirs[d][0];\n                    int c = j + dirs[d][1];\n                    if (isInBounds(r, c, n) && grid[r][c] == 1) {\n                        int parent = ds.find(r * n + c);\n                        if (!hs.contains(parent)) {\n                            hs.add(parent);\n                            size += ds.size[parent];\n                        }\n                    }\n                }\n                maxSize = Math.max(maxSize, size);\n            }\n        }\n        if (maxSize == 0) {\n            for (int i = 0; i < ds.size.length; i++) {\n                maxSize = Math.max(ds.size[ds.find(i)], maxSize);\n            }\n        }\n        return maxSize;\n    }\n}',
@@ -2676,7 +2676,7 @@ const data = {
                   tags: ['MST and DisjointSet Problems'],
                 },
                 {
-                  id: '74d7e2e3-2388-4ce1-9db1-b0035d390d50',
+                  id: 'ed744688-33b8-4620-91f2-76d536a604c7',
                   isFolder: false,
                   name: 'MostStonesRemoved.java',
                   code: 'import java.util.*;\n\npublic class MostStonesRemoved {\n    public int removeStones(int[][] stones) {\n        int r = 0, c = 0;\n//        Getting max row and max column\n        for (int[] stone : stones) {\n            r = Math.max(r, stone[0]);\n            c = Math.max(c, stone[1]);\n        }\n        DisjointSet ds = new DisjointSet(r+c+2);\n        Set<Integer> hs = new HashSet<>(); // For not visiting the already visited\n        for (int[] stone : stones) {\n            int row = stone[0];\n            int col = stone[1] + r + 1;\n            ds.unionByRank(row, col);\n            hs.add(row);\n            hs.add(col);\n        }\n        int total = 0;\n        for(int i : hs) {\n            if (ds.find(i) == i) total++;\n        }\n        return stones.length - total;\n    }\n}',
@@ -2685,7 +2685,7 @@ const data = {
                   tags: ['MST and DisjointSet Problems'],
                 },
                 {
-                  id: '4bd4da37-73f6-4cfa-99ee-13168e077ab6',
+                  id: '330bda92-3d3b-403b-b9ba-46b047f0a589',
                   isFolder: false,
                   name: 'MSTKruskals.java',
                   code: 'import java.util.*;\n\npublic class MSTKruskals {\n    static int spanningTree(int V, int E, int[][] edges){\n        // Code Here.\n        Arrays.sort(edges, (a,b) -> a[2] - b[2]);\n        DisjointSet ds = new DisjointSet(V);\n        int wt = 0;\n        for (int i = 0; i < E; i++) {\n            if (ds.find(edges[i][0]) != ds.find(edges[i][1])) {\n                ds.unionBySize(edges[i][0], edges[i][1]);\n                wt += edges[i][2];\n            }\n        }\n        return wt;\n\n    }\n}',
@@ -2694,7 +2694,7 @@ const data = {
                   tags: ['MST and DisjointSet Problems'],
                 },
                 {
-                  id: '06b22205-fa5c-4f01-8872-f50e0097c02f',
+                  id: '9618ce72-4048-4f9e-bfc8-6c077a3300a0',
                   isFolder: false,
                   name: 'MSTPrims.java',
                   code: 'import java.util.*;\npublic class MSTPrims {\n    static class Pair {\n        int node, wt;\n        Pair(int n, int w){\n            this.node = n;\n            this.wt = w;\n        }\n    }\n    static class MSTNode {\n        int wt, node, parent;\n        MSTNode (int w, int n, int p) {\n            this.wt = w;\n            this.node = n;\n            this.parent = p;\n        }\n    }\n\n    public static int minimumSpanningTree(ArrayList<ArrayList<Integer>> edges, int n) {\n        //Your code goes here\n        List<List<Pair>> adj = new ArrayList<>();\n        for (int i = 0; i < n; i++) {\n            adj.add(new ArrayList<>());\n        }\n        for (ArrayList<Integer> edge: edges) {\n            int x = edge.get(0);\n            int y = edge.get(1);\n            int z = edge.get(2);\n            adj.get(x).add(new Pair(y, z));\n            adj.get(y).add(new Pair(x, z));\n        }\n        int sum = 0;\n        boolean[] visited = new boolean[n];\n        PriorityQueue<MSTNode> pq = new PriorityQueue<>((a,b) -> a.wt - b.wt);\n        pq.add(new MSTNode(0, 0, -1));\n        while (!pq.isEmpty()) {\n            MSTNode node = pq.poll();\n            if (visited[node.node]) continue;\n            visited[node.node] = true;\n            if (node.parent != -1) {\n                sum += node.wt;\n            }\n            List<Pair> list = adj.get(node.node);\n            for (Pair p: list) {\n                if (!visited[p.node]) {\n                    pq.add(new MSTNode(p.wt, p.node, node.node));\n                }\n            }\n        }\n        return sum;\n    }\n}',
@@ -2703,7 +2703,7 @@ const data = {
                   tags: ['MST and DisjointSet Problems'],
                 },
                 {
-                  id: 'e7b3f511-09de-4b86-bad7-d6c797e31401',
+                  id: '3f4cbf64-4597-41da-ae5d-a2a100e9fc22',
                   isFolder: false,
                   name: 'NumberOfIslands2.java',
                   code: 'import java.util.*;\n\npublic class NumberOfIslands2 {\n    public static boolean isInBounds(int r, int c, int n, int m) {\n        return r >= 0 && c >= 0 && r < n && c < m;\n    }\n    public static int[] numberOfIslandII(int n, int m, int[][] queries, int q) {\n        // Write your code here.\n        DisjointSet ds = new DisjointSet(n * m);\n        boolean[][] visited = new boolean[n][m];\n        int count = 0;\n        int[] ans = new int[q];\n        int idx = 0;\n        int[][] dirs = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };\n        for (int[] query : queries) {\n            int row = query[0];\n            int col = query[1];\n            if (!visited[row][col]) {\n                visited[row][col] = true;\n                count++;\n                int node1 = row*m + col;\n                for (int d = 0; d < 4; d++) {\n                    int r = row + dirs[d][0], c = col + dirs[d][1];\n                    if (isInBounds(r,c,n,m) && visited[r][c]) {\n                        int node2 = r*m + c;\n                        if (ds.find(node1) != ds.find(node2)) {\n                            count--;\n                            ds.unionByRank(node1, node2);\n                        }\n                    }\n                }\n            }\n            ans[idx++] = count;\n        }\n        return ans;\n    }\n}',
@@ -2712,7 +2712,7 @@ const data = {
                   tags: ['MST and DisjointSet Problems'],
                 },
                 {
-                  id: '78feb63c-8e4d-47da-9e5f-901768bcaa6c',
+                  id: 'cf3de293-1f8d-4671-ad1d-62a7bbb8bf99',
                   isFolder: false,
                   name: 'NumberOfOperationsToMakeNetworkConnected.java',
                   code: 'import java.util.*;\n\npublic class NumberOfOperationsToMakeNetworkConnected {\n    public int makeConnected(int n, int[][] connections) {\n        DisjointSet ds = new DisjointSet(n);\n        int extra = 0;\n        for (int[] connection : connections) {\n            int x = ds.find(connection[0]);\n            int y = ds.find(connection[1]);\n            if (x != y)\n                ds.unionByRank(connection[0], connection[1]);\n            else\n                extra++;\n        }\n        int disconnected = 0;\n        for (int i = 0; i < n; i++) {\n            if (ds.parent[i] == i)\n                disconnected++;\n        }\n        int req = disconnected - 1;\n        return extra >= req ? req : -1;\n    }\n}',
@@ -2721,7 +2721,7 @@ const data = {
                   tags: ['MST and DisjointSet Problems'],
                 },
                 {
-                  id: 'ed72f9d9-8d6c-471f-943d-a6d985562828',
+                  id: 'f8c0f1fa-87df-42fe-8af2-352ccc0f99a1',
                   isFolder: false,
                   name: 'SwimInRisingWater.java',
                   code: 'import java.util.*;\n\npublic class SwimInRisingWater {\n    static class Pair {\n        int row, col, wt;\n        Pair(int r, int c, int w) {\n            this.row = r;\n            this.col = c;\n            this.wt = w;\n        }\n    }\n\n    public boolean isInBounds(int r, int c, int n) {\n        return r >= 0 && c >= 0 && r < n && c < n;\n    }\n    public int swimInWater(int[][] grid) {\n        // Ans = shortest path ka max value\n        int n = grid.length;\n        PriorityQueue<Pair> pq = new PriorityQueue<>((a,b) -> a.wt - b.wt);\n        pq.add(new Pair(0,0,grid[0][0]));\n        boolean[][] visited = new boolean[n][n];\n        int max = 0;\n        int[][] dirs = {{0,1},{1,0},{0,-1},{-1,0}};\n        while (!pq.isEmpty()) {\n            Pair p = pq.poll();\n            visited[p.row][p.col] = true;\n            max = Math.max(max, p.wt);\n            if (p.row == n-1 && p.col == n-1) return max;\n            for (int d = 0; d < 4; d++) {\n                int r = p.row + dirs[d][0], c = p.col + dirs[d][1];\n                if (isInBounds(r,c,n) && !visited[r][c]) {\n                    pq.add(new Pair(r,c,grid[r][c]));\n                    visited[r][c] = true;\n                }\n            }\n        }\n        return max;\n    }\n}',
@@ -2730,7 +2730,7 @@ const data = {
                   tags: ['MST and DisjointSet Problems'],
                 },
                 {
-                  id: '11768e83-528a-4672-8666-f0be628721c9',
+                  id: '4cd52bdf-7db4-4912-a31c-02b252f4fbfa',
                   isFolder: false,
                   name: 'ArticulationPoint.java',
                   code: 'import java.util.*;\n\npublic class ArticulationPoint {\n    int t = 1;\n    public void dfs(ArrayList<ArrayList<Integer>> adj, boolean[] visited, int curr, int[] time, int[] low, boolean[] ap, int parent) {\n        visited[curr] = true;\n        time[curr] = low[curr] = t++;\n        List<Integer> list = adj.get(curr);\n        int child = 0;\n        for (int ele : list) {\n            if (ele == parent) continue;\n            if (!visited[ele]) {\n                dfs(adj, visited, ele, time, low, ap, curr);\n                low[curr] = Math.min(low[ele], low[curr]);\n                if (low[ele] >= time[curr] && parent != -1) {\n                    ap[curr] = true;\n                }\n                child++;\n            } else {\n                low[curr] = Math.min(low[curr], time[ele]);\n            }\n        }\n        if (child > 1 && parent == -1) {\n            ap[curr] = true;\n        }\n    }\n    //Function to return Breadth First Traversal of given graph.\n    public ArrayList<Integer> articulationPoints(int V, ArrayList<ArrayList<Integer>> adj) {\n        // Code here\n        t = 1;\n        int[] time = new int[V];\n        int[] low = new int[V];\n        boolean[] ap = new boolean[V];\n        boolean[] visited = new boolean[V];\n        for (int i = 0; i < V; i++) if (!visited[i]) dfs(adj, visited, i, time, low, ap, -1);\n        ArrayList<Integer> ans = new ArrayList<>();\n        for (int i = 0; i < V; i++) if (ap[i]) ans.add(i);\n        if (ans.isEmpty()) ans.add(-1);\n        return ans;\n    }\n}',
@@ -2739,7 +2739,7 @@ const data = {
                   tags: ['Other Problems'],
                 },
                 {
-                  id: '5ce5d9ba-8667-415e-b97f-70d6de8aeb5e',
+                  id: '004341f2-1f8f-48f2-80c4-ebfda2fc3d9b',
                   isFolder: false,
                   name: 'BridgesInAGraph.java',
                   code: 'import java.util.*;\n\npublic class BridgesInAGraph {\n    static int t = 0;\n    public static void dfs(List<List<Integer>> adj, int parent, boolean[] visited, int[] time, int[] low, int curr, List<List<Integer>> ans) {\n        visited[curr] = true;\n        time[curr] = low[curr] = t++;\n        List<Integer> list = adj.get(curr);\n        for (int ele : list) {\n            if (ele == parent) continue;\n            if (!visited[ele]) {\n                dfs(adj, curr, visited, time, low, ele, ans);\n                low[curr] = Math.min(low[curr], low[ele]);\n                if (low[ele] > time[curr]) {\n                    ans.add(new ArrayList<>(Arrays.asList(ele, curr)));\n                }\n            } else {\n                low[curr] = Math.min(low[curr], low[ele]);\n            }\n        }\n    }\n    public static List<List<Integer>> findBridges(int[][] edges, int v, int e) {\n        // Write your code here!\n        List<List<Integer>> adj = new ArrayList<>();\n        t = 0;\n        for (int i = 0; i < v; i++) {\n            adj.add(new ArrayList<>());\n        }\n        for (int[] edge : edges) {\n            int x = edge[0];\n            int y = edge[1];\n            adj.get(x).add(y);\n            adj.get(y).add(x);\n        }\n        boolean[] visited = new boolean[v];\n        List<List<Integer>> ans = new ArrayList<>();\n        int[] time = new int[v];\n        int[] low = new int[v];\n        for (int i = 0; i < v; i++) {\n            if (!visited[i]) {\n                dfs(adj, -1, visited, time, low, i, ans);\n            }\n        }\n        return ans;\n    }\n}',
@@ -2748,7 +2748,7 @@ const data = {
                   tags: ['Other Problems'],
                 },
                 {
-                  id: 'f7a9ee43-fe9b-45cd-9594-fcaab26ea500',
+                  id: '84dcf508-4a52-43cb-802f-511f75d6f99b',
                   isFolder: false,
                   name: 'KosarajusAlgorithm.java',
                   code: 'import java.util.*;\n\npublic class KosarajusAlgorithm {\n    public static void dfs(List<List<Integer>> adj, boolean[] visited, int curr) {\n        visited[curr] = false;\n        List<Integer> list = adj.get(curr);\n        for (int ele : list) {\n            if (visited[ele]) {\n                dfs(adj, visited, ele);\n            }\n        }\n    }\n\n    public static void dfs(List<List<Integer>> adj, boolean[] visited, int curr, Stack<Integer> st) {\n        visited[curr] = true;\n        List<Integer> list = adj.get(curr);\n        for (int ele : list) {\n            if (!visited[ele]) {\n                dfs(adj, visited, ele, st);\n            }\n        }\n        st.push(curr);\n    }\n\n    //Function to find number of strongly connected components in the graph.\n    public static int kosaraju(int V, List<List<Integer>> adj) {\n        //code here\n        Stack<Integer> st = new Stack<>();\n        boolean[] visited = new boolean[V];\n        for (int i = 0; i < V; i++) {\n            if (!visited[i]) {\n                dfs(adj, visited, i, st);\n            }\n        }\n        List<List<Integer>> adjR = new ArrayList<>();\n        for (int i = 0; i < V; i++) {\n            adjR.add(new ArrayList<>());\n        }\n        for (int i = 0; i < V; i++) {\n            List<Integer> list = adj.get(i);\n            for (int ele : list) {\n                adjR.get(ele).add(i);\n            }\n        }\n        int count = 0;\n        while (!st.isEmpty()) {\n            int curr = st.pop();\n            if (visited[curr]) {\n                dfs(adjR, visited, curr);\n                count++;\n            }\n        }\n        return count;\n    }\n    public static int stronglyConnectedComponents(int v, ArrayList<ArrayList<Integer>> edges) {\n        // Write your code here.\n        List<List<Integer>> adj = new ArrayList<>();\n        for (int i = 0; i < v; i++) {\n            adj.add(new ArrayList<>());\n        }\n        for (ArrayList<Integer> edge : edges) {\n            int x = edge.get(0);\n            int y = edge.get(1);\n            adj.get(x).add(y);\n        }\n        return kosaraju(v, adj);\n    }\n}',
@@ -2757,7 +2757,7 @@ const data = {
                   tags: ['Other Problems'],
                 },
                 {
-                  id: '9d2b044b-722a-492c-9b53-8cda682af751',
+                  id: '730477f8-1290-4dff-a86e-11899a567077',
                   isFolder: false,
                   name: 'BipartiteGraph.java',
                   code: 'import java.util.*;\n\npublic class BipartiteGraph {\n    public boolean dfs(int[][] graph, int[] visited, int curr, int color) {\n        visited[curr] = color;\n        for (int i = 0; i < graph[curr].length; i++) {\n            if (visited[graph[curr][i]] == 0) {\n                if (!dfs(graph, visited, graph[curr][i], color == 5 ? 10 : 5)) return false;\n            } else if (visited[curr] == visited[graph[curr][i]]) return false;\n        }\n        return true;\n    }\n\n    public boolean bfs(int[][] graph, int[] visited, int curr) {\n        boolean flip = false;\n        Queue<Integer> q = new LinkedList<>();\n        q.add(curr);\n        while (!q.isEmpty()) {\n            int size = q.size();\n            int color = flip ? 5 : 10;\n            for (int i = 0; i < size; i++) {\n                int node = q.poll();\n                visited[node] = color;\n                for (int j = 0; j < graph[node].length; j++) {\n                    if (visited[graph[node][j]] == 0) {\n                        q.add(graph[node][j]);\n                    } else if (visited[node] == visited[graph[node][j]]) {\n                        return false;\n                    }\n                }\n            }\n            flip = !flip;\n        }\n        return true;\n    }\n    public boolean isBipartite(int[][] graph) {\n        int V = graph.length;\n        int[] visited = new int[V];\n        for (int i = 0; i < V; i++) {\n            if (visited[i] == 0) {\n                // if (!bfs(graph, visited, i)) return false;\n                if (!dfs(graph, visited, i, 5)) return false;\n            }\n        }\n        return true;\n    }\n}',
@@ -2766,7 +2766,7 @@ const data = {
                   tags: ['Problems on DFS and BFS'],
                 },
                 {
-                  id: '5f45372f-e649-4d4f-a183-827e25e97ce6',
+                  id: '730029d3-fa99-46fe-9eef-1f0b9177aefb',
                   isFolder: false,
                   name: 'CycleDetectionDirectedGraphDFS.java',
                   code: 'import java.util.*;\n\npublic class CycleDetectionDirectedGraphDFS {\n    public static boolean dfsCyclic(List<List<Integer>> adj, boolean[] visited, int curr, boolean[] dfsVisited) {\n        visited[curr] = true;\n        List<Integer> list = adj.get(curr);\n        dfsVisited[curr] = true;\n        for (int ele : list) {\n            if (!visited[ele]) {\n                if (dfsCyclic(adj, visited, ele, dfsVisited)) return true;\n            } else if (dfsVisited[ele]) return true;\n        }\n        dfsVisited[curr] = false;\n        return false;\n    }\n    public static Boolean isCyclic(int[][] edges, int v, int e) {\n        // Write your code here.\n        List<List<Integer>> adj = new ArrayList<>();\n        for (int i = 0; i < v; i++) adj.add(new ArrayList<>());\n        for (int i = 0; i < e; i++) {\n            adj.get(edges[i][0]).add(edges[i][1]);\n        }\n        boolean[] visited = new boolean[v];\n        boolean[] dfsVisited = new boolean[v];\n        for (int i = 0; i < v; i++) {\n            if (!visited[i]) {\n                if (dfsCyclic(adj, visited, i, dfsVisited)) return true;\n            }\n        }\n        return false;\n    }\n}',
@@ -2775,7 +2775,7 @@ const data = {
                   tags: ['Problems on DFS and BFS'],
                 },
                 {
-                  id: '076cbf5b-6712-44cd-80db-63d0b42ebd63',
+                  id: 'f180f0f4-4a59-4071-a582-da002709a79f',
                   isFolder: false,
                   name: 'CycleDetectionUndirectedGraph.java',
                   code: 'import java.util.*;\npublic class CycleDetectionUndirectedGraph {\n    boolean bfsCyclic(List<List<Integer>> adj, boolean[] visited, int curr) {\n        Queue<Integer> q = new LinkedList<>();\n        q.add(curr);\n        int[] parents = new int[visited.length];\n        parents[curr] = -1;\n        while (!q.isEmpty()) {\n            int node = q.poll();\n            visited[node] = true;\n            List<Integer> list = adj.get(node);\n            for (int ele : list) {\n                if (!visited[ele]) {\n                    q.add(ele);\n                    parents[ele] = node;\n                } else if (parents[node] != ele) return true;\n            }\n        }\n        return false;\n    }\n    boolean dfsCyclic(List<List<Integer>> adj, boolean[] visited, int curr, int parent) {\n        visited[curr] = true;\n        List<Integer> list = adj.get(curr);\n        for (int ele : list) {\n            if (!visited[ele]) {\n                if (dfsCyclic(adj, visited, ele, curr)) return true;\n            }\n            else if (parent != ele) return true;\n        }\n        return false;\n    }\n    boolean detectCycle(int V, List<List<Integer>> adj) {\n        // Write your code here.\n        boolean[] visited = new boolean[V];\n        for (int i = 0; i < V; i++) {\n            if (!visited[i] && dfsCyclic(adj, visited, i, -1)) return true;\n//            if (!visited[i] && bfsCyclic(adj, visited, i)) return true;\n        }\n        return false;\n    }\n}',
@@ -2784,7 +2784,7 @@ const data = {
                   tags: ['Problems on DFS and BFS'],
                 },
                 {
-                  id: '18f95402-fcb6-4737-a8a4-dded4233b488',
+                  id: '9555384e-9e77-4712-9b50-f300869c8fc3',
                   isFolder: false,
                   name: 'DistinctIslands.java',
                   code: 'import java.util.*;\npublic class DistinctIslands {\n    static void dfs(int[][] mat, int i, int j, List<List<Integer>> ans, int ogI, int ogJ) {\n        if (i < 0 || j < 0 || i >= mat.length || j >= mat[0].length || mat[i][j] != 1) return;\n        ans.add(new ArrayList<>(Arrays.asList(i - ogI, j - ogJ)));\n        mat[i][j] = 2;\n        dfs(mat, i, j+1, ans, ogI, ogJ);\n        dfs(mat, i+1, j, ans, ogI, ogJ);\n        dfs(mat, i, j-1, ans, ogI, ogJ);\n        dfs(mat, i-1, j, ans, ogI, ogJ);\n    }\n    public static int distinctIsland(int [][] mat, int m, int n) {\n        //write your code here\n        Set<List<List<Integer>>> hs = new HashSet<>();\n        for (int i = 0; i < m; i++) {\n            for (int j = 0; j < n; j++) {\n                if (mat[i][j] == 1) {\n                    List<List<Integer>> ans = new ArrayList<>();\n                    dfs(mat, i, j, ans, i, j);\n                    hs.add(ans);\n                }\n            }\n        }\n        return hs.size();\n    }\n}',
@@ -2793,7 +2793,7 @@ const data = {
                   tags: ['Problems on DFS and BFS'],
                 },
                 {
-                  id: '3f13047e-0cb8-495e-95ec-b1108d7729fe',
+                  id: '691ac2ed-695b-4702-8e71-5f9c344a1c08',
                   isFolder: false,
                   name: 'FloodFill.java',
                   code: 'import java.util.*;\npublic class FloodFill {\n    static class Pair {\n        int row, col;\n        Pair(int r, int c) {\n            this.row = r;\n            this.col = c;\n        }\n    }\n    static boolean checkInBounds (int r, int c, int m, int n) {\n        return r >= 0 && c >= 0 && r < m && c < n;\n    }\n    public int[][] floodFill(int[][] image, int sr, int sc, int color) {\n        int m = image.length;\n        int n = image[0].length;\n        int startColor = image[sr][sc];\n        int[][] directions = {{0, -1}, {-1, 0}, {0, 1}, {1, 0}};\n        boolean[][] visited = new boolean[m][n];\n        Queue<Pair> q = new LinkedList<>();\n        q.add(new Pair(sr, sc));\n        image[sr][sc] = color;\n        while (!q.isEmpty()) {\n            int size = q.size();\n            for (int i = 0; i < size; i++) {\n                Pair p = q.poll();\n                visited[p.row][p.col] = true;\n                for (int[] direction : directions) {\n                    int r = p.row + direction[0];\n                    int c = p.col + direction[1];\n                    if (checkInBounds(r, c, m, n) && !visited[r][c] && image[r][c] == startColor) {\n                        image[r][c] = color;\n                        q.add(new Pair(r, c));\n                    }\n                }\n            }\n        }\n        return image;\n    }\n}',
@@ -2802,7 +2802,7 @@ const data = {
                   tags: ['Problems on DFS and BFS'],
                 },
                 {
-                  id: 'b0d8e686-4a3c-429f-981f-c560d23834b7',
+                  id: '29efd516-1cd8-43ed-a3df-dfc5705978b3',
                   isFolder: false,
                   name: 'Matrix01.java',
                   code: 'import java.util.*;\npublic class Matrix01 {\n    static class Pair {\n        int row, col;\n        Pair(int r, int c) {\n            this.row = r;\n            this.col = c;\n        }\n    }\n    public boolean isInBound(int r, int c, int m, int n) {\n        return r >= 0 && c >= 0 && r < m && c < n;\n    }\n    public int[][] updateMatrix(int[][] mat) {\n        int m = mat.length, n = mat[0].length;\n        int[][] ans = new int[m][n]; // for good practice\n        Queue<Pair> q = new LinkedList<>();\n        for (int i = 0; i < m; i++) {\n            for (int j = 0; j < n; j++) {\n                if (mat[i][j] == 1) {\n                    ans[i][j] = -1;\n                } else {\n                    q.add(new Pair(i,j));\n                }\n            }\n        }\n        int[][] dirs = {{0,1}, {1,0}, {0,-1}, {-1,0}};\n        while (!q.isEmpty()) {\n            int size = q.size();\n            for (int i = 0; i < size; i++) {\n                Pair p = q.poll();\n                for (int j = 0; j < 4; j++) {\n                    int r = p.row + dirs[j][0];\n                    int c = p.col + dirs[j][1];\n                    if (isInBound(r,c,m,n) && ans[r][c] == -1) {\n                        ans[r][c] = ans[p.row][p.col] + 1;\n                        q.add(new Pair(r,c));\n                    }\n                }\n            }\n        }\n        return ans;\n    }\n}',
@@ -2811,7 +2811,7 @@ const data = {
                   tags: ['Problems on DFS and BFS'],
                 },
                 {
-                  id: '30a56081-b581-4588-8bde-a4f4dee1c5e1',
+                  id: 'f90f8884-fe8e-4404-9358-304101f323f3',
                   isFolder: false,
                   name: 'NumberOfEnclaves.java',
                   code: 'public class NumberOfEnclaves {\n    void dfs(int[][] grid, int i, int j) {\n        if (i < 0  || i >= grid.length  || j < 0  || j >= grid[0].length || grid[i][j] != 1) return;\n        grid[i][j] = 2;\n        dfs(grid, i, j + 1);\n        dfs(grid, i + 1, j);\n        dfs(grid, i, j - 1);\n        dfs(grid, i - 1, j);\n    }\n    public int numEnclaves(int[][] grid) {\n        int m = grid.length, n = grid[0].length;\n        for (int i = 0; i < m; i++) {\n            if (grid[i][0] == 1) dfs(grid, i, 0);\n            if (grid[i][n-1] == 1) dfs(grid, i, n - 1);\n        }\n        for (int i = 0; i < n; i++) {\n            if (grid[0][i] == 1) dfs(grid, 0, i);\n            if (grid[m - 1][i] == 1) dfs(grid, m-1, i);\n        }\n        int count = 0;\n        for (int i = 0; i < m; i++)\n            for (int j = 0; j < n; j++)\n                if(grid[i][j] == 1) count++;\n\n        return count;\n    }\n}',
@@ -2820,7 +2820,7 @@ const data = {
                   tags: ['Problems on DFS and BFS'],
                 },
                 {
-                  id: 'fc55b677-d1a6-43bb-ac4d-c5b55c6f6ad1',
+                  id: '2e3abd25-36fd-4d82-bd20-627364936e63',
                   isFolder: false,
                   name: 'NumberOfProvinces.java',
                   code: 'public class NumberOfProvinces {\n    public static void dfs(int[][] isConnected, boolean[] visited, int curr) {\n        visited[curr] = true;\n        for (int i = 0; i < isConnected[curr].length; i++) {\n            if (isConnected[curr][i] == 1) {\n                if (!visited[i])\n                    dfs(isConnected, visited, i);\n            }\n        }\n    }\n    public int findCircleNum(int[][] isConnected) {\n        int n = isConnected.length;\n        boolean[] visited = new boolean[n];\n        int count = 0;\n        for (int i = 0; i < n; i++) {\n            if (!visited[i]) {\n                count++;\n                dfs(isConnected, visited, i);\n            }\n        }\n        return count;\n    }\n}',
@@ -2829,7 +2829,7 @@ const data = {
                   tags: ['Problems on DFS and BFS'],
                 },
                 {
-                  id: 'd22cb95e-e25c-4d56-ae9d-bfa7895c905a',
+                  id: '2786602a-1b8c-4cd0-983f-0c6b68d08fd7',
                   isFolder: false,
                   name: 'RottingOranges.java',
                   code: 'import java.util.*;\npublic class RottingOranges {\n    static class Pair {\n        int row, col;\n        Pair(int r, int c) {\n            row = r;\n            col = c;\n        }\n    }\n    public boolean isInBound(int r, int c, int m, int n) {\n        return r >= 0 && c >= 0 && r < m && c < n;\n    }\n    public int orangesRotting(int[][] grid) {\n        int m = grid.length;\n        int n = grid[0].length;\n        Queue<Pair> q = new LinkedList<>();\n        int fresh = 0;\n        for (int i = 0; i < m; i++) {\n            for (int j = 0; j < n; j++) {\n                if (grid[i][j] == 2) q.add(new Pair(i, j));\n                else if (grid[i][j] == 1) fresh++;\n            }\n        }\n        if (fresh == 0) return 0;\n        // if (fresh > 0 && q.isEmpty()) return -1;\n        boolean[][] visited = new boolean[m][n];\n        int[][] directions = {{0,1},{1,0},{0,-1},{-1,0}};\n        int count = 0;\n        while (!q.isEmpty()) {\n            int size = q.size();\n            for (int i = 0; i < size; i++) {\n                Pair p = q.poll();\n                visited[p.row][p.col] = true;\n                for (int d = 0; d < 4; d++) {\n                    int r = directions[d][0] + p.row;\n                    int c = directions[d][1] + p.col;\n                    if (isInBound(r,c,m,n) && !visited[r][c] && grid[r][c] == 1) {\n                        grid[r][c] = 2;\n                        q.add(new Pair(r, c));\n                        fresh--;\n                    }\n                }\n            }\n            if (!q.isEmpty()) count++;\n        }\n        return fresh == 0 ? count : -1;\n    }\n}',
@@ -2838,7 +2838,7 @@ const data = {
                   tags: ['Problems on DFS and BFS'],
                 },
                 {
-                  id: '59656220-ead3-4ba9-a183-9fa98650a228',
+                  id: 'b74a2235-26bf-4191-85c9-444f7d6e7b81',
                   isFolder: false,
                   name: 'SurroundedRegions.java',
                   code: "public class SurroundedRegions {\n    void dfs(char[][] board, int i, int j) {\n        if (i < 0\n                || i >= board.length\n                || j < 0\n                || j >= board[0].length\n                || board[i][j] != 'O') return;\n        board[i][j] = 'A';\n        dfs(board, i, j + 1);\n        dfs(board, i + 1, j);\n        dfs(board, i, j - 1);\n        dfs(board, i - 1, j);\n    }\n    public void solve(char[][] board) {\n        int m = board.length;\n        int n = board[0].length;\n        for (int i = 0; i < n; i++) {\n            if (board[0][i] == 'O') dfs(board, 0, i);\n            if (board[m - 1][i] == 'O') dfs(board, m-1, i);\n        }\n        for (int i = 0; i < m; i++) {\n            if (board[i][0] == 'O') dfs(board, i, 0);\n            if (board[i][n-1] == 'O') dfs(board, i, n - 1);\n        }\n        for (int i = 0; i < m; i++) {\n            for (int j = 0; j < n; j++) {\n                if(board[i][j] == 'O')\n                    board[i][j] = 'X';\n                else if(board[i][j] == 'A')\n                    board[i][j] = 'O';\n            }\n        }\n    }\n}",
@@ -2847,7 +2847,7 @@ const data = {
                   tags: ['Problems on DFS and BFS'],
                 },
                 {
-                  id: '2a9d6948-b7d1-4815-a703-2ef56503cac0',
+                  id: '83468d82-8d0c-4145-bc4f-fe33be21c049',
                   isFolder: false,
                   name: 'WordLadder1.java',
                   code: "import java.util.*;\n\npublic class WordLadder1 {\n    public int ladderLength(String beginWord, String endWord, List<String> wordList) {\n        HashSet<String> hs = new HashSet<>(wordList);\n        Queue<String> q = new LinkedList<>();\n        q.add(beginWord);\n        hs.remove(beginWord);\n        int count = 1;\n        while (!q.isEmpty()) {\n            int size = q.size();\n            for (int i = 0; i < size; i++) {\n                String s = q.poll();\n                if (s.equals(endWord)) return count;\n                for (int l = 0; l < s.length(); l++) {\n                    char old = s.charAt(l);\n                    char[] replaceArray = s.toCharArray();\n                    for (char ch = 'a'; ch <= 'z'; ch++) {\n                        replaceArray[l] = ch;\n                        String str = new String(replaceArray);\n                        if (hs.contains(str)) {\n                            q.add(str);\n                            hs.remove(str);\n                        }\n                    }\n                    replaceArray[l] = old;\n                }\n            }\n            count++;\n        }\n        return 0;\n    }\n}",
@@ -2856,7 +2856,7 @@ const data = {
                   tags: ['Problems on DFS and BFS'],
                 },
                 {
-                  id: 'cc396b3c-abf9-4d74-b991-c39076d73796',
+                  id: '8bde57e0-9eac-435f-bd89-31c6d5225e4f',
                   isFolder: false,
                   name: 'WordLadder2.java',
                   code: "import java.util.*;\n\npublic class WordLadder2 {\n    public List<List<String>> findLadders(String beginWord, String endWord, List<String> wordList) {\n        List<List<String>> ans = new ArrayList<>();\n        List<String> removeList = new ArrayList<>();\n        HashSet<String> hs = new HashSet<>(wordList);\n        Queue<List<String>> q = new LinkedList<>();\n        q.add(new ArrayList<>(Collections.singletonList(beginWord)));\n        removeList.add(beginWord);\n        while (!q.isEmpty() && ans.isEmpty()) {\n            int size = q.size();\n            removeList.forEach(hs::remove);\n            for (int i = 0; i < size; i++) {\n                List<String> temp = q.poll();\n                String last = temp.getLast();\n                for (int s = 0; s < last.length(); s++) {\n                    char[] arr = last.toCharArray();\n                    char old = arr[s];\n                    for (char ch = 'a'; ch <= 'z'; ch++) {\n                        arr[s] = ch;\n                        String str = new String(arr);\n                        if (hs.contains(str)) {\n                            List<String> newList = new ArrayList<>(temp);\n                            newList.add(str);\n                            if (str.equals(endWord)) ans.add(newList);\n                            else q.add(newList);\n                            removeList.add(str);\n                        }\n                    }\n                    arr[s] = old;\n                }\n            }\n        }\n        return ans;\n    }\n}",
@@ -2865,7 +2865,7 @@ const data = {
                   tags: ['Problems on DFS and BFS'],
                 },
                 {
-                  id: '311692db-3a76-4715-b63f-2753f68ce371',
+                  id: '4567ab6a-ab3e-46ec-9140-0880e9ddbde6',
                   isFolder: false,
                   name: 'BellmanFordAlgorithm.java',
                   code: 'import java.util.*;\n\npublic class BellmanFordAlgorithm {\n    static int[] bellman_ford(int V, ArrayList<ArrayList<Integer>> edges, int S) {\n        // Write your code here\n        int[] distance = new int[V];\n        Arrays.fill(distance, (int) 1e8);\n        distance[S] = 0;\n        for (int j = 0; j < V - 1; j++) {\n            for (ArrayList<Integer> list : edges) {\n                int x = list.get(0);\n                int y = list.get(1);\n                int z = list.get(2);\n                if (distance[x] != 1e8 && distance[x] + z < distance[y]) {\n                    distance[y] = distance[x] + z;\n                }\n            }\n        }\n        for (ArrayList<Integer> list : edges) {\n            int x = list.get(0);\n            int y = list.get(1);\n            int z = list.get(2);\n            if (distance[x] != 1e8 && distance[x] + z < distance[y]) {\n                return new int[]{-1};\n            }\n        }\n\n        return distance;\n    }\n}',
@@ -2874,7 +2874,7 @@ const data = {
                   tags: ['Shortest Path Algorithms and Problems'],
                 },
                 {
-                  id: '0ab9efe5-84e3-4831-834e-2556971c9972',
+                  id: '7978e38c-26c4-4347-9978-ff5c58097d01',
                   isFolder: false,
                   name: 'CheapestFlightsWithKStops.java',
                   code: 'import java.util.*;\n\npublic class CheapestFlightsWithKStops {\n    static class Pair {\n        int node, cost;\n\n        Pair(int n, int c) {\n            this.node = n;\n            this.cost = c;\n        }\n    }\n\n    static class Triplet {\n        int stops, node, cost;\n\n        Triplet(int s, int n, int c) {\n            this.stops = s;\n            this.node = n;\n            this.cost = c;\n        }\n    }\n\n    public int findCheapestPrice(int n, int[][] flights, int src, int dst, int k) {\n        List<List<Pair>> adj = new ArrayList<>();\n        int[] distance = new int[n];\n        for (int i = 0; i < n; i++) {\n            adj.add(new ArrayList<>());\n            distance[i] = Integer.MAX_VALUE;\n        }\n        for (int[] flight : flights) {\n            int x = flight[0];\n            int y = flight[1];\n            int z = flight[2];\n            adj.get(x).add(new Pair(y, z));\n        }\n        distance[src] = 0;\n        PriorityQueue<Triplet> pq = new PriorityQueue<>((a,b) -> a.stops - b.stops);\n        pq.add(new Triplet(0,src,0));\n        while (!pq.isEmpty()) {\n            Triplet t = pq.poll();\n            List<Pair> list = adj.get(t.node);\n            if (t.stops > k) continue;\n            for (Pair p : list) {\n                int cost = p.cost + t.cost;\n                if (cost < distance[p.node]) {\n                    distance[p.node] = cost;\n                    pq.add(new Triplet(t.stops+1, p.node, cost));\n                }\n            }\n        }\n        return distance[dst] == Integer.MAX_VALUE ? -1 : distance[dst];\n    }\n}',
@@ -2883,7 +2883,7 @@ const data = {
                   tags: ['Shortest Path Algorithms and Problems'],
                 },
                 {
-                  id: '13f981a8-f3bd-4556-8861-765480a18713',
+                  id: '00562df4-06bd-44cb-b430-81ba408ddf8e',
                   isFolder: false,
                   name: 'DijkstrasAlgorithm.java',
                   code: 'import java.util.*;\n\npublic class DijkstrasAlgorithm {\n    static class Pair {\n        int node, weight;\n        Pair(int n, int w) {\n            this.node = n;\n            this.weight = w;\n        }\n    }\n    public static List<Integer> dijkstra(int[][] edge,int vertices, int edges,int source){\n        // Write your code here.\n        List<List<Pair>> adj = new ArrayList<>();\n        List<Integer> ans = new ArrayList<>();\n        for (int i = 0; i < vertices; i++) {\n            adj.add(new ArrayList<>());\n            ans.add(Integer.MAX_VALUE);\n        }\n        for (int i = 0; i < edges; i++) {\n            int x = edge[i][0];\n            int y = edge[i][1];\n            int z = edge[i][2];\n            adj.get(x).add(new Pair(y, z));\n            adj.get(y).add(new Pair(x, z));\n        }\n        PriorityQueue<Pair> pq = new PriorityQueue<>((a,b) -> a.node == b.node ? a.weight - b.weight : a.node - b.node);\n        pq.add(new Pair(source, 0));\n        ans.set(source, 0);\n        while (!pq.isEmpty()) {\n            Pair p = pq.poll();\n            List<Pair> list = adj.get(p.node);\n            for (Pair ele : list) {\n                int wt = ele.weight+p.weight;\n                if (wt < ans.get(ele.node)) {\n                    ans.set(ele.node, wt);\n                    pq.add(new Pair(ele.node, wt));\n                }\n            }\n        }\n        return ans;\n    }\n}',
@@ -2892,7 +2892,7 @@ const data = {
                   tags: ['Shortest Path Algorithms and Problems'],
                 },
                 {
-                  id: 'fbe7678f-b35c-4a8c-b836-ae265d0b0262',
+                  id: 'f6908439-3e4c-48c5-991c-6a0aab13ebf2',
                   isFolder: false,
                   name: 'FindCityWithSmallestNumberOfNeighborsAtThresholdDistance.java',
                   code: 'import java.util.*;\n\npublic class FindCityWithSmallestNumberOfNeighborsAtThresholdDistance {\n    static class Pair {\n        int node, distance;\n        Pair (int n, int d) {\n            this.node = n;\n            this.distance = d;\n        }\n    }\n    public int findTheCity(int n, int[][] edges, int distanceThreshold) {\n        int[][] matrix = new int[n][n];\n        for (int i = 0; i < n; i++) {\n            for (int j = 0; j < n; j++) {\n                if (i != j) {\n                    matrix[i][j] = (int)1e9;\n                }\n            }\n        }\n        for (int[] edge : edges) {\n            matrix[edge[0]][edge[1]] = edge[2];\n            matrix[edge[1]][edge[0]] = edge[2];\n        }\n        for (int via = 0; via < n; via++) {\n            for (int i = 0; i < n; i++) {\n                for (int j = 0; j < n; j++) {\n                    matrix[i][j] = Math.min(matrix[i][j], matrix[i][via] + matrix[via][j]);\n                }\n            }\n        }\n        int city = -1;\n        int maxCount = n+1;\n        for (int i = 0; i < n; i++) {\n            int count = 0;\n            for (int j = 0; j < n; j++) {\n                if (matrix[i][j] <= distanceThreshold) {\n                    count++;\n                }\n            }\n            if (count <= maxCount) {\n                maxCount = count;\n                city = i;\n            }\n        }\n        return city;\n\n    }\n}',
@@ -2901,7 +2901,7 @@ const data = {
                   tags: ['Shortest Path Algorithms and Problems'],
                 },
                 {
-                  id: '3f09bbc0-1fb2-4042-b0fd-18aa9f44b328',
+                  id: '69bb22f1-84a0-435f-938f-a8a78f75711a',
                   isFolder: false,
                   name: 'FloydWarshallAlgorithm.java',
                   code: 'import java.util.*;\n\npublic class FloydWarshallAlgorithm {\n    static int floydWarshall(int n, int m, int src, int dest, ArrayList<ArrayList<Integer>> edges) {\n        // Write your code here.\n        int[][] matrix = new int[n][n];\n        for (int i = 0; i < n; i++) {\n            for (int j = 0; j < n; j++) {\n                if (i != j) {\n                    matrix[i][j] = (int)1e9;\n                }\n            }\n        }\n        for (ArrayList<Integer> edge : edges) {\n            matrix[edge.get(0)-1][edge.get(1)-1] = edge.get(2);\n        }\n        for (int via = 0; via < n; via++) {\n            for (int i = 0; i < n; i++) {\n                for (int j = 0; j < n; j++) {\n                    if (matrix[i][via] + matrix[via][j] < matrix[i][j]) {\n                        matrix[i][j] = matrix[i][via] + matrix[via][j];\n                    }\n                }\n            }\n        }\n        return matrix[src-1][dest-1];\n    }\n}',
@@ -2910,7 +2910,7 @@ const data = {
                   tags: ['Shortest Path Algorithms and Problems'],
                 },
                 {
-                  id: '8b1893e0-3d2e-4afa-a269-d759dd1aeefb',
+                  id: '95d1e3d3-42d3-42c2-8e2a-490fac7c15c0',
                   isFolder: false,
                   name: 'MinimumOperationsMultiplicationToReachEnd.java',
                   code: 'import java.util.*;\n\npublic class MinimumOperationsMultiplicationToReachEnd {\n    static class Pair {\n        int val, steps;\n        Pair(int v, int s) {\n            this.val = v;\n            this.steps = s;\n        }\n    }\n    public static int minimumOperations(int n, int start, int end, int []arr) {\n        // Write your code here\n        int mod = 1000;\n        PriorityQueue<Pair> pq = new PriorityQueue<>((a,b) -> a.steps - b.steps);\n        HashSet<Integer> hs = new HashSet<>();\n        pq.add(new Pair(start, 0));\n        hs.add(start);\n        while (!pq.isEmpty()) {\n            Pair p = pq.poll();\n            if (p.val == end) return p.steps;\n            for (int num : arr) {\n                int val = (p.val*num)%mod;\n                if (!hs.contains(val)) {\n                    pq.add(new Pair(val, p.steps+1));\n                    hs.add(val);\n                }\n            }\n        }\n        return -1;\n    }\n}',
@@ -2919,7 +2919,7 @@ const data = {
                   tags: ['Shortest Path Algorithms and Problems'],
                 },
                 {
-                  id: '85d84c1b-fd37-4ba4-b9bf-4d8c790817a6',
+                  id: '844de50c-ec36-471f-880d-783e749606a5',
                   isFolder: false,
                   name: 'NetworkDelayTime.java',
                   code: 'import java.util.*;\n\npublic class NetworkDelayTime {\n    static class Pair {\n        int node, cost;\n        Pair(int n, int c) {\n            this.node = n;\n            this.cost = c;\n        }\n    }\n\n    public int networkDelayTime(int[][] times, int n, int k) {\n        List<List<Pair>> adj = new ArrayList<>();\n        int[] dist = new int[n];\n        for (int i = 0; i < n; i++) {\n            adj.add(new ArrayList<>());\n            dist[i] = Integer.MAX_VALUE;\n        }\n        for (int[] time : times) {\n            int x = time[0] - 1;\n            int y = time[1] - 1;\n            int z = time[2];\n            adj.get(x).add(new Pair(y, z));\n        }\n        PriorityQueue<Pair> pq = new PriorityQueue<>((a, b) -> a.cost - b.cost);\n        pq.add(new Pair(k - 1, 0));\n        dist[k - 1] = 0;\n        int sum = 0;\n        while (!pq.isEmpty()) {\n            Pair node = pq.poll();\n            List<Pair> list = adj.get(node.node);\n            for (Pair p : list) {\n                int cost = p.cost + node.cost;\n                if (cost < dist[p.node]) {\n                    dist[p.node] = cost;\n                    pq.add(new Pair(p.node, cost));\n                }\n            }\n        }\n        for (int i = 0; i < n; i++) {\n            if (dist[i] == Integer.MAX_VALUE) return -1;\n            sum = Math.max(sum, dist[i]);\n        }\n        return sum;\n    }\n}',
@@ -2928,7 +2928,7 @@ const data = {
                   tags: ['Shortest Path Algorithms and Problems'],
                 },
                 {
-                  id: '58c42a17-ccaf-49ed-a3a2-d0e41f0cdb25',
+                  id: '6f22156b-2c86-491c-9b40-fe8448275355',
                   isFolder: false,
                   name: 'NumberOfWaysToArriveAtDestination.java',
                   code: 'import java.util.*;\n\npublic class NumberOfWaysToArriveAtDestination {\n    static class Pair {\n        long node, distance;\n\n        Pair(long n, long d) {\n            this.node = n;\n            this.distance = d;\n        }\n    }\n\n    public int countPaths(int n, int[][] roads) {\n        List<List<Pair>> adj = new ArrayList<>();\n        long[] ways = new long[n];\n        long[] distance = new long[n];\n        for (int i = 0; i < n; i++) {\n            adj.add(new ArrayList<>());\n            distance[i] = Long.MAX_VALUE;\n        }\n        for (int[] road : roads) {\n            int x = road[0];\n            int y = road[1];\n            int z = road[2];\n            adj.get(x).add(new Pair(y, z));\n            adj.get(y).add(new Pair(x, z));\n        }\n        int mod = (int) (1e9 + 7);\n        ways[0] = 1;\n        distance[0] = 0;\n        PriorityQueue<Pair> pq = new PriorityQueue<>(Comparator.comparingLong(a -> a.distance));\n        pq.add(new Pair(0, 0));\n        while (!pq.isEmpty()) {\n            Pair node = pq.poll();\n            List<Pair> list = adj.get((int) node.node);\n            for (Pair p : list) {\n                long dist = p.distance + node.distance;\n                if (dist < distance[(int) p.node]) {\n                    distance[(int) p.node] = dist;\n                    ways[(int) p.node] = ways[(int) node.node] % mod;\n                    pq.add(new Pair(p.node, dist));\n                } else if (dist == distance[(int) p.node]) {\n                    ways[(int) p.node] += ways[(int) node.node] % mod;\n                }\n            }\n        }\n        return (int) (ways[n - 1] % mod);\n    }\n}',
@@ -2937,7 +2937,7 @@ const data = {
                   tags: ['Shortest Path Algorithms and Problems'],
                 },
                 {
-                  id: 'd5f1c278-7385-4b3d-9674-48adf625b349',
+                  id: 'e27b8175-a4fa-4ecb-8f42-46ed55076972',
                   isFolder: false,
                   name: 'PathWithMinimumEffort.java',
                   code: 'import java.util.*;\n\npublic class PathWithMinimumEffort {\n    static class Pair {\n        int row, col, diff;\n\n        Pair(int d, int r, int c) {\n            this.diff = d;\n            this.row = r;\n            this.col = c;\n        }\n    }\n\n    boolean isInBounds(int r, int c, int m, int n) {\n        return r >= 0 && c >= 0 && r < m && c < n;\n    }\n\n    public int minimumEffortPath(int[][] heights) {\n        int m = heights.length, n = heights[0].length;\n        int[][] minEffort = new int[m][n];\n        for (int i = 0; i < m; i++) {\n            Arrays.fill(minEffort[i], Integer.MAX_VALUE);\n        }\n        PriorityQueue<Pair> pq = new PriorityQueue<>((a, b) -> a.diff - b.diff);\n        pq.add(new Pair(0, 0, 0));\n        minEffort[0][0] = 0;\n        int[][] dirs = {{0, -1}, {1, 0}, {0, 1}, {-1, 0}};\n        while (!pq.isEmpty()) {\n            Pair p = pq.poll();\n            if (p.row == m - 1 && p.col == n - 1) return p.diff;\n            for (int[] dir : dirs) {\n                int r = p.row + dir[0];\n                int c = p.col + dir[1];\n                if (isInBounds(r, c, m, n)) {\n                    int diff = Math.max(p.diff, Math.abs(heights[p.row][p.col] - heights[r][c]));\n                    if (diff < minEffort[r][c]) {\n                        minEffort[r][c] = diff;\n                        pq.add(new Pair(diff, r, c));\n                    }\n                }\n            }\n        }\n        return -1;\n    }\n}',
@@ -2946,7 +2946,7 @@ const data = {
                   tags: ['Shortest Path Algorithms and Problems'],
                 },
                 {
-                  id: '9bf06ee9-3ec3-4c73-b9cf-4facf413f05a',
+                  id: '2a8c11e5-d452-4eac-9d3b-49371715dec3',
                   isFolder: false,
                   name: 'ShortestPathBinaryMatrix.java',
                   code: 'import java.util.*;\n\npublic class ShortestPathBinaryMatrix {\n    static class Pair {\n        int row, col;\n        Pair(int r, int c) {\n            this.row = r;\n            this.col = c;\n        }\n    }\n    boolean isInBounds(int r, int c, int m, int n) {\n        return r >= 0 && c >= 0 && r < m && c < n;\n    }\n    public int shortestPathBinaryMatrix(int[][] grid) {\n        int m = grid.length;\n        int n = grid[0].length;\n        if (grid[0][0] == 1 || grid[m-1][n-1] == 1) return -1;\n        int count = 1;\n        Queue<Pair> q = new LinkedList<>();\n        int[][] dirs = {{0,-1},{1,-1},{1,0},{1,1},{0,1},{-1,1},{-1,0},{-1,-1}};\n        q.add(new Pair(0, 0));\n        grid[0][0] = 2;\n        while (!q.isEmpty()) {\n            int size = q.size();\n            for (int i = 0; i < size; i++) {\n                Pair p = q.poll();\n                if (p.row == m-1 && p.col == n-1) return count;\n                for (int d = 0; d < 8; d++) {\n                    int r = p.row + dirs[d][0];\n                    int c = p.col + dirs[d][1];\n                    if (isInBounds(r,c,m,n) && grid[r][c] == 0) {\n                        q.add(new Pair(r,c));\n                        grid[r][c] = 2;\n                    }\n                }\n            }\n            count++;\n        }\n        return grid[m-1][n-1] != 2 ? -1 : count;\n    }\n}',
@@ -2955,7 +2955,7 @@ const data = {
                   tags: ['Shortest Path Algorithms and Problems'],
                 },
                 {
-                  id: '77dcb93a-4168-4fc4-8899-7240795aa64b',
+                  id: '9d4b8d25-4eae-4e67-a94b-57c6ee3593eb',
                   isFolder: false,
                   name: 'ShortestPathDAG.java',
                   code: "import java.util.*;\n\npublic class ShortestPathDAG {\n    public static class Pair {\n        int value, weight;\n\n        Pair(int v, int w) {\n            this.value = v;\n            this.weight = w;\n        }\n    }\n\n    public static void dfs(List<List<Pair>> adj, boolean[] visited, Stack<Integer> st, int curr) {\n        visited[curr] = true;\n        List<Pair> list = adj.get(curr);\n        for (Pair ele : list) {\n            if (!visited[ele.value]) {\n                dfs(adj, visited, st, ele.value);\n            }\n        }\n        st.push(curr);\n    }\n\n    public static Stack<Integer> toposort(List<List<Pair>> adj, int n) {\n        Stack<Integer> st = new Stack<>();\n        boolean[] visited = new boolean[n];\n        for (int i = 0; i < n; i++) {\n            if (!visited[i]) {\n                dfs(adj, visited, st, i);\n            }\n        }\n        return st;\n    }\n\n    public static int[] shortestPathInDAG(int n, int m, int[][] edges) {\n        // Write your code here\n        // EDGES to Adjacency List O(E+V) for this, But Dijkstra's algo can also be used (O(E + VLogV))\n        List<List<Pair>> adj = new ArrayList<>();\n        for (int i = 0; i < n; i++) {\n            adj.add(new ArrayList<>());\n        }\n        for (int[] edge : edges) {\n            adj.get(edge[0]).add(new Pair(edge[1], edge[2]));\n        }\n\n        Stack<Integer> st = toposort(adj, adj.size());\n        int[] ans = new int[n];\n        Arrays.fill(ans, 167890);\n        ans[0] = 0;\n        while (!st.isEmpty()) {\n            int node = st.pop();\n            List<Pair> list = adj.get(node);\n            for (Pair ele : list) {\n                int val = ans[node] + ele.weight;\n                if (val < ans[ele.value]) {\n                    ans[ele.value] = val;\n                }\n            }\n        }\n        for (int i = 0; i < n; i++) {\n            if (ans[i] == 167890) {\n                ans[i] = -1;\n            }\n        }\n        return ans;\n    }\n}",
@@ -2964,7 +2964,7 @@ const data = {
                   tags: ['Shortest Path Algorithms and Problems'],
                 },
                 {
-                  id: '25f9e97d-d4c2-41ee-bad1-ffd72b14ac25',
+                  id: '14f37623-30cf-4412-a326-6bef6e23ba5a',
                   isFolder: false,
                   name: 'SingleSourceShortestPathUndirectedGraph.java',
                   code: 'import java.util.*;\npublic class SingleSourceShortestPathUndirectedGraph {\n    public static int[] shortestPath(int n, int [][]edges, int src) {\n        // Write your code here.\n        List<List<Integer>> adj = new ArrayList<>();\n        int[] dist = new int[n];\n        for (int i = 0; i < n; i++) {\n            adj.add(new ArrayList<>());\n            dist[i] = -1;\n        }\n        for (int[] edge : edges) {\n            adj.get(edge[0]).add(edge[1]);\n            adj.get(edge[1]).add(edge[0]);\n        }\n        Queue<Integer> q = new LinkedList<>();\n        q.add(src);\n        dist[src] = 0;\n        while (!q.isEmpty()) {\n            int size = q.size();\n            for (int i = 0; i < size; i++) {\n                int node = q.poll();\n                List<Integer> list = adj.get(node);\n                for (int ele : list) {\n                    if (dist[ele] == -1) {\n                        dist[ele] = dist[node] + 1;\n                        q.add(ele);\n                    }\n                }\n            }\n        }\n        return dist;\n    }\n}',
@@ -2973,7 +2973,7 @@ const data = {
                   tags: ['Shortest Path Algorithms and Problems'],
                 },
                 {
-                  id: 'e23c2615-bc10-46a3-9938-017b9712867a',
+                  id: '1c3f3b77-4d78-4844-a583-d4b38d7b6b53',
                   isFolder: false,
                   name: 'AlienDictionary.java',
                   code: 'import java.util.*;\n\npublic class AlienDictionary {\n    public static void bfs(List<List<Integer>> adj, char[] strs, int[] indegree) {\n        Queue<Integer> q = new LinkedList<>();\n        for (int i = 0; i < indegree.length; i++) {\n            if (indegree[i] == 0) {\n                q.add(i);\n            }\n        }\n        int count = 0;\n        while (!q.isEmpty()) {\n            int size = q.size();\n            for (int i = 0; i < size; i++) {\n                int node = q.poll();\n                strs[count++] = (char) (node + \'a\');\n                List<Integer> list = adj.get(node);\n                for (int ele : list) {\n                    indegree[ele]--;\n                    if (indegree[ele] == 0) {\n                        q.add(ele);\n                    }\n                }\n            }\n        }\n    }\n    public static void topologicalSort(List<List<Integer>> adj, int v, char[] strs) {\n        // Write your code here!\n        int[] indegree = new int[v];\n        for (int i = 0; i < v; i++) {\n            List<Integer> list = adj.get(i);\n            for (Integer node : list) {\n                indegree[node]++;\n            }\n        }\n//        List<Integer> ans = new ArrayList<>();\n        bfs(adj, strs, indegree);\n    }\n    public static String getAlienLanguage(String []dictionary, int k) {\n        // Write your code here.\n        List<List<Integer>> adj = new ArrayList<>();\n        for (int i = 0; i < k; i++) {\n            adj.add(new ArrayList<>());\n        }\n        for (int i = 0; i < dictionary.length - 1; i++) {\n            String str1 = dictionary[i];\n            String str2 = dictionary[i + 1];\n            int len = Math.min(str1.length(), str2.length());\n            for (int j = 0; j < len; j++) {\n                char s1 = str1.charAt(j);\n                char s2 = str2.charAt(j);\n                if (s1 != s2) {\n                    adj.get(s1 - \'a\').add(s2 - \'a\');\n                    break;\n                }\n            }\n        }\n        System.out.println(adj);\n        char[] strs = new char[k];\n        topologicalSort(adj, k, strs);\n        return new String(strs);\n    }\n\n    public static void main(String[] args) {\n        String[] arr = {"caa", "aaa", "aab"};\n        String ans = getAlienLanguage(arr, 3);\n        System.out.println(ans);\n    }\n}',
@@ -2982,7 +2982,7 @@ const data = {
                   tags: ['Topo sort and Problems'],
                 },
                 {
-                  id: '067dfd69-c7cb-40b8-8616-fe9c118d8931',
+                  id: 'f4bb48a1-d31e-409d-9cdb-a637264ab905',
                   isFolder: false,
                   name: 'CourseSchedule.java',
                   code: 'import java.util.*;\n\npublic class CourseSchedule {\n    public boolean canFinish(int numCourses, int[][] prerequisites) {\n        int[] indegree = new int[numCourses];\n        List<List<Integer>> adj = new ArrayList<>();\n        for (int i = 0; i < numCourses; i++) {\n            adj.add(new ArrayList<>());\n        }\n        for (int[] prerequisite : prerequisites) {\n            indegree[prerequisite[0]]++;\n            adj.get(prerequisite[1]).add(prerequisite[0]);\n        }\n        Queue<Integer> q = new LinkedList<>();\n        for (int i = 0; i < indegree.length; i++) {\n            if (indegree[i] == 0) {\n                q.add(i);\n            }\n        }\n        int count = 0;\n        while (!q.isEmpty()) {\n            int size = q.size();\n            for (int i = 0; i < size; i++) {\n                int node = q.poll();\n                count++;\n                for (int j = 0; j < adj.get(node).size(); j++) {\n                    int ele = adj.get(node).get(j);\n                    indegree[ele]--;\n                    if (indegree[ele] == 0) {\n                        q.add(ele);\n                    }\n                }\n            }\n        }\n        return count == numCourses;\n    }\n}',
@@ -2991,7 +2991,7 @@ const data = {
                   tags: ['Topo sort and Problems'],
                 },
                 {
-                  id: 'da21af5c-3e2d-4275-969c-65037fe12b32',
+                  id: '2ad25755-d524-4233-a93e-16f6373678f6',
                   isFolder: false,
                   name: 'CourseSchedule2.java',
                   code: 'import java.util.*;\n\npublic class CourseSchedule2 {\n    public int[] findOrder(int numCourses, int[][] prerequisites) {\n        int[] indegree = new int[numCourses];\n        List<List<Integer>> adj = new ArrayList<>();\n        for (int i = 0; i < numCourses; i++) {\n            adj.add(new ArrayList<>());\n        }\n        for (int[] prerequisite : prerequisites) {\n            indegree[prerequisite[0]]++;\n            adj.get(prerequisite[1]).add(prerequisite[0]);\n        }\n        Queue<Integer> q = new LinkedList<>();\n        for (int i = 0; i < indegree.length; i++) {\n            if (indegree[i] == 0) {\n                q.add(i);\n            }\n        }\n        int[] ans = new int[numCourses];\n        int count = 0;\n        while (!q.isEmpty()) {\n            int size = q.size();\n            for (int i = 0; i < size; i++) {\n                int node = q.poll();\n                ans[count++] = node;\n                for (int j = 0; j < adj.get(node).size(); j++) {\n                    int ele = adj.get(node).get(j);\n                    indegree[ele]--;\n                    if (indegree[ele] == 0) {\n                        q.add(ele);\n                    }\n                }\n            }\n        }\n        return count == numCourses ? ans : new int[]{};\n    }\n}',
@@ -3000,7 +3000,7 @@ const data = {
                   tags: ['Topo sort and Problems'],
                 },
                 {
-                  id: '0fa83019-758d-4286-b1ce-7f1dd322e198',
+                  id: 'd5346434-238e-48cd-bb12-249f9fa8858c',
                   isFolder: false,
                   name: 'CycleInDetectionDirectedGraphBFS.java',
                   code: 'import java.util.*;\n\npublic class CycleInDetectionDirectedGraphBFS {\n    public static boolean detectCycleInDirectedGraph(int n, ArrayList<ArrayList<Integer>> edges) {\n        // Write your code here.\n        int e = edges.size();\n        int[] indegree = new int[n];\n        List<List<Integer>> adj = new ArrayList<>();\n        for (int i = 0; i < n; i++)  {\n            adj.add(new ArrayList<>());\n        }\n        for(int i = 0; i < e; i++){\n            List<Integer> list = edges.get(i);\n            int x = list.get(0) - 1;\n            int y = list.get(1) - 1;\n            adj.get(x).add(y);\n            indegree[y]++;\n        }\n        Queue<Integer> q = new LinkedList<>();\n        int count = 0;\n        for (int i = 0; i < indegree.length; i++) {\n            if (indegree[i] == 0) {\n                q.add(i);\n            }\n        }\n        while (!q.isEmpty()) {\n            int size = q.size();\n            for (int i = 0; i < size; i++) {\n                int node = q.poll();\n                count++;\n                List<Integer> list = adj.get(node);\n                for (int j = 0; j < list.size(); j++) {\n                    int ele = list.get(j);\n                    indegree[ele]--;\n                    if (indegree[ele] == 0) {\n                        q.add(ele);\n                    }\n                }\n            }\n        }\n        return count != n;\n    }\n}',
@@ -3009,7 +3009,7 @@ const data = {
                   tags: ['Topo sort and Problems'],
                 },
                 {
-                  id: '023ea76c-4a9f-4e0a-beb0-ee1aa42a1c4c',
+                  id: '79b4147b-4d61-499d-b74a-9c6b5e2ce18a',
                   isFolder: false,
                   name: 'FindEventualSafeStates.java',
                   code: 'import java.util.*;\n\npublic class FindEventualSafeStates {\n    public boolean dfs(int[][] graph, boolean[] visited, int[] dfsVisited, int curr) {\n        visited[curr] = true;\n        dfsVisited[curr] = 1;\n        for (int i = 0; i < graph[curr].length; i++) {\n            if (!visited[graph[curr][i]]) {\n                if (!dfs(graph, visited, dfsVisited, graph[curr][i])) return false;\n            } else if (dfsVisited[graph[curr][i]] == 1) return false;\n        }\n        dfsVisited[curr] = 0;\n        return true;\n    }\n    public List<Integer> eventualSafeNodes(int[][] graph) {\n        // DFS\n        // boolean[] visited = new boolean[graph.length];\n        // int[] dfsVisited = new int[graph.length];\n        // for (int i = 0; i < graph.length; i++) {\n        //     if (!visited[i]) {\n        //         dfs(graph, visited, dfsVisited, i);\n        //     }\n        // }\n        // List<Integer> ans = new ArrayList<>();\n        // for (int i = 0; i < graph.length; i++) {\n        //     if (dfsVisited[i] == 0) {\n        //         ans.add(i);\n        //     }\n        // }\n        // return ans;\n\n\n        // BFS\n        List<List<Integer>> adjRev = new ArrayList<>();\n        int V = graph.length;\n        int[] indegree = new int[V];\n        for (int i = 0; i < V; i++) {\n            adjRev.add(new ArrayList<>());\n        }\n        for (int i = 0; i < V; i++) {\n            for (int j = 0; j < graph[i].length; j++) {\n                indegree[i]++;\n                adjRev.get(graph[i][j]).add(i);\n            }\n        }\n        Queue<Integer> q = new LinkedList<>();\n        for (int i = 0; i < V; i++) {\n            if (indegree[i] == 0) {\n                q.add(i);\n            }\n        }\n        List<Integer> ans = new ArrayList<>();\n        while (!q.isEmpty()) {\n            int size = q.size();\n            for (int i = 0; i < size; i++) {\n                int node = q.poll();\n                ans.add(node);\n                List<Integer> list = adjRev.get(node);\n                for (int ele : list) {\n                    indegree[ele]--;\n                    if (indegree[ele] == 0) {\n                        q.add(ele);\n                    }\n                }\n            }\n        }\n        Collections.sort(ans);\n        return ans;\n    }\n}',
@@ -3018,7 +3018,7 @@ const data = {
                   tags: ['Topo sort and Problems'],
                 },
                 {
-                  id: '430e9a5b-e66b-4d6f-b1e6-9a9413aa24d3',
+                  id: 'a1ad0d5f-aa78-4a2a-9de6-f42366308262',
                   isFolder: false,
                   name: 'TopologicalSort.java',
                   code: 'import java.util.*;\n\npublic class TopologicalSort {\n    public static void bfs(List<List<Integer>> adj, List<Integer> ans, int[] indegree) {\n        Queue<Integer> q = new LinkedList<>();\n        for (int i = 0; i < indegree.length; i++) {\n            if (indegree[i] == 0) {\n                q.add(i);\n            }\n        }\n        while (!q.isEmpty()) {\n            int size = q.size();\n            for (int i = 0; i < size; i++) {\n                int node = q.poll();\n                ans.add(node);\n                List<Integer> list = adj.get(node);\n                for (int ele : list) {\n                    indegree[ele]--;\n                    if (indegree[ele] == 0) {\n                        q.add(ele);\n                    }\n                }\n            }\n        }\n    }\n\n    public static void dfs(List<List<Integer>> adj, boolean[] visited, int curr, Stack<Integer> st) {\n        visited[curr] = true;\n        List<Integer> list = adj.get(curr);\n        for (Integer it : adj.get(curr)) {\n            if (!visited[it]) {\n                dfs(adj, visited, it, st);\n            }\n        }\n        st.push(curr);\n    }\n\n    public static List<Integer> topologicalSort(int[][] edges, int e, int v) {\n        // Write your code here!\n        int[] indegree = new int[v];\n        List<List<Integer>> adj = new ArrayList<>();\n        for (int i = 0; i < v; i++) {\n            adj.add(new ArrayList<>());\n        }\n        for (int i = 0; i < e; i++) {\n            int x = edges[i][0];\n            int y = edges[i][1];\n            adj.get(x).add(y);\n            indegree[edges[i][1]]++;\n        }\n//        Stack<Integer> st = new Stack<>();\n//        boolean[] visited = new boolean[v];\n        List<Integer> ans = new ArrayList<>();\n        bfs(adj, ans, indegree);\n//        for (int i = 0; i < v; i++) {\n//            if (!visited[i]) {\n//                dfs(adj, visited, i, st);\n//            }\n//        }\n//         while (!st.isEmpty()) {\n//             ans.add(st.pop());\n//         }\n        return ans;\n    }\n}',
@@ -3029,12 +3029,12 @@ const data = {
               ],
             },
             {
-              id: 'f50ba8ec-bbf3-453c-bc6d-d70c0646381f',
+              id: 'a9a454ab-ae68-4b97-83de-22a168329d9d',
               isFolder: true,
               name: 'Greedy Algorithms',
               content: [
                 {
-                  id: 'e2835491-63d7-43a9-856b-60550f754189',
+                  id: 'f72b9091-ceaf-4ae6-a9c1-1daa937d54cd',
                   isFolder: false,
                   name: 'AssignCookies.java',
                   code: 'import java.util.*;\npublic class AssignCookies {\n    public int findContentChildren(int[] g, int[] s) {\n        Arrays.sort(g);\n        Arrays.sort(s);\n        int i = 0, j = 0;\n        int count = 0;\n        while (j < s.length && i < g.length) {\n            if (s[j] >= g[i]) {\n                count++;\n                i++;\n            }\n            j++;\n        }\n        return count;\n    }\n}',
@@ -3043,7 +3043,7 @@ const data = {
                   tags: ['Easy Problems'],
                 },
                 {
-                  id: 'ce328937-b2e7-44fd-bfd7-8a607489afaa',
+                  id: '24b504ec-f663-468c-a7ce-03c95e8ef2f8',
                   isFolder: false,
                   name: 'FractionalKnapsack.java',
                   code: 'import java.util.*;\npublic class FractionalKnapsack {\n    static class Item {\n        int value, weight;\n        Item(int x, int y) {\n            this.value = x;\n            this.weight = y;\n        }\n    }\n    static class Pair {\n        Item item;\n        double ratio;\n        Pair(Item a, double r) {\n            this.item = a;\n            this.ratio = r;\n        }\n    }\n    //Function to get the maximum total value in the knapsack.\n    static double fractionalKnapsack(int W, Item[] arr, int n) {\n        // Your code here\n        PriorityQueue<Pair> pq = new PriorityQueue<>((a, b) -> Double.compare(b.ratio, a.ratio));\n        for (int i = 0; i < n; i++)\n            pq.add(new Pair(arr[i], (double) arr[i].value / arr[i].weight));\n        double result = 0;\n        while (W > 0 && !pq.isEmpty()) {\n            Pair p = pq.poll();\n            if (p.item.weight <= W) {\n                W -= p.item.weight;\n                result += p.item.value;\n            } else {\n                result += p.ratio * W;\n                break;\n            }\n        }\n        return result;\n    }\n\n    public static void main(String[] args) {\n        Item[] items = new Item[3];\n        items[0] = new Item(60,10);\n        items[1] = new Item(100, 20);\n        items[2] = new Item(120, 30);\n        double ans = fractionalKnapsack(50, items, 3);\n        System.out.println(ans);\n    }\n}',
@@ -3052,7 +3052,7 @@ const data = {
                   tags: ['Easy Problems'],
                 },
                 {
-                  id: 'feaa9de0-2be8-414f-87ac-49d1611d11f1',
+                  id: '7e1e3df0-57dc-48aa-9f00-c244e0889703',
                   isFolder: false,
                   name: 'LemonadeChange.java',
                   code: 'public class LemonadeChange {\n    public boolean lemonadeChange(int[] bills) {\n        int ten = 0, five = 0;\n        for (int bill : bills) {\n            if (bill == 5) five++;\n            else if (bill == 10) {\n                ten++;\n                if (five >= 1) five--;\n                else return false;\n            } else if (bill == 20) {\n                if (ten >= 1 && five >= 1) {\n                    ten--;\n                    five--;\n                }\n                else if (five >= 3)\n                    five -= 3;\n                else return false;\n            }\n        }\n        return true;\n    }\n}',
@@ -3061,7 +3061,7 @@ const data = {
                   tags: ['Easy Problems'],
                 },
                 {
-                  id: 'b3614e33-65bb-479a-91f5-673e69ac3399',
+                  id: '6e007145-4271-4303-847e-ff7c4854704c',
                   isFolder: false,
                   name: 'MinNumberOfCoins.java',
                   code: 'import java.util.*;\npublic class MinNumberOfCoins {\n    public static List<Integer> MinimumCoins(int V) {\n        // Write your code here.\n        int[] arr = { 1000, 500, 100, 50, 20, 10, 5, 2, 1 };\n        List<Integer> result = new ArrayList<>();\n        int i = 0;\n        while (V > 0 && i < arr.length) {\n            if (arr[i] <= V) {\n                result.add(arr[i]);\n                V -= arr[i];\n                continue;\n            }\n            i++;\n        }\n        return result;\n    }\n}',
@@ -3070,7 +3070,7 @@ const data = {
                   tags: ['Easy Problems'],
                 },
                 {
-                  id: '20f20aba-a19b-4bec-83fe-07c9bfaf6e9a',
+                  id: 'f928035f-5f33-4387-aa1f-08048a984066',
                   isFolder: false,
                   name: 'ValidParenthesisString.java',
                   code: "public class ValidParenthesisString {\n    public boolean checkValidString(String s) {\n        int leftMin = 0, leftMax = 0;\n        for (char ch : s.toCharArray()) {\n            if (ch == '(') {\n                leftMin++;\n                leftMax++;\n            } else if (ch == ')') {\n                leftMin--;\n                leftMax--;\n            } else {\n                leftMin--;\n                leftMax++;\n            }\n            if (leftMax < 0) return false;\n            if (leftMin < 0) leftMin = 0;\n        }\n        return leftMin == 0;\n    }\n}",
@@ -3079,7 +3079,7 @@ const data = {
                   tags: ['Easy Problems'],
                 },
                 {
-                  id: '05e54768-1b9f-411a-a37e-f6cc535f71ba',
+                  id: '3980820e-460f-483a-bbe8-f0038ee735ab',
                   isFolder: false,
                   name: 'Candy.java',
                   code: 'import java.util.*;\n\npublic class Candy {\n    public int candy(int[] ratings) {\n        int n = ratings.length;\n        if (n == 1) return 1;\n        int[] result = new int[n];\n        for (int i = 1; i < n; i++) {\n            if (ratings[i] > ratings[i-1]) {\n                result[i] = result[i-1] + 1;\n            }\n        }\n        for (int i = n-2; i >= 0; i--) {\n            if (ratings[i] > ratings[i+1]) {\n                result[i] = Math.max(result[i], result[i+1] + 1);\n            }\n        }\n        System.out.println(Arrays.toString(result));\n        int count = n;\n        for (int x : result) {\n            count += x;\n        }\n        return count;\n    }\n}',
@@ -3088,7 +3088,7 @@ const data = {
                   tags: ['Medium Hard Problems'],
                 },
                 {
-                  id: '5c10b360-ae24-4ffe-b047-64d70efaeff4',
+                  id: '73e3f000-5e80-431d-9d05-f5d3ea713a1b',
                   isFolder: false,
                   name: 'InsertInterval.java',
                   code: 'import java.util.*;\n\npublic class InsertInterval {\n\n    public static int[][] insert(int[][] intervals, int[] newInterval) {\n        List<int[]> list = new ArrayList<>();\n        for (int[] interval: intervals) {\n            if (newInterval == null || interval[1] < newInterval[0]) {\n                list.add(interval);\n            } else if (interval[0] > newInterval[1]) {\n                list.add(newInterval);\n                list.add(interval);\n                newInterval = null;\n            } else {\n                newInterval[0] = Math.min(newInterval[0], interval[0]);\n                newInterval[1] = Math.max(newInterval[1], interval[1]);\n            }\n        }\n        if (newInterval != null) list.add(newInterval);\n        return list.toArray(new int[list.size()][]);\n    }\n\n    public static void main(String[] args) {\n        int[][] intervals = {{1, 2}, {3, 5}, {6, 7}, {8, 10}, {12, 16}};\n        int[] newInterval = {4, 8};\n        int[][] ans = insert(intervals, newInterval);\n        for (int[] a : ans) {\n            System.out.println(Arrays.toString(a));\n        }\n    }\n}',
@@ -3097,7 +3097,7 @@ const data = {
                   tags: ['Medium Hard Problems'],
                 },
                 {
-                  id: '280fd022-77d1-4603-8ad8-044e8e932f84',
+                  id: '1d631457-9f4b-441d-bff1-20802a55ee13',
                   isFolder: false,
                   name: 'JobSequencingProblem.java',
                   code: "import java.util.Arrays;\n\npublic class JobSequencingProblem {\n//    In coding ninja's platform the jobs are given in  2D array form the concept remains the same\n    static class Job {\n        int id, profit, deadline;\n\n        Job(int x, int y, int z) {\n            this.id = x;\n            this.deadline = y;\n            this.profit = z;\n        }\n    }\n\n    static int[] JobScheduling(Job[] arr, int n) {\n        Arrays.sort(arr, (a,b) -> (b.profit - a.profit));\n        int maxi = 0;\n        for (int i = 0; i < n; i++) {\n            maxi = Math.max(maxi, arr[i].deadline);\n        }\n        int[] result = new int[maxi + 1];\n        int totalProfit = 0, totalJobs = 0;\n        for (int i = 0; i < n; i++) {\n            for (int idx = arr[i].deadline; idx > 0; idx--) {\n                if (result[idx] == 0) {\n                    result[idx] = arr[i].profit;\n                    totalJobs++;\n                    totalProfit += arr[i].profit;\n                    break;\n                }\n            }\n        }\n        return new int[] {totalJobs, totalProfit};\n    }\n}",
@@ -3106,7 +3106,7 @@ const data = {
                   tags: ['Medium Hard Problems'],
                 },
                 {
-                  id: '88d7377d-3baa-4a71-9786-a5987717af84',
+                  id: 'bdc86237-bfb1-4ae7-a276-032476b1e551',
                   isFolder: false,
                   name: 'JumpGame.java',
                   code: 'public class JumpGame {\n    public boolean canJump(int[] nums) {\n        int goal = nums.length - 1;\n        for (int i = nums.length - 2; i >= 0; i--)\n            if (goal <= (nums[i] + i))\n                goal = i;\n        return goal == 0;\n    }\n}',
@@ -3115,7 +3115,7 @@ const data = {
                   tags: ['Medium Hard Problems'],
                 },
                 {
-                  id: 'cc667761-ea0c-423d-9ed1-cf79efd04a88',
+                  id: '0abb0f97-cf54-442a-bcdf-ced3dadd798d',
                   isFolder: false,
                   name: 'JumpGame2.java',
                   code: 'public class JumpGame2 {\n    public int jump(int[] nums) {\n        int count = 0;\n        int l = 0, r = 0;\n        while (r < nums.length - 1) {\n            int max = 0;\n            for (int i = l; i <= r; i++) {\n                max = Math.max(max, i + nums[i]);\n            }\n            l = r + 1;\n            r = max;\n            count++;\n        }\n        return count;\n    }\n}',
@@ -3124,7 +3124,7 @@ const data = {
                   tags: ['Medium Hard Problems'],
                 },
                 {
-                  id: '07cce8ab-5e5a-4455-be0c-a4c14b97c182',
+                  id: '8c1bcc9d-14a3-4be8-a58d-c84f50f963ac',
                   isFolder: false,
                   name: 'MergeIntervals.java',
                   code: 'import java.util.*;\npublic class MergeIntervals {\n    public int[][] merge(int[][] intervals) {\n        Arrays.sort(intervals, (a,b) -> a[0] - b[0]);\n        int start = intervals[0][0], end = intervals[0][1];\n        List<int[]> list = new ArrayList<>();\n        for (int[] interval : intervals) {\n            if (interval[0] <= end) {\n                end = Math.max(end, interval[1]);\n            } else {\n                list.add(new int[] {start, end});\n                start = interval[0];\n                end = interval[1];\n            }\n        }\n        list.add(new int[] {start, end});\n        return list.toArray(new int[list.size()][]);\n    }\n}',
@@ -3133,7 +3133,7 @@ const data = {
                   tags: ['Medium Hard Problems'],
                 },
                 {
-                  id: '6f5e49d8-affc-4383-97c9-bd01cbf9a21d',
+                  id: 'fb933b0e-c4d3-42a7-b374-022a20f8735a',
                   isFolder: false,
                   name: 'MinimumPlatforms.java',
                   code: 'import java.util.*;\n\npublic class MinimumPlatforms {\n\n    public static int calculateMinPlatforms(int[] arr, int[] dep, int n) {\n        // Write your code here.\n        Arrays.sort(arr);\n        Arrays.sort(dep);\n        int max = 0, platforms = 0, i = 0, j = 0;\n        while (i < n && j < n) {\n            if (arr[i] <= dep[j]) {\n                i++;\n                platforms++;\n            } else {\n                j++;\n                platforms--;\n            }\n            max = Math.max(max, platforms);\n        }\n        return max;\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {900, 940, 950, 1100, 1500, 1800};\n        int[] dep = {910, 1200, 1120, 1130, 1900, 2000};\n        int ans = calculateMinPlatforms(arr, dep, arr.length);\n        System.out.println(ans);\n    }\n}',
@@ -3142,7 +3142,7 @@ const data = {
                   tags: ['Medium Hard Problems'],
                 },
                 {
-                  id: 'f4ecaead-1ace-4b62-9cd9-428039b834fb',
+                  id: '6a02069d-ca0c-4d1c-bc61-db72558d08a0',
                   isFolder: false,
                   name: 'NMeetingsInARoom.java',
                   code: 'import java.util.*;\npublic class NMeetingsInARoom {\n    public static class Pair {\n        int start, end;\n        Pair (int s, int e) {\n            this.start = s;\n            this.end = e;\n        }\n    }\n    public static int maxMeetings(int start[], int end[], int n) {\n        // add your code here\n        PriorityQueue<Pair> pq = new PriorityQueue<>((a, b) -> a.end - b.end);\n        for (int i = 0; i < n; i++) pq.add(new Pair(start[i], end[i]));\n        int endTime = 0, count = 0;\n        while (!pq.isEmpty()) {\n            Pair p = pq.poll();\n            if (p.start > endTime) {\n                count++;\n                endTime = p.end;\n            }\n        }\n        return count;\n    }\n}',
@@ -3151,7 +3151,7 @@ const data = {
                   tags: ['Medium Hard Problems'],
                 },
                 {
-                  id: 'fcb03c8a-0071-469b-881f-1e9b08d79593',
+                  id: '94592aab-c2e0-4966-8ae0-5a4ab15f30d9',
                   isFolder: false,
                   name: 'NonOverlappingIntervals.java',
                   code: 'import java.util.*;\n\npublic class NonOverlappingIntervals {\n    public int eraseOverlapIntervals(int[][] intervals) {\n        Arrays.sort(intervals, (a,b) -> a[0] - b[0]);\n        int count = 0;\n        int end = intervals[0][1];\n        for (int i = 1; i < intervals.length; i++) {\n            int[] interval = intervals[i];\n            if (end <= interval[0]) {\n                end = interval[1];\n            } else {\n                count++;\n                end = Math.min(end, interval[1]);\n            }\n        }\n        return count;\n    }\n}',
@@ -3160,7 +3160,7 @@ const data = {
                   tags: ['Medium Hard Problems'],
                 },
                 {
-                  id: 'dcd87aae-d4bc-40c5-a23b-5cce5ac94938',
+                  id: 'b6cc0970-452d-465e-9fea-ded528d268bd',
                   isFolder: false,
                   name: 'SJF.java',
                   code: 'import java.util.*;\n\npublic class SJF {\n    static class Job {\n        int at, bt;\n        Job(int a, int b) {\n            this.at = a;\n            this.bt = b;\n        }\n        @Override\n        public String toString() {\n            return \'{\' + "at=" + at + " bt=" + bt + \'}\';\n        }\n    }\n\n    public static float sjf(int n, int[] arrivalTime, int[] burstTime) {\n        // Write your code here.\n        Job[] jobs = new Job[n];\n        for (int i = 0; i < n; i++) {\n            jobs[i] = new Job(arrivalTime[i], burstTime[i]);\n        }\n        Arrays.sort(jobs, (a, b) -> a.at - b.at);\n        List<Job> list = new ArrayList<>();\n        PriorityQueue<Job> pq = new PriorityQueue<>((a, b) -> a.bt - b.bt);\n        int currTime = 0,  i = 0;\n        while (i < n || !pq.isEmpty()) {\n            while (i < n && currTime >= jobs[i].at) pq.add(jobs[i++]);\n            if (pq.isEmpty()) {\n                currTime = jobs[i].at;\n                continue;\n            }\n            Job j = pq.poll();\n            list.add(j);\n            currTime += j.bt;\n        }\n        int xTime = list.get(0).at, ct = 0;\n        for (int j = 0; j < n; j++) {\n            Job job = list.get(j);\n            xTime += ct - job.at;\n            if (ct < job.at)\n                ct = job.at;\n            ct += job.bt;\n        }\n        return (float) xTime / n;\n    }\n\n    public static void main(String[] args) {\n        int[] arrivalTime = {1,1};\n        int[] burstTime = {3,4};\n//        int[] arrivalTime = {0, 5, 26, 0, 17, 13, 6, 2, 24};\n//        int[] burstTime = {22, 15, 21, 11, 14, 10, 27, 18, 24};\n        float ans = sjf(arrivalTime.length, arrivalTime, burstTime);\n        System.out.println(ans);\n    }\n}',
@@ -3171,12 +3171,12 @@ const data = {
               ],
             },
             {
-              id: '0160f0f2-3c8f-4320-bc13-158f4a3ec070',
+              id: '4ea8eedd-50be-47c6-ae3c-1686d5bc6d49',
               isFolder: true,
               name: 'Heaps',
               content: [
                 {
-                  id: '94443e7a-c9de-4502-9336-e7d4f974cf1e',
+                  id: 'b3f713be-16ec-4983-b4b7-e028d8aaa268',
                   isFolder: false,
                   name: 'ConnectNRopesWithMinCost.java',
                   code: 'import java.util.*;\n\npublic class ConnectNRopesWithMinCost {\n    static int minCost(int[] arr, int n) {\n        PriorityQueue<Integer> pq = new PriorityQueue<>();\n        for (int i : arr) pq.add(i);\n        int cost = 0;\n        while (pq.size() != 1) {\n            int sum = pq.poll() + pq.poll();\n            cost += sum;\n            pq.add(sum);\n        }\n        return cost;\n    }\n}',
@@ -3185,7 +3185,7 @@ const data = {
                   tags: ['Hard Problems'],
                 },
                 {
-                  id: '5d7b6752-517c-4d23-8eea-5bcea34ff42b',
+                  id: 'd232fa4e-a160-4a4c-8615-56c9a0c94056',
                   isFolder: false,
                   name: 'DesignTwitter.java',
                   code: "import java.util.*;\n\npublic class DesignTwitter {\n    static class Tweet {\n        int userId;\n        int tweetId;\n        int tweetFrequency;\n\n        Tweet(int uId, int tId, int f) {\n            this.userId = uId;\n            this.tweetId = tId;\n            this.tweetFrequency = f;\n        }\n    }\n\n    static class Twitter {\n\n        HashMap<Integer, HashSet<Integer>> followMap;\n        int frequency = 0;\n        PriorityQueue<Tweet> pq;\n\n        public Twitter() {\n            followMap = new HashMap<>();\n            pq = new PriorityQueue<>((a, b) -> b.tweetFrequency - a.tweetFrequency);\n        }\n\n        public void postTweet(int userId, int tweetId) {\n            pq.add(new Tweet(userId, tweetId, frequency));\n            frequency++;\n        }\n\n        public List<Integer> getNewsFeed(int userId) {\n            Deque<Tweet> q = new ArrayDeque<>();\n            List<Integer> op = new ArrayList<>();\n            int count = 10;\n            while (count > 0 && !pq.isEmpty()) {\n                Tweet t = pq.poll();\n                q.add(t);\n                if (\n                        userId == t.userId ||\n                                (followMap.containsKey(userId) && followMap.get(userId).contains(t.userId))\n                ) {\n                    count--;\n                    op.add(t.tweetId);\n                }\n            }\n            while (!q.isEmpty()) pq.add(q.poll());\n            System.out.println(followMap);\n            return op;\n        }\n\n        public void follow(int followerId, int followeeId) {\n            if (!followMap.containsKey(followerId)) {\n                followMap.put(followerId, new HashSet<>());\n            }\n            followMap.get(followerId).add(followeeId);\n        }\n\n        public void unfollow(int followerId, int followeeId) {\n            if (followMap.containsKey(followerId)) {\n                followMap.get(followerId).remove(followeeId);\n            }\n        }\n    }\n    public static void main(String[] args) {\n        Twitter twitter = new Twitter();\n        twitter.postTweet(1, 5); // User 1 posts a new tweet (id = 5).\n        System.out.println(twitter.getNewsFeed(1));  // User 1's news feed should return a list with 1 tweet id -> [5]. return [5]\n        twitter.follow(1, 2);    // User 1 follows user 2.\n        twitter.postTweet(2, 6); // User 2 posts a new tweet (id = 6).\n        System.out.println(twitter.getNewsFeed(1));  // User 1's news feed should return a list with 2 tweet ids -> [6, 5]. Tweet id 6 should precede tweet id 5 because it is posted after tweet id 5.\n        twitter.unfollow(1, 2);  // User 1 unfollows user 2.\n        System.out.println(twitter.getNewsFeed(1));  // User 1's news feed should return a list with 1 tweet id -> [5], since user 1 is no longer following user 2.\n    }\n}",
@@ -3194,7 +3194,7 @@ const data = {
                   tags: ['Hard Problems'],
                 },
                 {
-                  id: '326a03db-a957-45aa-bca3-4eea154f586f',
+                  id: 'cba6eed0-1554-416d-9412-11318a23dbc1',
                   isFolder: false,
                   name: 'FindMedianFromDataStream.java',
                   code: 'import java.util.*;\n\npublic class FindMedianFromDataStream {\n    static class MedianFinder {\n        PriorityQueue<Integer> maxHeap;\n        PriorityQueue<Integer> minHeap;\n        public MedianFinder() {\n            maxHeap = new PriorityQueue<>((a,b) -> b - a);\n            minHeap = new PriorityQueue<>();\n        }\n\n        public void addNum(int num) {\n            if (num < findMedian()) maxHeap.add(num);\n            else minHeap.add(num);\n            if (minHeap.size() - maxHeap.size() > 1) maxHeap.add(minHeap.poll());\n            else if (maxHeap.size() - minHeap.size() > 1) minHeap.add(maxHeap.poll());\n        }\n\n        public double findMedian() {\n            if (maxHeap.isEmpty() && minHeap.isEmpty()) return 0;\n            if (minHeap.size() == maxHeap.size())\n                return (minHeap.peek() + maxHeap.peek())/2.0;\n            if (minHeap.size() > maxHeap.size())\n                return minHeap.peek();\n            return maxHeap.peek();\n        }\n    }\n\n    public static void main(String[] args) {\n        MedianFinder medianFinder = new MedianFinder();\n        medianFinder.addNum(1);    // arr = [1]\n        medianFinder.addNum(2);    // arr = [1, 2]\n        System.out.println(medianFinder.findMedian()); // return 1.5 (i.e., (1 + 2) / 2)\n        medianFinder.addNum(3);    // arr[1, 2, 3]\n        System.out.println(medianFinder.findMedian()); // return 2.0\n    }\n}',
@@ -3203,7 +3203,7 @@ const data = {
                   tags: ['Hard Problems'],
                 },
                 {
-                  id: 'a31dcd20-2fb7-40b6-8acb-a7dc6566303e',
+                  id: 'e5410b9c-9701-425b-93a0-2bec9c90e49c',
                   isFolder: false,
                   name: 'KthLargest.java',
                   code: 'import java.util.*;\n\nclass KthLargest {\n    PriorityQueue<Integer> pq;\n    int size;\n\n    public KthLargest(int k, int[] nums) {\n        pq = new PriorityQueue<>();\n        size = k;\n        for (int num : nums) {\n            pq.add(num);\n            if (pq.size() > k) pq.poll();\n        }\n    }\n\n    public int add(int val) {\n        pq.add(val);\n        if (pq.size() > size) pq.poll();\n        return pq.peek();\n    }\n}',
@@ -3212,7 +3212,7 @@ const data = {
                   tags: ['Hard Problems'],
                 },
                 {
-                  id: 'e7d9b605-c0d7-4ae3-91fc-12a1ca6ca5c8',
+                  id: '924e6605-d37f-4a16-9bdf-4b9f37758f59',
                   isFolder: false,
                   name: 'MaximumSumCombination.java',
                   code: '// link: https://practice.geeksforgeeks.org/problems/maximum-sum-combination/1\n\nimport java.util.*;\n\npublic class MaximumSumCombination {\n    static List<Integer> maxCombinations(int N, int c, int a[], int b[]) {\n        List<Integer> al = new ArrayList<Integer>();\n        Arrays.sort(a);\n        Arrays.sort(b);\n        int n = N-1;\n        PriorityQueue<Pair> pq = new PriorityQueue<>((p,q) -> q.v - p.v);\n        pq.add(new Pair(a[n] + b[n], n, n));\n        Set<String> set = new HashSet<>();\n        set.add(n + " " + n);\n\n        while (!pq.isEmpty()) {\n            Pair cur = pq.poll();\n            al.add(cur.v);\n            if (al.size() == c) break;\n            int x = cur.x, y = cur.y;\n            if (x-1 >= 0 && !set.contains((x-1) + " " + y)) {\n                pq.add(new Pair(a[x-1] + b[y], x-1, y));\n                set.add((x-1) + " " + y);\n            }\n            if (y-1 >= 0 && !set.contains(x + " " + (y-1))) {\n                pq.add(new Pair(a[x] + b[y-1], x, y-1));\n                set.add(x + " " + (y-1));\n            }\n        }\n        return al;\n    }\n    static class Pair {\n        int v, x, y;\n        Pair(int v, int x, int y) {\n            this.v = v;\n            this.x = x;\n            this.y = y;\n        }\n        // public int compareTo(Pair p) { return p.v - this.v; }\n    }\n\n    public static void main(String[] args) {\n        int[] A = {9, 9, 10, 6, 1, 6, 4};\n        int[] B = {5, 3, 4, 2, 10, 4, 9};\n        int k = 4;\n        List<Integer> ans = maxCombinations(A.length, k, A, B);\n        System.out.println(ans);\n    }\n}',
@@ -3221,7 +3221,7 @@ const data = {
                   tags: ['Hard Problems'],
                 },
                 {
-                  id: 'c9ade672-cb84-46a7-8d9a-f24d377d8d3d',
+                  id: 'eaf05a45-8f5e-4390-88f9-a60a2e0d3f3b',
                   isFolder: false,
                   name: 'TopKFrequentElements.java',
                   code: 'import java.util.*;\n\npublic class TopKFrequentElements {\n    static class Pair {\n        int key, freq;\n        Pair(int k, int f) {\n            this.key = k;\n            this.freq = f;\n        }\n    }\n    public int[] topKFrequent(int[] nums, int k) {\n        HashMap<Integer, Integer> map = new HashMap<>();\n        for (int num: nums) {\n            map.put(num, map.getOrDefault(num, 0) + 1);\n        }\n        PriorityQueue<Pair> pq = new PriorityQueue<>((a,b) -> a.freq - b.freq);\n        for (Map.Entry<Integer, Integer> m : map.entrySet()) {\n            pq.add(new Pair(m.getKey(), m.getValue()));\n            if (pq.size() > k) pq.poll();\n        }\n        int[] ans = new int[k];\n        for (int i = 0; i < k; i++) {\n            ans[i] = pq.poll().key;\n        }\n        return ans;\n    }\n}',
@@ -3230,7 +3230,7 @@ const data = {
                   tags: ['Hard Problems'],
                 },
                 {
-                  id: 'c714a64f-994c-4c1f-b3ad-971718d74ff1',
+                  id: '41f23fa4-e33b-4918-ad44-e086119f745b',
                   isFolder: false,
                   name: 'MaxHeap.java',
                   code: 'import java.util.*;\n\npublic class MaxHeap {\n    public static void swap(List<Integer> heap, int i, int j) {\n        int temp = heap.get(i);\n        heap.set(i, heap.get(j));\n        heap.set(j, temp);\n    }\n\n    //    MAX HEAP push: SWAP if PARENT < CHILD\n    public static void push(List<Integer> heap, int value) {\n        heap.add(value);\n        int i = heap.size() - 1;\n        while (heap.get((i - 1) / 2) < heap.get(i)) {\n            swap(heap, i, (i - 1) / 2);\n            i = (i - 1) / 2;\n        }\n    }\n\n    public static int pop(List<Integer> heap) {\n        if (heap.isEmpty()) return -1;\n        if (heap.size() == 1) return heap.remove(0);\n        int val = heap.get(0);\n        heap.set(0, heap.get(heap.size() - 1));\n        heap.remove(heap.size() - 1);\n        int i = 0;\n        while (2 * i + 1 < heap.size()) {\n            int lIdx = 2*i + 1;\n            int rIdx = 2*i + 2;\n            int leftChild = heap.get(lIdx);\n            if (rIdx < heap.size() && heap.get(rIdx) >= leftChild && heap.get(rIdx) > heap.get(i)) {\n                swap(heap, rIdx, i);\n                i = rIdx;\n            } else if (leftChild > heap.get(i)) {\n                swap(heap, lIdx, i);\n                i = lIdx;\n            } else break;\n        }\n        return val;\n    }\n\n    public static void main(String[] args) {\n        List<Integer> heap = new ArrayList<>();\n\n        System.out.println(pop(heap));\n        push(heap, 76);\n        System.out.println(pop(heap));\n        System.out.println(pop(heap));\n        push(heap, 62);\n        System.out.println(pop(heap));\n        System.out.println(pop(heap));\n        System.out.println(pop(heap));\n        push(heap, 58);\n        push(heap, 8);\n        push(heap, 4);\n        push(heap, 52);\n        System.out.println(pop(heap));\n        push(heap, 74);\n        System.out.println(pop(heap));\n        System.out.println(heap);\n        System.out.println(pop(heap));\n        System.out.println(pop(heap));\n        System.out.println(pop(heap));\n\n    }\n}',
@@ -3239,7 +3239,7 @@ const data = {
                   tags: ['Learning'],
                 },
                 {
-                  id: '8b70fa3d-3066-478b-a2c5-5135120aebe8',
+                  id: '3a3ec511-b547-4ac9-b4d5-b6257d17e982',
                   isFolder: false,
                   name: 'MinHeap.java',
                   code: 'import java.util.ArrayList;\nimport java.util.List;\n\npublic class MinHeap {\n    public static void swap(List<Integer> heap, int i, int j) {\n        int temp = heap.get(i);\n        heap.set(i, heap.get(j));\n        heap.set(j, temp);\n    }\n\n    //    MAX HEAP push: SWAP if PARENT < CHILD\n    public static void push(List<Integer> heap, int value) {\n        heap.add(value);\n        int i = heap.size() - 1;\n        while (heap.get((i - 1) / 2) > heap.get(i)) {\n            swap(heap, i, (i - 1) / 2);\n            i = (i - 1) / 2;\n        }\n    }\n\n    public static void percolateDownMinHeap(List<Integer> heap, int i) {\n        while (2 * i + 1 < heap.size()) {\n            int lIdx = 2*i + 1;\n            int rIdx = 2*i + 2;\n            int leftChild = heap.get(lIdx);\n            if (rIdx < heap.size() && heap.get(rIdx) <= leftChild && heap.get(rIdx) < heap.get(i)) {\n                swap(heap, rIdx, i);\n                i = rIdx;\n            } else if (leftChild < heap.get(i)) {\n                swap(heap, lIdx, i);\n                i = lIdx;\n            } else break;\n        }\n    }\n    public static int pop(List<Integer> heap) {\n        if (heap.isEmpty()) return -1;\n        if (heap.size() == 1) return heap.remove(0);\n        int val = heap.get(0);\n        heap.set(0, heap.get(heap.size() - 1));\n        heap.remove(heap.size() - 1);\n        percolateDownMinHeap(heap, 0);\n        return val;\n    }\n\n    public static void main(String[] args) {\n        List<Integer> heap = new ArrayList<>();\n        push(heap, 50);\n        push(heap, 10);\n        push(heap, 70);\n        push(heap, 20);\n        push(heap, 30);\n        System.out.println(pop(heap));\n        System.out.println(pop(heap));\n        System.out.println(pop(heap));\n        System.out.println(heap);\n    }\n}',
@@ -3248,7 +3248,7 @@ const data = {
                   tags: ['Learning'],
                 },
                 {
-                  id: '06ca8770-586c-4e34-9b94-280e7970aea3',
+                  id: '973f57e5-5507-4f42-b863-277c39301ebf',
                   isFolder: false,
                   name: 'HandOfStraights.java',
                   code: 'import java.util.*;\n\npublic class HandOfStraights {\n    public static boolean isNStraightHand(int[] hand, int groupSize) {\n        if (hand.length < groupSize || hand.length % groupSize != 0) return false;\n        HashMap<Integer, Integer> hm = new HashMap<>();\n        for (int j : hand) hm.put(j, hm.getOrDefault(j, 0) + 1);\n\n        PriorityQueue<Integer> pq = new PriorityQueue<>();\n        for (Map.Entry<Integer, Integer> m : hm.entrySet()) pq.add(m.getKey());\n\n        while (!pq.isEmpty()) {\n            int first = pq.peek();\n            for (int i = first; i < first + groupSize; i++) {\n                if (hm.containsKey(i)) {\n                    int count = hm.get(i) - 1;\n                    hm.put(i, count);\n                    if (count == 0) {\n                        if (i != pq.peek()) return false;\n                        pq.poll();\n                    }\n                } else {\n                    return false;\n                }\n            }\n        }\n        return true;\n    }\n\n    public static void main(String[] args) {\n        int[] hand = {1,2,3,6,2,3,4,7,8};\n        int groupSize = 3;\n        System.out.println(isNStraightHand(hand, groupSize));\n\n    }\n}',
@@ -3257,7 +3257,7 @@ const data = {
                   tags: ['Medium Problems'],
                 },
                 {
-                  id: 'e13fd1d8-a216-424a-8701-1e1335204662',
+                  id: '5104109d-91ab-465e-8ff3-9aa5398664c3',
                   isFolder: false,
                   name: 'KthLargestElement.java',
                   code: 'import java.util.*;\npublic class KthLargestElement {\n    public int findKthLargest(int[] nums, int k) {\n        PriorityQueue<Integer> pq = new PriorityQueue<>();\n        for (int num : nums) {\n            pq.add(num);\n            if (pq.size() > k) {\n                pq.poll();\n            }\n        }\n        return pq.poll();\n    }\n}',
@@ -3266,7 +3266,7 @@ const data = {
                   tags: ['Medium Problems'],
                 },
                 {
-                  id: '904c563f-809c-4551-8f5a-0d74ecdb158e',
+                  id: '62075ba0-cc59-429f-ad5e-1a7fb4b2ca16',
                   isFolder: false,
                   name: 'KthSmallestElement.java',
                   code: 'import java.util.*;\npublic class KthSmallestElement {\n    public static int kthSmallest(int[] arr, int l, int r, int k) {\n        //Your code here\n        PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> b - a);\n        for (int i = l; i <= r; i++) {\n            pq.add(arr[i]);\n            if (pq.size() > k) {\n                pq.poll();\n            }\n        }\n        return pq.poll();\n    }\n}',
@@ -3275,7 +3275,7 @@ const data = {
                   tags: ['Medium Problems'],
                 },
                 {
-                  id: '3bd59581-209c-4d58-b8a1-8e0f02b52b60',
+                  id: '2a33b443-6a3d-47e9-a6ec-9cd17edd59b2',
                   isFolder: false,
                   name: 'MergeKElements.java',
                   code: 'public class MergeKElements {\n    public static class ListNode {\n        int val;\n        ListNode next;\n        ListNode() {}\n        ListNode(int val) { this.val = val; }\n        ListNode(int val, ListNode next) { this.val = val; this.next = next; }\n    }\n    public ListNode merge(ListNode a, ListNode b) {\n        ListNode temp = new ListNode(0);\n        ListNode curr = temp;\n        while (a != null && b != null) {\n            if (a.val <= b.val) {\n                curr.next = a;\n                a = a.next;\n            } else {\n                curr.next = b;\n                b = b.next;\n            }\n            curr = curr.next;\n        }\n        curr.next = a != null ? a : b;\n        return temp.next;\n    }\n\n    public ListNode mergeKLists(ListNode[] lists) {\n        int size = lists.length;\n        int interval = 1;\n        while (interval < size) {\n            for (int i = 0; i < size - interval; i += 2*interval)\n                lists[i] = merge(lists[i], lists[i + interval]);\n            interval *= 2;\n        }\n        return size > 0 ? lists[0] : null;\n    }\n}',
@@ -3284,7 +3284,7 @@ const data = {
                   tags: ['Medium Problems'],
                 },
                 {
-                  id: 'b6a1cda9-ea1b-4ece-ab83-ea2945c6aed3',
+                  id: '19d07ca5-e3b0-463e-9a0a-a40350fae092',
                   isFolder: false,
                   name: 'MergeKSortedLists.java',
                   code: 'public class MergeKSortedLists {\n     public class ListNode {\n         int val;\n         ListNode next;\n\n         ListNode() {\n         }\n\n         ListNode(int val) {\n             this.val = val;\n         }\n\n         ListNode(int val, ListNode next) {\n             this.val = val;\n             this.next = next;\n         }\n     }\n    public ListNode merge(ListNode a, ListNode b) {\n        ListNode temp = new ListNode(0);\n        ListNode curr = temp;\n        while (a != null && b != null) {\n            if (a.val <= b.val) {\n                curr.next = a;\n                a = a.next;\n            } else {\n                curr.next = b;\n                b = b.next;\n            }\n            curr = curr.next;\n        }\n        curr.next = a != null ? a : b;\n        return temp.next;\n    }\n\n    public ListNode mergeKLists(ListNode[] lists) {\n        int size = lists.length;\n        int interval = 1;\n        while (interval < size) {\n            for (int i = 0; i < size - interval; i += 2*interval)\n                lists[i] = merge(lists[i], lists[i + interval]);\n            interval *= 2;\n        }\n        return size > 0 ? lists[0] : null;\n    }\n}',
@@ -3293,7 +3293,7 @@ const data = {
                   tags: ['Medium Problems'],
                 },
                 {
-                  id: '90740ffd-c8a4-4792-9a23-fb3e8beb5e5b',
+                  id: '1bea97cc-2c55-4f0c-a376-aaa647074fd8',
                   isFolder: false,
                   name: 'NearlySorted.java',
                   code: 'import java.util.*;\npublic class NearlySorted {\n    public static int[] nearlySorted(int[] arr, int n, int k) {\n        // Write your code here.\n        int[] ans = new int[n];\n        PriorityQueue<Integer> pq = new PriorityQueue<>();\n        int idx = 0;\n        for (int i = 0; i < arr.length; i++) {\n            pq.add(arr[i]);\n            if (pq.size() > k) {\n                ans[idx++] = pq.poll();\n            }\n        }\n        while (!pq.isEmpty()) {\n            ans[idx++] = pq.poll();\n        }\n        return ans;\n    }\n}',
@@ -3302,7 +3302,7 @@ const data = {
                   tags: ['Medium Problems'],
                 },
                 {
-                  id: 'fc3a2dc3-13c0-4a9e-8266-58b7ec91d270',
+                  id: '86935d7b-8270-45cb-80d2-b758f4a753e9',
                   isFolder: false,
                   name: 'ReplaceEachElementWithItsRank.java',
                   code: 'import java.util.*;\npublic class ReplaceEachElementWithItsRank {\n    public static List<Integer> replaceWithRank(List<Integer> arr, int n) {\n        // Write your code here\n        List<Integer> ans = new ArrayList<>(arr);\n        HashMap<Integer, Integer> map = new HashMap<>();\n        Collections.sort(arr);\n        int rank = 1;\n        for (int element : arr)\n            if (!map.containsKey(element)) map.put(element, rank++);\n        for (int i = 0; i < arr.size(); i++)\n            ans.set(i, map.get(ans.get(i)));\n        return ans;\n    }\n}',
@@ -3311,7 +3311,7 @@ const data = {
                   tags: ['Medium Problems'],
                 },
                 {
-                  id: 'e0c37756-f23a-41ed-ab93-270a7c5c94ae',
+                  id: 'f6a56115-a668-41f8-896a-6d136eacf8ba',
                   isFolder: false,
                   name: 'TaskScheduler.java',
                   code: "import java.util.*;\n\npublic class TaskScheduler {\n    static class Pair {\n        int val, time;\n        Pair(int v, int t) {\n            this.val = v;\n            this.time = t;\n        }\n    }\n    public static int leastInterval(char[] tasks, int n) {\n        HashMap<Integer, Integer> hm = new HashMap<>();\n        for (int task : tasks)\n            hm.put(task, hm.getOrDefault(task, 0) + 1);\n        PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> b - a);\n        for (Map.Entry<Integer, Integer> m: hm.entrySet())\n            pq.add(m.getValue());\n        Queue<Pair> q = new LinkedList<>();\n        int time = 0;\n        while (!pq.isEmpty() || !q.isEmpty()) {\n            time++;\n            if (!pq.isEmpty()) {\n                int val = pq.poll() - 1;\n                if (val > 0) q.add(new Pair(val, time + n));\n            }\n            if (!q.isEmpty() && q.peek().time <= time)\n                pq.add(q.poll().val);\n        }\n        return time;\n\n    }\n\n    public static void main(String[] args) {\n        char[] tasks = {'A', 'A', 'A', 'B', 'B', 'B'};\n        int n = 2;\n        int ans = leastInterval(tasks, n);\n        System.out.println(ans);\n    }\n}",
@@ -3322,12 +3322,12 @@ const data = {
               ],
             },
             {
-              id: '758fc9a5-34bc-42aa-a71a-a455ec029258',
+              id: 'bae1f86b-b407-4613-9166-dff341198edc',
               isFolder: true,
               name: 'LinkedList',
               content: [
                 {
-                  id: '4ed01f79-9530-48ab-824c-9002c0ff67f7',
+                  id: '807375fb-4148-493a-b0f4-6872401a8eb6',
                   isFolder: false,
                   name: 'CopyListWithRandomPointer.java',
                   code: 'public class CopyListWithRandomPointer {\n    class Node {\n        int val;\n        Node next;\n        Node random;\n        public Node(int val) {\n            this.val = val;\n            this.next = null;\n            this.random = null;\n        }\n    }\n    public Node copyRandomList(Node head) {\n        // Optimised solution\n        if (head == null) return null;\n        // Step 1: Create a new linked list in between the nodes of current LL\n        Node curr = head;\n        while (curr != null) {\n            Node newNode = new Node(curr.val);\n            newNode.next = curr.next;\n            curr.next = newNode;\n            curr = newNode.next;\n        }\n        // Step 2: Assign random pointers to the deep copy\n        curr = head;\n        while (curr != null) {\n            if (curr.random != null)\n                curr.next.random = curr.random.next;\n            curr = curr.next.next;\n        }\n        // Step 3: Separate both the linked list and return Head\n        Node copy = head.next;\n        Node temp = copy;\n        curr = head;\n        while (temp != null) {\n            curr.next = temp.next;\n            curr = curr.next;\n            if (curr == null) break;\n            temp.next = curr.next;\n            temp = temp.next;\n        }\n        // curr.next = null;\n        return copy;\n    }\n}',
@@ -3336,7 +3336,7 @@ const data = {
                   tags: ['Hard Problems of LL'],
                 },
                 {
-                  id: '7ffb9fea-8ce2-4c44-ac06-bc54b67b012c',
+                  id: '967f829b-c1b1-426f-91a3-a44f5186b5a1',
                   isFolder: false,
                   name: 'FlattenLL.java',
                   code: 'public class FlattenLL {\n    public class Node {\n        public int data;\n        public Node next;\n        public Node child;\n\n        Node()\n        {\n            this.data = 0;\n            this.next = null;\n            this.child = null;\n        }\n        Node(int data)\n        {\n            this.data = data;\n            this.next = null;\n            this.child = null;\n        }\n        Node(int data, Node next, Node child)\n        {\n            this.data = data;\n            this.next = next;\n            this.child = child;\n        }\n    }\n\n    public static Node merge(Node left, Node right) {\n        Node temp = new Node(0);\n        Node tHead = temp;\n        while (left != null && right != null) {\n            if (left.data <= right.data) {\n                temp.child = left;\n                left = left.child;\n            } else {\n                temp.child = right;\n                right = right.child;\n            }\n            temp = temp.child;\n        }\n        if (left != null)\n            temp.child = left;\n        else\n            temp.child = right;\n        return tHead.child;\n    }\n    public static Node flatList(Node head) {\n        if (head == null || head.next == null) return head;\n        head.next = flatList(head.next);\n        head = merge(head, head.next);\n        return head;\n    }\n    public static Node flattenLinkedList(Node head) {\n        //Write your code here\n        return flatList(head);\n    }\n\n}',
@@ -3345,7 +3345,7 @@ const data = {
                   tags: ['Hard Problems of LL'],
                 },
                 {
-                  id: '9bd74d98-e292-40ab-a177-4d7a82272672',
+                  id: '2dc2bf25-1782-437c-b81e-a58ef92abf19',
                   isFolder: false,
                   name: 'ReverseNodesInKGroups.java',
                   code: 'public class ReverseNodesInKGroups {\n    public static ListNode revLL(ListNode head) {\n        ListNode prev = null;\n        ListNode curr = head;\n        ListNode next = head;\n        while (curr != null) {\n            next = curr.next;\n            curr.next = prev;\n            prev = curr;\n            curr = next;\n        }\n        return prev;\n    }\n    public ListNode reverseKGroup(ListNode head, int k) {\n        ListNode curr = head, start = head, prev = head;\n        ListNode newHead = new ListNode(0, head);\n        ListNode temp = newHead;\n\n        while (curr != null) {\n            for (int i = 1; i <= k; i++) {\n                if (curr.next == null && i < k) return newHead.next;\n                prev = curr;\n                curr = curr.next;\n            }\n            prev.next = null;\n            temp.next = revLL(start);\n            start.next = curr;\n            temp = start;\n            start = curr;\n        }\n        return newHead.next;\n    }\n}',
@@ -3354,7 +3354,7 @@ const data = {
                   tags: ['Hard Problems of LL'],
                 },
                 {
-                  id: 'a4aa57c5-c756-4f15-95c0-dc4126eaf3ef',
+                  id: '841742c1-8777-4cfe-847b-45d8bc5529bb',
                   isFolder: false,
                   name: 'RotateList.java',
                   code: 'public class RotateList {\n    public ListNode rotateRight(ListNode head, int k) {\n        if (head == null || head.next == null) return head;\n        int length = 1;\n        ListNode end = head;\n        while (end.next != null) {\n            length++;\n            end = end.next;\n        }\n        k = k%length;\n        if (k == 0) return head;\n        ListNode prev = null;\n        ListNode start = head;\n        for (int i = 0; i <length - k; i++) {\n            prev = start;\n            start = start.next;\n        }\n        prev.next = null;\n        end.next = head;\n        head = start;\n        return head;\n    }\n}',
@@ -3363,7 +3363,7 @@ const data = {
                   tags: ['Hard Problems of LL'],
                 },
                 {
-                  id: '721bce38-08d2-485f-8789-d622c84a6c94',
+                  id: 'db8136b0-655f-4565-9b76-7804154901f8',
                   isFolder: false,
                   name: 'AddOneToNumberLL.java',
                   code: 'public class AddOneToNumberLL {\n    public static Node revLL(Node head) {\n\t\tNode prev = null;\n\t\tNode curr = head, next = head;\n\t\twhile (curr != null) {\n\t\t\tnext = curr.next;\n\t\t\tcurr.next = prev;\n\t\t\tprev = curr;\n\t\t\tcurr = next;\n\t\t}\n\t\treturn prev;\n\t}\n\n\tpublic static Node addNode(Node head) {\n\t\t// Write your code here.\n\t\thead = revLL(head);\n\t\tNode curr = head;\n\t\tint carry = 1;\n\t\twhile (curr.next != null) {\n\t\t\tcarry = curr.data + carry;\n\t\t\tcurr.data = carry % 10;\n\t\t\tcarry = carry / 10;\n\t\t\tif (carry == 0) break;\n\t\t\tcurr = curr.next;\n\t\t}\n\t\tif (carry != 0) {\n\t\t\tcurr.next = new Node(carry);\n\t\t}\n\t\thead = revLL(head);\n\t\treturn head;\n\t}\n}',
@@ -3372,7 +3372,7 @@ const data = {
                   tags: ['Medium Problem of LL'],
                 },
                 {
-                  id: 'd40308b4-e4dd-4207-8194-f1ec335acff2',
+                  id: '700c49ba-d6d4-4a83-8b3d-8b84c07981c7',
                   isFolder: false,
                   name: 'AddTwoNumbersLL.java',
                   code: 'public class AddTwoNumbersLL {\n    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {\n        ListNode sum = new ListNode(0);\n        ListNode sumHead = sum;\n        int carry = 0;\n        while (l1 != null || l2 != null || carry != 0) {\n            int d1 = l1 != null ? l1.val : 0;\n            int d2 = l2 != null ? l2.val : 0;\n            carry += d1 + d2;\n            sum.next = new ListNode(carry%10);\n            sum = sum.next;\n            carry /= 10;\n            l1 = l1 != null ? l1.next : null;\n            l2 = l2 != null ? l2.next : null;\n        }\n        return sumHead.next;\n    }\n}',
@@ -3381,7 +3381,7 @@ const data = {
                   tags: ['Medium Problem of LL'],
                 },
                 {
-                  id: '975373cf-3d4c-441a-84bc-6faab19ab680',
+                  id: 'a9dbbe05-ed4c-41e0-bfef-a39cdce68d6a',
                   isFolder: false,
                   name: 'DeleteMiddleNode.java',
                   code: 'public class DeleteMiddleNode {\n    public ListNode deleteMiddle(ListNode head) {\n        if (head.next == null) return null;\n        ListNode slow = head, fast = head, prev = null;\n        while (fast != null && fast.next != null) {\n            prev = slow;\n            slow = slow.next;\n            fast = fast.next.next;\n        }\n        prev.next = slow.next;\n        slow.next = null;\n        return head;\n    }\n}',
@@ -3390,7 +3390,7 @@ const data = {
                   tags: ['Medium Problem of LL'],
                 },
                 {
-                  id: '5d928a03-aa96-4563-8534-b8bd0e0d31ee',
+                  id: '4178bd59-8e02-4a27-a0ef-58577f67a895',
                   isFolder: false,
                   name: 'IntersectionOfTwoLinkedLists.java',
                   code: 'public class IntersectionOfTwoLinkedLists {\n    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {\n        ListNode d1 = headA;\n        ListNode d2 = headB;\n        while (d1 != d2) {\n            d1 = d1 == null ? headB : d1.next;\n            d2 = d2 == null ? headA : d2.next;\n        }\n        return d1;\n    }\n}',
@@ -3399,7 +3399,7 @@ const data = {
                   tags: ['Medium Problem of LL'],
                 },
                 {
-                  id: '03eb48a6-e30a-4249-813f-7bd2d513f265',
+                  id: 'cbc99511-ffba-4967-9bf0-7c81121923f1',
                   isFolder: false,
                   name: 'LengthOfLoopInLL.java',
                   code: 'public class LengthOfLoopInLL {\n\n    public static int lengthOfLoop(Node head) {\n        // Write your code here\n        if (head == null || head.next == null) {\n            return 0;\n        }\n        int len = 1;\n        Node s = head, f = head, s2 = head;\n        while (f != null && f.next != null) {\n            s = s.next;\n            f = f.next.next;\n            if (f == s) {\n                while (s != s2) {\n                    s = s.next;\n                    s2 = s2.next;\n                }\n                s = s.next;\n                while (s != s2) {\n                    s = s.next;\n                    len++;\n                }\n            }\n        }\n        return len;\n    }\n}',
@@ -3408,7 +3408,7 @@ const data = {
                   tags: ['Medium Problem of LL'],
                 },
                 {
-                  id: '7b144d05-8062-458e-818d-d03d5e0afcc3',
+                  id: '65969f8a-b845-4721-98ad-5a94f162ac6a',
                   isFolder: false,
                   name: 'ListNode.java',
                   code: 'public class ListNode {\n    int val;\n    ListNode next;\n\n    ListNode() {\n    }\n\n    ListNode(int val) {\n        this.val = val;\n    }\n\n    ListNode(int val, ListNode next) {\n        this.val = val;\n        this.next = next;\n    }\n}',
@@ -3417,7 +3417,7 @@ const data = {
                   tags: ['Medium Problem of LL'],
                 },
                 {
-                  id: 'd7389cab-184c-4374-be43-e87a93ebd832',
+                  id: '69526dc9-d398-4888-837a-9064073edf8c',
                   isFolder: false,
                   name: 'Node.java',
                   code: 'public class Node {\n    public int data;\n    public Node next;\n\n    Node() {\n        this.data = 0;\n        this.next = null;\n    }\n\n    Node(int data) {\n        this.data = data;\n        this.next = null;\n    }\n\n    Node(int data, Node next) {\n        this.data = data;\n        this.next = next;\n    }\n}',
@@ -3426,7 +3426,7 @@ const data = {
                   tags: ['Medium Problem of LL'],
                 },
                 {
-                  id: '7368a877-cfcd-4db1-b5cc-894fdc633d04',
+                  id: 'ce4532e6-35ae-44fe-a3b7-f48c9db572f9',
                   isFolder: false,
                   name: 'OddEvenLinkedList.java',
                   code: 'public class OddEvenLinkedList {\n    public static ListNode oddEvenList(ListNode head) {\n        if (head == null || head.next == null)\n            return head;\n        ListNode odd = head;\n        ListNode even = head.next;\n        ListNode evenhead = even;\n        while (even != null && even.next != null) {\n            odd.next = even.next;\n            odd = odd.next;\n            even.next = odd.next;\n            even = even.next;\n        }\n        odd.next = evenhead;\n        return head;\n    }\n}',
@@ -3435,7 +3435,7 @@ const data = {
                   tags: ['Medium Problem of LL'],
                 },
                 {
-                  id: '57208cb2-c022-4eee-b1ff-63b030420247',
+                  id: '83191434-678d-42cf-9842-a5cad938e9cc',
                   isFolder: false,
                   name: 'PalindromeLinkedList.java',
                   code: '// Definition for singly-linked list.\nclass PalindromeLinkedList {\n    public static ListNode revLL(ListNode head) {\n        ListNode curr = head, prev = null, next;\n        while (curr != null) {\n            next = curr.next;\n            curr.next = prev;\n            prev = curr;\n            curr = next;\n        }\n        return prev;\n    }\n\n    public boolean isPalindrome(ListNode head) {\n        if (head == null || head.next == null) return true;\n        ListNode slow = head, curr = head, fast = head;\n        while (fast != null && fast.next != null) {\n            slow = slow.next;\n            fast = fast.next.next;\n        }\n        slow = revLL(slow);\n        while (slow != null) {\n            if (slow.val != curr.val) return false;\n            slow = slow.next;\n            curr = curr.next;\n        }\n        return true;\n    }\n\n    public static void main(String[] args) {\n        System.out.println("Hello");\n    }\n}',
@@ -3444,7 +3444,7 @@ const data = {
                   tags: ['Medium Problem of LL'],
                 },
                 {
-                  id: 'c749f354-e709-4221-a850-827653f6b864',
+                  id: '7a70a714-8cfe-4e5f-9953-907b0eca5930',
                   isFolder: false,
                   name: 'RemoveNthNodeFromLastOfLL.java',
                   code: 'public class RemoveNthNodeFromLastOfLL {\n    public ListNode removeNthFromEnd(ListNode head, int n) {\n        ListNode curr = head;\n        int l = 1;\n        while (curr.next != null) {\n            curr = curr.next;\n            l++;\n        }\n        int len = l - n;\n        if (len == 0) {\n            head = head.next;\n        } else {\n            curr = head;\n            while (len != 1) {\n                len--;\n                curr = curr.next;\n            }\n            curr.next = curr.next.next;\n        }\n        return head;\n    }\n}',
@@ -3453,7 +3453,7 @@ const data = {
                   tags: ['Medium Problem of LL'],
                 },
                 {
-                  id: '6dbbf052-912e-4809-b166-3171a27fa4cc',
+                  id: '6d6e889e-e058-41f0-9e17-558d32381116',
                   isFolder: false,
                   name: 'Sort012LinkedList.java',
                   code: 'public class Sort012LinkedList {\n    public static Node sortList(Node head) {\n        // Write your code here\n        Node zeroHead = new Node(0), onesHead = new Node(0), twosHead = new Node(0);\n        Node zero = zeroHead, ones = onesHead, twos = twosHead;\n        Node curr = head;\n        while (curr != null) {\n            if (curr.data == 0) {\n                zero.next = curr;\n                zero = zero.next;\n            } else if (curr.data == 1) {\n                ones.next = curr;\n                ones = ones.next;\n            } else {\n                twos.next = curr;\n                twos = twos.next;\n            }\n            curr = curr.next;\n        }\n        twos.next = null;\n        ones.next = twosHead.next;\n        zero.next = onesHead.next;\n        return zeroHead.next;\n    }\n}',
@@ -3462,7 +3462,7 @@ const data = {
                   tags: ['Medium Problem of LL'],
                 },
                 {
-                  id: '29b233da-fd08-4f7f-8912-5811f243fc7f',
+                  id: 'd8956722-94af-4c3a-bbba-81b28a4aa377',
                   isFolder: false,
                   name: 'SortLinkedList.java',
                   code: 'public class SortLinkedList {\n    public static ListNode merge(ListNode left, ListNode right) {\n        ListNode temp = new ListNode(0);\n        ListNode tHead = temp;\n        while (left != null && right != null) {\n            if (left.val <= right.val) {\n                temp.next = left;\n                left = left.next;\n            } else {\n                temp.next = right;\n                right = right.next;\n            }\n            temp = temp.next;\n        }\n        if (left != null)\n            temp.next = left;\n        else\n            temp.next = right;\n        return tHead.next;\n    }\n\n    public static ListNode mergeSort(ListNode head) {\n        if (head == null || head.next == null) return head;\n        ListNode s = head, f = head.next;\n        while (f != null && f.next != null) {\n            s = s.next;\n            f = f.next.next;\n        }\n        ListNode head2 = s.next;\n        s.next = null;\n        head = mergeSort(head);\n        head2 = mergeSort(head2);\n        return merge(head, head2);\n    }\n    public ListNode sortList(ListNode head) {\n        return mergeSort(head);\n    }\n}',
@@ -3471,7 +3471,7 @@ const data = {
                   tags: ['Medium Problem of LL'],
                 },
                 {
-                  id: '6c595525-f1f9-43f4-b1db-4f6528360d00',
+                  id: 'c9e04afd-f66e-4a0d-863b-ef662ae4e3c6',
                   isFolder: false,
                   name: 'DeleteAllCommonOccurances.java',
                   code: 'public class DeleteAllCommonOccurances {\n    public static Node deleteAllOccurrences(Node head, int k) {\n        // Write your code here.\n        while (head != null && head.data == k) {\n            head = head.next;\n        }\n        if (head == null) return null;\n        Node start = head, curr = head.next;\n        while (curr != null) {\n            if (curr.data != k) {\n                start.next = curr;\n                curr.prev = start;\n                start = curr;\n            }\n            curr = curr.next;\n        }\n        start.next = null;\n        return head;\n    }\n}',
@@ -3480,7 +3480,7 @@ const data = {
                   tags: ['Medium Problems of DLL'],
                 },
                 {
-                  id: '1f994917-5a49-4802-b8f6-8c920d605e9f',
+                  id: 'c660e5cc-8806-4df2-b059-09c808d12311',
                   isFolder: false,
                   name: 'Node.java',
                   code: 'public class Node {\n    public int data;\n    public Node next;\n    public Node prev;\n\n    Node() {\n        this.data = 0;\n        this.next = null;\n        this.prev = null;\n    }\n\n    Node(int data) {\n        this.data = data;\n        this.next = null;\n        this.prev = null;\n    }\n\n    Node(int data, Node next, Node prev) {\n        this.data = data;\n        this.next = next;\n        this.prev = prev;\n    }\n}',
@@ -3489,7 +3489,7 @@ const data = {
                   tags: ['Medium Problems of DLL'],
                 },
                 {
-                  id: '16732290-cbf5-4348-876b-5b17d111ec2e',
+                  id: '5a3b5a32-8bec-4c51-8b10-62ee20edd9a7',
                   isFolder: false,
                   name: 'PairWithGivenSum.java',
                   code: 'import java.util.*;\n\npublic class PairWithGivenSum {\n    public static List<List<Integer>> findPairs (Node head, int k) {\n        Node start = head, end = head;\n        while (end.next != null && end.data + start.data <= k) {\n            end = end.next;\n        }\n        List<List<Integer>> output = new ArrayList<>();\n        while (start != null && end != null && start.data < end.data) {\n            int s = start.data + end.data;\n            if (s > k)\n                end = end.prev;\n            else if (s < k)\n                start = start.next;\n            else {\n                output.add(new ArrayList<>(Arrays.asList(start.data, end.data)));\n                start = start.next;\n                end = end.prev;\n            }\n        }\n        return output;\n    }\n}',
@@ -3498,7 +3498,7 @@ const data = {
                   tags: ['Medium Problems of DLL'],
                 },
                 {
-                  id: '75a343a7-5f84-4971-ab29-78e2cba351c1',
+                  id: 'ea4f85a7-410d-4e8b-869e-0995a4a8fc97',
                   isFolder: false,
                   name: 'RemoveDuplicatesSortedDLL.java',
                   code: '//  Link: https://www.codingninjas.com/studio/problems/remove-duplicates-from-a-sorted-doubly-linked-list_2420283\n\npublic class RemoveDuplicatesSortedDLL {\n    public static Node uniqueSortedList(Node head) {\n        // Write your code here.\n        if (head == null || head.next == null) return head;\n        Node start = head;\n        Node curr = head.next;\n        while (curr != null) {\n            if (start.data != curr.data) {\n                start.next = curr;\n                start = start.next;\n            }\n            curr = curr.next;\n        }\n        start.next = null;\n        return head;\n    }\n}',
@@ -3509,7 +3509,7 @@ const data = {
               ],
             },
             {
-              id: '7ef35bfd-46a4-4c85-883d-bcda7258da64',
+              id: '34693548-c455-438d-a809-97ecb068d8cf',
               isFolder: false,
               name: 'Patterns.java',
               code: '// !ignore\nimport java.util.Scanner;\n\npublic class Patterns {\n    public static void printBlockPattern(int n) {\n        for (int i = 0; i < n; i++) {\n            for (int j = 0; j < n; j++)\n                System.out.print("*");\n            System.out.println();\n        }\n    }\n\n    public static void printTrianglePattern(int n) {\n        for (int i = 0; i < n; i++) {\n            for (int j = 0; j <= i; j++)\n                System.out.print("*");\n            System.out.println();\n        }\n    }\n\n    public static void printTriangleNumberPattern(int n) {\n        for (int i = 0; i < n; i++) {\n            for (int j = 0; j <= i; j++)\n                System.out.print(j + 1);\n            System.out.println();\n        }\n    }\n\n    public static void printTriangleNumberPattern2(int n) {\n        for (int i = 0; i < n; i++) {\n            for (int j = 0; j <= i; j++)\n                System.out.print(i + 1);\n            System.out.println();\n        }\n    }\n\n    public static void printDownTrianglePattern(int n) {\n        for (int i = 0; i < n; i++) {\n            for (int j = n; j > i; j--)\n                System.out.print("*");\n            System.out.println();\n        }\n    }\n\n    public static void printDownTriangleNumberPattern(int n) {\n        for (int i = 0; i < n; i++) {\n            for (int j = i; j < n; j++)\n                System.out.print(j + 1 - i);\n            System.out.println();\n        }\n    }\n\n    public static void printEQTrianglePattern(int n) {\n        for (int i = 0; i < n; i++) {\n            for (int j = 0; j < n - i - 1; j++)\n                System.out.print(" ");\n            for (int j = 0; j < 2 * i + 1; j++)\n                System.out.print("*");\n            System.out.println();\n        }\n    }\n\n    public static void printDownEQTrianglePattern(int n) {\n        for (int i = 0; i < n; i++) {\n            for (int j = 0; j < i; j++)\n                System.out.print(" ");\n            for (int j = 0; j < 2 * (n - i) - 1; j++)\n                System.out.print("*");\n            System.out.println();\n        }\n    }\n\n    public static void printDiamondPattern(int n) {\n        printEQTrianglePattern(n);\n        printDownEQTrianglePattern(n);\n    }\n\n    public static void printHalfDiamondPattern(int n) {\n        printTrianglePattern(n);\n        printDownTrianglePattern(n - 1);\n    }\n\n    public static void print01TrianglePattern(int n) {\n        for (int i = 1; i <= n; i++) {\n            for (int j = 1; j <= i; j++) {\n                System.out.print((i + j) % 2 == 0 ? 1 : 0);\n            }\n            System.out.println();\n        }\n    }\n\n    public static void printHalfButterflyNumberPattern(int n) {\n        for (int i = 1; i <= n; i++) {\n//            Num\n            for (int j = 1; j <= i; j++)\n                System.out.print(j + " ");\n//            Space\n            for (int k = 0; k < (n - i) * 2; k++)\n                System.out.print("  ");\n//            Num\n            for (int j = i; j > 0; j--)\n                System.out.print(j + " ");\n            System.out.println();\n        }\n    }\n\n    public static void printNumberTrianglePattern(int n) {\n        int start = 1;\n        for (int i = 0; i < n; i++) {\n            for (int j = 0; j <= i; j++)\n                System.out.print(start++ + " ");\n            System.out.println();\n        }\n    }\n\n    public static void printAlphabetTrianglePattern(int n) {\n        for (int i = 0; i < n; i++) {\n            for (int j = 0; j <= i; j++)\n                System.out.print((char) (j + 65));\n            System.out.println();\n        }\n    }\n\n    public static void printDownAlphabetTrianglePattern(int n) {\n        for (int i = 0; i < n; i++) {\n            for (int j = 0; j < n - i; j++)\n                System.out.print((char) (j + 65));\n            System.out.println();\n        }\n    }\n\n    public static void printAlphabetTrianglePattern2(int n) {\n        for (int i = 0; i < n; i++) {\n            for (int j = 0; j <= i; j++)\n                System.out.print((char) (i + 65));\n            System.out.println();\n        }\n    }\n\n    public static void printAlphabetEQTrianglePattern(int n) {\n        for (int i = 0; i < n; i++) {\n//            Space\n            for (int j = n; j > i; j--) {\n                System.out.print(" ");\n            }\n//            Num\n            for (int j = 0; j <= i; j++)\n                System.out.print((char) (j + 65));\n//            Num\n            for (int j = i; j > 0; j--)\n                System.out.print((char) (j + 64));\n            System.out.println();\n        }\n    }\n\n    public static void printAlphabetReverseTrianglePattern(int n) {\n        for (int i = n; i > 0; i--) {\n//            Num\n            for (int j = n - i; j >= 0; j--)\n                System.out.print((char) (n - j - 1 + 65));\n            System.out.println();\n        }\n    }\n\n    public static void printInnerDiamondPattern(int n) {\n        for (int i = n; i > 0; i--) {\n            for (int j = i; j > 0; j--)\n                System.out.print("*");\n            for (int j = 0; j < n - i; j++)\n                System.out.print("  ");\n            for (int j = i; j > 0; j--)\n                System.out.print("*");\n            System.out.println();\n        }\n        for (int i = 1; i <= n; i++) {\n            for (int j = i; j > 0; j--)\n                System.out.print("*");\n            for (int j = 0; j < n - i; j++)\n                System.out.print("  ");\n            for (int j = i; j > 0; j--)\n                System.out.print("*");\n            System.out.println();\n        }\n    }\n\n    public static void printButterflyPattern(int n) {\n        for (int i = 0; i < n; i++) {\n            for (int j = 0; j <= i; j++)\n                System.out.print("*");\n            for (int j = 0; j < n - i - 1; j++)\n                System.out.print("  ");\n            for (int j = 0; j <= i; j++)\n                System.out.print("*");\n            System.out.println();\n        }\n        for (int i = n - 1; i > 0; i--) {\n            for (int j = i; j > 0; j--)\n                System.out.print("*");\n            for (int j = 0; j < 2 * (n - i); j++)\n                System.out.print(" ");\n            for (int j = i; j > 0; j--)\n                System.out.print("*");\n            System.out.println();\n        }\n    }\n\n    public static void printEmptyRectPattern(int n) {\n        for (int i = 0; i < n; i++) {\n            for (int j = 0; j < n; j++) {\n                if (i == 0 || i == n - 1 || j == 0 || j == n-1) {\n                    System.out.print("*");\n                } else {\n                    System.out.print(" ");\n                }\n            }\n            System.out.println();\n        }\n    }\n    public static void printNumberRectPattern(int n) {\n        for (int i = 0; i < 2*n -1; i++) {\n            for (int j = 0;  j < 2*n -1; j++) {\n                int down = 2*n -2 - i;\n                int right = 2*n -2 - j;\n                System.out.print(n - Math.min(Math.min(i, down), Math.min(j, right)));\n            }\n            System.out.println();\n        }\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n//        printBlockPattern(n);\n//        printTrianglePattern(n);\n//        printTriangleNumberPattern(n);\n//        printTriangleNumberPattern2(n);\n//        printDownTrianglePattern(n);\n//        printDownTriangleNumberPattern(n);\n//        printEQTrianglePattern(n);\n//        printDownEQTrianglePattern(n);\n//        printDiamondPattern(n);\n//        printHalfDiamondPattern(n);\n//        print01TrianglePattern(n);\n//        printHalfButterflyNumberPattern(n);\n//        printNumberTrianglePattern(n);\n//        printAlphabetTrianglePattern(n);\n//        printDownAlphabetTrianglePattern(n);\n//        printAlphabetTrianglePattern2(n);\n//        printAlphabetEQTrianglePattern(n);\n//        printAlphabetReverseTrianglePattern(n);\n//        printInnerDiamondPattern(n);\n//        printButterflyPattern(n);\n        printEmptyRectPattern(n);\n//        printNumberRectPattern(n);\n        sc.close();\n    }\n}',
@@ -3518,12 +3518,12 @@ const data = {
               tags: ['Pattern'],
             },
             {
-              id: '41e29a05-35b0-4827-b701-4722bc7a3a26',
+              id: '495011cd-94db-4353-a8a7-fbadcf858dd8',
               isFolder: true,
               name: 'Recursion',
               content: [
                 {
-                  id: 'eb9be68a-5593-4c5d-908f-f4f6c46f89dd',
+                  id: '80c4bf09-4ab9-46f4-a984-febe2c692003',
                   isFolder: false,
                   name: 'CountGoodNumbers.java',
                   code: 'public class CountGoodNumbers {\n    public static long power(long num, long n) {\n        if (n == 0) return 1;\n        if (n == 1) return num;\n        long r = power(num, n/2);\n        if (n%2 == 0) return (r*r)%1000000007;\n        return (r*r*num)%1000000007;\n    }\n    public int countGoodNumbers(long n) {\n        long primePower = power(4, n/2);\n        long evenPower = power(5, n/2);\n        if (n%2 == 1)\n            evenPower *= 5;\n        return (int)((evenPower * primePower)%1000000007);\n    }\n}',
@@ -3532,7 +3532,7 @@ const data = {
                   tags: ['Get a Strong Hold'],
                 },
                 {
-                  id: '37b7048d-6f1e-4638-bc30-a71332d1f0e3',
+                  id: '44236de3-3bf4-4f71-8de3-ce194a76414a',
                   isFolder: false,
                   name: 'Pow.java',
                   code: 'public class Pow {\n    public static double fastExpo(double x, int n) {\n        if (n == 0) return 1;\n        if (n == 1) return x;\n        double r = fastExpo(x, n/2);\n        return n%2 == 0 ? r*r : r*x*r;\n    }\n    public double myPow(double x, int n) {\n        // if (n == 0) return 1;\n        // double ans = x;\n        // for (int i = 2; i <= Math.abs(n); i++)\n        //     ans = ans * x;\n        // if (n < 0) {\n        //     ans = 1/ans;\n        // }\n        // return ans;\n        boolean isNegative = n < 0;\n        n = Math.abs(n);\n        double fast = fastExpo(x, n);\n        return isNegative ? 1/fast : fast;\n    }\n}',
@@ -3541,7 +3541,7 @@ const data = {
                   tags: ['Get a Strong Hold'],
                 },
                 {
-                  id: '642d267c-9d92-428d-b9e2-63ba6488bae0',
+                  id: 'b3f38ebf-60f4-40ab-8bfc-ec0eeb98162c',
                   isFolder: false,
                   name: 'RecursiveATOI.java',
                   code: "public class RecursiveATOI {\n    public static int solve(char[] arr, int i, double num, boolean isNegative, boolean signed) {\n        if (i >= arr.length || signed && ((arr[i] == '+' || arr[i] == '-') || !Character.isDigit(arr[i]))) {\n            num = isNegative ? -num : num;\n            if (num > Integer.MAX_VALUE)\n                num = Integer.MAX_VALUE;\n            else if (num < Integer.MIN_VALUE)\n                num = Integer.MIN_VALUE;\n            return (int) num;\n        }\n        if (arr[i] == '+' || arr[i] == '-') {\n            isNegative = arr[i] == '-';\n            signed = true;\n        } else if (arr[i] - '0' >= 0 && arr[i] - '0' <= 9) {\n            num = num * 10 + (arr[i] - '0');\n            signed = true;\n        } else if (Character.isDigit(arr[i]) && arr[i] != ' ') {\n            i = arr.length;\n        }\n        i++;\n        return solve(arr, i, num, isNegative, signed);\n    }\n\n    public static int myAtoi(String s) {\n        char[] arr = s.toCharArray();\n        return solve(arr, 0, 0, false, false);\n    }\n\n    public static void main(String[] args) {\n        String s = \"  -0012a42\";\n        System.out.println(myAtoi(s));\n    }\n}",
@@ -3550,7 +3550,7 @@ const data = {
                   tags: ['Get a Strong Hold'],
                 },
                 {
-                  id: 'c4989bdf-4997-4b7a-862d-2a19649c5b3c',
+                  id: '72960ac5-b58b-4818-8511-0ea1afa8245e',
                   isFolder: false,
                   name: 'ReverseStack.java',
                   code: 'import java.util.Stack;\n\npublic class ReverseStack {\n    public static void insertElement(int element, Stack<Integer> s) {\n        if (s.isEmpty()) {\n            s.push(element);\n        } else {\n            int top = s.pop();\n            insertElement(element, s);\n            s.push(top);\n        }\n    }\n    public static void reverseStack(Stack<Integer> s) {\n        if (s.isEmpty()) return;\n        int element = s.pop();\n        reverseStack(s);\n        insertElement(element, s);\n    }\n\n    public static void main(String[] args) {\n        Stack<Integer> s = new Stack<>();\n        s.push(30);\n        s.push(-5);\n        s.push(18);\n        s.push(14);\n        s.push(-3);\n\n        System.out.println("Stack elements before sorting: ");\n        SortStack.printStack(s);\n        reverseStack(s);\n        System.out.println(" \\n\\nStack elements after sorting:");\n        SortStack.printStack(s);\n    }\n}',
@@ -3559,7 +3559,7 @@ const data = {
                   tags: ['Get a Strong Hold'],
                 },
                 {
-                  id: '773a0308-585b-4308-af4f-daabfd6bfe6f',
+                  id: 'c4e876a2-0d94-4a40-8b4d-7f10eab4507c',
                   isFolder: false,
                   name: 'SortStack.java',
                   code: 'import java.util.*;\n\npublic class SortStack {\n    static void insertElement(int element, Stack<Integer> s) {\n        if (s.isEmpty() || s.peek() <= element) {\n            s.push(element);\n        } else {\n            int top = s.pop();\n            insertElement(element, s);\n            s.push(top);\n        }\n    }\n\n    static void sortStack(Stack<Integer> s) {\n        if (s.isEmpty()) return;\n        int element = s.pop();\n        sortStack(s);\n        insertElement(element, s);\n    }\n\n    // Utility Method to print contents of stack\n    static void printStack(Stack<Integer> s) {\n        ListIterator<Integer> lt = s.listIterator();\n        // forwarding\n        while (lt.hasNext())\n            lt.next();\n        // printing from top to bottom\n        while (lt.hasPrevious())\n            System.out.print(lt.previous() + " ");\n    }\n\n    public static void main(String[] args) {\n        Stack<Integer> s = new Stack<>();\n        s.push(30);\n        s.push(-5);\n        s.push(18);\n        s.push(14);\n        s.push(-3);\n\n        System.out.println("Stack elements before sorting: ");\n        printStack(s);\n        sortStack(s);\n        System.out.println(" \\n\\nStack elements after sorting:");\n        printStack(s);\n    }\n}',
@@ -3568,7 +3568,7 @@ const data = {
                   tags: ['Get a Strong Hold'],
                 },
                 {
-                  id: '52fa182f-10dc-4a67-9d3e-532a69a78e1d',
+                  id: '8f6513ae-7969-4994-8033-c17fe1874ef8',
                   isFolder: false,
                   name: 'CombinationSum.java',
                   code: 'import java.util.*;\n\npublic class CombinationSum {\n    public static void solve(int[] arr, int target, List<List<Integer>> ans, List<Integer> temp, int idx) {\n        if (arr.length == idx) {\n            if (target == 0) ans.add(new ArrayList<>(temp));\n            return;\n        }\n        if (arr[idx] <= target) {\n            temp.add(arr[idx]);\n            solve(arr, target - arr[idx], ans, temp, idx);\n            temp.remove(temp.size() - 1);\n        }\n        solve(arr, target, ans, temp, idx + 1);\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {13,3,2,17};\n        int target = 14;\n        List<List<Integer>> ans = new ArrayList<>();\n        solve(arr, target, ans, new ArrayList<>(), 0);\n        System.out.println(ans);\n    }\n}',
@@ -3577,7 +3577,7 @@ const data = {
                   tags: ['Subsequences Pattern'],
                 },
                 {
-                  id: 'f6a17960-aa60-407e-aef9-06c8c2003da4',
+                  id: '3e0cb3e7-5cc6-4f78-aec8-9d3f6dfd2052',
                   isFolder: false,
                   name: 'CombinationSum2.java',
                   code: 'import java.util.*;\npublic class CombinationSum2 {\n    public static void solve(int[] arr, int k, int sum, int idx, HashSet<List<Integer>> hs, List<Integer> temp) {\n        if (sum > k || arr.length == idx) return;\n        if (sum == k) {\n            List<Integer> list = new ArrayList<>(temp);\n            Collections.sort(list);\n            hs.add(list);\n            return;\n        }\n        for (int i = idx; i < arr.length; i++) {\n            if (i > idx && arr[i] == arr[i-1]) continue;\n            if (arr[i] > k) return;\n            temp.add(arr[i]);\n            solve(arr, k, sum + arr[i], idx + 1, hs, temp);\n            temp.remove(temp.size() - 1);\n        }\n    }\n    public static List<List<Integer>> combinationSum2(int[] arr, int target) {\n        Arrays.sort(arr);\n        System.out.println(Arrays.toString(arr));\n        HashSet<List<Integer>> hs = new HashSet<>();\n        solve(arr, target, 0, 0, hs, new ArrayList<>());\n        return new ArrayList<>(hs);\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {10,1,2,7,6,1,5};\n        int target = 8;\n        System.out.println(combinationSum2(arr, target));\n    }\n}',
@@ -3586,7 +3586,7 @@ const data = {
                   tags: ['Subsequences Pattern'],
                 },
                 {
-                  id: '5e97fd18-dce7-4105-9c97-5b32ab3b5491',
+                  id: 'd30a4a07-e166-45fb-8fc8-766e8c283539',
                   isFolder: false,
                   name: 'CombinationSum3.java',
                   code: 'import java.util.*;\n\npublic class CombinationSum3 {\n    public static void solve(int k, int n, HashSet<Integer> hs, List<List<Integer>> ans, List<Integer> temp, int idx,\n            HashSet<List<Integer>> ansHs) {\n        if (n < 0)\n            return;\n        if (n == 0) {\n            if (temp.size() == k)\n                ans.add(new ArrayList<>(temp));\n            return;\n        }\n        for (int i = idx; i <= 9; i++) {\n            if (i > n)\n                return;\n            temp.add(i);\n            solve(k, n - i, hs, ans, temp, i + 1, ansHs);\n            temp.remove(temp.size() - 1);\n        }\n    }\n\n    public List<List<Integer>> combinationSum3(int k, int n) {\n        List<List<Integer>> ans = new ArrayList<>();\n        HashSet<Integer> hs = new HashSet<>();\n        solve(k, n, hs, ans, new ArrayList<>(), 1, new HashSet<>());\n        return ans;\n    }\n}',
@@ -3595,7 +3595,7 @@ const data = {
                   tags: ['Subsequences Pattern'],
                 },
                 {
-                  id: '77d8a3cb-13cc-4cad-ae1e-b64c1d26019d',
+                  id: '89b01093-198d-4736-9014-336e17a86092',
                   isFolder: false,
                   name: 'GenerateAllBinaryStrings.java',
                   code: 'import java.util.*;\n\npublic class GenerateAllBinaryStrings {\n    public static void getAllStrings(int n, List<String> ans, StringBuilder sb, boolean hadOne) {\n        if (n == 0) {\n            ans.add(sb.toString());\n            return;\n        }\n        if (hadOne) {\n            sb.append(0);\n            getAllStrings(n - 1, ans, sb, false);\n            sb.deleteCharAt(sb.length() - 1);\n        } else {\n            sb.append(0);\n            getAllStrings(n - 1, ans, sb, false);\n            sb.deleteCharAt(sb.length() - 1);\n            sb.append(1);\n            getAllStrings(n - 1, ans, sb, true);\n            sb.deleteCharAt(sb.length() - 1);\n        }\n    }\n\n    public static List<String> generateString(int n) {\n        // Write your code here.\n        List<String> ans = new ArrayList<>();\n        StringBuilder sb = new StringBuilder();\n        getAllStrings(n, ans, sb, false);\n        return ans;\n    }\n\n    public static void main(String[] args) {\n        int n = 3;\n        List<String> ans = generateString(n);\n        System.out.println(ans);\n    }\n}',
@@ -3604,7 +3604,7 @@ const data = {
                   tags: ['Subsequences Pattern'],
                 },
                 {
-                  id: '520858b4-b1e2-4cce-bc05-744bda9afb62',
+                  id: '7f23a6a0-a881-4b4e-a344-a99e9fcb080c',
                   isFolder: false,
                   name: 'GenerateParentheses.java',
                   code: 'import java.util.*;\n\npublic class GenerateParentheses {\n    public static void solve(int n, List<String> ans, StringBuilder sb, int closeCount, int openCount) {\n        if (openCount == n && closeCount == n) {\n            ans.add(sb.toString());\n            return;\n        }\n        if (openCount < n) {\n            sb.append("(");\n            solve(n, ans, sb, closeCount, openCount + 1);\n            sb.deleteCharAt(sb.length() - 1);\n        }\n        if (closeCount < openCount) {\n            sb.append(")");\n            solve(n, ans, sb, closeCount + 1, openCount);\n            sb.deleteCharAt(sb.length() - 1);\n        }\n    }\n    public static List<String> generateParenthesis(int n) {\n        List<String> ans = new ArrayList<>();\n        StringBuilder sb = new StringBuilder();\n        solve(n, ans, sb, 0, 0);\n        return ans;\n    }\n    public static void main(String[] args) {\n        int n = 3;\n        System.out.println(generateParenthesis(n));\n    }\n}',
@@ -3613,7 +3613,7 @@ const data = {
                   tags: ['Subsequences Pattern'],
                 },
                 {
-                  id: '016aa76c-050f-4595-bb69-a31628d1b5b9',
+                  id: 'c4c4f5c0-27f1-4f4b-8d95-97adb9958544',
                   isFolder: false,
                   name: 'MoreSubsequences.java',
                   code: '// Link: https://www.codingninjas.com/studio/problems/more-subsequence_8842355\nimport java.util.*;\npublic class MoreSubsequences {\n    public static void solve(String s, StringBuilder sb, HashSet<String> ans, int idx) {\n        if (idx == s.length()) {\n            ans.add(sb.toString());\n            return;\n        }\n        solve(s, sb, ans, idx + 1);\n\n        sb.append(s.charAt(idx));\n        solve(s, sb, ans, idx + 1);\n        sb.deleteCharAt(sb.length() - 1);\n    }\n    public static int generateSubsequences(String s) {\n        // Write your code here\n        HashSet<String> ans = new HashSet<>();\n        solve(s, new StringBuilder(), ans, 0);\n        return ans.size();\n    }\n\n    public static String moreSubsequence(int n, int m, String a, String b) {\n        // Write your code here\n        return generateSubsequences(a) >= generateSubsequences(b) ? a : b;\n    }\n\n    public static void main(String[] args) {\n        String ans = moreSubsequence(9, 9, "cbfbdhcac", "bcbcfbeag");\n        System.out.println(ans);\n    }\n}',
@@ -3622,7 +3622,7 @@ const data = {
                   tags: ['Subsequences Pattern'],
                 },
                 {
-                  id: 'f2b28ee8-e174-40a4-b972-ab30a81b94cb',
+                  id: '7bd595e7-050a-4afb-8283-99803583946a',
                   isFolder: false,
                   name: 'PhoneKeypadCombination.java',
                   code: 'import java.util.*;\n\npublic class PhoneKeypadCombination {\n   public List<String> letterCombinations(String s) {\n        List<String> ans = new ArrayList<>();\n        if (s.length() == 0) return ans;\n        String[] mappings = {"", "", "abc","def", "ghi", "jkl","mno", "pqrs", "tuv","wxyz"};\n        solve(s, 0, ans, new StringBuilder(), mappings);\n        return ans;\n    }\n    void solve(String s, int idx, List<String> ans, StringBuilder sb, String[] mappings) {\n        if (idx == s.length()) {\n            ans.add(sb.toString());\n            return;\n        }\n        char ch = s.charAt(idx);\n        String map = mappings[ch - \'0\'];\n        for (int i = 0; i < map.length(); i++) {\n            sb.append(map.charAt(i));\n            solve(s, idx + 1, ans, sb, mappings);\n            sb.deleteCharAt(sb.length() - 1);\n        }\n    }\n}',
@@ -3631,7 +3631,7 @@ const data = {
                   tags: ['Subsequences Pattern'],
                 },
                 {
-                  id: 'd3ef8ffa-cfaf-461d-ac27-54216fb4c194',
+                  id: '55ff373a-2d48-4169-a06b-24b57d0857f8',
                   isFolder: false,
                   name: 'SubarraysWithKSum.java',
                   code: 'import java.util.*;\n\npublic class SubarraysWithKSum {\n    public static void solve(int[] arr, long k, int idx, List<List<Integer>> ans, List<Integer> temp) {\n        if (idx == arr.length) {\n            if (k == 0) ans.add(new ArrayList<>(temp));\n            return;\n        }\n        temp.add(arr[idx]);\n        solve(arr, k - arr[idx], idx + 1, ans, temp);\n        temp.remove(temp.size() - 1);\n        solve(arr, k, idx + 1, ans, temp);\n    }\n\n//    Count total subsequences\n    public static int solveCount(int[] arr, long k, int sum, int idx) {\n        if (sum > k || idx == arr.length && sum != k) return 0;\n        if (sum == k) return 1;\n        return solveCount(arr, k, sum + arr[idx], idx + 1) + solveCount(arr, k, sum, idx + 1);\n    }\n\n    public static void subArraysWithSumK(int[] arr, long k) {\n        // Write your code here\n        List<List<Integer>> ans = new ArrayList<>();\n        Arrays.sort(arr);\n        solve(arr, k, 0, ans, new ArrayList<>());\n        System.out.println(ans);\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {1, 2, 3, 1, 1, 1};\n        long k = 3;\n        subArraysWithSumK(arr, k);\n    }\n}',
@@ -3640,7 +3640,7 @@ const data = {
                   tags: ['Subsequences Pattern'],
                 },
                 {
-                  id: '3847d622-c3d3-4024-9f58-af397755c6f8',
+                  id: '7335b697-44f9-43d9-9faf-0d695dd2458c',
                   isFolder: false,
                   name: 'SubsetSum.java',
                   code: '//  Link: https://www.codingninjas.com/studio/problems/subset-sum_3843086\n\nimport java.util.ArrayList;\n\npublic class SubsetSum {\n    public static void solve(int[] arr, int idx, int sum, ArrayList<Integer> ans) {\n        if (idx == arr.length) {\n            ans.add(sum);\n            return;\n        }\n        // Exclude\n        solve(arr, idx + 1, sum, ans);\n        // Include\n        solve(arr, idx + 1, sum + arr[idx], ans);\n    }\n    public static ArrayList<Integer> subsetSum(int nums[]) {\n        // Write your code here..\n        ArrayList<Integer> ans = new ArrayList<>();\n        solve(nums, 0, 0, ans);\n        ans.sort(null);\n        return ans;\n    }\n}',
@@ -3649,7 +3649,7 @@ const data = {
                   tags: ['Subsequences Pattern'],
                 },
                 {
-                  id: 'd04d8fb5-79b6-4ab8-937d-fd9559524c3a',
+                  id: '89861f1a-a993-467d-b139-8770f9889334',
                   isFolder: false,
                   name: 'SubsetSum2.java',
                   code: 'import java.util.*;\npublic class SubsetSum2 {\n    public static void solve(int[] arr, int idx, List<List<Integer>> ans, List<Integer> temp) {\n        ans.add(new ArrayList<>(temp));\n        for (int i = idx; i < arr.length; i++) {\n            if (i > idx && arr[i - 1] == arr[i]) continue;\n            temp.add(arr[i]);\n            solve(arr, i + 1, ans, temp);\n            temp.remove(temp.size() - 1);\n        }\n    }\n    public List<List<Integer>> subsetsWithDup(int[] nums) {\n        Arrays.sort(nums);\n        List<List<Integer>> ans = new ArrayList<>();\n        solve(nums, 0, ans, new ArrayList<>());\n        return ans;\n    }\n}',
@@ -3658,7 +3658,7 @@ const data = {
                   tags: ['Subsequences Pattern'],
                 },
                 {
-                  id: '8a0dc089-0a32-4020-b5da-8b0e200dcf91',
+                  id: '71cc3b3a-dd7c-4abe-89df-96d6ea4c9b38',
                   isFolder: false,
                   name: 'ExpressionAddOperators.java',
                   code: 'import java.util.*;\n\npublic class ExpressionAddOperators {\n    public static List<String> addOperators(String num, int target) {\n        List<String> ans = new ArrayList<>();\n        if (num == null || num.length() == 0) return ans;\n        solve(target, num, ans, "", 0, 0, 0);\n        return ans;\n    }\n\n    static void solve(int target, String num, List<String> ans, String path, int idx, long res, long prev) {\n        if (idx == num.length()) {\n            if (res == target) ans.add(path);\n            return;\n        }\n        for (int i = idx; i < num.length(); i++) {\n            if (i != idx && num.charAt(idx) == \'0\') break;\n            long curr = Long.parseLong(num.substring(idx, i+1));\n            if (idx == 0)\n                solve(target, num, ans, path + curr, i + 1, curr, curr);\n            else {\n                solve(target, num, ans, path + "+" + curr, i + 1, res + curr, curr);\n                solve(target, num, ans, path + "-" + curr, i + 1, res - curr, -curr);\n                solve(target, num, ans, path + "*" + curr, i + 1, res - prev + prev * curr, prev * curr);\n            }\n        }\n    }\n\n    public static void main(String[] args) {\n        String num = "232";\n        int target = 8;\n        System.out.println(addOperators(num, target));\n    }\n}',
@@ -3667,7 +3667,7 @@ const data = {
                   tags: ['Trying out all Combos or Hard'],
                 },
                 {
-                  id: '5306e678-18e8-480f-9096-776bbca6e057',
+                  id: '1c3dd94d-2cbe-4097-803a-f6bb36f95837',
                   isFolder: false,
                   name: 'MNodesColoring.java',
                   code: 'public class MNodesColoring {\n    public static boolean isPossible(int[][] mat, int node, int n, int[] colors, int color) {\n        for (int i = 0; i < n; i++) {\n            if (mat[node][i] == 1 && color == colors[i]) return false;\n        }\n        return true;\n    }\n    public static boolean solve(int[][] mat, int m, int node, int n, int[] colors) {\n        if (node == n) return true;\n        for (int i = 1; i <= m; i++) {\n            if (isPossible(mat, node, n, colors, i)) {\n                colors[node] = i;\n                if (solve(mat, m, node + 1, n, colors)) return true;\n                colors[node] = 0;\n            }\n        }\n        return false;\n    }\n    public static String graphColoring(int [][]mat, int m) {\n        // Write your code here\n        int n = mat.length;\n        return solve(mat, m, 0, n, new int[n]) ? "YES" : "NO";\n    }\n}',
@@ -3676,7 +3676,7 @@ const data = {
                   tags: ['Trying out all Combos or Hard'],
                 },
                 {
-                  id: '39010071-3cf6-4a2c-9688-4f236408f265',
+                  id: '9e209012-9d5b-4fd0-8982-44b7851a5955',
                   isFolder: false,
                   name: 'NQueensProblem.java',
                   code: 'import java.util.Arrays;\n\npublic class NQueensProblem {\n\n    public static boolean safeToPlace(int i, int j, int[][] mat) {\n        int row = i, col = j;\n        while (row >= 0 && col >= 0) if (mat[row--][col--] == 1) return false;\n        row = i;\n        col = j;\n        while (col >= 0) if (mat[row][col--] == 1) return false;\n        col = j;\n        while (row < mat.length && col >= 0) if (mat[row++][col--] == 1) return false;\n        return true;\n    }\n\n    public static boolean solve(int[][] board, int col) {\n        if (col == board.length) {\n            for (int[] row : board)\n                System.out.println(Arrays.toString(row));\n            return true;\n        }\n\n        for (int row = 0; row < board.length; row++) {\n            if (safeToPlace(row, col, board)) {\n                board[row][col] = 1;\n                if (solve(board, col + 1)) return true;\n                board[row][col] = 0;\n            }\n        }\n        return false;\n    }\n\n    public static void main(String[] args) {\n        int n = 4;\n        int[][] board = new int[n][n];\n        solve(board, 0);\n    }\n}',
@@ -3685,7 +3685,7 @@ const data = {
                   tags: ['Trying out all Combos or Hard'],
                 },
                 {
-                  id: '581c8f70-d32d-4ad9-bd09-5069369d4d6f',
+                  id: 'f318f123-dd23-446c-a50c-dee734d742b9',
                   isFolder: false,
                   name: 'PalindromePartitioning.java',
                   code: 'import java.util.*;\npublic class PalindromePartitioning {\n    boolean isPalindrome(String s, int start, int end) {\n        while (start < end) {\n            if (s.charAt(start) != s.charAt(end)) return false;\n            start++;\n            end--;\n        }\n        return true;\n    }\n\n    void solve(String s, List<List<String>> ans, List<String> temp, int idx) {\n        if (idx == s.length()) {\n            ans.add(new ArrayList<>(temp));\n            return;\n        }\n        for (int i = idx; i < s.length(); i++) {\n            if (!isPalindrome(s, idx, i)) continue;\n            temp.add(s.substring(idx, i+1));\n            solve(s, ans, temp, i + 1);\n            temp.remove(temp.size() - 1);\n        }\n    }\n\n    public List<List<String>> partition(String s) {\n        List<List<String>> ans = new ArrayList<>();\n        solve(s, ans, new ArrayList<>(), 0);\n        return ans;\n    }\n}',
@@ -3694,7 +3694,7 @@ const data = {
                   tags: ['Trying out all Combos or Hard'],
                 },
                 {
-                  id: 'ac1fc880-9546-47ed-9f45-a95627071837',
+                  id: 'dc4f9dcb-8576-4918-b170-ab0d82a044e9',
                   isFolder: false,
                   name: 'RatInAMaze.java',
                   code: 'import java.util.*;\n\npublic class RatInAMaze {\n    public static void func(int[][] mat, int i, int j, String path, List<String> paths, String directions, int[] di, int[] dj, boolean[][] visited) {\n        int m = mat.length; // rows\n        int n = mat[0].length; // cols\n        if (i < 0 || j < 0 || j >= n || i >= m || mat[i][j] == 0 || visited[i][j]) return;\n        if (i == m - 1 && j == n - 1) {\n            paths.add(path);\n            return;\n        }\n        for (int x = 0; x < 4; x++) {\n            visited[i][j] = true;\n            func(mat, i + di[x], j + dj[x], path + directions.charAt(x), paths, directions, di, dj, visited);\n            visited[i][j] = false;\n        }\n    }\n\n    public static void main(String[] args) {\n        int[][] mat = {\n                {1, 0, 0, 0},\n                {1, 1, 0, 1},\n                {1, 1, 0, 0},\n                {0, 1, 1, 1},\n        };\n        List<String> paths = new ArrayList<>();\n        boolean[][] visited = new boolean[mat.length][mat[0].length];\n        String directions = "DLRU";\n        int[] di = {1, 0, 0, -1};\n        int[] dj = {0, -1, 1, 0};\n        func(mat, 0, 0, "", paths, directions, di, dj, visited);\n        System.out.println(paths);\n    }\n}',
@@ -3703,7 +3703,7 @@ const data = {
                   tags: ['Trying out all Combos or Hard'],
                 },
                 {
-                  id: 'bfe16713-7888-4d48-84a1-833f3d157a64',
+                  id: '99296c19-09c2-4db1-a1a2-734e4430792c',
                   isFolder: false,
                   name: 'SudokuSolver.java',
                   code: "public class SudokuSolver {\n    public static void printBoard(char[][] board) {\n        for (int i = 0; i < board.length; i++) {\n            if (i % 3 == 0 && i != 0) {\n                System.out.println(\"- - - - - - - - - - - - - \");\n            }\n            for (int j = 0; j < board[i].length; j++) {\n                if (j % 3 == 0 && j != 0) {\n                    System.out.print(\"| \");\n                }\n                System.out.print(board[i][j] + \" \");\n            }\n            System.out.println();\n        }\n    }\n\n    public static boolean isPossible(char[][] board, int r, int c, char ch) {\n        for (int i = 0; i < 9; i++) {\n            if (board[r][i] == ch || board[i][c] == ch) return false;\n        }\n        int row = r / 3;\n        int col = c / 3;\n        for (int i = row * 3; i < (row + 1) * 3; i++) {\n            for (int j = col * 3; j < (col + 1) * 3; j++) {\n                if (board[i][j] == ch) return false;\n            }\n        }\n        return true;\n    }\n\n    public static boolean solve(char[][] board) {\n        for (int row = 0; row < board.length; row++) {\n            for (int col = 0; col < board[row].length; col++) {\n                if (board[row][col] == '.') {\n                    for (char ch = '1'; ch <= '9'; ch++) {\n                        if (isPossible(board, row, col, ch)) {\n                            board[row][col] = ch;\n                            if (solve(board)) return true;\n                            board[row][col] = '.';\n                        }\n                    }\n                    return false;\n                }\n            }\n        }\n        return true;\n    }\n\n    public static void solveSudoku(char[][] board) {\n        if (solve(board)) {\n            printBoard(board);\n        };\n    }\n\n    public static void main(String[] args) {\n        char[][] board = {\n                {'5', '3', '.', '.', '7', '.', '.', '.', '.'},\n                {'6', '.', '.', '1', '9', '5', '.', '.', '.'},\n                {'.', '9', '8', '.', '.', '.', '.', '6', '.'},\n                {'8', '.', '.', '.', '6', '.', '.', '.', '3'},\n                {'4', '.', '.', '8', '.', '3', '.', '.', '1'},\n                {'7', '.', '.', '.', '2', '.', '.', '.', '6'},\n                {'.', '6', '.', '.', '.', '.', '2', '8', '.'},\n                {'.', '.', '.', '4', '1', '9', '.', '.', '5'},\n                {'.', '.', '.', '.', '8', '.', '.', '7', '9'}\n        };\n        solveSudoku(board);\n    }\n}",
@@ -3712,7 +3712,7 @@ const data = {
                   tags: ['Trying out all Combos or Hard'],
                 },
                 {
-                  id: '9676d63a-4aea-4d99-a788-1a6cb38390d4',
+                  id: 'd62f2f8d-c242-4bc2-be75-c434c6016ce6',
                   isFolder: false,
                   name: 'WordBreak.java',
                   code: 'import java.util.List;\n\npublic class WordBreak {\n    static boolean check(String s, String b) {\n        return s.length() >= b.length() && s.startsWith(b);\n    }\n\n    static boolean solve(String s, List<String> words, int idx, int[] dp) {\n        if (idx == s.length())\n            return true;\n        for (int i = 0; i < words.size(); i++) {\n            if (!check(s.substring(idx), words.get(i)))\n                continue;\n            int x = idx + words.get(i).length();\n            if (dp[x] == 0 ? solve(s, words, x, dp) : dp[x] > 0)\n                return true;\n            dp[x] = -1;\n        }\n        return false;\n    }\n\n    public boolean wordBreak(String s, List<String> words) {\n        int[] dp = new int[s.length() + 1];\n        return solve(s, words, 0, dp);\n    }\n}',
@@ -3721,7 +3721,7 @@ const data = {
                   tags: ['Trying out all Combos or Hard'],
                 },
                 {
-                  id: '01e68e1e-2ae9-4986-9caa-bfc8b689b34b',
+                  id: 'af887c42-f454-4788-94a5-f378a0fa7274',
                   isFolder: false,
                   name: 'WordSearch.java',
                   code: "public class WordSearch {\n    static boolean solve(String word, int idx, int i, int j, int[] dx, int[] dy, boolean[][] visited, char[][] board) {\n        if (idx == word.length()) return true;\n        char ch = word.charAt(idx);\n        if (i < 0 || j < 0 || i == board.length || j == board[0].length || visited[i][j] || board[i][j] != ch) return false;\n        System.out.println(board[i][j]);\n        for (int x = 0; x < 4; x++) {\n            visited[i][j] = true;\n            if (solve(word, idx + 1, i + dx[x], j + dy[x], dx, dy, visited, board)) {\n                return true;\n            }\n            visited[i][j] = false;\n        }\n        return false;\n    }\n\n    public static boolean exist(char[][] board, String word) {\n        // DLRU\n        int[] dx = {0, -1, 1, 0};\n        int[] dy = {1, 0, 0, -1};\n        boolean[][] visited = new boolean[board.length][board[0].length];\n\n        char ch = word.charAt(0);\n        for (int i = 0; i < board.length; i++)\n            for (int j = 0; j < board[i].length; j++)\n                if (board[i][j] == ch && solve(word, 0, i, j, dx, dy, visited, board)) return true;\n        return false;\n    }\n\n    public static void main(String[] args) {\n        char[][] board = {\n                {'A', 'B', 'C', 'E'},\n                {'S', 'F', 'C', 'S'},\n                {'A', 'D', 'E', 'E'}\n        };\n        String word = \"ABCCED\";\n        System.out.println(exist(board, word));\n    }\n}",
@@ -3732,12 +3732,12 @@ const data = {
               ],
             },
             {
-              id: 'c76231c8-9fea-4f4c-8908-40cd9cc08782',
+              id: '4a821c14-81b2-4451-9669-731b63994b8e',
               isFolder: true,
               name: 'Sliding Window & Two Pointer Combined Problems',
               content: [
                 {
-                  id: 'c7cbc64d-d357-4575-8d29-c55db8717b10',
+                  id: 'c0a486cd-b481-49af-b393-d4cbd58db60d',
                   isFolder: false,
                   name: 'LongestSubstringwithAtMostKDistinctCharacters.java',
                   code: "public class LongestSubstringwithAtMostKDistinctCharacters {\n    public static int kDistinctChars(int k, String str) {\n        // Write your code here\n        int[] count = new int[26];\n        int i = 0, j = 0, unique = 0, maxLength = 0;\n        while (j < str.length()) {\n            int idx1 = str.charAt(j) - 'a';\n            count[idx1]++;\n            if (count[idx1] == 1) unique++;\n            while (unique > k) {\n                int idx2 = str.charAt(i++) - 'a';\n                count[idx2]--;\n                if (count[idx2] == 0) unique--;\n            }\n            maxLength = Math.max(maxLength, j - i + 1);\n            j++;\n        }\n        return maxLength;\n    }\n}",
@@ -3746,7 +3746,7 @@ const data = {
                   tags: ['Hard Problems'],
                 },
                 {
-                  id: 'e7ec940a-e5fd-4cbc-a301-fc72b52aa287',
+                  id: '99146f82-b04c-4d9e-b995-ddbe965ec92a',
                   isFolder: false,
                   name: 'MinimumWindowSubsequence.java',
                   code: 'import java.util.*;\n\npublic class MinimumWindowSubsequence {\n    public static String minWindow(String s, String t) {\n        // Write your code here\n        int i = 0, j = 0, start, end, minLength = s.length() + 1, subStart = 0;\n        while (i < s.length() && j < t.length()) {\n            if (s.charAt(i) == t.charAt(j)) {\n                if (j == t.length() - 1) {\n                    end = i;\n                    while (j >= 0) {\n                        if (s.charAt(i) == t.charAt(j)) j--;\n                        i--;\n                    }\n                    start = i + 1;\n                    int size = end - start + 1;\n                    if (minLength > size) {\n                        minLength = size;\n                        subStart = start;\n                    }\n                    j = 0;\n                    i++;\n                } else j++;\n            }\n            i++;\n        }\n        return minLength > s.length() ? "" : s.substring(subStart, subStart + minLength);\n\n    }\n}',
@@ -3755,7 +3755,7 @@ const data = {
                   tags: ['Hard Problems'],
                 },
                 {
-                  id: '302b84f6-89a3-48ad-b4a0-af06f9e3d0e5',
+                  id: '3ad9498a-c7ce-4f5d-9cff-73cbdd378bf0',
                   isFolder: false,
                   name: 'MinimumWindowSubstring.java',
                   code: 'import java.util.*;\n\npublic class MinimumWindowSubstring {\n    public String minWindow(String s, String t) {\n        HashMap<Character, Integer> map = new HashMap<>();\n        for (int i = 0; i < t.length(); i++) {\n            char ch = t.charAt(i);\n            map.put(ch, map.getOrDefault(ch, 0) + 1);\n        }\n        int start = 0, subStart = 0, minLength = s.length() + 1, match = 0;\n        for (int end = 0; end < s.length(); end++) {\n            char ch1 = s.charAt(end);\n            if (map.containsKey(ch1)) {\n                map.put(ch1, map.get(ch1) - 1);\n                if (map.get(ch1) == 0) match++;\n            }\n            while (match == map.size()) {\n                int size = end - start + 1;\n                if (minLength > size) {\n                    minLength = size;\n                    subStart = start;\n                }\n                char ch2 = s.charAt(start);\n                if (map.containsKey(ch2)) {\n                    map.put(ch2, map.get(ch2) + 1);\n                    if (map.get(ch2) == 1) match--;\n                }\n                start++;\n            }\n        }\n        return minLength > s.length() ? "" : s.substring(subStart, subStart + minLength);\n    }\n}',
@@ -3764,7 +3764,7 @@ const data = {
                   tags: ['Hard Problems'],
                 },
                 {
-                  id: '2b97bfff-8f71-4518-874d-91ec9019d723',
+                  id: '35666d1e-1ffe-4761-8562-8dfa267993c6',
                   isFolder: false,
                   name: 'SubarrayswithKDifferentIntegers.java',
                   code: 'public class SubarrayswithKDifferentIntegers {\n    public static int atmost(int[] nums, int k) {\n        int[] bucket = new int[nums.length + 1];\n        int i = 0, j = 0, unique = 0, count = 0;\n        while (j < nums.length) {\n            int idx1 = nums[j];\n            bucket[idx1]++;\n            if (bucket[idx1] == 1) unique++;\n            while (unique > k) {\n                int idx2 = nums[i++];\n                bucket[idx2]--;\n                if (bucket[idx2] == 0) unique--;\n            }\n            count += j - i + 1;\n            j++;\n        }\n        return count;\n    }\n    public int subarraysWithKDistinct(int[] nums, int k) {\n        return atmost(nums, k) - atmost(nums, k - 1);\n    }\n}',
@@ -3773,7 +3773,7 @@ const data = {
                   tags: ['Hard Problems'],
                 },
                 {
-                  id: '133cef1d-2e0a-457d-a01d-11fadd84c7a9',
+                  id: '70d57e50-a046-46bb-a61c-996373ef8b15',
                   isFolder: false,
                   name: 'BinarySubArraysWithSum.java',
                   code: 'import java.util.*;\npublic class BinarySubArraysWithSum {\n    public static int atmost(int[] nums, int goal) {\n        int sum = 0, i = 0, j = 0, count = 0;\n        while (j < nums.length) {\n            sum += nums[j];\n            while (i <= j && sum > goal) {\n                sum -= nums[i];\n                i++;\n            }\n            count += j - i + 1;\n            j++;\n        }\n        return count;\n    }\n    public int numSubarraysWithSum(int[] nums, int goal) {\n//        HashMap<Integer, Integer> hm = new HashMap<>();\n//        hm.put(0, 1);\n//        int sum = 0, count = 0;\n//        for (int i = 0; i < nums.length; i++) {\n//            sum += nums[i];\n//            if (hm.containsKey(sum - goal))\n//                count += hm.get(sum - goal);\n//            hm.put(sum, hm.getOrDefault(sum, 0) + 1);\n//        }\n//        return count;\n        return atmost(nums, goal) - atmost(nums, goal - 1);\n    }\n}',
@@ -3782,7 +3782,7 @@ const data = {
                   tags: ['Medium Problems'],
                 },
                 {
-                  id: 'd4c7735c-62ca-495d-b9b6-5c3e32fe15ea',
+                  id: '30862077-36a8-43a7-9018-457478f3e218',
                   isFolder: false,
                   name: 'CountNumberOfNiceSubArrays.java',
                   code: 'import java.util.*;\n\npublic class CountNumberOfNiceSubArrays {\n    public static int atmost(int[] nums, int goal) {\n        int sum = 0, i = 0, j = 0, count = 0;\n        while (j < nums.length) {\n            sum += nums[j]%2;\n            while (i <= j && sum > goal) {\n                sum -= nums[i]%2;\n                i++;\n            }\n            count += j - i + 1;\n            j++;\n        }\n        return count;\n    }\n    public int numberOfSubarrays(int[] nums, int k) {\n//        HashMap<Integer, Integer> hm = new HashMap<>();\n//        hm.put(0, 1);\n//        int sum = 0, count = 0;\n//        for (int i = 0; i < nums.length; i++) {\n//            sum += nums[i]%2 == 0 ? 0 : 1;\n//            if (hm.containsKey(sum - k))\n//                count += hm.get(sum - k);\n//            hm.put(sum, hm.getOrDefault(sum, 0) + 1);\n//        }\n//        return count;\n        return atmost(nums, k) - atmost(nums, k - 1);\n    }\n}',
@@ -3791,7 +3791,7 @@ const data = {
                   tags: ['Medium Problems'],
                 },
                 {
-                  id: 'b9b5b79b-8fe9-4fca-8cbd-f7e0249b1fad',
+                  id: 'f4d14986-7500-40d5-9dce-0a12ef24c94a',
                   isFolder: false,
                   name: 'FruitIntoBaskets.java',
                   code: 'import java.util.*;\n\npublic class FruitIntoBaskets {\n    public static int findMaxFruits(int[] arr, int n) {\n        // Write your code here.\n        int i = 0, j = 0, count = 0, maxCount = 0;\n        HashMap<Integer, Integer> hm = new HashMap<>();\n        while (j < n) {\n            hm.put(arr[j], hm.getOrDefault(arr[j], 0) + 1);\n            count++;\n            while (hm.size() > 2) {\n                int c = hm.get(arr[i]);\n                if (c == 1) hm.remove(arr[i]);\n                else hm.put(arr[i], c - 1);\n                count--;\n                i++;\n            }\n            maxCount = Math.max(maxCount, count);\n            j++;\n        }\n        return maxCount;\n    }\n}',
@@ -3800,7 +3800,7 @@ const data = {
                   tags: ['Medium Problems'],
                 },
                 {
-                  id: 'bad109f6-537a-49bb-a4ef-9ceb441596a3',
+                  id: '1743a3b9-3f51-4318-9d90-3438034fafcf',
                   isFolder: false,
                   name: 'LongestRepeatingCharacterReplacement.java',
                   code: "public class LongestRepeatingCharacterReplacement {\n    public static int getMaxFrequency(int[] arr) {\n        int maxFrequency = 0;\n        for (int i = 0; i < 26; i++)\n            maxFrequency = Math.max(maxFrequency, arr[i]);\n        return maxFrequency;\n    }\n    public int characterReplacement(String s, int k) {\n        int[] bucket = new int[26];\n        int i = 0, j = 0, maxLength = 0;\n        while (j < s.length()) {\n            int idx = s.charAt(j) - 'A';\n            bucket[idx]++;\n            while (j-i+1 - getMaxFrequency(bucket) > k)\n                bucket[s.charAt(i++) - 'A']--;\n            maxLength = Math.max(maxLength, j - i + 1);\n            j++;\n        }\n        return maxLength;\n    }\n}",
@@ -3809,7 +3809,7 @@ const data = {
                   tags: ['Medium Problems'],
                 },
                 {
-                  id: '7749aee5-9f03-4397-889c-865969e58c94',
+                  id: '3a51138e-611e-4405-98b2-2a406d5ef7fd',
                   isFolder: false,
                   name: 'LongestSubStringWithoutRepeatingCharacters.java',
                   code: "import java.util.*;\npublic class LongestSubStringWithoutRepeatingCharacters {\n    public int lengthOfLongestSubstring(String s) {\n//        HashMap<Character, Integer> hm = new HashMap<>();\n//        int i = 0, j = 0, maxLength = 0;\n//        while (j < s.length()) {\n//            char ch = s.charAt(j);\n//            hm.put(ch, hm.getOrDefault(ch, 0) + 1);\n//            while (hm.size() < j - i + 1) {\n//                char ch2 = s.charAt(i);\n//                int c = hm.get(ch2);\n//                if (c == 1) hm.remove(ch2);\n//                else hm.put(ch2, c - 1);\n//                i++;\n//            }\n//            if (hm.size() == j - i + 1)\n//                maxLength = Math.max(maxLength, j - i + 1);\n//            j++;\n//        }\n//        return maxLength;\n//        Could have used a HashMap as well\n        int[] bucket = new int[128];\n        int i = 0, j = 0, unique = 0, maxLength = 0;\n        while (j < s.length()) {\n            int idx = s.charAt(j) - ' ';\n            bucket[idx]++;\n            if (bucket[idx] == 1) unique++;\n            while (unique < j - i + 1) {\n                int idx2 = s.charAt(i) - ' ';\n                bucket[idx2]--;\n                if (bucket[idx2] == 0) unique--;\n                i++;\n            }\n            if (unique == j - i + 1) {\n                maxLength = Math.max(maxLength, j - i + 1);\n            }\n            j++;\n        }\n        return maxLength;\n    }\n}",
@@ -3818,7 +3818,7 @@ const data = {
                   tags: ['Medium Problems'],
                 },
                 {
-                  id: 'b96b858f-8cdd-4335-9034-656c7cecbfa8',
+                  id: '5094ff7b-7637-464d-ace2-44b09557b962',
                   isFolder: false,
                   name: 'MaximumConsecutiveOnes3.java',
                   code: 'public class MaximumConsecutiveOnes3 {\n    public int longestOnes(int[] nums, int k) {\n        int i = 0, j = 0, maxLength = 0, flips = 0;\n        while (j < nums.length) {\n            if (nums[j] == 0) flips++;\n            while (flips > k) if (nums[i++] == 0) flips--;\n//            if (flips <= k)\n            maxLength = Math.max(maxLength, j - i + 1);\n            j++;\n        }\n        return maxLength;\n    }\n}',
@@ -3827,7 +3827,7 @@ const data = {
                   tags: ['Medium Problems'],
                 },
                 {
-                  id: '11f5d193-33c5-479c-9ea3-7a43c9eddc4e',
+                  id: 'cf722075-8990-440b-a534-d76830aef7ad',
                   isFolder: false,
                   name: 'MaximumPointsFromCards.java',
                   code: 'public class MaximumPointsFromCards {\n    public int maxScore(int[] cardPoints, int k) {\n//        O(N)\n//        int n = cardPoints.length, sum = 0, i = 0, j = n - k;\n//        for (int point = j; point < n; point++)\n//            sum += cardPoints[point];\n//        int res = sum;\n//        while (j < n) {\n//            sum += cardPoints[i++] - cardPoints[j++];\n//            res = Math.max(res, sum);\n//        }\n//        return res;\n\n//        O(2N)\n        int n = cardPoints.length, totalSum = 0;\n        for (int point : cardPoints) totalSum += point;\n        if (k == n) return totalSum;\n\n        int window = 0, i = 0, j = 0, sum = 0, size = n - k;\n        while (j < n) {\n            window += cardPoints[j];\n            if (j - i + 1 == size) {\n                sum = Math.max(sum, totalSum - window);\n                window -= cardPoints[i++];\n            }\n            j++;\n        }\n        return sum;\n    }\n}',
@@ -3836,7 +3836,7 @@ const data = {
                   tags: ['Medium Problems'],
                 },
                 {
-                  id: '5ea40a33-342e-4ad7-8a60-b32606a16971',
+                  id: 'febc4b1b-a4f1-4e96-b21a-83f4436387d5',
                   isFolder: false,
                   name: 'NumberOfSubStringsContainingAll3Characters.java',
                   code: "public class NumberOfSubStringsContainingAll3Characters {\n    public static int countSubstring(String s){\n        // Write your code here.\n//        int count = 0;\n//        int i = 0, j = 0;\n//        int[] arr = {0, 0, 0};\n//        while (j < s.length()) {\n//            arr[s.charAt(j) - 'a']++;\n//            while (arr[0] > 0 && arr[1] > 0 && arr[2] > 0) {\n//                arr[s.charAt(i) - 'a']--;\n//                i++;\n//            }\n//            count += i;\n//            j++;\n//        }\n//        return count;\n        int count = 0;\n        int idx_a = -1, idx_b = -1, idx_c = -1;\n        for (int i = 0; i < s.length(); i++) {\n            char ch = s.charAt(i);\n            if (ch == 'a') {\n                idx_a = i;\n            }\n            else if (ch == 'b') {\n                idx_b = i;\n            }\n            else if (ch == 'c') {\n                idx_c = i;\n            }\n            count += Math.min(idx_a, Math.min(idx_b, idx_c))+1;\n        }\n        return count;\n    }\n}",
@@ -3847,12 +3847,12 @@ const data = {
               ],
             },
             {
-              id: '68eb87da-e25e-4554-882e-af641a2b072a',
+              id: 'b96517ea-ccbd-49b7-905b-f0c1e9e1c6a6',
               isFolder: true,
               name: 'Stacks and Queues',
               content: [
                 {
-                  id: '43386601-9743-4fcd-a466-84d6663cccc7',
+                  id: '873e5c8a-431c-4f27-a51c-137b3c21e97d',
                   isFolder: false,
                   name: 'CelebrityProblem.java',
                   code: 'import java.util.*;\n\npublic class CelebrityProblem {\n    int celebrity(int[][] M, int n) {\n        // code here\n        Stack<Integer> stack = new Stack<>();\n        for (int i = 0; i < n; i++) {\n            stack.push(i);\n        }\n        while (stack.size() > 1) {\n            int p1 = stack.pop();\n            int p2 = stack.pop();\n            if (M[p1][p2] == 1) {\n                stack.push(p2);\n            } else if (M[p2][p1] == 1) {\n                stack.push(p1);\n            }\n        }\n        int celeb = stack.pop();\n        // verify celeb\n        for (int i = 0; i < n; i++) {\n            if (i != celeb && M[i][celeb] == 0) return -1;\n            if (i != celeb && M[celeb][i] == 1) return -1;\n        }\n        return celeb;\n    }\n}',
@@ -3861,7 +3861,7 @@ const data = {
                   tags: ['Implementation Problems'],
                 },
                 {
-                  id: 'b2679b92-ee60-45e8-9f0a-3a58cfa14f0e',
+                  id: '40379d59-1bae-4054-8a8d-dd140bd1adb2',
                   isFolder: false,
                   name: 'LFUCache.java',
                   code: 'import java.util.*;\nclass LFUCache {\n    static class Node {\n        int key, value, frequency;\n        Node next;\n        Node prev;\n        Node (int k, int v) {\n            this.key = k;\n            this.value = v;\n            this.next = null;\n            this.prev = null;\n            this.frequency = 1;\n        }\n    }\n    static class DLL {\n        Node head, tail;\n        int size;\n        DLL() {\n            this.head = new Node(-100, -100);\n            this.tail = new Node(-100, -100);\n            this.head.next = this.tail;\n            this.tail.prev = this.head;\n        }\n        void add(Node node) {\n            node.next = head.next;\n            node.prev = head;\n            head.next.prev = node;\n            head.next = node;\n            size += 1;\n        }\n        void remove(Node node) {\n            Node next = node.next;\n            Node prev = node.prev;\n            next.prev = prev;\n            prev.next = next;\n            size -= 1;\n        }\n    }\n    Map<Integer, Node> keyNode;\n    Map<Integer, DLL> freqList;\n    int maxSize;\n    int minFrequency = 1;\n    public LFUCache(int capacity) {\n        keyNode = new HashMap<>();\n        freqList = new HashMap<>();\n        maxSize = capacity;\n    }\n\n    void updateFrequency(Node node) {\n        DLL list = freqList.get(node.frequency);\n        list.remove(node);\n        if (list.size == 0 && node.frequency == minFrequency) minFrequency++;\n        node.frequency += 1;\n        if (freqList.containsKey(node.frequency)) {\n            freqList.get(node.frequency).add(node);\n        } else {\n            DLL newList = new DLL();\n            newList.add(node);\n            freqList.put(node.frequency, newList);\n        }\n    }\n\n    public int get(int key) {\n        if (keyNode.containsKey(key)) {\n            Node node = keyNode.get(key);\n            updateFrequency(node);\n            return node.value;\n        }\n        return -1;\n    }\n\n    public void put(int key, int value) {\n        if (maxSize == 0) return;\n        if (keyNode.containsKey(key)) {\n            Node node = keyNode.get(key);\n            node.value = value;\n            updateFrequency(node);\n        }\n        else {\n            Node node = new Node(key, value);\n            if (keyNode.size() == maxSize) {\n                DLL list = freqList.get(minFrequency);\n                keyNode.remove(list.tail.prev.key);\n                list.remove(list.tail.prev);\n            }\n            minFrequency = 1;\n            if (freqList.containsKey(node.frequency)) {\n                freqList.get(node.frequency).add(node);\n            } else {\n                DLL newList = new DLL();\n                newList.add(node);\n                freqList.put(node.frequency, newList);\n            }\n            keyNode.put(node.key, node);\n        }\n    }\n}\n\n/*\n * Your LFUCache object will be instantiated and called as such:\n * LFUCache obj = new LFUCache(capacity);\n * int param_1 = obj.get(key);\n * obj.put(key,value);\n */',
@@ -3870,7 +3870,7 @@ const data = {
                   tags: ['Implementation Problems'],
                 },
                 {
-                  id: 'fba3a9fe-dfdc-4e7c-8170-c689fb2bcc5e',
+                  id: 'ae434001-06f6-4964-bccd-97f3418919cd',
                   isFolder: false,
                   name: 'LRUCache.java',
                   code: 'import java.util.*;\n\nclass LRUCache {\n    static class Node {\n        int key;\n        int value;\n        Node next;\n        Node prev;\n        Node (int key, int value)  {\n            this.next = null;\n            this.prev = null;\n            this.key = key;\n            this.value = value;\n        }\n    }\n    Node head = new Node(-1,-1);\n    Node tail = new Node(-1,-1);\n    int capacity;\n    HashMap<Integer, Node> hm = new HashMap<>();\n\n    public LRUCache(int capacity) {\n        this.head.next = this.tail;\n        this.tail.prev = this.head;\n        this.capacity = capacity;\n    }\n\n    public int get(int key) {\n        if (this.hm.containsKey(key)) {\n            Node temp = this.hm.get(key);\n            delete(temp);\n            insert(temp);\n            return temp.value;\n        }\n        return -1;\n    }\n\n    public void put(int key, int value) {\n        if (this.hm.containsKey(key)) delete(this.hm.get(key));\n        if (this.hm.size() == this.capacity) delete(this.tail.prev);\n        insert(new Node(key, value));\n    }\n\n    public void delete(Node node) {\n        this.hm.remove(node.key);\n        node.prev.next = node.next;\n        node.next.prev = node.prev;\n    }\n    public void insert(Node node) {\n        this.hm.put(node.key, node);\n        node.next = head.next;\n        node.prev = head;\n        head.next.prev = node;\n        head.next = node;\n    }\n}',
@@ -3879,7 +3879,7 @@ const data = {
                   tags: ['Implementation Problems'],
                 },
                 {
-                  id: '75b88442-cb1b-4e9a-abf0-67ecc50775ac',
+                  id: 'b616eccf-9496-4393-aede-7503196549bf',
                   isFolder: false,
                   name: 'SlidingWindowMaximum.java',
                   code: 'import java.util.*;\n\npublic class SlidingWindowMaximum {\n    public static int[] maxSlidingWindow(int[] nums, int k) {\n        Deque<Integer> q = new ArrayDeque<>();\n        int[] ans = new int[nums.length - k + 1];\n        int i = 0, j = 0;\n        while (j < nums.length) {\n            while (!q.isEmpty() && nums[q.peekLast()] < nums[j]) q.pollLast();\n            q.offer(j);\n            if (j - i + 1 == k) {\n                if (q.peekFirst() < i) q.pollFirst();\n                ans[i] = nums[q.peekFirst()];\n                i++;\n            }\n            j++;\n        }\n        return ans;\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {1, 3, -1, -3, 5, 3, 6, 7};\n        int[] ans = maxSlidingWindow(arr, 3);\n        System.out.println(Arrays.toString(ans));\n    }\n}',
@@ -3888,7 +3888,7 @@ const data = {
                   tags: ['Implementation Problems'],
                 },
                 {
-                  id: '8faf7ea3-e080-4255-8741-473f76b9a492',
+                  id: '9a94c4ed-e082-4af3-bb27-02c03d395cef',
                   isFolder: false,
                   name: 'StockSpanner.java',
                   code: 'import java.util.*;\nclass StockSpanner {\n    static class Pair {\n        int first, second;\n        Pair(int a, int b) {\n            this.first = a;\n            this.second = b;\n        }\n    }\n    static Stack<Pair> stack;\n    public StockSpanner() {\n        stack = new Stack<>();\n    }\n    \n    public int next(int price) {\n        if (stack.isEmpty()) {\n            Pair temp = new Pair(price, 1);\n            stack.add(temp);\n            return 1;\n        }\n        int val = 1;\n        while (!stack.isEmpty() && stack.peek().first <= price) {\n            val += stack.pop().second;\n        }\n        stack.push(new Pair(price, val));\n        return val;\n    }\n\n    public static void main(String[] args) {\n        StockSpanner obj = new StockSpanner();\n        int[] arr = {100, 80, 60, 70, 60, 75, 85};\n        int[] ans = new int[arr.length];\n        for (int i = 0; i < arr.length; i++) {\n            ans[i] = obj.next(arr[i]);\n        }\n        System.out.println(Arrays.toString(ans));\n    }\n}',
@@ -3897,7 +3897,7 @@ const data = {
                   tags: ['Implementation Problems'],
                 },
                 {
-                  id: '005249fc-fda4-40e4-a9f8-5b553ddb2c35',
+                  id: '40e7e479-a405-402a-837c-e4041cf5a5c8',
                   isFolder: false,
                   name: 'MinStack.java',
                   code: 'import java.util.*;\n\npublic class MinStack {\n    Stack<Integer> stack;\n    Stack<Integer> minStack;\n\n    public MinStack() {\n        stack = new Stack<>();\n        minStack = new Stack<>();\n    }\n\n    public void push(int val) {\n        stack.push(val);\n        minStack.push(minStack.isEmpty() ? val : Math.min(minStack.peek(), val));\n    }\n\n    public void pop() {\n        stack.pop();\n        minStack.pop();\n    }\n\n    public int top() {\n        return stack.peek();\n    }\n\n    public int getMin() {\n        return minStack.peek();\n    }\n}',
@@ -3906,7 +3906,7 @@ const data = {
                   tags: ['Learning'],
                 },
                 {
-                  id: '6faaad66-9fc5-4dcb-85a3-d4ca53f40c3d',
+                  id: '9f2c1af4-0c79-4283-ab51-a477e122cba7',
                   isFolder: false,
                   name: 'QueueUsingArray.java',
                   code: "public class QueueUsingArray {\n    class Queue {\n        int front, rear;\n        int []arr;\n\n        Queue() {\n            front = 0;\n            rear = 0;\n            arr = new int[100001];\n        }\n\n        // Enqueue (add) element 'e' at the end of the queue.\n        public void enqueue(int e) {\n            // Write your code here.\n            if (rear < arr.length) {\n                arr[rear++] = e;\n            }\n        }\n\n        // Dequeue (retrieve) the element from the front of the queue.\n        public int dequeue() {\n            // Write your code here.\n            if (front < rear) {\n                return arr[front++];\n            }\n            return -1;\n        }\n    }\n}",
@@ -3915,7 +3915,7 @@ const data = {
                   tags: ['Learning'],
                 },
                 {
-                  id: 'fbed7829-533d-44a5-90e6-c4be97925096',
+                  id: 'a4793ba0-355d-422c-9a32-c9d604a4fc16',
                   isFolder: false,
                   name: 'QueueUsingLinkedList.java',
                   code: 'class Node {\n    public int data;\n    public Node next;\n\n    Node(int data) {\n        this.data = data;\n        this.next = null;\n    }\n};\n\nclass MQueue{\n    Node front;\n    Node rear;\n    void push(){};\n    MQueue() {\n        front = null;\n        rear = null;\n    }\n}\n\npublic class QueueUsingLinkedList extends MQueue {\n    public void push(int x) {\n        // Write Your Code Here\n        Node newNode = new Node(x);\n        if (front == null && rear == null) {\n            front = newNode;\n            rear = newNode;\n        } else {\n            rear.next = newNode;\n            rear = rear.next;\n        }\n    }\n\n    public int pop() {\n        // Write Your Code Here\n        if (front == null || rear == null) return -1;\n        Node temp = front;\n        if (front == rear) {\n            front = null;\n            rear = null;\n        } else {\n            front = front.next;\n        }\n        return temp.data;\n    }\n}',
@@ -3924,7 +3924,7 @@ const data = {
                   tags: ['Learning'],
                 },
                 {
-                  id: 'c1bf8351-ff2e-4063-8d5a-15e9a4c6b82f',
+                  id: '91738a58-bfae-47f7-b288-e48cd9631043',
                   isFolder: false,
                   name: 'QueueUsingStack.java',
                   code: 'import java.util.*;\n\npublic class QueueUsingStack {\n    class MyQueue {\n        Stack<Integer> s1;\n        Stack<Integer> s2;\n\n        public MyQueue() {\n            s1 = new Stack<>();\n            s2 = new Stack<>();\n        }\n\n        public void push(int x) {\n            while (!s1.isEmpty()) {\n                s2.push(s1.pop());\n            }\n            s1.push(x);\n            while (!s2.isEmpty()) {\n                s1.push(s2.pop());\n            }\n        }\n\n        public int pop() {\n            return this.s1.pop();\n        }\n\n        public int peek() {\n            return this.s1.peek();\n        }\n\n        public boolean empty() {\n            return this.s1.isEmpty();\n        }\n    }\n\n}',
@@ -3933,7 +3933,7 @@ const data = {
                   tags: ['Learning'],
                 },
                 {
-                  id: 'ead68498-28bb-41a4-ac80-2dcf7c52a38d',
+                  id: '9463dd52-4efc-4014-9e5b-87a6aa374b85',
                   isFolder: false,
                   name: 'StackUsingArrays.java',
                   code: 'public class StackUsingArrays {\n    static class Stack {\n        int[] stack;\n        int index;\n        int capacity;\n        Stack(int capacity) {\n            // Write your code here.\n            this.stack = new int[capacity];\n            this.index = -1;\n            this.capacity = capacity;\n        }\n        public void push(int num) {\n            // Write your code here\n            if (this.index != this.capacity - 1) {\n                this.index += 1;\n                this.stack[this.index] = num;\n            }\n        }\n        public int pop() {\n            // Write your code here.\n            if (this.index != -1) {\n                return this.stack[this.index--];\n            }\n            return -1;\n        }\n        public int top() {\n            // Write your code here.\n            if (this.index != -1) {\n                return this.stack[this.index];\n            }\n            return -1;\n        }\n        public int isEmpty() {\n            // Write your code here.\n            return this.index == -1 ? 1 : 0;\n            // false = 0;\n        }\n        public int isFull() {\n            // Write your code here.\n            return this.index == this.capacity - 1 ? 1 : 0;\n        }\n    }\n}',
@@ -3942,7 +3942,7 @@ const data = {
                   tags: ['Learning'],
                 },
                 {
-                  id: 'a7ae77b6-e38a-4d2b-bbb8-3981596871c7',
+                  id: 'c455c360-6ca6-459b-aefc-b9b59fcf4ddd',
                   isFolder: false,
                   name: 'StackUsingLinkedList.java',
                   code: 'public class StackUsingLinkedList {\n    static class Node {\n        int data;\n        Node next;\n\n        Node() {\n            this.data = 0;\n            this.next = null;\n        }\n\n        Node(int data) {\n            this.data = data;\n            this.next = null;\n        }\n\n        Node(int data, Node next) {\n            this.data = data;\n            this.next = next;\n        }\n    }\n\n    ;\n\n    static class Stack {\n        //Write your code here\n        Node head;\n        Node tail;\n        int length;\n\n        Stack() {\n            head = null;\n            tail = null;\n            length = 0;\n        }\n\n        int getSize() {\n            return this.length;\n        }\n\n        boolean isEmpty() {\n            return this.length == 0;\n        }\n\n        void push(int data) {\n            Node newNode = new Node(data);\n            if (tail == null || head == null) {\n                head = newNode;\n                tail = newNode;\n            } else {\n                tail.next = newNode;\n                tail = tail.next;\n            }\n            length++;\n        }\n\n        void pop() {\n            if (head == tail) {\n                head = null;\n                tail = null;\n                length = 0;\n            } else {\n                Node curr = head;\n                Node prev = null;\n                while (curr.next != null) {\n                    prev = curr;\n                    curr = curr.next;\n                }\n                prev.next = null;\n                tail = prev;\n                length--;\n            }\n        }\n\n        int getTop() {\n            if (tail != null) return tail.data;\n            return -1;\n        }\n    }\n}',
@@ -3951,7 +3951,7 @@ const data = {
                   tags: ['Learning'],
                 },
                 {
-                  id: 'b2e583a9-4ac9-4db0-bd9f-870b66985cab',
+                  id: '68f63b5d-2deb-4f8c-8d34-8b0a2f53f0dd',
                   isFolder: false,
                   name: 'StackUsingQueue.java',
                   code: 'import java.util.*;\n\npublic class StackUsingQueue {\n    class MyStack {\n        static Queue<Integer> queue;\n        public MyStack() {\n            queue = new LinkedList<>();\n        }\n\n        public void push(int x) {\n            queue.add(x);\n            for (int i =0; i < queue.size() - 1; i++) {\n                int element = queue.poll();\n                queue.add(element);\n            }\n        }\n\n        public int pop() {\n            return queue.remove();\n        }\n\n        public int top() {\n            return queue.peek();\n        }\n\n        public boolean empty() {\n            return queue.isEmpty();\n        }\n\n    }\n}',
@@ -3960,7 +3960,7 @@ const data = {
                   tags: ['Learning'],
                 },
                 {
-                  id: '1fa9e56f-a45f-485e-8345-0b75cd1e7d17',
+                  id: '107f33ec-4fcd-4a5d-803b-2769701e31a7',
                   isFolder: false,
                   name: 'ValidParentheses.java',
                   code: "import java.util.*;\n\npublic class ValidParentheses {\n    public boolean isValid(String s) {\n        HashMap<Character, Character> hm = new HashMap<>();\n        hm.put('(', ')');\n        hm.put('[', ']');\n        hm.put('{', '}');\n        Stack<Character> stack = new Stack<>();\n        for (int i = 0; i < s.length(); i++) {\n            char ch = s.charAt(i);\n            if (hm.containsKey(ch)) {\n                stack.push(ch);\n            } else {\n                if (stack.isEmpty()) return false;\n                char element = stack.peek();\n                if (hm.get(element) != ch) return false;\n                stack.pop();\n            }\n        }\n        return stack.isEmpty();\n    }\n}",
@@ -3969,7 +3969,7 @@ const data = {
                   tags: ['Learning'],
                 },
                 {
-                  id: '15914892-ffbf-48bd-bbd5-a87c87c328e4',
+                  id: '57f3c1de-38d4-4c8d-a383-96cd433f0e4c',
                   isFolder: false,
                   name: 'AsteroidCollision.java',
                   code: 'import java.util.*;\n\npublic class AsteroidCollision {\n    public static boolean sameSign (int i, int j) {\n        return (i > 0 && j > 0) || (i < 0 && j < 0);\n    }\n    public static boolean rulesFollowed(Stack<Integer> stack, int asteroid) {\n        return stack.isEmpty() || stack.peek() > 0 && asteroid > 0 || stack.peek() < 0 && asteroid < 0 || stack.peek() < 0;\n    }\n\n    public static int[] asteroidCollision(int[] asteroids) {\n        Stack<Integer> stack = new Stack<>();\n        int idx = 0;\n        while (idx < asteroids.length) {\n            if (rulesFollowed(stack, asteroids[idx])) stack.push(asteroids[idx]);\n            else {\n                int val = Math.abs(asteroids[idx]);\n                if (stack.peek() == val) stack.pop();\n                else if (stack.peek() < val) {\n                    stack.pop();\n                    idx--;\n                }\n            }\n            idx++;\n        }\n        int size = stack.size();\n        int[] ans = new int[size];\n        while (!stack.isEmpty())\n            ans[--size] = stack.pop();\n        return ans;\n//        Stack<Integer> stack = new Stack<>();\n//        int j = -1;\n//        int idx = 0;\n//        while (idx < asteroids.length) {\n//            if (j == -1 || sameSign(asteroids[j], asteroids[idx]) || asteroids[j] < 0)\n//                asteroids[++j] = asteroids[idx];\n//            else {\n//                if (asteroids[j] == Math.abs(asteroids[idx])) {\n//                    asteroids[j] = 0;\n//                    j--;\n//                } else if (asteroids[j] < Math.abs(asteroids[idx])) {\n//                    asteroids[j] = 0;\n//                    j--;\n//                    idx--;\n//                }\n//            }\n//            idx++;\n//        }\n//        int[] ans = new int[j+1];\n//        System.arraycopy(asteroids, 0, ans, 0, j + 1);\n//        return ans;\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {-2, -2, 1, -2};\n//        int[] arr = {5, -5};\n//        int[] arr = {5, 10, -5};\n        System.out.println(Arrays.toString(asteroidCollision(arr)));\n    }\n}',
@@ -3978,7 +3978,7 @@ const data = {
                   tags: ['Monotonic StackQueue Problems [VVV. Imp]'],
                 },
                 {
-                  id: '9fa36266-5b05-49c3-b73a-ff6bf6a2abc7',
+                  id: '1c66841a-7eb7-42b3-8070-e814bd7c1ce9',
                   isFolder: false,
                   name: 'LargestRectangleInHistogram.java',
                   code: 'import java.util.*;\n\npublic class LargestRectangleInHistogram {\n    public static int[] getPSE(int[] arr, int n) {\n        int[] ans = new int[n];\n        Stack<Integer> stack = new Stack<>();\n        for (int i = n - 1; i >= 0; i--) {\n            while (!stack.isEmpty() && arr[stack.peek()] >= arr[i])\n                ans[stack.pop()] = i;\n            stack.push(i);\n        }\n        while (!stack.isEmpty())\n            ans[stack.pop()] = -1;\n        return ans;\n    }\n\n    public static int[] getNSE(int[] arr, int n) {\n        int[] ans = new int[n];\n        Stack<Integer> stack = new Stack<>();\n        for (int i = 0; i < n; i++) {\n            while (!stack.isEmpty() && arr[stack.peek()] > arr[i])\n                ans[stack.pop()] = i;\n            stack.push(i);\n        }\n        while (!stack.isEmpty())\n            ans[stack.pop()] = n;\n        return ans;\n    }\n\n    public static int largestRectangleArea(int[] heights) {\n        int n = heights.length;\n        if (n == 1) return heights[0];\n        int[] nse = getNSE(heights, n);\n        int[] pse = getPSE(heights, n);\n        int maxArea = 0;\n        for (int i = 0; i < heights.length; i++) {\n            int area = (nse[i] - pse[i] - 1) * heights[i];\n            maxArea = Math.max(maxArea, area);\n        }\n        return maxArea;\n    }\n\n    public static void main(String[] args) {\n        int[] heights = {3};\n        System.out.println(largestRectangleArea(heights));\n    }\n}\n\n// [2,1,5,6,2,3]\n//',
@@ -3987,7 +3987,7 @@ const data = {
                   tags: ['Monotonic StackQueue Problems [VVV. Imp]'],
                 },
                 {
-                  id: '734e0f98-6b14-476f-8663-b8669a0f06f3',
+                  id: '4da7301f-90be-4d49-9e62-cad767a3adf0',
                   isFolder: false,
                   name: 'MaximalRectangle.java',
                   code: "import java.util.*;\n\npublic class MaximalRectangle {\n    public static int[] getPSE(char[] arr, int n) {\n        int[] ans = new int[n];\n        Deque<Integer> stack = new ArrayDeque<>();\n        for (int i = n - 1; i >= 0; i--) {\n            while (!stack.isEmpty() && arr[stack.peek()] >= arr[i])\n                ans[stack.pop()] = i;\n            stack.push(i);\n        }\n        while (!stack.isEmpty())\n            ans[stack.pop()] = -1;\n        return ans;\n    }\n\n    public static int[] getNSE(char[] arr, int n) {\n        int[] ans = new int[n];\n        Deque<Integer> stack = new ArrayDeque<>();\n        for (int i = 0; i < n; i++) {\n            while (!stack.isEmpty() && arr[stack.peek()] > arr[i])\n                ans[stack.pop()] = i;\n            stack.push(i);\n        }\n        while (!stack.isEmpty())\n            ans[stack.pop()] = n;\n        return ans;\n    }\n\n    public static int largestRectangleArea(char[] heights) {\n        int n = heights.length;\n        int[] nse = getNSE(heights, n), pse = getPSE(heights, n);\n        int maxArea = 0;\n        for (int i = 0; i < heights.length; i++)\n            maxArea = Math.max(maxArea, (nse[i] - pse[i] - 1) * (heights[i] - '0'));\n        return maxArea;\n    }\n\n    public int maximalRectangle(char[][] M) {\n        int max = largestRectangleArea(M[0]);\n        for (int i = 1; i < M.length; i++) {\n            for (int j = 0; j < M[0].length; j++) {\n                M[i][j] = M[i][j] == '1' ? (char) (M[i][j] + M[i - 1][j] - '0') : '0';\n            }\n            max = Math.max(max, largestRectangleArea(M[i]));\n        }\n        return max;\n    }\n}",
@@ -3996,7 +3996,7 @@ const data = {
                   tags: ['Monotonic StackQueue Problems [VVV. Imp]'],
                 },
                 {
-                  id: 'b9196fb3-990b-4210-b40b-4ea18615285d',
+                  id: '35baa833-a7eb-4d51-ae2d-2a7379be67c8',
                   isFolder: false,
                   name: 'NearestSmallerElement.java',
                   code: 'import java.util.*;\npublic class NearestSmallerElement {\n    public int[] prevSmaller(int[] A) {\n        int[] ans = new int[A.length];\n        Stack<Integer> stack = new Stack<>();\n        for (int i = A.length - 1; i >= 0; i--) {\n            while (!stack.isEmpty() && A[stack.peek()] > A[i])\n                ans[stack.pop()] = A[i];\n            stack.push(i);\n        }\n        while (!stack.isEmpty())\n            ans[stack.pop()] = -1;\n        return ans;\n    }\n}',
@@ -4005,7 +4005,7 @@ const data = {
                   tags: ['Monotonic StackQueue Problems [VVV. Imp]'],
                 },
                 {
-                  id: 'c1a9b4f6-291a-499a-bfed-f55d908c5bdd',
+                  id: 'cedfe90c-ad62-484b-be68-088c42d944bf',
                   isFolder: false,
                   name: 'NextGreaterElement.java',
                   code: 'import java.util.*;\npublic class NextGreaterElement {\n    public int[] nextGreaterElement(int[] nums1, int[] nums2) {\n        HashMap<Integer, Integer> hm = new HashMap<>();\n        int[] ans = new int[nums1.length];\n        for (int i = 0; i < nums1.length; i++) {\n            hm.put(nums1[i], i);\n            ans[i] = -1;\n        }\n        Stack<Integer> stack = new Stack<>();\n        for (int i = 0; i < nums2.length; i++) {\n            while (!stack.isEmpty() && nums2[i] > stack.peek())\n                ans[hm.get(stack.pop())] = nums2[i];\n            if (hm.containsKey(nums2[i]))\n                stack.push(nums2[i]);\n        }\n        return ans;\n    }\n}',
@@ -4014,7 +4014,7 @@ const data = {
                   tags: ['Monotonic StackQueue Problems [VVV. Imp]'],
                 },
                 {
-                  id: 'ea2d3834-3535-4cba-a3db-845f2c406a11',
+                  id: '4ff13947-d3f3-4379-9076-9ea9c1f6fdcd',
                   isFolder: false,
                   name: 'NextGreaterElement2.java',
                   code: 'import java.util.*;\n\npublic class NextGreaterElement2 {\n    public static int[] nextGreaterElementII(int []a) {\n        // Write your code here.\n        int n = a.length;\n        int[] ans = new int[n];\n        Stack<Integer> stack = new Stack<>();\n        for (int i = 0; i < 2 * n; i++) {\n            int idx = i%n;\n            while (!stack.isEmpty() && a[stack.peek()] < a[idx])\n                ans[stack.pop()] = a[idx];\n            if (i < n) stack.push(idx);\n        }\n        while (!stack.isEmpty())\n            ans[stack.pop()] = -1;\n        return ans;\n    }\n}',
@@ -4023,7 +4023,7 @@ const data = {
                   tags: ['Monotonic StackQueue Problems [VVV. Imp]'],
                 },
                 {
-                  id: '78c98ba4-8a18-4a7d-b1ab-169054aed465',
+                  id: '32479163-a340-405f-aaee-a59037821e85',
                   isFolder: false,
                   name: 'NGEsToRight.java',
                   code: 'public class NGEsToRight {\n    public static int[] countGreater(int []arr, int []query) {\n        // Write your code here.\n        int[] ans = new int[query.length];\n        for (int i = 0; i < query.length; i++) {\n            int idx = query[i];\n            int c = 0;\n            for (int j = idx+1; j < arr.length; j++) {\n                if (arr[j] > arr[idx]) c++;\n            }\n            ans[i] = c;\n        }\n        return ans;\n    }\n}',
@@ -4032,7 +4032,7 @@ const data = {
                   tags: ['Monotonic StackQueue Problems [VVV. Imp]'],
                 },
                 {
-                  id: 'c0aa63b9-8f1f-41da-86b5-dc0d4a3393e5',
+                  id: '9a52541b-10c9-4a59-99d7-63d1d1ad77bc',
                   isFolder: false,
                   name: 'RemoveKDigits.java',
                   code: 'import java.util.*;\npublic class RemoveKDigits {\n    public static String removeKdigits(String num, int k) {\n        if (num.length() <= k) return "0";\n        Stack<Character> stack = new Stack<>();\n        for (int i = 0; i < num.length(); i++) {\n            while (!stack.isEmpty() && k > 0 && num.charAt(i) < stack.peek()) {\n                stack.pop();\n                k--;\n            }\n            stack.push(num.charAt(i));\n        }\n        while (k > 0) {\n            stack.pop();\n            k--;\n        }\n        int size = stack.size();\n        char[] chars = new char[size];\n        while (!stack.isEmpty())\n            chars[--size] = stack.pop();\n        int i = 0;\n        while (i < chars.length && chars[i] == \'0\') i++;\n        if (i == chars.length) return "0";\n        return String.valueOf(chars, i, chars.length - i);\n    }\n\n    public static void main(String[] args) {\n        String s = "1001001";\n        int k = 2;\n        System.out.println(removeKdigits(s, k));\n    }\n}',
@@ -4041,7 +4041,7 @@ const data = {
                   tags: ['Monotonic StackQueue Problems [VVV. Imp]'],
                 },
                 {
-                  id: '1e669892-1574-4988-bea4-1fd51c2c5c70',
+                  id: 'be23ff14-a6c7-46af-9704-51df4b35b90d',
                   isFolder: false,
                   name: 'SumOfSubArrayMinimum.java',
                   code: 'import java.util.*;\n\npublic class SumOfSubArrayMinimum {\n    public static long solve(int[] arr, int start, long sum) {\n        if (start == arr.length) return sum;\n        int min = Integer.MAX_VALUE;\n        for (int i = start; i < arr.length; i++) {\n            min = Math.min(min, arr[i]);\n            sum += min;\n        }\n        return solve(arr, start + 1, sum);\n    }\n\n    public int sumSubarrayMins(int[] arr) {\n//        O(N^2) solution\n//        return (int) (solve(arr, 0, 0)%1000000007);\n        int n = arr.length;\n        int[] pse = getPSE(arr, n), nse = getNSE(arr, n);\n        long res = 0;\n        for(int i = 0; i < n; i++)\n            res +=  (long) (i - pse[i]) * (nse[i] - i) * arr[i];\n        return (int)(res % (1e9 + 7));\n    }\n\n    public int[] getPSE(int[] arr, int n) {\n        int[] psee = new int[n];\n        Stack<Integer> stk = new Stack<>();\n        for(int i = n-1; i >= 0; i--){\n            while(!stk.isEmpty() && arr[i] <= arr[stk.peek()])\n                psee[stk.pop()] = i;\n            stk.push(i);\n        }\n        while(!stk.isEmpty())\n            psee[stk.pop()] = -1;\n        return psee;\n    }\n\n    public int[] getNSE(int[] arr, int n) {\n        int[] nse = new int[n];\n        Stack<Integer> stk = new Stack<>();\n        for(int i = 0; i < n; i++){\n            while(!stk.isEmpty() && arr[i] < arr[stk.peek()])\n                nse[stk.pop()] = i;\n            stk.push(i);\n        }\n        while(!stk.isEmpty())\n            nse[stk.pop()] = n;\n        return nse;\n    }\n}',
@@ -4050,7 +4050,7 @@ const data = {
                   tags: ['Monotonic StackQueue Problems [VVV. Imp]'],
                 },
                 {
-                  id: 'cde1df75-5b1c-4378-a650-85000d9a3956',
+                  id: '1469eef2-8623-44a0-b784-ac48037077fa',
                   isFolder: false,
                   name: 'SumOfSubarrayRanges.java',
                   code: 'import java.util.*;\n\npublic class SumOfSubarrayRanges {\n    public static long solve(int[] arr, int start, long sum) {\n        if (start == arr.length) return sum;\n        int min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;\n        for (int i = start; i < arr.length; i++) {\n            min = Math.min(min, arr[i]);\n            max = Math.max(max, arr[i]);\n            sum += max - min;\n        }\n        return solve(arr, start + 1, sum);\n    }\n//    public long subArrayRanges(int[] nums) {\n//        return solve(nums, 0, 0);\n//    }\n\n    public int[] getPSE(int[] arr, int n) {\n        int[] pse = new int[n];\n        Stack<Integer> stk = new Stack<>();\n        for (int i = n - 1; i >= 0; i--) {\n            while (!stk.isEmpty() && arr[i] <= arr[stk.peek()])\n                pse[stk.pop()] = i;\n            stk.push(i);\n        }\n        while (!stk.isEmpty())\n            pse[stk.pop()] = -1;\n        return pse;\n    }\n\n    public int[] getPGE(int[] arr, int n) {\n        int[] pge = new int[n];\n        Stack<Integer> stk = new Stack<>();\n        for (int i = n - 1; i >= 0; i--) {\n            while (!stk.isEmpty() && arr[i] >= arr[stk.peek()])\n                pge[stk.pop()] = i;\n            stk.push(i);\n        }\n        while (!stk.isEmpty())\n            pge[stk.pop()] = -1;\n        return pge;\n    }\n\n    public int[] getNSE(int[] arr, int n) {\n        int[] nse = new int[n];\n        Stack<Integer> stk = new Stack<>();\n        for (int i = 0; i < n; i++) {\n            while (!stk.isEmpty() && arr[i] < arr[stk.peek()])\n                nse[stk.pop()] = i;\n            stk.push(i);\n        }\n        while (!stk.isEmpty())\n            nse[stk.pop()] = n;\n        return nse;\n    }\n\n    public int[] getNGE(int[] arr, int n) {\n        int[] nge = new int[n];\n        Stack<Integer> stk = new Stack<>();\n        for (int i = 0; i < n; i++) {\n            while (!stk.isEmpty() && arr[i] > arr[stk.peek()])\n                nge[stk.pop()] = i;\n            stk.push(i);\n        }\n        while (!stk.isEmpty())\n            nge[stk.pop()] = n;\n        return nge;\n    }\n\n    public long subArrayRanges(int[] nums) {\n        int n = nums.length;\n        int[] pse = getPSE(nums, n), nse = getNSE(nums, n), pge = getPGE(nums, n), nge = getNGE(nums, n);\n        long sum = 0;\n        for (int i = 0; i < n; i++) {\n            sum += ((long) (i - nge[i]) * (pge[i] - i) - (long) (i - nse[i]) * (pse[i] - i)) * nums[i];\n        }\n        return sum;\n    }\n}',
@@ -4059,7 +4059,7 @@ const data = {
                   tags: ['Monotonic StackQueue Problems [VVV. Imp]'],
                 },
                 {
-                  id: 'ec2f76bf-0955-4464-b809-79582ffc3ad5',
+                  id: '33437eac-a433-40c6-bceb-8e87c50d162e',
                   isFolder: false,
                   name: 'TrappingRainwater.java',
                   code: 'public class TrappingRainwater {\n    public int trap(int[] height) {\n//        Takes O(n) extra space\n//        int n = height.length;\n//        int[] left = new int[n], right = new int[n];\n//        int totalWater = 0, maxL = 0, maxR = 0;\n//        for (int i = 0; i < n; i++) {\n//            maxL = Math.max(maxL, height[i]);\n//            maxR = Math.max(maxR, height[n-i-1]);\n//            left[i] = maxL;\n//            right[n-i-1] = maxR;\n//        }\n//        for (int i = 0; i < n; i++)\n//            totalWater += Math.min(left[i], right[i]) - height[i];\n//        return totalWater;\n\n//        Constant space solution\n        int l = 0, r = height.length - 1;\n        int maxL = height[l], maxR = height[r];\n        int total = 0;\n        while (l < r) {\n            if (maxL < maxR) {\n                maxL = Math.max(maxL, height[++l]);\n                total += maxL - height[l];\n            } else {\n                maxR = Math.max(maxR, height[--r]);\n                total += maxR - height[r];\n            }\n        }\n        return total;\n    }\n}',
@@ -4068,7 +4068,7 @@ const data = {
                   tags: ['Monotonic StackQueue Problems [VVV. Imp]'],
                 },
                 {
-                  id: 'eb1e3067-6fa8-4830-af21-6dd5480505e7',
+                  id: '73a1df5f-4d0e-4925-b1dd-192f3c6ceb2d',
                   isFolder: false,
                   name: 'InfixToPostfixUsingStack.java',
                   code: "import java.util.*;\npublic class InfixToPostfixUsingStack {\n    public static int pref(char operator) {\n        if (operator == '^') return 3;\n        if (operator == '*' || operator == '/') return 2;\n        if (operator == '+' || operator == '-') return 1;\n        return -1;\n    }\n    public static String infixToPostfix(String exp) {\n        // Write your code here\n        Stack<String> val = new Stack<>();\n        Stack<Character> op = new Stack<>();\n        for (int i = 0; i < exp.length(); i++) {\n            char ch = exp.charAt(i);\n            if (Character.isLetterOrDigit(ch)) val.push(String.valueOf(ch));\n            else if (ch == '(') op.push(ch);\n            else if (ch == ')') {\n                while (op.peek() != '(') {\n                    String val2 = val.pop();\n                    val.push(val.pop() + val2 + op.pop());\n                }\n                op.pop();\n            } else {\n                while (!op.isEmpty() && pref(op.peek()) >= pref(ch)) {\n                    String val2 = val.pop();\n                    val.push(val.pop() + val2 + op.pop());\n                }\n                op.push(ch);\n            }\n        }\n        while (!op.isEmpty()) {\n            String val2 = val.pop();\n            val.push(val.pop() + val2 + op.pop());\n        }\n        return val.peek();\n    }\n}",
@@ -4077,7 +4077,7 @@ const data = {
                   tags: ['Prefix, Infix, PostFix Conversion Problems'],
                 },
                 {
-                  id: 'de3bcf6a-ab2d-4c38-a8be-0241bc2375f2',
+                  id: '397ff7c6-7bcd-4f3d-bc9c-c176ca0370fb',
                   isFolder: false,
                   name: 'InfixToPrefixUsingStack.java',
                   code: "import java.util.Stack;\n\npublic class InfixToPrefixUsingStack {\n    public static int pref(char operator) {\n        if (operator == '^') return 3;\n        if (operator == '*' || operator == '/') return 2;\n        if (operator == '+' || operator == '-') return 1;\n        return -1;\n    }\n    public static String convertInfixToPrefix(String exp) {\n        Stack<String> val = new Stack<>();\n        Stack<Character> op = new Stack<>();\n        for (int i = 0; i < exp.length(); i++) {\n            char ch = exp.charAt(i);\n            if (Character.isLetterOrDigit(ch)) val.push(String.valueOf(ch));\n            else if (ch == '(') op.push(ch);\n            else if (ch == ')') {\n                while (op.peek() != '(') {\n                    String val2 = val.pop();\n                    val.push(op.pop() + val.pop() + val2);\n                }\n                op.pop();\n            } else {\n                while (!op.isEmpty() && pref(ch) <= pref(op.peek())) {\n                    String val2 = val.pop();\n                    val.push(op.pop() + val.pop() + val2);\n                }\n                op.push(ch);\n            }\n        }\n        while (!op.isEmpty()) {\n            String val2 = val.pop();\n            val.push(op.pop() + val.pop() + val2);\n        }\n        return val.peek();\n    }\n}",
@@ -4086,7 +4086,7 @@ const data = {
                   tags: ['Prefix, Infix, PostFix Conversion Problems'],
                 },
                 {
-                  id: '0925b2d9-4997-4212-b203-5d47b5da5252',
+                  id: '19a0c90d-9200-4e01-84f5-52498095df43',
                   isFolder: false,
                   name: 'PostfixToInfixUsingStack.java',
                   code: 'import java.util.Stack;\n\npublic class PostfixToInfixUsingStack {\n    public static String postToInfix(String exp) {\n        // Write your code here.\n        Stack<String> val = new Stack<>();\n        for (int i = 0; i < exp.length(); i++) {\n            char ch = exp.charAt(i);\n            if (Character.isLetterOrDigit(ch)) val.push(String.valueOf(ch));\n            else {\n                String val1 = val.pop();\n                val.push("(" + val.pop() + ch + val1 + ")");\n            }\n        }\n        return val.peek();\n    }\n}',
@@ -4095,7 +4095,7 @@ const data = {
                   tags: ['Prefix, Infix, PostFix Conversion Problems'],
                 },
                 {
-                  id: 'c136ee8a-0382-4861-ae76-00f21ecef3e1',
+                  id: '40f75907-f55a-4da1-b70c-7a2e4a27f256',
                   isFolder: false,
                   name: 'PostfixToPrefixUsingStack.java',
                   code: 'import java.util.Stack;\n\npublic class PostfixToPrefixUsingStack {\n    public static String postfixToPrefix(String exp) {\n        // Write your code here\n        Stack<String> val = new Stack<>();\n        for (int i = 0; i < exp.length(); i++) {\n            char ch = exp.charAt(i);\n            if (Character.isLetterOrDigit(ch)) val.push(String.valueOf(ch));\n            else {\n                String val1 = val.pop();\n                val.push(ch + val.pop() + val1);\n            }\n        }\n        return val.peek();\n    }\n}',
@@ -4104,7 +4104,7 @@ const data = {
                   tags: ['Prefix, Infix, PostFix Conversion Problems'],
                 },
                 {
-                  id: '35bb1e1c-33db-4d09-9bdc-4ed0ba6968e0',
+                  id: 'd1300d04-b474-44ca-aa9b-55c381f20a7b',
                   isFolder: false,
                   name: 'PrefixToInfixUsingStack.java',
                   code: 'import java.util.Stack;\n\npublic class PrefixToInfixUsingStack {\n    public static String prefixToInfixConversion(String exp) {\n        // Write your code here\n        Stack<String> val = new Stack<>();\n        for (int i = exp.length() - 1; i >= 0; i--) {\n            char ch = exp.charAt(i);\n            if (Character.isLetterOrDigit(ch)) val.push(String.valueOf(ch));\n            else val.push("(" + val.pop() + ch + val.pop() + ")");\n        }\n        return val.peek();\n    }\n}',
@@ -4113,7 +4113,7 @@ const data = {
                   tags: ['Prefix, Infix, PostFix Conversion Problems'],
                 },
                 {
-                  id: 'd02c4ebb-568a-4a1e-a4c3-e34a9dc1ada3',
+                  id: '29057348-0da0-4c59-b947-b6cde3796bb1',
                   isFolder: false,
                   name: 'PrefixToPostfixUsingStack.java',
                   code: 'import java.util.Stack;\n\npublic class PrefixToPostfixUsingStack {\n    public static String preToPost(String s) {\n        // Write Your Code Here\n        Stack<String> val = new Stack<>();\n        for (int i = s.length() - 1; i >= 0; i--) {\n            char ch = s.charAt(i);\n            if (Character.isLetterOrDigit(ch)) val.push(String.valueOf(ch));\n            else val.push(val.pop() + val.pop() + ch);\n        }\n        return val.peek();\n    }\n}',
@@ -4124,12 +4124,12 @@ const data = {
               ],
             },
             {
-              id: '3b91c079-01ce-4da9-ba49-06aa9f6c05dd',
+              id: 'ff123354-d76f-4b27-a19f-2438c0f15abd',
               isFolder: true,
               name: 'Strings',
               content: [
                 {
-                  id: '574fa50e-4f8c-4948-8cae-134de5aa543c',
+                  id: '1ad05325-cfe7-48f1-9ac6-8bafea86f532',
                   isFolder: false,
                   name: 'IsomorphicStrings.java',
                   code: 'import java.util.*;\n\npublic class IsomorphicStrings {\n    public static boolean isIsomorphic(String s, String t) {\n        //    Brute force\n        //        Instead of char array use Stack array\n\n        //    Optimal approach\n        char[] mapST = new char[128];\n        char[] mapTS = new char[128];\n        for (int i = 0; i < s.length(); i++) {\n            char sChar = s.charAt(i);\n            char tChar = t.charAt(i);\n            if (mapST[sChar] != 0 && mapST[sChar] != tChar\n                    || mapTS[tChar] != 0 && mapTS[tChar] != sChar) {\n                return false;\n            }\n            mapST[sChar] = tChar;\n            mapTS[tChar] = sChar;\n        }\n        return true;\n    }\n\n    public static void main(String[] args) {\n        String s = "edd";\n        String t = "add";\n        System.out.println(isIsomorphic(s, t));\n    }\n}',
@@ -4138,7 +4138,7 @@ const data = {
                   tags: ['Basic and Easy String Problems'],
                 },
                 {
-                  id: '12d00e6e-6888-418f-be31-4feb062ecda6',
+                  id: 'fed43657-2258-43a5-8fb3-31b84cf6f795',
                   isFolder: false,
                   name: 'LargestOddNumberInString.java',
                   code: 'class LargestOddNumberInString {\n    public String largestOddNumber(String num) {\n        for (int i = num.length() - 1; i >= 0; i--) {\n            int value = num.charAt(i) - \'0\';\n            if (value % 2 == 1) return num.substring(0, i+1);\n        }\n        return "";\n    }\n}',
@@ -4147,7 +4147,7 @@ const data = {
                   tags: ['Basic and Easy String Problems'],
                 },
                 {
-                  id: '39f628b7-025c-49c1-8568-9345c223171c',
+                  id: 'd132ab64-2139-46bc-8c0e-70bd474edf5c',
                   isFolder: false,
                   name: 'LongestCommonPrefix.java',
                   code: 'import java.util.*;\n\npublic class LongestCommonPrefix {\n    public static String longestCommonPrefix(String[] strs) {\n//        Brute force\n//        Arrays.sort(strs);\n//        String f = strs[0], l = strs[strs.length - 1];\n//        int len = Math.min(f.length(), l.length());\n//        int i = 0;\n//        while (i < len) {\n//            if (f.charAt(i) != l.charAt(i)) break;\n//            i++;\n//        }\n//        return f.substring(0, i);\n//        Optimal solution\n        String prefix = strs[0];\n        for (int i = 1; i < strs.length; i++) {\n            while (!strs[i].startsWith(prefix)) {\n                prefix = prefix.substring(0, prefix.length() - 1);\n            }\n        }\n        return prefix;\n    }\n\n    public static void main(String[] args) {\n        String[] strs = {"flower", "flow", "flight"};\n        System.out.println(longestCommonPrefix(strs));\n    }\n}',
@@ -4156,7 +4156,7 @@ const data = {
                   tags: ['Basic and Easy String Problems'],
                 },
                 {
-                  id: 'ec087bec-1775-4f8f-bfd2-506e7087d6bd',
+                  id: 'c6017f03-d6fa-4a8f-af52-9dad22f27606',
                   isFolder: false,
                   name: 'RemoveOutermostParentheses.java',
                   code: "import java.util.*;\n\npublic class RemoveOutermostParentheses {\n    public static String removeOuterParentheses(String s) {\n//        Brute force approach\n//        StringBuilder sb = new StringBuilder();\n//        Stack<Character> stack = new Stack<>();\n//        for (int i = 0; i < s.length(); i++) {\n//            char ch = s.charAt(i);\n//            if (ch == '(') {\n//                if (stack.size() > 0) {\n//                    sb.append(ch);\n//                }\n//                stack.push(ch);\n//            } else if (ch == ')') {\n//                stack.pop();\n//                if (stack.size() > 0) {\n//                    sb.append(ch);\n//                }\n//            }\n//        }\n//        return sb.toString();\n\n//        Optimal approach\n        int counter = 0;\n        StringBuilder sb = new StringBuilder();\n        for (int i = 0; i < s.length(); i++) {\n            char ch = s.charAt(i);\n            if (ch == '(') {\n                if (counter > 0) {\n                    sb.append(ch);\n                }\n                counter++;\n            } else if (ch == ')') {\n                if (counter > 1) {\n                    sb.append(ch);\n                }\n                counter--;\n            }\n        }\n        return sb.toString();\n    }\n}",
@@ -4165,7 +4165,7 @@ const data = {
                   tags: ['Basic and Easy String Problems'],
                 },
                 {
-                  id: '03be4113-8b49-40a6-8eb3-cea1c1d4bc4b',
+                  id: '04682f16-3626-4f1c-8c65-7bb70fccf52c',
                   isFolder: false,
                   name: 'ReverseWordsInAString.java',
                   code: 'public class ReverseWordsInAString {\n    public static String reverseWords(String s) {\n        int i = s.length() - 1, j = 0;\n        StringBuilder sb = new StringBuilder();\n        while (i >= 0) {\n            while (i >= 0 && s.charAt(i) == \' \') i--;\n            // first character\n            j = i;\n            while (i >= 0 && s.charAt(i) != \' \') i--;\n            if (i == - 1) {\n                sb.append(s, 0, j+1);\n            } else {\n                sb.append(s, i+1, j+1).append(" ");\n            }\n        }\n        return sb.toString().trim();\n    }\n\n    public static void main(String[] args) {\n        String s = "the sky is blue";\n        System.out.println(reverseWords(s));\n    }\n}',
@@ -4174,7 +4174,7 @@ const data = {
                   tags: ['Basic and Easy String Problems'],
                 },
                 {
-                  id: '70f9ff31-1853-40f0-a21e-0b7836dd02d6',
+                  id: '2b161602-d044-48fe-a5bf-684e1ad6f6f3',
                   isFolder: false,
                   name: 'RotateStrings.java',
                   code: 'import java.util.*;\npublic class RotateStrings {\n    public static boolean rotateString(String s, String goal) {\n//        Brute force solution\n//        if (s.length() != goal.length()) return false;\n//        if (s.equals(goal)) return true;\n//        StringBuilder sb = new StringBuilder(goal);\n//        for (int i = 0; i < s.length(); i++) {\n//            sb.append(sb.charAt(0)).replace(0,1,"");\n//            if (s.contentEquals(sb)) return true;\n//        }\n//        return false;\n\n//        Trick solution\n        return (s + s).contains(goal);\n\n//        Queue solution\n//        if (s.length() != goal.length()) return false;\n//        Queue<Character> q1 = new LinkedList<>();\n//        Queue<Character> q2 = new LinkedList<>();\n//        for (int i = 0; i < s.length(); i++) {\n//            q1.add(s.charAt(i));\n//            q2.add(goal.charAt(i));\n//        }\n//        int k = s.length() - 2;\n//        while (k != 0) {\n//            q1.add(q1.remove());\n//            if (q1.equals(q2)) return true;\n//            k--;\n//        }\n//        return false;\n    }\n\n    public static void main(String[] args) {\n        System.out.println(rotateString("abcde","cdeab"));\n    }\n}',
@@ -4183,7 +4183,7 @@ const data = {
                   tags: ['Basic and Easy String Problems'],
                 },
                 {
-                  id: '0ed1218f-c8fe-4dd8-8a8b-8289cc74e620',
+                  id: '1786f4cb-93b4-4258-8a11-5e077db0d63c',
                   isFolder: false,
                   name: 'ValidAnagram.java',
                   code: "public class ValidAnagram {\n    public static boolean isAnagram(String s, String t) {\n        if (s.length() != t.length()) return false;\n        int[] count = new int[26];\n        for (int i = 0; i < s.length(); i++) {\n            count[s.charAt(i) - 'a']++;\n            count[t.charAt(i) - 'a']--;\n        }\n        for (int i = 0; i < 26; i++) {\n            if (count[i] != 0) return false;\n        }\n        return true;\n    }\n}",
@@ -4192,7 +4192,7 @@ const data = {
                   tags: ['Basic and Easy String Problems'],
                 },
                 {
-                  id: 'cc0a32f7-f968-4923-9384-708928afe85b',
+                  id: 'e25608da-abc6-4aca-86af-fb481abceac9',
                   isFolder: false,
                   name: 'CountAndSay.java',
                   code: "import java.util.*;\n\npublic class CountAndSay {\n    public String countAndSay(int n) {\n        if (n == 1) return \"1\";\n        String x = countAndSay(n-1);\n        StringBuilder sb = new StringBuilder();\n        int len = x.length(), count = 1;\n        char prev = x.charAt(0);\n        for (int i = 1; i < len; i++) {\n            char ch = x.charAt(i);\n            if (prev == ch) count++;\n            else {\n                sb.append((char)('0'+count)).append(prev);\n                count = 1;\n                prev = ch;\n            }\n        }\n        if (count != 0) {\n            sb.append((char)('0'+count)).append(prev);\n        }\n        return sb.toString();\n    }\n}",
@@ -4201,7 +4201,7 @@ const data = {
                   tags: ['Hard Problems'],
                 },
                 {
-                  id: '8f41e6bc-c00a-4b47-990a-6779783b8aa7',
+                  id: '26216e7d-d145-4da4-8aae-c271223715a9',
                   isFolder: false,
                   name: 'CountPalindromicSubsequenceOfGivenString.java',
                   code: 'import java.util.*;\n\npublic class CountPalindromicSubsequenceOfGivenString {\n    static int mod = (int) 1e9 + 7;\n\n    static int solve(String str, int i, int j, int[][] dp) {\n        if (i == j) return 1;\n        if (i > j) return 0;\n        if (dp[i][j] != -1) return dp[i][j];\n        if (str.charAt(i) == str.charAt(j)) return dp[i][j] = 1 + solve(str, i + 1, j, dp) + solve(str, i, j - 1, dp);\n        return dp[i][j] = solve(str, i + 1, j, dp) + solve(str, i, j - 1, dp) - solve(str, i + 1, j - 1, dp);\n    }\n\n    public static int countPalindromicSubseq(String s) {\n        //    Write your code here.\n        int n = s.length();\n        int[][] dp = new int[n + 1][n + 1];\n        for (int i = 0; i <= n; i++) {\n            Arrays.fill(dp[i], -1);\n        }\n        return solve(s, 0, n - 1, dp);\n    }\n}',
@@ -4210,7 +4210,7 @@ const data = {
                   tags: ['Hard Problems'],
                 },
                 {
-                  id: '776c4e5a-1055-473f-8412-2e7fe9a77a92',
+                  id: 'dfbf8046-9081-428f-bf75-8f72b460cf16',
                   isFolder: false,
                   name: 'KMPAlgorithm.java',
                   code: 'import java.util.*;\n\npublic class KMPAlgorithm {\n    int[] getLPS(String needle) {\n        int m = needle.length();\n        int[] lps = new int[m];\n        int prevLPS = 0, i = 1;\n        while (i < m) {\n            if (needle.charAt(i) == needle.charAt(prevLPS)) {\n                lps[i] = prevLPS + 1;\n                prevLPS++;\n                i++;\n            } else {\n                if (prevLPS == 0) {\n                    lps[i] = 0;\n                    i++;\n                } else {\n                    prevLPS = lps[prevLPS - 1];\n                }\n            }\n        }\n        return lps;\n    }\n    int search(String haystack, String needle) {\n        int[] lps = getLPS(needle);\n        int i = 0, j = 0;\n        int n = haystack.length();\n        int m = needle.length();\n        while (i < n) {\n            if (haystack.charAt(i) == needle.charAt(j)) {\n                i++;\n                j++;\n            } else {\n                if (j == 0) {\n                    i++;\n                } else {\n                    j = lps[j-1];\n                }\n            }\n            if (j == m) {\n                return i - m;\n            }\n        }\n        return -1;\n    }\n}',
@@ -4219,7 +4219,7 @@ const data = {
                   tags: ['Hard Problems'],
                 },
                 {
-                  id: '10390781-175a-49f5-bb98-e474974c816b',
+                  id: '373f3542-80ec-400d-a7a0-069e9bb9b271',
                   isFolder: false,
                   name: 'LongestHappyPrefix.java',
                   code: 'import java.util.*;\n\npublic class LongestHappyPrefix {\n    int[] getLPS(String needle) {\n        int m = needle.length();\n        int[] lps = new int[m];\n        int prevLPS = 0, i = 1;\n        while (i < m) {\n            if (needle.charAt(i) == needle.charAt(prevLPS)) {\n                lps[i] = prevLPS + 1;\n                prevLPS++;\n                i++;\n            } else {\n                if (prevLPS == 0) {\n                    lps[i] = 0;\n                    i++;\n                } else {\n                    prevLPS = lps[prevLPS - 1];\n                }\n            }\n        }\n        return lps;\n    }\n    public String longestPrefix(String s) {\n        int[] lps = getLPS(s);\n        return s.substring(0, lps[lps.length - 1]);\n    }\n}',
@@ -4228,7 +4228,7 @@ const data = {
                   tags: ['Hard Problems'],
                 },
                 {
-                  id: '52d5d2eb-e6db-4935-853b-de9660f51224',
+                  id: '34979bf2-93a2-45b0-bab0-11781a6f3d5a',
                   isFolder: false,
                   name: 'MinBracketReversalsToMakeExpressionBalanced.java',
                   code: "public class MinBracketReversalsToMakeExpressionBalanced {\n    public int minAddToMakeValid(String s) {\n        int openCount = 0, closeCount = 0;\n        int n = s.length();\n        for (int i = 0; i < n; i++) {\n            char ch = s.charAt(i);\n            if (ch == '(') openCount++;\n            else if (openCount > 0) openCount--;\n            else closeCount++;\n        }\n        return openCount+closeCount;\n    }\n}",
@@ -4237,7 +4237,7 @@ const data = {
                   tags: ['Hard Problems'],
                 },
                 {
-                  id: '1f1c2db5-691c-4191-8954-c95b269bdccf',
+                  id: '8a979914-03f0-457b-b218-df9324108b57',
                   isFolder: false,
                   name: 'RabinKarp.java',
                   code: 'import java.util.*;\n\npublic class RabinKarp {\n    private static final int PRIME = 101;\n\n    static double calculateHash(String str) {\n        double hash = 0;\n        for (int i = 0; i < str.length(); i++) {\n            hash += str.charAt(i) * Math.pow(PRIME, i);\n        }\n        return hash;\n    }\n\n    static double updateHash(double prevHash, char oldChar, char newChar, int patternLength) {\n        double newHash = (prevHash - oldChar) / PRIME;\n        newHash += newChar * Math.pow(PRIME, patternLength - 1);\n        return newHash;\n    }\n\n    static List<Integer> search(String text, String pattern) {\n        List<Integer> ans = new ArrayList<>();\n        int patternLength = pattern.length();\n        double patternHash = calculateHash(pattern);\n        double strHash = calculateHash(text.substring(0, patternLength));\n        for (int i = 0; i <= text.length() - patternLength; i++) {\n            if (strHash == patternHash) {\n                if (text.substring(i, i + patternLength).equals(pattern)) {\n                    ans.add(i + 1);\n                }\n            }\n            if (i < text.length() - patternLength) {\n                strHash = updateHash(strHash, text.charAt(i), text.charAt(i + patternLength), patternLength);\n            }\n        }\n        return ans;\n    }\n\n    public static List<Integer> stringMatch(String text, String pattern) {\n        // Write your code here.\n        return search(text, pattern);\n\n    }\n}',
@@ -4246,7 +4246,7 @@ const data = {
                   tags: ['Hard Problems'],
                 },
                 {
-                  id: 'da0b351e-d236-4707-ad98-21014f3cfffa',
+                  id: '732e8c34-b48f-4e36-b0b6-7993b8d42716',
                   isFolder: false,
                   name: 'ShortestPalindrome.java',
                   code: "import java.util.*;\n\npublic class ShortestPalindrome {\n    public int[] getLPS(StringBuilder sb) {\n        int n = sb.length();\n        int[] lps = new int[n];\n        int prev = 0, i = 1;\n        while (i < n) {\n            if (sb.charAt(i) == sb.charAt(prev)) {\n                lps[i] = prev + 1;\n                prev++;\n                i++;\n            } else {\n                if (prev == 0) {\n                    lps[i] = 0;\n                    i++;\n                } else {\n                    prev = lps[prev - 1];\n                }\n            }\n        }\n        return lps;\n    }\n\n    public String shortestPalindrome(String s) {\n        StringBuilder sb = new StringBuilder(s);\n        int n = s.length();\n        sb.append('&');\n        for (int i = n-1; i >= 0; i--) {\n            sb.append(s.charAt(i));\n        }\n        int[] lps = getLPS(sb);\n        StringBuilder ans = new StringBuilder();\n        int idx = n - lps[lps.length-1];\n        for (int i = n-1; i >= n-idx; i--) {\n            ans.append(s.charAt(i));\n        }\n        ans.append(s);\n        return ans.toString();\n    }\n}",
@@ -4255,7 +4255,7 @@ const data = {
                   tags: ['Hard Problems'],
                 },
                 {
-                  id: '35e0863f-b497-4cf0-aa44-5a3c34889472',
+                  id: '5242d170-dd14-4396-8ba9-671fbb886281',
                   isFolder: false,
                   name: 'ZAlgorithm.java',
                   code: 'import java.util.*;\n\npublic class ZAlgorithm {\n    static List<Integer> search(String text, String pattern) {\n        String newPattern = pattern + "$" + text;\n        List<Integer> ans = new ArrayList<>();\n        int[] z = z_function(newPattern.toCharArray());\n        int n = pattern.length();\n        for (int i = 0; i < z.length; i++) {\n            if (z[i] == n) {\n                ans.add(i - n - 1);\n            }\n        }\n        return ans;\n    }\n    static int[] z_function(char[] s) {\n        int n = s.length;\n        int[] z = new int[n];\n        int l = 0, r = 0;\n        for (int i = 1; i < n; i++) {\n            if (i < r) {\n                z[i] = Math.min(r - i, z[i - l]);\n            }\n            while (i + z[i] < n && s[z[i]] == s[i + z[i]]) {\n                z[i]++;\n            }\n            if (i + z[i] > r) {\n                l = i;\n                r = i + z[i];\n            }\n        }\n        return z;\n    }\n\n    public static void main(String[] args) {\n        String haystack = "sadbutsad", needle = "sad";\n        List<Integer> ans = search(haystack, needle);\n        System.out.println(ans);\n    }\n}',
@@ -4264,7 +4264,7 @@ const data = {
                   tags: ['Hard Problems'],
                 },
                 {
-                  id: '7dea7c79-bc8c-4691-b851-7a367f8e9809',
+                  id: '510ec03a-3096-4921-bbf8-443c6c900a7b',
                   isFolder: false,
                   name: 'CountWithKDifferentCharacters.java',
                   code: "import java.util.*;\n\npublic class CountWithKDifferentCharacters {\n    public static int helper(String str, int k) {\n        int[] bucket = new int[26];\n        int result = 0,  i = 0, j = 0, c = 0;\n        while (j < str.length()) {\n            int idx = str.charAt(j) - 'a';\n            bucket[idx]++;\n            if (bucket[idx] == 1) c++;\n            while (c > k) {\n                int idx2 = str.charAt(i) - 'a';\n                bucket[idx2]--;\n                if (bucket[idx2] == 0) c--;\n                i++;\n            }\n            result += j - i + 1;\n            j++;\n        }\n        return result;\n    }\n    public static int countSubStrings(String str, int k) {\n        // Brute force solution: Generate all substrings and check the count of substrings containing k different characters\n//        int count = 0;\n//        for (int i = 0; i < str.length(); i++) {\n//            for (int j = i; j < str.length(); j++) {\n//                String s = str.substring(i, j+1);\n//                HashSet<Character> hs = new HashSet<>();\n//                for (int x = 0; x < s.length(); x++) {\n//                    hs.add(s.charAt(x));\n//                }\n//                if (hs.size() == k) count++;\n//            }\n//        }\n//        return count;\n\n        // Better solution: Use 2 nested loops (subarray trick) and array instead of HashSet\n//        int count = 0;\n//        for (int i = 0; i < str.length(); i++) {\n//            int[] bucket = new int[26];\n//            int c = 0;\n//            for (int j = i; j < str.length(); j++) {\n//                char ch = str.charAt(j);\n//                bucket[ch - 'a']++;\n//                if (bucket[ch - 'a'] == 1) c++;\n//                if (c == k) count++;\n//            }\n//        }\n//        return count;\n\n        // Optimal solution: To get the exact k we need the difference of atmost k and atmost k-1\n        return helper(str, k) - helper(str, k-1);\n    }\n\n    public static void main(String[] args) {\n        String s = \"aacfssa\";\n        int k = 3;\n        int count = countSubStrings(s, k);\n        System.out.println(count);\n    }\n}",
@@ -4273,7 +4273,7 @@ const data = {
                   tags: ['Medium String Problems'],
                 },
                 {
-                  id: '8921b376-a6a9-49cb-bda8-e4216b41b2ba',
+                  id: '82f34866-c3cd-4ea3-9143-0d8e915c62ac',
                   isFolder: false,
                   name: 'LongestPalindromicSubstring.java',
                   code: 'public class LongestPalindromicSubstring {\n    public static boolean isPalindrome(String str) {\n        int i = 0;\n        while (i < str.length() / 2) {\n            if (str.charAt(i) != str.charAt(str.length() - i - 1)) return false;\n            i++;\n        }\n        return true;\n    }\n\n    public static int expandFromMid(int left, int right, String s) {\n        while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {\n            left--;\n            right++;\n        }\n        return right - left - 1;\n    }\n\n    public String longestPalindrome(String s) {\n//        Brute force\n//        String maxL = "";\n//        for (int i = 0; i < s.length(); i++) {\n//            for (int j = i; j < s.length(); j++) {\n//                if (s.charAt(i) == s.charAt(j)) {\n//                    String sub = s.substring(i, j + 1);\n//                    if (sub.length() > maxL.length() && isPalindrome(sub)) {\n//                        maxL = sub;\n//                    }\n//                }\n//            }\n//        }\n//        return maxL;\n\n//        Optimized approach: Go to each element and try to expand outwards, store max\n        int start = 0, end = 0;\n        for (int i = 0; i < s.length(); i++) {\n            int len1 = expandFromMid(i, i, s);\n            int len2 = expandFromMid(i, i + 1, s);\n            int len = Math.max(len1, len2);\n            if (len > end - start + 1) {\n                start = i - (len - 1) / 2;\n                end = i + len / 2;\n            }\n        }\n        return s.substring(start, end + 1);\n    }\n}',
@@ -4282,7 +4282,7 @@ const data = {
                   tags: ['Medium String Problems'],
                 },
                 {
-                  id: 'e7caae06-d860-448c-ac47-c0e96ef02010',
+                  id: 'a7900ee0-6afb-4bae-a202-65bd34091ef5',
                   isFolder: false,
                   name: 'MaximumNestingDepthOfParentheses.java',
                   code: "class MaximumNestingDepthOfParentheses {\n    public int maxDepth(String s) {\n        int maxLength = 0, count = 0;\n        for (int i = 0; i < s.length(); i++) {\n            char ch = s.charAt(i);\n            if (ch == '(') count++;\n            else if (ch == ')') count--;\n            maxLength = Math.max(maxLength, count);\n        }\n        return maxLength;\n    }\n}",
@@ -4291,7 +4291,7 @@ const data = {
                   tags: ['Medium String Problems'],
                 },
                 {
-                  id: 'a149e911-52a9-4a64-92fa-1429612da714',
+                  id: '99e70a66-e7e4-4c95-b019-5dae00b68fa1',
                   isFolder: false,
                   name: 'ReverseWordsInAString.java',
                   code: "public class ReverseWordsInAString {\n    public String reverseWords(String s) {\n        int i = s.length() - 1, j = 0;\n        StringBuilder sb = new StringBuilder();\n        while (i >= 0) {\n            while (i >= 0 && s.charAt(i) == ' ') i--;\n            j = i;\n            while (i >= 0 && s.charAt(i) != ' ') i--;\n            if (i == - 1) sb.append(s, 0, j+1);\n            else sb.append(s, i+1, j+1).append(\" \");\n        }\n        return sb.toString().trim();\n    }\n}",
@@ -4300,7 +4300,7 @@ const data = {
                   tags: ['Medium String Problems'],
                 },
                 {
-                  id: '6cceebb3-bded-40d3-b006-b8a8d91562de',
+                  id: 'fad23b48-805f-4445-a7c7-88f67cbadc73',
                   isFolder: false,
                   name: 'RomanToIntegers.java',
                   code: "import java.util.HashMap;\n\npublic class RomanToIntegers {\n    public static int romanToInt(String s) {\n        HashMap<Character, Integer> hm = new HashMap<>();\n        hm.put('I', 1);\n        hm.put('V', 5);\n        hm.put('X', 10);\n        hm.put('L', 50);\n        hm.put('C', 100);\n        hm.put('D', 500);\n        hm.put('M', 1000);\n        char[] sArr = s.toCharArray();\n        int sum = 0;\n        for (int i = 0; i < sArr.length; i++) {\n            if (i < sArr.length - 1 && hm.get(sArr[i]) >= hm.get(sArr[i+1])) {\n                sum += hm.get(sArr[i]);\n            } else {\n                sum -= hm.get(sArr[i]);\n            }\n        }\n        return sum;\n    }\n\n    public static void main(String[] args) {\n        String s = \"III\";\n        System.out.println(romanToInt(s));\n    }\n}",
@@ -4309,7 +4309,7 @@ const data = {
                   tags: ['Medium String Problems'],
                 },
                 {
-                  id: '00fc17d6-5343-4453-9d61-2ba2ea7a1663',
+                  id: '92e7d623-6bf2-428f-8a90-17dc4c3b614b',
                   isFolder: false,
                   name: 'SortCharacterByFrequency.java',
                   code: 'import java.util.*;\n\npublic class SortCharacterByFrequency {\n    public static HashMap<Character, Integer> getFrequencyMap(char[] s) {\n        HashMap<Character, Integer> map = new HashMap<>();\n        for (int i = 0; i < s.length; i++) {\n            map.put(s[i], map.getOrDefault(s[i], 0) + 1);\n        }\n        return map;\n    }\n\n    public static void addFrequencyChar(StringBuilder sb, int times, char ch) {\n        while (times != 0) {\n            sb.append(ch);\n            times--;\n        }\n    }\n\n    public static String frequencySort(String s) {\n//      Brute force solution\n//        HashMap<Character, Integer> hm = getFrequencyMap(s.toCharArray());\n//        PriorityQueue<Map.Entry<Character, Integer>> pq = new PriorityQueue<>(Map.Entry.comparingByValue(Collections.reverseOrder()));\n//        pq.addAll(hm.entrySet());\n//        StringBuilder sb = new StringBuilder();\n//        while (!pq.isEmpty()) {\n//            Map.Entry<Character, Integer> map = pq.poll();\n//            addFrequencyChar(sb, map.getValue(), map.getKey());\n//        }\n//        return sb.toString();\n\n//        Optimized Solution\n        HashMap<Character, Integer> hm = getFrequencyMap(s.toCharArray());\n        List<Character>[] list = new List[s.length() + 1];\n        for (Map.Entry<Character, Integer> map: hm.entrySet()) {\n            int i = map.getValue();\n            if (list[i] == null)\n                list[i] = new ArrayList<>();\n            list[i].add(map.getKey());\n        }\n        StringBuilder sb = new StringBuilder();\n        for (int i = s.length(); i > 0; i--)\n            if (list[i] != null)\n                for (char ch : list[i]) addFrequencyChar(sb, i, ch);\n        return sb.toString();\n    }\n\n    public static void main(String[] args) {\n        System.out.println(frequencySort("treerrrazt"));\n    }\n}',
@@ -4318,7 +4318,7 @@ const data = {
                   tags: ['Medium String Problems'],
                 },
                 {
-                  id: '5469cd1e-8d75-4ec6-8da2-4a864e8494e4',
+                  id: 'dd0c8460-0ac9-496a-8cd7-e7bf4874f3a6',
                   isFolder: false,
                   name: 'StringToIntegerATOI.java',
                   code: "public class StringToIntegerATOI {\n    public int myAtoi(String s) {\n        boolean isNegative = false;\n        char[] sArray = s.toCharArray();\n        int n = sArray.length;\n        int i = 0;\n        while (i < n && sArray[i] == ' ') i++;\n        if (i < n && sArray[i] == '-') {\n            isNegative = true;\n            i++;\n        } else if (i < n && sArray[i] == '+') i++;\n        double num = 0;\n        while (i < n && sArray[i] - '0' >= 0 && sArray[i] - '0' <= 9) {\n            num = num*10 + (sArray[i] - '0');\n            i++;\n        }\n        num = isNegative ? -num : num;\n        if (num > Integer.MAX_VALUE)\n            num = Integer.MAX_VALUE;\n        else if (num < Integer.MIN_VALUE)\n            num = Integer.MIN_VALUE;\n        return (int)num;\n    }\n\n    public static void main(String[] args) {\n        System.out.println(Double.MAX_VALUE);\n    }\n}",
@@ -4327,7 +4327,7 @@ const data = {
                   tags: ['Medium String Problems'],
                 },
                 {
-                  id: 'a4eb7b70-26b9-4c80-a5ff-dd41c19734e9',
+                  id: 'cf1e4db9-5a2f-437d-8d79-370bfb00030e',
                   isFolder: false,
                   name: 'SumOfBeautyOfAllSubstrings.java',
                   code: "public class SumOfBeautyOfAllSubstrings {\n    public static int calcBeauty(String sub) {\n        int[] count = new int[26];\n        int low = Integer.MAX_VALUE, high = Integer.MIN_VALUE;\n        for (int i = 0; i < sub.length(); i++) {\n            int idx = sub.charAt(i) - 'a';\n            count[idx]++;\n        }\n        for (int i = 0; i < 26; i++) {\n            if (count[i] != 0) {\n                low = Math.min(low, count[i]);\n            }\n            high = Math.max(high, count[i]);\n        }\n        int c = high - low;\n        return Math.max(c, 0);\n    }\n\n    public static int beautySum(String s) {\n        int sum = 0;\n        for (int i = 0; i < s.length(); i++) {\n            int[] count = new int[26];\n            int low = Integer.MAX_VALUE, high = Integer.MIN_VALUE;\n            for (int j = i; j < s.length(); j++) {\n                count[s.charAt(j) - 'a']++;\n                for (int c : count) {\n                    if (c != 0)\n                        low = Math.min(low, c);\n                    high = Math.max(high, c);\n                }\n                sum += high - low;\n            }\n        }\n        return sum;\n    }\n\n    public static void main(String[] args) {\n        String s = \"xzvfsppsjfbxdwkqe\";\n        int ans = beautySum(s);\n        System.out.println(ans);\n    }\n}",
@@ -4338,64 +4338,57 @@ const data = {
               ],
             },
             {
-              id: 'c573cab3-37c2-4738-8044-df3c57423742',
+              id: 'd8e7270f-d439-417b-b926-647774e05c9b',
               isFolder: true,
               name: 'Tries',
               content: [
                 {
-                  id: 'cf423ca1-5ad1-4351-87f8-741c2c552268',
-                  isFolder: true,
-                  name: 'Problems',
-                  content: [
-                    {
-                      id: '9f801401-724c-40bc-ad4d-665df940885f',
-                      isFolder: false,
-                      name: 'LongestStringWithAllPrefixes.java',
-                      code: "import java.util.*;\n\npublic class LongestStringWithAllPrefixes {\n    static class Trie {\n        static class TrieNode {\n            TrieNode[] node;\n            boolean isWord;\n\n            TrieNode() {\n                this.node = new TrieNode[26];\n                this.isWord = false;\n            }\n        }\n\n        TrieNode root;\n\n        public Trie() {\n            // Write your code here.\n            this.root = new TrieNode();\n        }\n\n        public void insert(String word) {\n            // Write your code here.\n            TrieNode curr = this.root;\n            int n = word.length();\n            for (int i = 0; i < n; i++) {\n                char ch = word.charAt(i);\n                if (curr.node[ch - 'a'] == null) {\n                    curr.node[ch - 'a'] = new TrieNode();\n                }\n                curr = curr.node[ch - 'a'];\n            }\n            curr.isWord = true;\n        }\n\n        public int getCompletedStr(String word) {\n            // Write your code here.\n            TrieNode curr = this.root;\n            int count = 0;\n            int n = word.length();\n            for (int i = 0; i < n; i++) {\n                if (curr.isWord) count++;\n                curr = curr.node[word.charAt(i) - 'a'];\n            }\n            if (curr.isWord) count++;\n            return count;\n        }\n    }\n\n    public static String completeString(int n, String[] a) {\n        // Write your code here.\n        Trie root = new Trie();\n        for (int i = 0; i < n; i++) {\n            root.insert(a[i]);\n        }\n        String largest = \"\";\n        for (int i = 0; i < n; i++) {\n            int c = root.getCompletedStr(a[i]);\n            if (c == a[i].length()\n                    && (c > largest.length()\n                    || (c == largest.length() && largest.compareTo(a[i]) > 0))) {\n                largest = a[i];\n            }\n        }\n        return largest == \"\" ? \"None\" : largest;\n    }\n}",
-                      link: 'https://www.naukri.com/code360/problems/complete-string_2687860',
-                      notes: '',
-                      tags: ['Problems'],
-                    },
-                    {
-                      id: '1b70372f-a543-4002-84c7-7c80792f79bb',
-                      isFolder: false,
-                      name: 'MaxXorOfTwoNumbersInArray.java',
-                      code: 'import java.util.*;\npublic class MaxXorOfTwoNumbersInArray {\n    static class Trie {\n        static class TrieNode {\n            TrieNode[] node;\n            TrieNode() {\n                this.node = new TrieNode[2];\n            }\n        }\n\n        TrieNode root;\n        public Trie() {\n            this.root = new TrieNode();\n        }\n\n        public void insert(int num) {\n            TrieNode curr = this.root;\n            for (int i = 31; i >= 0; i--) {\n                int bit = (num >> i) & 1;\n                if (curr.node[bit] == null) {\n                    curr.node[bit] = new TrieNode();\n                }\n                curr = curr.node[bit];\n            }\n        }\n        public int getMax(int num) {\n            TrieNode curr = this.root;\n            int maxNum = 0;\n            for (int i = 31; i >= 0; i--) {\n                int bit = (num >> i) & 1;\n                if (curr.node[1-bit] != null) {\n                    maxNum |= 1<<i;\n                    curr = curr.node[1-bit];\n                } else {\n                    curr = curr.node[bit];\n                }\n            }\n            return maxNum;\n        }\n    }\n    public int findMaximumXOR(int[] nums) {\n        Trie root = new Trie();\n        for (int num : nums) {\n            root.insert(num);\n        }\n        int maxi = 0;\n        for (int num: nums) {\n            maxi = Math.max(maxi, root.getMax(num));\n        }\n        return maxi;\n    }\n}',
-                      link: 'https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/',
-                      notes: '',
-                      tags: ['Problems'],
-                    },
-                    {
-                      id: '74eafe12-f7c6-4539-98ed-ecbbbff96822',
-                      isFolder: false,
-                      name: 'MaxXORWithAnElementFromArrayOfflineQueries.java',
-                      code: 'import java.util.*;\n\npublic class MaxXORWithAnElementFromArrayOfflineQueries {\n    static class Trie {\n        static class TrieNode {\n            TrieNode[] node;\n\n            TrieNode() {\n                this.node = new TrieNode[2];\n            }\n        }\n\n        TrieNode root;\n\n        public Trie() {\n            this.root = new TrieNode();\n        }\n\n        public void insert(int num) {\n            TrieNode curr = this.root;\n            for (int i = 31; i >= 0; i--) {\n                int bit = (num >> i) & 1;\n                if (curr.node[bit] == null) {\n                    curr.node[bit] = new TrieNode();\n                }\n                curr = curr.node[bit];\n            }\n        }\n\n        public int getMax(int num) {\n            TrieNode curr = this.root;\n            int maxNum = 0;\n            for (int i = 31; i >= 0; i--) {\n                int bit = (num >> i) & 1;\n                if (curr == null) return -1;\n                if (curr.node[1 - bit] != null) {\n                    maxNum |= 1 << i;\n                    curr = curr.node[1 - bit];\n                } else {\n                    curr = curr.node[bit];\n                }\n            }\n            return maxNum;\n        }\n    }\n\n    public int[] maximizeXor(int[] nums, int[][] queries) {\n        Trie root = new Trie();\n        int n = queries.length;\n        int[] ans = new int[n];\n        int[][] q = new int[n][3];\n        for (int i = 0; i < n; i++) {\n            q[i] = new int[]{queries[i][0], queries[i][1], i};\n            ans[i] = -100;\n        }\n        Arrays.sort(q, (a, b) -> a[1] - b[1]);\n        Arrays.sort(nums);\n        int idx = 0;\n        for (int[] query : q) {\n            for (int i = idx; i < nums.length; i++) {\n                if (nums[i] > query[1]) break;\n                root.insert(nums[i]);\n                idx++;\n            }\n            ans[query[2]] = Math.max(ans[query[2]], root.getMax(query[0]));\n        }\n        return ans;\n    }\n}',
-                      link: 'https://leetcode.com/problems/maximum-xor-with-an-element-from-array/',
-                      notes: '',
-                      tags: ['Problems'],
-                    },
-                    {
-                      id: 'ec67755b-f168-49f4-9adc-f3de0ced121e',
-                      isFolder: false,
-                      name: 'NumberOfDistinctSubstringsInString.java',
-                      code: "import java.util.*;\n\npublic class NumberOfDistinctSubstringsInString {\n    static class TrieNode {\n        TrieNode[] node;\n\n        TrieNode() {\n            this.node = new TrieNode[26];\n        }\n    }\n\n    public static int countDistinctSubstrings(String s) {\n        // Write your code here.\n        TrieNode root = new TrieNode();\n        int count = 1;\n        for (int i = 0; i < s.length(); i++) {\n            TrieNode curr = root;\n            for (int j = i; j < s.length(); j++) {\n                char ch = s.charAt(j);\n                if (curr.node[ch - 'a'] == null) {\n                    curr.node[ch - 'a'] = new TrieNode();\n                    count++;\n                }\n                curr = curr.node[ch - 'a'];\n            }\n        }\n        return count;\n    }\n}",
-                      link: 'https://www.naukri.com/code360/problems/count-distinct-substrings_985292',
-                      notes: '',
-                      tags: ['Problems'],
-                    },
-                    {
-                      id: '423d4235-4cae-4bc5-8cc8-6d624c2d9e8d',
-                      isFolder: false,
-                      name: 'Trie2.java',
-                      code: "public class Trie2 {\n    static class TrieNode {\n        TrieNode[] node;\n        int endWith;\n        int countPre;\n        TrieNode() {\n            this.node = new TrieNode[26];\n            this.countPre = 0;\n            this.endWith = 0;\n        }\n    }\n    \n    TrieNode root;\n    public Trie2() {\n        // Write your code here.\n        this.root = new TrieNode();\n    }\n\n    public void insert(String word) {\n        // Write your code here.\n        TrieNode curr = this.root;\n        int n = word.length();\n        for (int i = 0; i < n; i++) {\n            char ch = word.charAt(i);\n            if (curr.node[ch-'a'] == null) {\n                curr.node[ch-'a'] = new TrieNode();\n            }\n            curr = curr.node[ch-'a'];\n            curr.countPre += 1;\n        }\n        curr.endWith += 1;\n    }\n\n    public int countWordsEqualTo(String word) {\n        // Write your code here.\n        TrieNode curr = this.root;\n        int n = word.length();\n        for (int i = 0; i < n; i++) {\n            char ch = word.charAt(i);\n            if (curr.node[ch-'a'] == null) {\n                return 0;\n            }\n            curr = curr.node[ch-'a'];\n        }\n        return curr.endWith;\n    }\n\n    public int countWordsStartingWith(String word) {\n        // Write your code here.\n        TrieNode curr = this.root;\n        int n = word.length();\n        for (int i = 0; i < n; i++) {\n            char ch = word.charAt(i);\n            if (curr.node[ch-'a'] == null) {\n                return 0;\n            }\n            curr = curr.node[ch-'a'];\n        }\n        return curr.countPre;\n    }\n\n    public void erase(String word) {\n        // Write your code here.\n        TrieNode curr = this.root;\n        int n = word.length();\n        for (int i = 0; i < n; i++) {\n            char ch = word.charAt(i);\n            if (curr.node[ch-'a'] == null) {\n                return;\n            }\n            curr = curr.node[ch-'a'];\n            curr.countPre--;\n        }\n        curr.endWith--;\n    }\n\n    public static TrieNode deleteWord(TrieNode root, String word) {\n        // WRITE YOUR CODE HERE\n        TrieNode curr = root;\n        int n = word.length();\n        for (int i = 0; i < n; i++) {\n            char ch = word.charAt(i);\n            if (curr.children[ch-'a'] == null) {\n                return root;\n            }\n            curr = curr.children[ch-'a'];\n        }\n        curr.isEnd = false;\n        return root;\n    }\n}",
-                      link: 'https://www.naukri.com/code360/problems/implement-trie_1387095',
-                      notes: '',
-                      tags: ['Problems'],
-                    },
-                  ],
+                  id: '59b7ba21-c2bb-429d-b17c-fc066c20d63b',
+                  isFolder: false,
+                  name: 'LongestStringWithAllPrefixes.java',
+                  code: "import java.util.*;\n\npublic class LongestStringWithAllPrefixes {\n    static class Trie {\n        static class TrieNode {\n            TrieNode[] node;\n            boolean isWord;\n\n            TrieNode() {\n                this.node = new TrieNode[26];\n                this.isWord = false;\n            }\n        }\n\n        TrieNode root;\n\n        public Trie() {\n            // Write your code here.\n            this.root = new TrieNode();\n        }\n\n        public void insert(String word) {\n            // Write your code here.\n            TrieNode curr = this.root;\n            int n = word.length();\n            for (int i = 0; i < n; i++) {\n                char ch = word.charAt(i);\n                if (curr.node[ch - 'a'] == null) {\n                    curr.node[ch - 'a'] = new TrieNode();\n                }\n                curr = curr.node[ch - 'a'];\n            }\n            curr.isWord = true;\n        }\n\n        public int getCompletedStr(String word) {\n            // Write your code here.\n            TrieNode curr = this.root;\n            int count = 0;\n            int n = word.length();\n            for (int i = 0; i < n; i++) {\n                if (curr.isWord) count++;\n                curr = curr.node[word.charAt(i) - 'a'];\n            }\n            if (curr.isWord) count++;\n            return count;\n        }\n    }\n\n    public static String completeString(int n, String[] a) {\n        // Write your code here.\n        Trie root = new Trie();\n        for (int i = 0; i < n; i++) {\n            root.insert(a[i]);\n        }\n        String largest = \"\";\n        for (int i = 0; i < n; i++) {\n            int c = root.getCompletedStr(a[i]);\n            if (c == a[i].length()\n                    && (c > largest.length()\n                    || (c == largest.length() && largest.compareTo(a[i]) > 0))) {\n                largest = a[i];\n            }\n        }\n        return largest == \"\" ? \"None\" : largest;\n    }\n}",
+                  link: 'https://www.naukri.com/code360/problems/complete-string_2687860',
+                  notes: '',
+                  tags: ['Problems'],
                 },
                 {
-                  id: '396a54d7-0508-44e2-8667-0b19af3be98d',
+                  id: '5eb63885-8c84-45b7-bc0e-24d02dca6c8e',
+                  isFolder: false,
+                  name: 'MaxXorOfTwoNumbersInArray.java',
+                  code: 'import java.util.*;\npublic class MaxXorOfTwoNumbersInArray {\n    static class Trie {\n        static class TrieNode {\n            TrieNode[] node;\n            TrieNode() {\n                this.node = new TrieNode[2];\n            }\n        }\n\n        TrieNode root;\n        public Trie() {\n            this.root = new TrieNode();\n        }\n\n        public void insert(int num) {\n            TrieNode curr = this.root;\n            for (int i = 31; i >= 0; i--) {\n                int bit = (num >> i) & 1;\n                if (curr.node[bit] == null) {\n                    curr.node[bit] = new TrieNode();\n                }\n                curr = curr.node[bit];\n            }\n        }\n        public int getMax(int num) {\n            TrieNode curr = this.root;\n            int maxNum = 0;\n            for (int i = 31; i >= 0; i--) {\n                int bit = (num >> i) & 1;\n                if (curr.node[1-bit] != null) {\n                    maxNum |= 1<<i;\n                    curr = curr.node[1-bit];\n                } else {\n                    curr = curr.node[bit];\n                }\n            }\n            return maxNum;\n        }\n    }\n    public int findMaximumXOR(int[] nums) {\n        Trie root = new Trie();\n        for (int num : nums) {\n            root.insert(num);\n        }\n        int maxi = 0;\n        for (int num: nums) {\n            maxi = Math.max(maxi, root.getMax(num));\n        }\n        return maxi;\n    }\n}',
+                  link: 'https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/',
+                  notes: '',
+                  tags: ['Problems'],
+                },
+                {
+                  id: 'ef0b9bd2-41d1-4040-a10c-756a2471e2a3',
+                  isFolder: false,
+                  name: 'MaxXORWithAnElementFromArrayOfflineQueries.java',
+                  code: 'import java.util.*;\n\npublic class MaxXORWithAnElementFromArrayOfflineQueries {\n    static class Trie {\n        static class TrieNode {\n            TrieNode[] node;\n\n            TrieNode() {\n                this.node = new TrieNode[2];\n            }\n        }\n\n        TrieNode root;\n\n        public Trie() {\n            this.root = new TrieNode();\n        }\n\n        public void insert(int num) {\n            TrieNode curr = this.root;\n            for (int i = 31; i >= 0; i--) {\n                int bit = (num >> i) & 1;\n                if (curr.node[bit] == null) {\n                    curr.node[bit] = new TrieNode();\n                }\n                curr = curr.node[bit];\n            }\n        }\n\n        public int getMax(int num) {\n            TrieNode curr = this.root;\n            int maxNum = 0;\n            for (int i = 31; i >= 0; i--) {\n                int bit = (num >> i) & 1;\n                if (curr == null) return -1;\n                if (curr.node[1 - bit] != null) {\n                    maxNum |= 1 << i;\n                    curr = curr.node[1 - bit];\n                } else {\n                    curr = curr.node[bit];\n                }\n            }\n            return maxNum;\n        }\n    }\n\n    public int[] maximizeXor(int[] nums, int[][] queries) {\n        Trie root = new Trie();\n        int n = queries.length;\n        int[] ans = new int[n];\n        int[][] q = new int[n][3];\n        for (int i = 0; i < n; i++) {\n            q[i] = new int[]{queries[i][0], queries[i][1], i};\n            ans[i] = -100;\n        }\n        Arrays.sort(q, (a, b) -> a[1] - b[1]);\n        Arrays.sort(nums);\n        int idx = 0;\n        for (int[] query : q) {\n            for (int i = idx; i < nums.length; i++) {\n                if (nums[i] > query[1]) break;\n                root.insert(nums[i]);\n                idx++;\n            }\n            ans[query[2]] = Math.max(ans[query[2]], root.getMax(query[0]));\n        }\n        return ans;\n    }\n}',
+                  link: 'https://leetcode.com/problems/maximum-xor-with-an-element-from-array/',
+                  notes: '',
+                  tags: ['Problems'],
+                },
+                {
+                  id: 'd1117af6-122e-44c9-86a5-b2e719182e77',
+                  isFolder: false,
+                  name: 'NumberOfDistinctSubstringsInString.java',
+                  code: "import java.util.*;\n\npublic class NumberOfDistinctSubstringsInString {\n    static class TrieNode {\n        TrieNode[] node;\n\n        TrieNode() {\n            this.node = new TrieNode[26];\n        }\n    }\n\n    public static int countDistinctSubstrings(String s) {\n        // Write your code here.\n        TrieNode root = new TrieNode();\n        int count = 1;\n        for (int i = 0; i < s.length(); i++) {\n            TrieNode curr = root;\n            for (int j = i; j < s.length(); j++) {\n                char ch = s.charAt(j);\n                if (curr.node[ch - 'a'] == null) {\n                    curr.node[ch - 'a'] = new TrieNode();\n                    count++;\n                }\n                curr = curr.node[ch - 'a'];\n            }\n        }\n        return count;\n    }\n}",
+                  link: 'https://www.naukri.com/code360/problems/count-distinct-substrings_985292',
+                  notes: '',
+                  tags: ['Problems'],
+                },
+                {
+                  id: '493eb244-74e9-48e3-aa0f-a09d8cb55bcb',
+                  isFolder: false,
+                  name: 'Trie2.java',
+                  code: "public class Trie2 {\n    static class TrieNode {\n        TrieNode[] node;\n        int endWith;\n        int countPre;\n        TrieNode() {\n            this.node = new TrieNode[26];\n            this.countPre = 0;\n            this.endWith = 0;\n        }\n    }\n    \n    TrieNode root;\n    public Trie2() {\n        // Write your code here.\n        this.root = new TrieNode();\n    }\n\n    public void insert(String word) {\n        // Write your code here.\n        TrieNode curr = this.root;\n        int n = word.length();\n        for (int i = 0; i < n; i++) {\n            char ch = word.charAt(i);\n            if (curr.node[ch-'a'] == null) {\n                curr.node[ch-'a'] = new TrieNode();\n            }\n            curr = curr.node[ch-'a'];\n            curr.countPre += 1;\n        }\n        curr.endWith += 1;\n    }\n\n    public int countWordsEqualTo(String word) {\n        // Write your code here.\n        TrieNode curr = this.root;\n        int n = word.length();\n        for (int i = 0; i < n; i++) {\n            char ch = word.charAt(i);\n            if (curr.node[ch-'a'] == null) {\n                return 0;\n            }\n            curr = curr.node[ch-'a'];\n        }\n        return curr.endWith;\n    }\n\n    public int countWordsStartingWith(String word) {\n        // Write your code here.\n        TrieNode curr = this.root;\n        int n = word.length();\n        for (int i = 0; i < n; i++) {\n            char ch = word.charAt(i);\n            if (curr.node[ch-'a'] == null) {\n                return 0;\n            }\n            curr = curr.node[ch-'a'];\n        }\n        return curr.countPre;\n    }\n\n    public void erase(String word) {\n        // Write your code here.\n        TrieNode curr = this.root;\n        int n = word.length();\n        for (int i = 0; i < n; i++) {\n            char ch = word.charAt(i);\n            if (curr.node[ch-'a'] == null) {\n                return;\n            }\n            curr = curr.node[ch-'a'];\n            curr.countPre--;\n        }\n        curr.endWith--;\n    }\n\n    public static TrieNode deleteWord(TrieNode root, String word) {\n        // WRITE YOUR CODE HERE\n        TrieNode curr = root;\n        int n = word.length();\n        for (int i = 0; i < n; i++) {\n            char ch = word.charAt(i);\n            if (curr.children[ch-'a'] == null) {\n                return root;\n            }\n            curr = curr.children[ch-'a'];\n        }\n        curr.isEnd = false;\n        return root;\n    }\n}",
+                  link: 'https://www.naukri.com/code360/problems/implement-trie_1387095',
+                  notes: '',
+                  tags: ['Problems'],
+                },
+                {
+                  id: '4ae5ae2f-5fb6-40eb-9689-c72197af9e01',
                   isFolder: false,
                   name: 'Trie.java',
                   code: 'class Trie {\n    class TrieNode {\n        HashMap<Character, TrieNode> map;\n        boolean isWord;\n        TrieNode() {\n            this.map = new HashMap<>();\n            this.isWord = false;\n        }\n    }\n    TrieNode node;\n    public Trie() {\n        this.node = new TrieNode();\n    }\n    \n    public void insert(String word) {\n        int n = word.length();\n        TrieNode curr = this.node;\n        for (int i = 0; i < n; i++) {\n            char ch = word.charAt(i);\n            if (!curr.map.containsKey(ch)) {\n                curr.map.put(ch, new TrieNode());\n            }\n            curr = curr.map.get(ch);\n        }\n        curr.isWord = true;\n    }\n    \n    public boolean search(String word) {\n        int n = word.length();\n        TrieNode curr = this.node;\n        for (int i = 0; i < n; i++) {\n            char ch = word.charAt(i);\n            if (!curr.map.containsKey(ch)) {\n                return false;\n            }\n            curr = curr.map.get(ch);\n        }\n        return curr.isWord;\n    }\n    \n    public boolean startsWith(String prefix) {\n        int n = prefix.length();\n        TrieNode curr = this.node;\n        for (int i = 0; i < n; i++) {\n            char ch = prefix.charAt(i);\n            if (!curr.map.containsKey(ch)) {\n                return false;\n            }\n            curr = curr.map.get(ch);\n        }\n        return true;\n    }\n}\n\n/**\n * Your Trie object will be instantiated and called as such:\n * Trie obj = new Trie();\n * obj.insert(word);\n * boolean param_2 = obj.search(word);\n * boolean param_3 = obj.startsWith(prefix);\n */',
